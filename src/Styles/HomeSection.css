@@ -1,0 +1,88 @@
+section {
+    width: 100%;
+    height: auto;
+}
+.homeSectionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.homeSectionContainer > img {
+    vertical-align: middle;
+    width: 80vmin;
+    border-radius: 1%;
+}
+.homeSectionHeader {
+    position: relative;
+    text-align: center;
+}
+.homeSectionHeader h2 {
+    margin: 20px 0;
+    font-size: 3vmin;
+}
+.homeSectionHeader h1 {
+    margin: 20px 0;
+    font-size: 10vmin;
+}
+.homeSectionHeader img {
+    vertical-align: middle;
+    width: 120vmin;
+    z-index: 1;
+    border-radius: 1%;
+}
+.homeSectionHeader > div {
+    background-color: #ffffffd2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    padding: 30px;
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    border-radius: 5%;
+}
+.homeArticle {
+    position: static;
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.homeArticle img {
+    vertical-align: middle;
+    width: 60vmin;
+    border-radius: 5%;
+}
+.homeTextContainer {
+    margin: auto 20px;
+    width: auto;
+    text-align: center;
+}
+.homeTitle {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+.homeContent {
+    display: inline;
+    font-size: 1.1rem;
+}
+.register {
+    background-color: #5e308c;
+    margin: 10px auto;
+    width: 14vmin;
+    height: 3.5vmin;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    line-height: 3.5vmin;
+    font-size: 2vmin;
+    font-weight: normal;
+    color: #ffffff;
+    cursor: pointer;
+}
+.register:hover {
+    background-color: #a676a3;
+}
