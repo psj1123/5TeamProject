@@ -74,7 +74,7 @@ const HomeSection = () => {
               <span>지금 바로 시작해보세요!</span>
               <Link to="/register">
                 <div className="register">
-                  <span>회원가입</span>
+                  회원가입
                 </div>
               </Link>
             </div>

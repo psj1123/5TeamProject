@@ -20,15 +20,14 @@ const Login = () => {
           return <Navigate to="/myprojectslist" replace={true} />;
         } else {
           return (
-            <>
+            <><section>
               <div>
                 <Header page={'Login'} />
               </div>
               {/*이곳에 로그인 폼 컴포넌트 작성해주세요!!
-              테스트용*/}
+    테스트용*/}
               <button onClick={loginClick}>로그인</button>
-              <Footer />
-            </>
+            </section><Footer /></>
           );
         }
       }}

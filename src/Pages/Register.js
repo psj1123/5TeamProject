@@ -13,11 +13,12 @@ const Register = () => {
           return <Navigate to="/myprojectslist" replace={true} />;
         } else {
           return (
-            <div>
-              <Header page={'Register'} />
-              {/* 이곳에 회원가입 폼 섹션을 작성해주세요!! */}
-              <Footer />
-            </div>
+            <><section>
+              <div>
+                <Header page={'Register'} />
+                {/* 이곳에 회원가입 폼 섹션을 작성해주세요!! */}
+              </div>
+            </section><Footer /></>
           );
         }
       }}
