@@ -8,6 +8,9 @@ import MyProjectsList from './Pages/MyProjectsList';
 import Project from './Pages/Project';
 import NotFound from './Pages/NotFound';
 import { UserDataProvider } from './Contexts/UserData';
+import ReactModal from 'react-modal';
+
+ReactModal.setAppElement('#root');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,7 +23,7 @@ root.render(
         <Route path="/register" element={<Register />} />
         <Route path="/myprojectslist" element={<MyProjectsList />} />
         <Route path="/project" element={<Project />} />
-        <Route path="/project/:projectcode" element={<Project />} />
+        <Route path="/project/:projectCode" element={<Project />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </UserDataProvider>
