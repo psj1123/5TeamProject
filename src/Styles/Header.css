@@ -78,19 +78,39 @@ a {
     transition: all .3s ease
 }
 
-.headerRight li:hover {
+.headerRight li :hover {
     color: #5e308c;
     transition: all .3s ease
 }
 
 .headerRight li div {
+    position: relative;
     padding: 0 10px;
     border-radius: 10px;
+    font-weight: bold;
+    transition: all .3s ease;
+    text-decoration: none;
 }
-.headerRight li div:hover {
-    background-color: #a676a3;
-    cursor: pointer;
+
+.headerRight li div:after {
+    border-top: solid 2px #5e308c;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 7px; /*밑줄효과 위로 이동*/
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
 }
+
+.headerRight li div:hover:after {
+    transform: scaleX(1);
+}
+
+
+
+
 .headerRight span {
     display: block;
     width: 20vmin;
