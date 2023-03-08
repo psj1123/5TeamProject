@@ -4,6 +4,7 @@ section {
     height: auto;
     background-color: #E2E2E2;
 }
+
 .homeSectionContainer {
     display: flex;
     flex-direction: column;
@@ -12,21 +13,21 @@ section {
     width: 100%;
 }
 
-.homeSectionContainer>img {
-    vertical-align: middle;
-    width: 80vmin;
-    border-radius: 1%;
+.homeSectionHead_Container {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-.homeSectionHead_content {
-    display: inline;
+.homeSectionHead_image {
+    display: block;
     float: left;
+    margin-right: 30px;
 }
 
-.homeSectionHead_content > img {
-    vertical-align: middle;
+.homeSectionHead_image > img {
     border-radius: 1%;
-    display: inline;
     width: 70vmin;
     z-index: 1;
     margin: 10px;
@@ -34,7 +35,7 @@ section {
 }
 
 .homeSectionHeader {
-    display: inline;
+    display: block;
     margin: 150px 0 0 0;
     position: relative;
     float: right;
@@ -47,14 +48,6 @@ section {
 .homeSectionHeader h1 {
     margin: 20px 0;
     font-size: 7vmin;
-}
-
-.homeSectionHeader > div {
-    display: inline;
-    margin: auto;
-    margin-top: 110px;
-    position: relative;
-    float: left;
 }
 
 .homeArticle {
@@ -131,6 +124,7 @@ section {
     display: block;
     margin: 30px 0 300px 0;
     text-align: right;
+    line-height: 30px;
 }
 
 .homeContent2 {
@@ -142,6 +136,7 @@ section {
     display: block;
     margin: 30px 0 0 0;
     text-align: left;
+    line-height: 30px;
 }
 
 .login {

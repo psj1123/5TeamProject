@@ -52,9 +52,10 @@ const HomeSection = () => {
       </div>
 
       <div className="homeSectionContainer">
-        <div className="homeSectionHead_content">
-          <img src="./img/HomeImage01.jpg" alt="사진1" />
-
+        <div className="homeSectionHead_Container">
+          <div className="homeSectionHead_image">
+            <img src="./img/HomeImage01.jpg" alt="사진1" />
+          </div>
           <div className="homeSectionHeader">
             <h1>내 노트, 팀 프로젝트</h1>
             <h2>간편하게, 효율적으로 성공적인 협업을 위한 Jellabo</h2>
