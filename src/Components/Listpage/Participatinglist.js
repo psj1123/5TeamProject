@@ -14,7 +14,7 @@ const Participatinglist = (props) => {
 
   return (
     <>
-      {props.list[props.num].join == 1 ? (
+      {props.list[props.num].join == 1 ? ( // join값이 1이면 참여중인 프로젝트에 보여짐
         <Col className="" sm={2}>
           <Card
             bg={'Light'.toLowerCase()}
@@ -23,11 +23,18 @@ const Participatinglist = (props) => {
             onClick={onClick}
           >
             <div className="listCard" style={{ minHeight: '160px' }}>
+              {/* --- 카드 최상단 --- */}
               <Card.Header align="center">프로젝트</Card.Header>
+              {/* --- 카드 최상단 --- */}
+
               <Card.Body>
+                {/* --- 카드 상단 프로젝트 명 --- */}
                 <Card.Title align="center" className="ellipsis">
                   <h4>{props.list[props.num].projectName}</h4>
                 </Card.Title>
+                {/* --- 카드 상단 프로젝트 명 --- */}
+
+                {/* --- 카드 중단 프로젝트 내용 --- */}
                 <Card.Text
                   align="center"
                   className="listHeadEllipsis"
@@ -35,6 +42,9 @@ const Participatinglist = (props) => {
                 >
                   {props.list[props.num].content}
                 </Card.Text>
+                {/* --- 카드 중단 프로젝트 내용 --- */}
+
+                {/* --- 카드 하단 프로젝트 마감일 --- */}
                 <h6
                   align="center"
                   className="listHeadEllipsis"
@@ -42,6 +52,7 @@ const Participatinglist = (props) => {
                 >
                   {props.list[props.num].deadline}
                 </h6>
+                {/* --- 카드 하단 프로젝트 마감일 --- */}
               </Card.Body>
             </div>
           </Card>

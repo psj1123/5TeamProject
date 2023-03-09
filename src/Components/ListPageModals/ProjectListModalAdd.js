@@ -25,7 +25,7 @@ function ProjectListModalAdd(props) {
   };
   const onInsert = () => {
     let find = props.list.findIndex(
-      // 이미 존재하는 프로젝트명이 있는지 검사하기 위한 변수
+      // 이미 존재하는 프로젝트명이 있는지 검사하기 위한 코드
       (x) => x.projectName == input_name.current.value
     );
     if (
@@ -40,8 +40,8 @@ function ProjectListModalAdd(props) {
         projectName: input_name.current.value,
         content: input_contents.current.value,
         deadline: input_deadline.current.value,
-        management: 1, // 유저가 추가하면 1 , 그렇지 않으면 0
-        join: 0, // 참여중이면 1 , 그렇지 않으면 0
+        management: 1, // 유저가 직접 추가하므로 1 ( 1이 관리중인 프로젝트 )
+        join: 0, // 생성시 자동참여 x 상태 default 값 0 ( 1이 참여중인 프로젝트 )
       });
 
       props.setList(nextProjects);
@@ -51,7 +51,7 @@ function ProjectListModalAdd(props) {
       input_name.current.value = '';
       input_contents.current.value = '';
       input_deadline.current.value = '';
-      props.setModalIsOpen(false);
+      props.setModalIsOpen(false); // 입력 완료시 모달창 닫기
     } else if (
       (input_name.current.value === '' ||
         input_contents.current.value === '' ||
@@ -104,6 +104,7 @@ function ProjectListModalAdd(props) {
           Please write it down briefly.
         </Form.Text>
       </Form.Group>
+
       {/* 프로젝트 기간 입력 */}
       <Form.Group className="mb-3" controlId="formBasicContents">
         <Form.Label>Deadline</Form.Label>
@@ -118,12 +119,18 @@ function ProjectListModalAdd(props) {
           Please write it down Deadline.
         </Form.Text>
       </Form.Group>
+
+      {/* --- 제출 버튼--- */}
       <Button variant="primary" type="button" onClick={onInsert}>
         Submit
       </Button>
+
+      {/* --- 리셋 버튼--- */}
       <Button variant="secondary" style={{ marginLeft: '5px' }} type="reset">
         reset
       </Button>
+
+      {/* --- 나가기 버튼--- */}
       <Button
         variant="secondary"
         style={{ marginLeft: '200px' }}

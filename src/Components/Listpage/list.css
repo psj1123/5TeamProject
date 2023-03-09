@@ -5,13 +5,13 @@
     white-space: nowrap;
   }
   
-  .ellipsismany { /* 프로젝트 내용 상세설명 3줄이상 입력 시 ellipsis 처리 */
+  .ellipsismany { /* 프로젝트 내용 상세설명 2줄이상 입력 시 ellipsis 처리 */
     display: -webkit-box;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
-    -webkit-line-clamp: 2; /* 2줄이상 넘어가면 ellipsis */
+    -webkit-line-clamp: 2; /* 라인 수 변경시 조작 */
   }
   
   .listCard:hover{

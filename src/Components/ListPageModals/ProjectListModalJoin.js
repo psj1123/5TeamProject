@@ -8,12 +8,11 @@ function ProjectListModalJoin(props) {
   };
   const onInsert = () => {
     let find = props.list.findIndex(
-      // Input 내용과 일치하는 프로젝트명의 data를 찾음 props.list의 list 부분이 수정될 예정
-      // data를 가져와서 management 를 0으로 수정하고 유저 데이터에 넣음
+      // Input 내용과 일치하는 프로젝트명의 data를 찾음
       (x) => x.projectName == input_name.current.value
     );
     if (
-      // 프로젝트 이름이 입력되고, 입력된 값의 이름이 데이터에 존재하면 실행
+      // 프로젝트명이 입력되고, 입력된 이름이 데이터에 존재하면 실행
       input_name.current.value !== '' &&
       find !== -1 &&
       props.list[find].join === 0
@@ -40,8 +39,8 @@ function ProjectListModalJoin(props) {
       {/* ---프로젝트 이름 입력--- */}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Project Name</Form.Label>
-        {/* 엔터키 버그 해결을 위한 인풋 */}
-        <input type="text" style={{ display: 'none' }} />{' '}
+        {/* 엔터키 버그 해결을 위한 보이지 않는 인풋 */}
+        <input type="text" style={{ display: 'none' }} />
         <Form.Control
           onChange={change}
           ref={input_name}
@@ -54,19 +53,17 @@ function ProjectListModalJoin(props) {
       </Form.Group>
       {/* ---프로젝트 이름 입력--- */}
 
-      {/* --- 입력버튼--- */}
+      {/* --- 제출 버튼--- */}
       <Button variant="primary" type="button" onClick={onInsert}>
         Submit
       </Button>
-      {/* --- 입력버튼--- */}
 
-      {/* --- 리셋버튼--- */}
+      {/* --- 리셋 버튼--- */}
       <Button variant="secondary" style={{ marginLeft: '5px' }} type="reset">
         reset
       </Button>
-      {/* --- 리셋버튼--- */}
 
-      {/* --- 나가기버튼--- */}
+      {/* --- 나가기 버튼--- */}
       <Button
         variant="secondary"
         style={{ marginLeft: '200px' }}
@@ -76,7 +73,6 @@ function ProjectListModalJoin(props) {
       >
         Exit
       </Button>
-      {/* --- 나가기버튼--- */}
     </Form>
   );
 }
