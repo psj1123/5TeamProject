@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Card, Nav, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import '../../Styles/Cards.css';
 
 const Participatinglist = (props) => {
   let Navigate = useNavigate();
@@ -14,7 +15,7 @@ const Participatinglist = (props) => {
 
   return (
     <>
-      {props.list[props.num].join == 1 ? (
+      {props.list[props.num].join === 1 ? (
         <Col className="" sm={2}>
           <Card
             bg={'Light'.toLowerCase()}
@@ -23,7 +24,7 @@ const Participatinglist = (props) => {
             onClick={onClick}
           >
             <div className="listCard" style={{ minHeight: '160px' }}>
-              <Card.Header align="center">프로젝트</Card.Header>
+              <Card.Header align="center" className='header'>프로젝트</Card.Header>
               <Card.Body>
                 <Card.Title align="center" className="ellipsis">
                   <h4>{props.list[props.num].projectName}</h4>

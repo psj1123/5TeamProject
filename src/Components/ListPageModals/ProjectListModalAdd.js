@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import '../../Styles/ListModal.css'
+import './ProjectListModal.css'
 
 function ProjectListModalAdd(props) {
   const input_name = useRef('');
@@ -121,7 +123,7 @@ function ProjectListModalAdd(props) {
       </Form.Group>
 
       {/* --- 제출 버튼--- */}
-      <Button variant="primary" type="button" onClick={onInsert}>
+      <Button variant="primary" type="button" onClick={onInsert} className='submit'>
         Submit
       </Button>
 
@@ -133,6 +135,7 @@ function ProjectListModalAdd(props) {
       {/* --- 나가기 버튼--- */}
       <Button
         name='exit'
+        className='exit'
         variant="secondary"
         style={{ marginLeft: '200px' }}
         onClick={() => {

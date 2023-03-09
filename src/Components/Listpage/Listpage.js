@@ -5,6 +5,7 @@ import Participatinglist from './Participatinglist';
 import Modal from 'react-modal';
 import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
+import '../../Styles/Cards.css';
 import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
 
 function Listpage(props) {
@@ -42,7 +43,7 @@ function Listpage(props) {
         </Container>
       </div>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}
-
+      <hr align='center' />
       {/* --------- 하단 , 참여중인 프로젝터 --------- */}
       <div align="center">
         <h4>참여중인 프로젝트</h4>
@@ -59,12 +60,13 @@ function Listpage(props) {
                 style={{ width: '11rem' }}
                 className="mb-2"
               >
-                <div className="test1" style={{ minHeight: '160px' }}>
-                  <Card.Header align="center">프로젝트 추가</Card.Header>
+                <div>
+                  <Card.Header align="center" className='header'>프로젝트 추가</Card.Header>
                   <Card.Body align="center">
                     {/* ----- 프로젝트 추가 모달창 구현 ----- */}
                     <div style={{ marginTop: '-1px' }}>
                       <Button
+                        className='btn_add'
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen(true)}
                       >
@@ -90,6 +92,7 @@ function Listpage(props) {
                     {/* ----- 프로젝트 참여 모달창 구현 ----- */}
                     <div style={{ marginTop: '19px' }}>
                       <Button
+                        className='btn_join'
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen1(true)}
                       >

@@ -6,10 +6,9 @@ function Cards(props) {
     <div>
       <Card
         bg={'Light'.toLowerCase()}
-        style={{ width: '11rem' }}
         className="mb-2"
       >
-        <div className="test1" style={{ minHeight: '160px' }}>
+        <div className="test1">
           <Card.Header align="center">프로젝트</Card.Header>
           <Card.Body>
             <Card.Title align="center" className="ellipsis">

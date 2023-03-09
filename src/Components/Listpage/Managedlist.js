@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './list.css';
+import '../../Styles/Cards.css';
 
 function Managedlist(props) {
   let Navigate = useNavigate();
@@ -20,8 +21,8 @@ function Managedlist(props) {
             className="mb-2"
             onClick={onClick}
           >
-            <div className="listCard" style={{ minHeight: '160px' }}>
-              <Card.Header align="center">프로젝트</Card.Header>
+            <div className="listCard">
+              <Card.Header align="center" className='header'>프로젝트</Card.Header>
               <Card.Body>
                 <Card.Title align="center" className="listHeadEllipsis">
                   <h4>{props.list[props.num].projectName}</h4>

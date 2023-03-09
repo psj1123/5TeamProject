@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import '../../Styles/ListModal.css'
 
 function ProjectListModalJoin(props) {
   const input_name = useRef('');
@@ -53,7 +54,7 @@ function ProjectListModalJoin(props) {
       {/* ---프로젝트 이름 입력--- */}
 
       {/* --- 입력버튼--- */}
-      <Button variant="primary" type="button" onClick={onInsert}>
+      <Button variant="primary" type="button" className='submit' onClick={onInsert}>
         Submit
       </Button>
       {/* --- 입력버튼--- */}
@@ -67,6 +68,7 @@ function ProjectListModalJoin(props) {
       {/* --- 나가기버튼--- */}
       <Button
         variant="secondary"
+        className='exit'
         style={{ marginLeft: '200px' }}
         onClick={() => {
           props.setModalIsOpen(false);
