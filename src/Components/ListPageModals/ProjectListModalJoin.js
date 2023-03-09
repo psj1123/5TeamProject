@@ -40,6 +40,8 @@ function ProjectListModalJoin(props) {
       {/* ---프로젝트 이름 입력--- */}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Project Name</Form.Label>
+        {/* 엔터키 버그 해결을 위한 인풋 */}
+        <input type="text" style={{ display: 'none' }} />{' '}
         <Form.Control
           onChange={change}
           ref={input_name}
