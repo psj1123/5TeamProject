@@ -29,7 +29,7 @@ function Listpage(props) {
   return (
     <>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}
-      <div align="center">
+      <div className="" align="center">
         <h4>관리중인 프로젝트</h4>
       </div>
       <div>
@@ -42,6 +42,8 @@ function Listpage(props) {
         </Container>
       </div>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}
+
+      <hr></hr>
 
       {/* --------- 하단 , 참여중인 프로젝터 --------- */}
       <div align="center">
@@ -59,7 +61,7 @@ function Listpage(props) {
                 style={{ width: '11rem' }}
                 className="mb-2"
               >
-                <div className="test1" style={{ minHeight: '160px' }}>
+                <div className="" style={{ minHeight: '160px' }}>
                   <Card.Header align="center">프로젝트 추가</Card.Header>
                   <Card.Body align="center">
                     {/* ----- 프로젝트 추가 모달창 구현 ----- */}
