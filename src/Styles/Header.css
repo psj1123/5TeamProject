@@ -98,7 +98,7 @@ a {
     content: '';
     display: block;
     position: absolute;
-    bottom: 7px; /*밑줄효과 위로 이동*/
+    bottom: 12px; /*밑줄효과 위로 이동*/
     left: 0;
     right: 0;
     transform: scaleX(0);
