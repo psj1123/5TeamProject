@@ -38,7 +38,7 @@ const Participatinglist = (props) => {
 
               <Card.Body>
                 {/* --- 카드 상단 프로젝트 명 --- */}
-                <Card.Title align="center" className="ellipsis">
+                <Card.Title align="center" className="listHeadEllipsis">
                   <h4>{props.list[props.num].projectName}</h4>
                 </Card.Title>
                 {/* --- 카드 상단 프로젝트 명 --- */}
@@ -46,7 +46,7 @@ const Participatinglist = (props) => {
                 {/* --- 카드 중단 프로젝트 내용 --- */}
                 <Card.Text
                   align="center"
-                  className="ellipsis"
+                  className="listHeadEllipsis"
                   style={{ marginTop: '-10px' }}
                 >
                   {props.list[props.num].content}
@@ -56,7 +56,7 @@ const Participatinglist = (props) => {
                 {/* --- 카드 하단 프로젝트 마감일 --- */}
                 <h6
                   align="center"
-                  className="ellipsis"
+                  className="listHeadEllipsis"
                   style={{ marginTop: '10px' }}
                 >
                   {result !== 0 ? 'D-' + result : 'D-day'}
