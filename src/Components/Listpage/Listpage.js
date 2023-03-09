@@ -63,7 +63,7 @@ function Listpage(props) {
                   <Card.Header align="center">프로젝트 추가</Card.Header>
                   <Card.Body align="center">
                     {/* ----- 프로젝트 추가 모달창 구현 ----- */}
-                    <div style={{ marginTop: '-1px' }}>
+                    <div>
                       <Button
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen(true)}
@@ -88,7 +88,7 @@ function Listpage(props) {
                       {/* ----- 프로젝트 추가 모달창 구현 ----- */}
                     </div>
                     {/* ----- 프로젝트 참여 모달창 구현 ----- */}
-                    <div style={{ marginTop: '19px' }}>
+                    <div style={{ marginTop: '21px' }}>
                       <Button
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen1(true)}

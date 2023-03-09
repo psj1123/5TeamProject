@@ -29,8 +29,8 @@ const Participatinglist = (props) => {
 
               <Card.Body>
                 {/* --- 카드 상단 프로젝트 명 --- */}
-                <Card.Title align="center" className="ellipsis">
-                  <h4>{props.list[props.num].projectName}</h4>
+                <Card.Title align="center" className="listHeadEllipsis">
+                  <h5>{props.list[props.num].projectName}</h5>
                 </Card.Title>
                 {/* --- 카드 상단 프로젝트 명 --- */}
 
