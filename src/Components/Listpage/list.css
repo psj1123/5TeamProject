@@ -23,3 +23,11 @@
     height: 100px;
     background-color: aqua;
   }
+
+  .colortest{
+    border: 1px solid red;
+  }
+
+  .dayred{
+    color: red;
+  }

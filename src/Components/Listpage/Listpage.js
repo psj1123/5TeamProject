@@ -66,7 +66,7 @@ function Listpage(props) {
                   </Card.Header>
                   <Card.Body align="center">
                     {/* ----- 프로젝트 추가 모달창 구현 ----- */}
-                    <div style={{ marginTop: '-1px' }}>
+                    <div style={{ marginTop: '7px' }}>
                       <Button
                         className="btn_add"
                         variant="outline-secondary"
@@ -92,7 +92,7 @@ function Listpage(props) {
                       {/* ----- 프로젝트 추가 모달창 구현 ----- */}
                     </div>
                     {/* ----- 프로젝트 참여 모달창 구현 ----- */}
-                    <div style={{ marginTop: '19px' }}>
+                    <div style={{ marginTop: '25px', marginBottom: '5px' }}>
                       <Button
                         className="btn_join"
                         variant="outline-secondary"

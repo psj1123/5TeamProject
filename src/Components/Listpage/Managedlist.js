@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Card, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './list.css';
@@ -18,6 +18,7 @@ function Managedlist(props) {
   let gap = dday - today;
   let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
 
+  /* 카드 hover Overlay 기능 */
   const renderTooltip = (props) => (
     <Tooltip className="ellipsismany" id="button-tooltip" {...props}>
       {find.projectName}
@@ -25,6 +26,16 @@ function Managedlist(props) {
       {find.content}
     </Tooltip>
   );
+
+  /* 마감일 임박 시 강조 기능 , 마운트 될 때만 실행 */
+  let [ddayColor, setDdayColor] = useState('');
+  useEffect(() => {
+    if (result > 10) {
+      setDdayColor('');
+    } else {
+      setDdayColor('dayred');
+    }
+  }, []);
 
   return (
     <>
@@ -61,20 +72,23 @@ function Managedlist(props) {
                     className="listHeadEllipsis"
                     style={{ marginTop: '-10px' }}
                   >
-                    {props.list[props.num].content}
+                    <b> {props.list[props.num].content}</b>
                   </Card.Text>
                   {/* --- 카드 중단 프로젝트 내용 --- */}
 
                   {/* --- 카드 하단 프로젝트 마감일 --- */}
-                  <h6
-                    align="center"
-                    className="listHeadEllipsis"
-                    style={{ marginTop: '-10px' }}
-                  >
-                    {props.list[props.num].deadline}
-                    <br />
-                    {result !== 0 ? 'D-' + result : 'D-day'}
-                  </h6>
+                  <div align="center">
+                    <h6
+                      align="center"
+                      className="listHeadEllipsis"
+                      style={{ marginTop: '-10px' }}
+                    >
+                      {props.list[props.num].deadline}
+                    </h6>
+                    <b className={ddayColor}>
+                      {result !== 0 ? 'D - ' + result : 'D-day'}
+                    </b>
+                  </div>
                   {/* --- 카드 하단 프로젝트 마감일 --- */}
                 </Card.Body>
               </div>
