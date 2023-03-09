@@ -31,7 +31,7 @@ function ProjectListModalAdd(props) {
       (x) => x.projectName === input_name.current.value
     );
 
-    /* 시간 함수  */
+    /* 마감일 오체크 확인을 위한 시간 함수  */
     const today = new Date();
     let dday = new Date(input_deadline.current.value).getTime();
     let gap = dday - today;
@@ -43,7 +43,7 @@ function ProjectListModalAdd(props) {
       input_contents.current.value !== '' &&
       input_deadline.current.value !== '' &&
       find === -1 &&
-      result > 0
+      result > 0 // 마감일이 내일 이후로 선택 되었다면
     ) {
       const nextProjects = props.list.concat({
         id: props.nextNum,
@@ -78,7 +78,8 @@ function ProjectListModalAdd(props) {
         alert('프로젝트 마감일을 선택해주세요!');
       }
     } else if (result <= 0) {
-      alert('마감일을 내일 이후로 체크해 주세요!');
+      // 마감일이 오늘 이전으로 체크 되었다면
+      alert('마감일을 다음 날 이후로 체크해 주세요!');
     } else {
       alert('이미 존재하는 프로젝트명 입니다!');
       input_name.current.focus();

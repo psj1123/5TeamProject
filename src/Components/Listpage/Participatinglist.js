@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Col, Card, Nav, Button } from 'react-bootstrap';
+import {
+  Col,
+  Card,
+  Nav,
+  Button,
+  Tooltip,
+  OverlayTrigger,
+} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../../Styles/Cards.css';
 
@@ -19,6 +26,14 @@ const Participatinglist = (props) => {
   let gap = dday - today;
   let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
 
+  const renderTooltip = (props) => (
+    <Tooltip className="ellipsismany" id="button-tooltip" {...props}>
+      {find.projectName}
+      <br />
+      {find.content}
+    </Tooltip>
+  );
+
   return (
     <>
       {props.list[props.num].join === 1 ? ( // join값이 1이면 참여중인 프로젝트에 보여짐
@@ -29,41 +44,49 @@ const Participatinglist = (props) => {
             className="mb-2"
             onClick={onClick}
           >
-            <div className="listCard" style={{ minHeight: '160px' }}>
-              {/* --- 카드 최상단 --- */}
-              <Card.Header align="center" className="header">
-                프로젝트
-              </Card.Header>
-              {/* --- 카드 최상단 --- */}
+            <OverlayTrigger
+              placement="top"
+              delay={{ show: 150, hide: 200 }}
+              overlay={renderTooltip}
+            >
+              <div className="listCard" style={{ minHeight: '160px' }}>
+                {/* --- 카드 최상단 --- */}
+                <Card.Header align="center" className="header">
+                  프로젝트
+                </Card.Header>
+                {/* --- 카드 최상단 --- */}
 
-              <Card.Body>
-                {/* --- 카드 상단 프로젝트 명 --- */}
-                <Card.Title align="center" className="listHeadEllipsis">
-                  <h4>{props.list[props.num].projectName}</h4>
-                </Card.Title>
-                {/* --- 카드 상단 프로젝트 명 --- */}
+                <Card.Body>
+                  {/* --- 카드 상단 프로젝트 명 --- */}
+                  <Card.Title align="center" className="listHeadEllipsis">
+                    <h4>{props.list[props.num].projectName}</h4>
+                  </Card.Title>
+                  {/* --- 카드 상단 프로젝트 명 --- */}
 
-                {/* --- 카드 중단 프로젝트 내용 --- */}
-                <Card.Text
-                  align="center"
-                  className="listHeadEllipsis"
-                  style={{ marginTop: '-10px' }}
-                >
-                  {props.list[props.num].content}
-                </Card.Text>
-                {/* --- 카드 중단 프로젝트 내용 --- */}
+                  {/* --- 카드 중단 프로젝트 내용 --- */}
+                  <Card.Text
+                    align="center"
+                    className="listHeadEllipsis"
+                    style={{ marginTop: '-10px' }}
+                  >
+                    {props.list[props.num].content}
+                  </Card.Text>
+                  {/* --- 카드 중단 프로젝트 내용 --- */}
 
-                {/* --- 카드 하단 프로젝트 마감일 --- */}
-                <h6
-                  align="center"
-                  className="listHeadEllipsis"
-                  style={{ marginTop: '10px' }}
-                >
-                  {result !== 0 ? 'D-' + result : 'D-day'}
-                </h6>
-                {/* --- 카드 하단 프로젝트 마감일 --- */}
-              </Card.Body>
-            </div>
+                  {/* --- 카드 하단 프로젝트 마감일 --- */}
+                  <h6
+                    align="center"
+                    className="listHeadEllipsis"
+                    style={{ marginTop: '-10px' }}
+                  >
+                    {props.list[props.num].deadline}
+                    <br />
+                    {result !== 0 ? 'D-' + result : 'D-day'}
+                  </h6>
+                  {/* --- 카드 하단 프로젝트 마감일 --- */}
+                </Card.Body>
+              </div>
+            </OverlayTrigger>
           </Card>
         </Col>
       ) : null}
