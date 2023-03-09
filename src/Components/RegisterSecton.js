@@ -44,6 +44,23 @@ const RegisterSection = () => {
       return;
     }
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('비밀번호가 일치하지 않습니다!');
+      return;
+    }
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
+      return;
+    }
+
     alert('회원가입이 완료되었습니다.');
 
     const confirmation = confirm('로그인하시겠습니까?');
