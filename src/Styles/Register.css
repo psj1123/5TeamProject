@@ -19,17 +19,19 @@
 }
 
 .register_form label {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
-    text-align: right;
+    text-align: left;
     
 }
 
 .register_form input {
+    font-size: 17px;
     padding: 10px;
     border: 1px solid #d4d3d3;
     border-radius: 4px;
     width: 220px;
+    height: 27px;
 }
 
 .inputContainer {
@@ -52,9 +54,9 @@
 
 .inputName {
     display: inline-block;
-    margin-right : 20px;
+    margin-left : 20px;
     width: 15vmin;
-    text-align: right;
+    text-align: left;
 }
 
 .inputbox {

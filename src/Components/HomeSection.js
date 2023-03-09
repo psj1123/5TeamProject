@@ -57,7 +57,10 @@ const HomeSection = () => {
           </div>
           <div className="homeSectionHeader">
             <h1>내 노트, 팀 프로젝트</h1>
-            <h2>간편하게, 효율적으로 성공적인 협업을 위한 Jellabo</h2>
+            <h2>
+              간편하고 효율적으로 진행하세요<br />
+              성공적인 협업을 위한 Jellabo
+            </h2>
             <Link to="/login">
               <div className="login">무료로 시작하기</div>
             </Link>
@@ -85,13 +88,13 @@ const HomeSection = () => {
               </span>
             </div>
           </div>
-          <div>
+          <div className="homeImage">
             <img src="./img/HomeImage02.jpg" alt="사진2" />
           </div>
         </div>
 
         <div className="homeArticle">
-          <div>
+          <div className="homeImage">
             <img src="./img/HomeImage03.jpg" alt="사진3" />
           </div>
           <div className="homeTextContainer">
@@ -117,11 +120,12 @@ const HomeSection = () => {
           <div className="homeTextContainer">
             <div className="homeTitle3">
               <span>지금 바로 시작해보세요!</span>
-              <Link to="/login">
-                <div className="login">무료로 시작하기</div>
-              </Link>
             </div>
-            <div>
+            <Link to="/login">
+              <div className="login">무료로 시작하기</div>
+            </Link>
+
+            <div className="homeImage">
               <img src="./img/HomeImage04.jpg" alt="사진4" />
             </div>
           </div>

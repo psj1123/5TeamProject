@@ -3,37 +3,50 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%
+    width: 100%;
+    height: auto;
 }
 a {
     text-decoration: none;
     color: #000000;
 }
+
 .headerContainer {
+    min-height: 5em;
     background-color: #ffffff;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     height: 60px;
+    
     box-shadow: 0 4px 4px -4px #383838;
     /*border-bottom: 1px solid #000000;*/
 }
-.headerLeft {
-    margin-left: 50px;
-    height: 60px;
+
+.headerContainer div {
     display: flex;
+    align-items: center;
+}
+
+.headerLeft {
+    margin-left: 7em;
+    height: 60px;
+    display: block;
     align-items: center;
 }
 
 .headerLeft div {
     display: flex;
     align-items: center;
-    font-size: 1.9rem;
+    font-size: 2.35rem;
     font-weight: bold;
 }
 
 .headerLeft div img {
-    height: 30px;
+    display: flex;
+    align-items: center;
+    height: 40px;
     margin-right: 10px;
 }
 .headerCenter {
@@ -49,43 +62,35 @@ a {
     width: auto;
     float: left;
 }
-.headerCenter span:first-of-type{
-    max-width: 50vmin;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 .headerRight {
     width: auto;
     height: 60px;
-    margin-right: 50px;
+    margin-right: 8em;
+    float: right;
+}
+
+.rightLogin {
+    display: block;
+    width: auto;
+    height: 60px;
+    margin-right: 1em;
     float: right;
     line-height: 60px;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #000000;
-}
-.headerRight ul {
-    margin: 0;
-    height: auto;
-    list-style: none;
-    cursor: pointer
-}
-.headerRight li {
-    margin-left: 20px;
-    display: block;
-    float: left;
-    color: #000000;
+    font-weight: bold;
     transition: all .3s ease
 }
 
-.headerRight li :hover {
+.rightLogin div :hover {
     color: #5e308c;
     transition: all .3s ease
 }
 
-.headerRight li div {
+.rightLogin div {
     position: relative;
+    display: flex;
     padding: 0 10px;
     border-radius: 10px;
     font-weight: bold;
@@ -93,10 +98,10 @@ a {
     text-decoration: none;
 }
 
-.headerRight li div:after {
-    border-top: solid 2px #5e308c;
+.rightLogin div:after {
+    border-top: solid 3.5px #5e308c;
     content: '';
-    display: block;
+    display: flex;
     position: absolute;
     bottom: 12px; /*밑줄효과 위로 이동*/
     left: 0;
@@ -105,7 +110,7 @@ a {
     transition: transform 250ms ease-in-out;
 }
 
-.headerRight li div:hover:after {
+.rightLogin div:hover:after {
     transform: scaleX(1);
 }
 
