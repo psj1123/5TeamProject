@@ -4,18 +4,21 @@ const FooterRight = () => {
   return (
     <div>
       <ul>
-        <span>정책사항</span>
+        <span>
+          <div className="footerRight_head">
+            <p>정책사항</p>
+          </div>
+        </span>
         <li>
-          <span>이용약관</span>
+          <span className="RightContent">
+            개인정보 판매 또는 공유에 반대합니다.
+          </span>
         </li>
         <li>
-          <span>개인정보처리방침</span>
+          <span>© 2023 JellyFive, Inc.</span>
         </li>
         <li>
-          <span>고객센터</span>
-        </li>
-        <li>
-          <span>오류 신고</span>
+          <span>Powered by React.</span>
         </li>
       </ul>
     </div>
