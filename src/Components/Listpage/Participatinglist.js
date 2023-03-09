@@ -12,6 +12,12 @@ const Participatinglist = (props) => {
     Navigate('/project/' + find.id);
   };
 
+  /* D-day를 위한 시간 함수  */
+  const today = new Date();
+  let dday = new Date(props.list[props.num].deadline).getTime();
+  let gap = dday - today;
+  let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1;
+
   return (
     <>
       {props.list[props.num].join == 1 ? ( // join값이 1이면 참여중인 프로젝트에 보여짐
@@ -50,7 +56,7 @@ const Participatinglist = (props) => {
                   className="listHeadEllipsis"
                   style={{ marginTop: '10px' }}
                 >
-                  {props.list[props.num].deadline}
+                  {result !== 0 ? 'D-' + result : 'D-day'}
                 </h6>
                 {/* --- 카드 하단 프로젝트 마감일 --- */}
               </Card.Body>

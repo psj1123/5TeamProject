@@ -14,7 +14,7 @@ function Listpage(props) {
       id: 99, // 페이지 이동을 위한 프로젝트 고유 ID
       projectName: 'test1', // 프로젝트 이름
       content: 'test1', // 프로젝트 내용
-      deadline: '2099-12-31', // 마감일
+      deadline: '2023-12-31', // 마감일
       management: 1, // 유저가 생성한 프로젝트면 1 , 아니면 0
       join: 1, // 유저가 참여중인 프로젝트면 1 , 아니면 0
     },
