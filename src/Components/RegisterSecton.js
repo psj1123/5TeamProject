@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
-
 import '../Styles/Register.css';
+import axios from 'axios';
 
 const RegisterSection = () => {
   const [formData, setFormData] = useState({

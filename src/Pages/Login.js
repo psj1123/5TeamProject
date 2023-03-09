@@ -60,7 +60,9 @@ const Login = () => {
         };
 
         if (state.isLoggedIn) {
-          return <Navigate to="/myprojectslist" replace={true} />;
+          return (
+            <Navigate to="/myprojectslist/${state.email}" replace={true} />
+          );
         } else {
           return (
             <>
