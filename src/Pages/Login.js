@@ -36,12 +36,11 @@ const Login = () => {
             return;
           }
           if (!validatePassword(password)) {
-            alert(
-              '비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.'
-            );
+
+            alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
             return;
           }
-
+          
           actions.setIsLoggedIn(true);
           actions.setEmail(email);
           actions.setNickname('테스트');
@@ -53,53 +52,51 @@ const Login = () => {
           return (
             <>
               <Header page={'Login'} />
-              <section>
-                <div className="login-container">
-                  <div className="login-form-box">
-                    <div className="login-image">
-                      <img src="img/LoginImage.png" alt="login" />
+              <div className="login-container">
+                <div className="login-form-box">
+                  <div className="login-image">
+                    <img src="img/LoginImage.png" alt="login" />
+                  </div>
+                  <div className="login-form">
+                    <div className="login-form-input">
+                      <p>Jellabo</p>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            loginClick();
+                          }
+                        }}
+                        placeholder=" 이메일"
+                      />
                     </div>
-                    <div className="login-form">
-                      <div className="login-form-input">
-                        <p>Jellabo</p>
-                        <input
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                              loginClick();
-                            }
-                          }}
-                          placeholder=" 이메일"
-                        />
-                      </div>
-                      <div className="login-form-input">
-                        <input
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                              loginClick();
-                            }
-                          }}
-                          placeholder=" 비밀번호"
-                        />
-                      </div>
-                      <div className="login-form-button">
-                        <button onClick={loginClick}>로그인</button>
-                      </div>
-                      <div className="signup-link">
-                        <p>계정이 아직 없으신가요?</p>
+                    <div className="login-form-input">
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            loginClick();
+                          }
+                        }}
+                        placeholder=" 비밀번호"
+                      />
+                    </div>
+                    <div className="login-form-button">
+                      <button onClick={loginClick}>로그인</button>
+                    </div>
+                    <div className="signup-link">
+                      <p>계정이 아직 없으신가요?</p>
                         <Link to="/register" replace={true}>
                           <button>회원가입</button>
                         </Link>
-                      </div>
                     </div>
                   </div>
                 </div>
-              </section>
+              </div>
               <Footer />
             </>
           );
@@ -110,3 +107,4 @@ const Login = () => {
 };
 
 export default Login;
+
