@@ -19,7 +19,7 @@ a {
     /*border-bottom: 1px solid #000000;*/
 }
 .headerLeft {
-    margin-left: 30px;
+    margin-left: 50px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@ a {
 .headerLeft div {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     font-weight: bold;
 }
 
@@ -59,7 +59,7 @@ a {
 .headerRight {
     width: auto;
     height: 60px;
-    margin-right: 30px;
+    margin-right: 50px;
     float: right;
     line-height: 60px;
     font-size: 1.1rem;

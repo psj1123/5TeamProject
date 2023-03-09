@@ -1,13 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FooterLeft = () => {
   return (
     <div>
       <ul>
-        <span>가상의 회사명</span>
-        <li>
-          <span>찾아오시는 길: 대한민국 OOOO XXXX OOO XXXX OOO-XX X층</span>
-        </li>
+        <span>
+          <Link to="/">
+            <div className="footerLeft_head">
+              <img src="/favicon.ico" alt="Jellabo favicon" />
+              <h3>Jellabo</h3>
+            </div>
+          </Link>
+        </span>
         <li>
           <span>대표번호: 000) XXX-0000</span>
         </li>

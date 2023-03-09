@@ -1,14 +1,26 @@
-footer {
-    
+.footerLeft_head {
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
+
+.footerLeft_head img {
+    height: 30px;
+}
+
+.footerLeft_head h3 {
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
 .footerContainer {
-    background-color: #f2c49b;
+    background-color: #ffffff;
     display: flex;
     justify-content: space-around;
     padding: 20px 0;
     width: 100%;
     height: auto;
-    border-top: 2px solid #d9ab9a;
+    box-shadow: 0 4px 4px -4px #383838;
 }
 .footerContainer > div {
     width: 300px;

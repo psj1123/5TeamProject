@@ -52,7 +52,7 @@ section {
 
 .homeArticle {
     position: static;
-    margin: 50px 0;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -141,20 +141,20 @@ section {
 
 .login {
     background-color: #5e308c;
-        margin: 10px auto;
-        width: 20vmin;
-        height: 5.5vmin;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-        border-radius: 5px;
-        line-height: 3.5vmin;
-        font-size: 2vmin;
-        font-weight: normal;
-        color: #ffffff;
-        cursor: pointer;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    margin: 10px auto;
+    width: 20vmin;
+    height: 5.5vmin;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    line-height: 3.5vmin;
+    font-size: 2vmin;
+    font-weight: normal;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login:hover {

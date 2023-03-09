@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';
+import RegisterSection from '../Components/RegisterSecton';
 
 const Register = () => {
   return (
@@ -13,12 +14,13 @@ const Register = () => {
           return <Navigate to="/myprojectslist" replace={true} />;
         } else {
           return (
-            <><section>
-              <div>
-                <Header page={'Register'} />
-                {/* 이곳에 회원가입 폼 섹션을 작성해주세요!! */}
-              </div>
-            </section><Footer /></>
+            <>
+              <Header page={'Register'} />
+              <section>
+                  <RegisterSection />
+              </section>
+              <Footer />
+            </>
           );
         }
       }}
