@@ -15,7 +15,7 @@ function Listpage(props) {
       id: 99, // 페이지 이동을 위한 프로젝트 고유 ID
       projectName: 'test1', // 프로젝트 이름
       content: 'test1', // 프로젝트 내용
-      deadline: '2099-12-31', // 마감일
+      deadline: '2023-12-31', // 마감일
       management: 1, // 유저가 생성한 페이지면 1 , 아니면 0
       join: 1, // 유저가 참여중인 페이지면 1 , 아니면 0
     },
@@ -30,10 +30,10 @@ function Listpage(props) {
   return (
     <>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}
-      <div align="center" className='top'>
+      <div align="center" className="top">
         <h4>관리중인 프로젝트</h4>
       </div>
-      <div >
+      <div>
         <Container>
           <Row>
             {list.map(function (a, i) {
@@ -43,7 +43,7 @@ function Listpage(props) {
         </Container>
       </div>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}
-      <hr align='center' />
+      <hr align="center" />
       {/* --------- 하단 , 참여중인 프로젝터 --------- */}
       <div align="center">
         <h4>참여중인 프로젝트</h4>
@@ -61,12 +61,14 @@ function Listpage(props) {
                 className="mb-2"
               >
                 <div>
-                  <Card.Header align="center" className='header'>프로젝트 추가</Card.Header>
+                  <Card.Header align="center" className="header">
+                    프로젝트 추가
+                  </Card.Header>
                   <Card.Body align="center">
                     {/* ----- 프로젝트 추가 모달창 구현 ----- */}
                     <div style={{ marginTop: '-1px' }}>
                       <Button
-                        className='btn_add'
+                        className="btn_add"
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen(true)}
                       >
@@ -92,7 +94,7 @@ function Listpage(props) {
                     {/* ----- 프로젝트 참여 모달창 구현 ----- */}
                     <div style={{ marginTop: '19px' }}>
                       <Button
-                        className='btn_join'
+                        className="btn_join"
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen1(true)}
                       >

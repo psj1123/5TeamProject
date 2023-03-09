@@ -13,6 +13,12 @@ const Participatinglist = (props) => {
     Navigate('/project/' + find.id);
   };
 
+  /* D-day를 위한 시간 함수  */
+  const today = new Date();
+  let dday = new Date(props.list[props.num].deadline).getTime();
+  let gap = dday - today;
+  let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
+
   return (
     <>
       {props.list[props.num].join === 1 ? (
@@ -24,7 +30,9 @@ const Participatinglist = (props) => {
             onClick={onClick}
           >
             <div className="listCard" style={{ minHeight: '160px' }}>
-              <Card.Header align="center" className='header'>프로젝트</Card.Header>
+              <Card.Header align="center" className="header">
+                프로젝트
+              </Card.Header>
               <Card.Body>
                 <Card.Title align="center" className="ellipsis">
                   <h4>{props.list[props.num].projectName}</h4>
@@ -41,7 +49,7 @@ const Participatinglist = (props) => {
                   className="ellipsis"
                   style={{ marginTop: '10px' }}
                 >
-                  {props.list[props.num].deadline}
+                  {result !== 0 ? 'D-' + result : 'D-day'}
                 </h6>
               </Card.Body>
             </div>

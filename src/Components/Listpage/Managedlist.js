@@ -11,6 +11,12 @@ function Managedlist(props) {
     Navigate('/project/' + find.id);
   };
 
+  /* D-day를 위한 시간 함수  */
+  const today = new Date();
+  let dday = new Date(props.list[props.num].deadline).getTime();
+  let gap = dday - today;
+  let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
+
   return (
     <>
       {props.list[props.num].management === 1 ? ( // management값이 1이면 관리중인 프로젝트에 보여짐
@@ -22,7 +28,9 @@ function Managedlist(props) {
             onClick={onClick}
           >
             <div className="listCard">
-              <Card.Header align="center" className='header'>프로젝트</Card.Header>
+              <Card.Header align="center" className="header">
+                프로젝트
+              </Card.Header>
               <Card.Body>
                 <Card.Title align="center" className="listHeadEllipsis">
                   <h4>{props.list[props.num].projectName}</h4>
@@ -39,7 +47,7 @@ function Managedlist(props) {
                   className="listHeadEllipsis"
                   style={{ marginTop: '10px' }}
                 >
-                  {props.list[props.num].deadline}
+                  {result !== 0 ? 'D-' + result : 'D-day'}
                 </h6>
               </Card.Body>
             </div>
