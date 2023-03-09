@@ -1,3 +1,24 @@
+br.break-t {
+    display: none;
+}
+
+@media only screen and (min-width: 1280) {
+    br.break-m {
+        display: none;
+    }
+
+    br.break-t {
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 600) {
+    br.break-t {
+        display: none;
+    }
+}
+
+
 section {
     margin-top: 60px;
     width: 100%;
@@ -6,39 +27,41 @@ section {
 }
 
 .homeSectionContainer {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: auto;
 }
 
 .homeSectionHead_Container {
-    margin: 50px 0;
+    margin: 0 0 10em 0;
     display: flex;
     justify-content: center;
     width: 100%;
+    height: auto;
 }
 
 .homeSectionHead_image {
-    display: block;
+    display: inline;
     float: left;
     margin-right: 30px;
 }
 
 .homeSectionHead_image > img {
     border-radius: 1%;
-    width: 70vmin;
+    width: 68vmin;
     z-index: 1;
     margin: 10px;
     position: relative;
 }
 
 .homeSectionHeader {
-    display: block;
+    display: inline;
     margin: 150px 0 0 0;
     position: relative;
-    float: right;
+    float: left;
     text-align: center;
 }
 .homeSectionHeader h2 {
@@ -52,7 +75,7 @@ section {
 
 .homeArticle {
     position: static;
-    margin-top: 50px;
+    margin: 0 0 50px 0;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -63,8 +86,13 @@ section {
     border-radius: 5%;
 }
 .homeTextContainer {
-    margin: auto 20px;
+    margin: 30px;
     width: auto;
+    justify-content: center;
+}
+
+.homeTextContainer > img {
+    margin: 0 0 100px 0;
 }
 
 .homeTitle {
@@ -106,7 +134,7 @@ section {
 
 .homeTitle3 {
     display: block;
-    margin-bottom: 15px;
+    margin: 100px 0 0 0;
     font-weight: bold;
     font-size: 2.5rem;
 }
@@ -141,7 +169,7 @@ section {
 
 .login {
     background-color: #5e308c;
-    margin: 10px auto;
+    margin: 30px auto;
     width: 20vmin;
     height: 5.5vmin;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FooterLeft = () => {
   return (
-    <div>
+    <div className="LeftContainer">
       <ul>
         <span>
           <Link to="/">
@@ -13,12 +13,44 @@ const FooterLeft = () => {
             </div>
           </Link>
         </span>
-        <li>
-          <span>대표번호: 000) XXX-0000</span>
-        </li>
-        <li>
-          <span>FAX: 000-XXX-0000</span>
-        </li>
+        <div className="Left_icon_Contatiner">
+          <div className="Left_icon">
+            <a
+              href="https://github.com/psj1123/5TeamProject"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img alt="Jellabo Github Icon" src="./../img/github.png" />
+            </a>
+          </div>
+          <div className="Left_icon">
+            <a
+              href="mailto:projectJellabo@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img alt="Jellabo Mail Icon" src="./../img/mail.png" />
+            </a>
+          </div>
+          <div className="Left_icon">
+            <a
+              href="https://ko-kr.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img alt="Jellabo facebook Icon" src="./../img/facebook.png" />
+            </a>
+          </div>
+          <div className="Left_icon">
+            <a
+              href="https://kr.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img alt="Jellabo LinkedIn Icon" src="./../img/linkedin.png" />
+            </a>
+          </div>
+        </div>
       </ul>
     </div>
   );

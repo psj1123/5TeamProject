@@ -85,11 +85,15 @@ const HomeSection = () => {
               </span>
             </div>
           </div>
-          <img src="./img/HomeImage02.jpg" alt="사진2" />
+          <div>
+            <img src="./img/HomeImage02.jpg" alt="사진2" />
+          </div>
         </div>
 
         <div className="homeArticle">
-          <img src="./img/HomeImage03.jpg" alt="사진3" />
+          <div>
+            <img src="./img/HomeImage03.jpg" alt="사진3" />
+          </div>
           <div className="homeTextContainer">
             <div className="homeTitle2">
               <span>
@@ -117,7 +121,9 @@ const HomeSection = () => {
                 <div className="login">무료로 시작하기</div>
               </Link>
             </div>
-            <img src="./img/HomeImage04.jpg" alt="사진4" />
+            <div>
+              <img src="./img/HomeImage04.jpg" alt="사진4" />
+            </div>
           </div>
         </div>
       </div>
