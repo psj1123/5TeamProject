@@ -6,20 +6,21 @@
 }
 
 .login-form {
-    margin-left: 80px;
-    height: 28em;
-    width: 300px;
-    margin: 60px 40px 60px 100px;
-    padding: 50px;
-    border: none;
-    background-color: #ffffff;
-    border-radius: 15px;
-    align-items: center;
+  display: block;
+  margin-left: 80px;
+  min-height: 32em;
+  width: 320px;
+  margin: 60px 40px 60px 100px;
+  padding: 50px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 15px;
+  align-items: center;
 }
 
 .login-form h2 {
   margin-bottom: 10px;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   text-align: center;
   color: #51148d;
@@ -107,13 +108,13 @@
 }
 
 .login-image {
-    margin: 10px;
+    margin: 0;
 }
 
 .login-image img {
     display: block;
     margin: 0 auto;
-    width: 600px;
+    width: 500px;
     height: 600px;
     object-fit: cover;
     border: none;

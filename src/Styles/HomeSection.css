@@ -1,33 +1,13 @@
-br.break-t {
-    display: none;
-}
-
-@media only screen and (min-width: 1280) {
-    br.break-m {
-        display: none;
-    }
-
-    br.break-t {
-        display: inline;
-    }
-}
-
-@media only screen and (min-width: 600) {
-    br.break-t {
-        display: none;
-    }
-}
-
-
 section {
-    margin-top: 60px;
+    margin-top: 5em;
     width: 100%;
     height: auto;
+    min-height: 59em;
     background-color: #E2E2E2;
 }
 
 .homeSectionContainer {
-    display: inline-block;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -62,15 +42,17 @@ section {
     margin: 150px 0 0 0;
     position: relative;
     float: left;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 .homeSectionHeader h2 {
     margin: 20px 0;
     font-size: 3vmin;
+    text-align: center;
 }
 .homeSectionHeader h1 {
     margin: 20px 0;
-    font-size: 7vmin;
+    font-size: 5vmin;
 }
 
 .homeArticle {
@@ -133,7 +115,7 @@ section {
 }
 
 .homeTitle3 {
-    display: block;
+    display: flex;
     margin: 100px 0 0 0;
     font-weight: bold;
     font-size: 2.5rem;
@@ -141,6 +123,8 @@ section {
 
 .homeTitle3 span {
     font-size: 3rem;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .homeContent1 {
