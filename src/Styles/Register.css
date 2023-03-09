@@ -2,15 +2,19 @@
     align-items: center;
     margin: 10px auto;
     height: 100%;
-    width: auto;
+    width: 30%;
     display: block;
     margin: auto;
+    border: none;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 2px 5px #808080;
     
 }
 .register_form h1 {
     margin: 7px;
     margin-bottom: 50px;
-    font-size: 7vmin;
+    font-size: 5vmin;
     text-align: center;
 }
 
@@ -42,6 +46,13 @@
     align-content: stretch;
 }
 
+.inputContainer2 {
+    display: block;
+    margin-bottom: 2vmin;
+    text-align: center;
+    align-content: stretch;
+}
+
 .inputName {
     display: inline-block;
     margin-right : 20px;
@@ -56,7 +67,7 @@
 
 button {
     background-color: #5e308c;
-    margin: 10px auto;
+    margin: 0 0 50px 0;
     width: 20vmin;
     height: 5.5vmin;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
@@ -67,7 +78,6 @@ button {
     color: #ffffff;
     cursor: pointer;
     text-align: center;
-    display: flex;
     justify-content: center;
     align-items: center;
 }

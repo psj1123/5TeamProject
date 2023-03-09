@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
+
 import '../Styles/Register.css';
 
 const RegisterSection = () => {
@@ -30,7 +31,7 @@ const RegisterSection = () => {
     const { email, password, confirmPassword, name, nickname, dateOfBirth } =
       formData;
 
-    // Check if all the required fields are filled
+    // 입력한 것이 없을 시에 경고창 생성
     if (
       !email ||
       !password ||
@@ -171,6 +172,8 @@ const RegisterSection = () => {
                       회원가입
                     </button>
                   </div>
+                </form>
+                <div className="inputContainer2">
                   <br />
                   <p>
                     위의 "회원가입" 버튼을 클릭하면 Jellabo의 이용약관 및
@@ -178,7 +181,7 @@ const RegisterSection = () => {
                     <br />
                     이해했으며 그에 동의하는 것으로 간주합니다.
                   </p>
-                </form>
+                </div>
               </section>
             </>
           );
