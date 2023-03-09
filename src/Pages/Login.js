@@ -53,14 +53,15 @@ const Login = () => {
           return (
             <>
               <Header page={'Login'} />
-              <div className="login-container">
-                <div className="login-form-box">
+              <section>
+                <div className="login-container">
                   <div className="login-image">
                     <img src="img/LoginImage.png" alt="login" />
                   </div>
                   <div className="login-form">
+                    <h2>Jellabo</h2>
+                    <br />
                     <div className="login-form-input">
-                      <p>Jellabo</p>
                       <input
                         type="text"
                         value={email}
@@ -89,15 +90,19 @@ const Login = () => {
                     <div className="login-form-button">
                       <button onClick={loginClick}>로그인</button>
                     </div>
-                    <div className="signup-link">
+                    <div className="signup">
                       <p>계정이 아직 없으신가요?</p>
-                      <Link to="/register" replace={true}>
-                        <button>회원가입</button>
-                      </Link>
+                    </div>
+                    <div className="signup-link">
+                      <div>
+                        <Link to="/register" replace={true}>
+                          <p>회원가입</p>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
               <Footer />
             </>
           );

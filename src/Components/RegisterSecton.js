@@ -57,7 +57,7 @@ const RegisterSection = () => {
 
     const emailRegex = /\S+@\S+\.\S+/;
     if (!emailRegex.test(email)) {
-      alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
+      alert('이메일 양식에 맞게 작성하세요!');
       return;
     }
 
