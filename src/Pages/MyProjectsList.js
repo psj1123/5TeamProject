@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';
+import Listpage from '../Components/Listpage/Listpage';
 
 const MyProjectsList = () => {
   return (
@@ -16,8 +17,9 @@ const MyProjectsList = () => {
           return (
             <div>
               <Header page={'MyProjectList'} />
-              {/* 이곳에 프로젝트 리스트 섹션 컴포넌트 작성해주세요!! 
-              테스트용*/}
+              {/* 프로젝트 리스트 페이지 */}
+              {<Listpage />}
+              {/* 프로젝트 리스트 페이지 */}
               <button>
                 <Link to="/project">프로젝트</Link>
               </button>

@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';
+import ReturnTop from '../Components/ReturnTop';
 
 const Login = () => {
   return (
@@ -21,12 +22,17 @@ const Login = () => {
         } else {
           return (
             <>
-              <div>
+              <div
+                style={{
+                  marginTop: '120px',
+                }}
+              >
                 <Header page={'Login'} />
               </div>
               {/*이곳에 로그인 폼 컴포넌트 작성해주세요!!
               테스트용*/}
               <button onClick={loginClick}>로그인</button>
+              <ReturnTop />
               <Footer />
             </>
           );

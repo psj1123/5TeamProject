@@ -17,7 +17,7 @@ const HeaderLeft = ({ page }) => {
     return (
       <div className="headerLeft">
         <Link to="/" replace={true}>
-          <div>홈으로 가기</div>
+          <div>OXOXO</div>
         </Link>
       </div>
     );
@@ -27,7 +27,7 @@ const HeaderLeft = ({ page }) => {
     return (
       <div className="headerLeft">
         <Link to="/">
-          <div>홈으로 가기</div>
+          <div>OXOXO</div>
         </Link>
       </div>
     );

@@ -1,0 +1,391 @@
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+.projectModalOverlay {
+  background-color: #acacacb7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 62px;
+  position: fixed;
+  z-index: 50000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.projectModal {
+  background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  width: auto;
+  max-width: calc(100% - 450px);
+  min-width: 400px;
+  height: auto;
+  max-height: calc(100% - 100px);
+  min-height: 300px;
+  overflow: hidden;
+  padding: 20px 70px 20px 20px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+.closeModal {
+  background-color: #ffffff;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.closeModal:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+.closeModal:active {
+  background-color: #cccccc;
+  color: #ffffff;
+}
+
+/* 설정 modal */
+
+.settingModalContainer {
+  background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  width: auto;
+  max-width: calc(100% - 450px);
+  min-width: 400px;
+  height: auto;
+  max-height: calc(100% - 100px);
+  min-height: 300px;
+  overflow: hidden;
+  padding: 20px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  top: 50%;
+  left: 60%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.settingModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.settingModalSidebar {
+  width: 30%;
+  padding-right: 20px;
+}
+
+.settingModalSidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settingModalSidebar li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  color: #555555;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.settingModalSidebar li.active {
+  color: #000000;
+  border-right: 3px solid #000000;
+  background-color: #f5f5f5;
+}
+
+.settingModalMain {
+  width: 70%;
+}
+
+.settingModalMain form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label,
+h4 {
+  display: block;
+  margin-bottom: 5px;
+  color: #555555;
+  font-weight: bold;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  resize: none;
+  font-size: 1rem;
+}
+
+.settingModalMain button[type='submit'] {
+  background-color: #5e308c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 20px;
+  width: 210px;
+}
+
+.settingModalMain button[type='submit']:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+.settingModalMain button[type='submit']:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+
+.settingClose,
+.saveClose {
+  background-color: #5e308c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 20px;
+}
+
+.settingClose:hover,
+.saveClose:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+
+.settingClose:active,
+.saveClose:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+/* 설정 modal 끝 */
+
+/* 글작성 modal */
+.writeNoteButton {
+  background-color: #5e308c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.writeNoteButton:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+.writeNoteButton:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+
+/* 글작성 modal 끝 */
+
+/* 카테고리 */
+
+.categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.categoryItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.categoryItem.selected {
+  background-color: #5e308c;
+  color: #fff;
+}
+
+.categoryItem.addCategory {
+  background-color: #fff;
+  color: #5e308c;
+  border: 2px dashed #5e308c;
+}
+
+.categoryItem:hover:not(.addCategory) {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+
+.categoryItem:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+
+/* 카테고리 끝 */
+
+/* 자세히 보기 */
+
+.detailSection {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 30px;
+}
+
+.detailTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.detailescription {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.detailWriter {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.detailDate {
+  font-size: 14px;
+  color: #999;
+}
+
+.buttonContainer {
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+  float: right;
+}
+
+.editButton,
+.deleteButton {
+  background-color: #5e308c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+
+.editButton:active,
+.deleteButton:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+
+/* 자세히 보기 끝 */
+
+/* 설정 modal 멤버관리 tab */
+.memberManagement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memberManagement h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.memberManagement ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.memberManagement li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.memberManagement li:last-of-type {
+  margin-bottom: 0;
+}
+
+.memberManagement button {
+  background-color: #5e308c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.memberManagement button:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+
+.memberManagement button:active {
+  background-color: #a676a3;
+  color: #000000;
+}
+
+/* 설정 modal 멤버관리 tab 끝 */

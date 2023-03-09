@@ -1,5 +1,10 @@
 header {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 a {
     text-decoration: none;
@@ -21,6 +26,12 @@ a {
     font-weight: bold;
     font-size: 1.5rem;
     color: #ffffff;
+}
+.headerLeft div {
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .headerCenter {
     width: auto;
@@ -78,5 +89,5 @@ a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
