@@ -16,9 +16,7 @@ const Register = () => {
           return (
             <>
               <Header page={'Register'} />
-              <section>
-                  <RegisterSection />
-              </section>
+              <RegisterSection />
               <Footer />
             </>
           );
