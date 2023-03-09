@@ -36,11 +36,12 @@ const Login = () => {
             return;
           }
           if (!validatePassword(password)) {
-
-            alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
+            alert(
+              '비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.'
+            );
             return;
           }
-          
+
           actions.setIsLoggedIn(true);
           actions.setEmail(email);
           actions.setNickname('테스트');
@@ -90,9 +91,9 @@ const Login = () => {
                     </div>
                     <div className="signup-link">
                       <p>계정이 아직 없으신가요?</p>
-                        <Link to="/register" replace={true}>
-                          <button>회원가입</button>
-                        </Link>
+                      <Link to="/register" replace={true}>
+                        <button>회원가입</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -107,4 +108,3 @@ const Login = () => {
 };
 
 export default Login;
-
