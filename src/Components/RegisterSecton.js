@@ -98,7 +98,6 @@ const RegisterSection = () => {
                       />
                     </div>
                   </div>
-                  <br />
 
                   <div className="inputContainer">
                     <div className="inputName">
@@ -115,7 +114,6 @@ const RegisterSection = () => {
                       />
                     </div>
                   </div>
-                  <br />
 
                   <div className="inputContainer">
                     <div className="inputName">
@@ -132,7 +130,6 @@ const RegisterSection = () => {
                       />
                     </div>
                   </div>
-                  <br />
 
                   <div className="inputContainer">
                     <div className="inputName">
@@ -149,7 +146,6 @@ const RegisterSection = () => {
                       />
                     </div>
                   </div>
-                  <br />
 
                   <div className="inputContainer">
                     <div className="inputName">
@@ -166,7 +162,6 @@ const RegisterSection = () => {
                       />
                     </div>
                   </div>
-                  <br />
 
                   <div className="inputContainer">
                     <div className="inputName">
