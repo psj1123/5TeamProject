@@ -30,14 +30,14 @@ const Participatinglist = (props) => {
                 </Card.Title>
                 <Card.Text
                   align="center"
-                  className="ellipsis"
+                  className="listHeadEllipsis"
                   style={{ marginTop: '-10px' }}
                 >
                   {props.list[props.num].content}
                 </Card.Text>
                 <h6
                   align="center"
-                  className="ellipsis"
+                  className="listHeadEllipsis"
                   style={{ marginTop: '10px' }}
                 >
                   {props.list[props.num].deadline}
