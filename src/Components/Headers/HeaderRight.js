@@ -39,7 +39,7 @@ const HeaderRight = ({ page }) => {
                 <ul>
                   <li>
                     <Link to="/myprojectslist" replace={true}>
-                      <div>나의 프로젝트 리스트</div>
+                      <div>프로젝트 리스트</div>
                     </Link>
                   </li>
                   <li>
@@ -55,7 +55,6 @@ const HeaderRight = ({ page }) => {
               <div className="headerRight">
                 <ul>
                   <li>
-                    {/*여유가 된다면 개인정보 수정 페이지로 링크 걸기*/}
                     <div>
                       <span>{state.nickname}</span>
                       <span>{'(' + state.email + ')'}</span>
@@ -73,18 +72,16 @@ const HeaderRight = ({ page }) => {
         else {
           return (
             <div className="headerRight">
-              <ul>
-                <li>
-                  <Link to="/login">
-                    <div>로그인</div>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/register">
-                    <div>회원가입</div>
-                  </Link>
-                </li>
-              </ul>
+              <div className="rightLogin">
+                <Link to="/login">
+                  <div>로그인</div>
+                </Link>
+              </div>
+              <div className="rightLogin">
+                <Link to="/register">
+                  <div>회원가입</div>
+                </Link>
+              </div>
             </div>
           );
         }

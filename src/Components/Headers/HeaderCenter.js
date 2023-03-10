@@ -8,6 +8,7 @@ const HeaderCenter = ({ page }) => {
       <div className="headerCenter">
         <Link to="/project/:projectcode">
           <span>프로젝트 제목</span>
+          <span>(생성자)</span>
         </Link>
       </div>
     );

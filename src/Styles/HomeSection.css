@@ -1,52 +1,63 @@
 section {
-    margin-top: 120px;
+    margin-top: 5em;
     width: 100%;
     height: auto;
+    min-height: 59em;
+    background-color: #E2E2E2;
 }
+
 .homeSectionContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: auto;
 }
-.homeSectionContainer > img {
-    vertical-align: middle;
-    width: 80vmin;
+
+.homeSectionHead_Container {
+    margin: 0 0 10em 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.homeSectionHead_image {
+    display: inline;
+    float: left;
+    margin-right: 30px;
+}
+
+.homeSectionHead_image > img {
     border-radius: 1%;
-}
-.homeSectionHeader {
+    width: 68vmin;
+    z-index: 1;
+    margin: 10px;
     position: relative;
-    text-align: center;
+}
+
+.homeSectionHeader {
+    display: inline;
+    margin: 150px 0 0 0;
+    position: relative;
+    float: left;
+    justify-content: center;
+    align-items: center;
 }
 .homeSectionHeader h2 {
     margin: 20px 0;
     font-size: 3vmin;
+    text-align: center;
 }
 .homeSectionHeader h1 {
     margin: 20px 0;
-    font-size: 10vmin;
+    font-size: 5vmin;
 }
-.homeSectionHeader img {
-    vertical-align: middle;
-    width: 120vmin;
-    z-index: 1;
-    border-radius: 1%;
-}
-.homeSectionHeader > div {
-    background-color: #ffffffd2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50% );
-    padding: 30px;
-    box-sizing: border-box;
-    border: 2px solid #000000;
-    border-radius: 5%;
-}
+
 .homeArticle {
     position: static;
-    margin: 50px 0;
+    margin: 0 0 50px 0;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -57,33 +68,108 @@ section {
     border-radius: 5%;
 }
 .homeTextContainer {
-    margin: auto 20px;
+    margin: 30px;
     width: auto;
-    text-align: center;
+    justify-content: center;
 }
+
+.homeTextContainer > img {
+    margin: 0 0 100px 0;
+}
+
 .homeTitle {
     display: block;
     margin-bottom: 15px;
     font-weight: bold;
     font-size: 2.5rem;
+    text-align: center;
 }
-.homeContent {
+
+.homeTitle span {
+    font-size: 3rem;
+}
+
+.homeTitle1 {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: right;
+}
+.homeTitle1 span {
+    font-size: 3rem;
+    text-align: right;
+}
+
+.homeTitle2 {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: left;
+}
+
+.homeTitle2 span {
+    font-size: 3rem;
+    text-align: left;
+}
+
+.homeTitle3 {
+    display: flex;
+    margin: 100px 0 0 0;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.homeTitle3 span {
+    font-size: 3rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.homeContent1 {
     display: inline;
     font-size: 1.1rem;
 }
-.register {
+
+.homeContent1 span {
+    display: block;
+    margin: 30px 0 300px 0;
+    text-align: right;
+    line-height: 30px;
+}
+
+.homeContent2 {
+    display: inline;
+    font-size: 1.1rem;
+}
+
+.homeContent2 span {
+    display: block;
+    margin: 30px 0 0 0;
+    text-align: left;
+    line-height: 30px;
+}
+
+.login {
     background-color: #5e308c;
-    margin: 10px auto;
-    width: 14vmin;
-    height: 3.5vmin;
-    border: 2px solid #000000;
+    margin: 30px auto;
+    width: 20vmin;
+    height: 5.5vmin;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     line-height: 3.5vmin;
     font-size: 2vmin;
     font-weight: normal;
     color: #ffffff;
     cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.register:hover {
+
+.login:hover {
     background-color: #a676a3;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
 }

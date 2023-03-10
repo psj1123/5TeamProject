@@ -7,7 +7,10 @@ const HeaderLeft = ({ page }) => {
     return (
       <div className="headerLeft">
         <Link to="/myprojectslist">
-          <div>참여 프로젝트 리스트</div>
+          <div>
+            <img src="/favicon.ico" alt="Jellabo favicon" />
+            Jellabo
+          </div>
         </Link>
       </div>
     );
@@ -17,7 +20,10 @@ const HeaderLeft = ({ page }) => {
     return (
       <div className="headerLeft">
         <Link to="/" replace={true}>
-          <div>OXOXO</div>
+          <div>
+            <img src="/favicon.ico" alt="Jellabo favicon" />
+            Jellabo
+          </div>
         </Link>
       </div>
     );
@@ -27,7 +33,10 @@ const HeaderLeft = ({ page }) => {
     return (
       <div className="headerLeft">
         <Link to="/">
-          <div>OXOXO</div>
+          <div>
+            <img src="/favicon.ico" alt="Jellabo favicon" />
+            Jellabo
+          </div>
         </Link>
       </div>
     );
