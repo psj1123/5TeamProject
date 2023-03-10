@@ -1,0 +1,36 @@
+section {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    background-color: #5e308c;
+    margin: 10px auto;
+    width: 17vmin;
+    height: 5vmin;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    line-height: 3.7vmin;
+    font-size: 2vmin;
+    font-weight: normal;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home:hover {
+    background-color: #a676a3;
+}
+
+.image404 {
+    max-width: 100%;
+    max-height: 50vh;
+    margin-bottom: 20px;
+}

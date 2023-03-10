@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Components/Header.js';
-import HomeSection from '../Components/HomeSection.js';
 import Footer from '../Components/Footer.js';
+import HomeSection from '../Components/HomeSection.js';
 import ReturnTop from '../Components/ReturnTop.js';
 
 const Home = () => {

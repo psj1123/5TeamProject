@@ -72,18 +72,16 @@ const HeaderRight = ({ page }) => {
         else {
           return (
             <div className="headerRight">
-              <ul>
-                <li>
-                  <Link to="/login">
-                    <div>로그인</div>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/register">
-                    <div>회원가입</div>
-                  </Link>
-                </li>
-              </ul>
+              <div className="rightLogin">
+                <Link to="/login">
+                  <div>로그인</div>
+                </Link>
+              </div>
+              <div className="rightLogin">
+                <Link to="/register">
+                  <div>회원가입</div>
+                </Link>
+              </div>
             </div>
           );
         }

@@ -8,9 +8,15 @@ const Footer = () => {
   return (
     <footer>
       <div className="footerContainer">
-        <FooterLeft />
-        <FooterCenter />
-        <FooterRight />
+        <div className="footerContainer_1">
+          <FooterLeft />
+        </div>
+        <div className="footerContainer_2">
+          <FooterCenter />
+        </div>
+        <div className="footerContainer_3">
+          <FooterRight />
+        </div>
       </div>
     </footer>
   );

@@ -1,15 +1,18 @@
 .returnTop {
-    display: none;
-    background: #ffffff url('../../public/img/ReturnTop.png') no-repeat center;
     position: fixed;
-    z-index: 99999;
-    width: 30px;
-    height: 30px;
-    right: 20px;
-    bottom: 20px;
-    border: 1px solid #c6c6c6;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../../public/img/ReturnTop.png");
+    background-size: cover;
     cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
 }
+
 .activeReturnTop {
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
