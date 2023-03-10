@@ -7,6 +7,7 @@ import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
 import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
+import data from './data';
 
 function Listpage(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State

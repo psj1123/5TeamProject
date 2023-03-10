@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../../Styles/ListModal.css';
 import './ProjectListModal.css';
+import '../Listpage/data';
+import data from '../Listpage/data';
 
 function ProjectListModalAdd(props) {
   const input_name = useRef('');
@@ -45,6 +47,14 @@ function ProjectListModalAdd(props) {
       find === -1 &&
       result > 0 // 마감일이 내일 이후로 선택 되었다면
     ) {
+      const datatest = {
+        id: props.nextNum,
+        projectName: input_name.current.value,
+        content: input_contents.current.value,
+        deadline: input_deadline.current.value,
+        management: 1, // 유저가 직접 추가하므로 1 ( 1이 관리중인 프로젝트 )
+        join: 0, // 생성시 자동참여 x 상태 default 값 0 ( 1이 참여중인 프로젝트 )
+      };
       const nextProjects = props.list.concat({
         id: props.nextNum,
         projectName: input_name.current.value,
@@ -56,6 +66,7 @@ function ProjectListModalAdd(props) {
 
       props.setList(nextProjects);
       props.setNextNum(props.nextNum + 1);
+      data.push(datatest);
 
       input_name.current.value = '';
       input_contents.current.value = '';
