@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../Styles/ListModal.css'
-import './ProjectListModal.css'
+import '../../Styles/ListModal.css';
+import './ProjectListModal.css';
 
 function ProjectListModalAdd(props) {
   const input_name = useRef('');
@@ -30,12 +30,20 @@ function ProjectListModalAdd(props) {
       // 이미 존재하는 프로젝트명이 있는지 검사하기 위한 코드
       (x) => x.projectName === input_name.current.value
     );
+
+    /* 마감일 오체크 확인을 위한 시간 함수  */
+    const today = new Date();
+    let dday = new Date(input_deadline.current.value).getTime();
+    let gap = dday - today;
+    let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
+
     if (
       // 프로젝트 이름,내용,마감일이 모두 입력이 되고 데이터에 동일한 프로젝트명이 없을 때
       input_name.current.value !== '' &&
       input_contents.current.value !== '' &&
       input_deadline.current.value !== '' &&
-      find === -1
+      find === -1 &&
+      result > 0 // 마감일이 내일 이후로 선택 되었다면
     ) {
       const nextProjects = props.list.concat({
         id: props.nextNum,
@@ -69,6 +77,9 @@ function ProjectListModalAdd(props) {
       } else {
         alert('프로젝트 마감일을 선택해주세요!');
       }
+    } else if (result <= 0) {
+      // 마감일이 오늘 이전으로 체크 되었다면
+      alert('마감일을 다음 날 이후로 체크해 주세요!');
     } else {
       alert('이미 존재하는 프로젝트명 입니다!');
       input_name.current.focus();
@@ -123,7 +134,12 @@ function ProjectListModalAdd(props) {
       </Form.Group>
 
       {/* --- 제출 버튼--- */}
-      <Button variant="primary" type="button" onClick={onInsert} className='submit'>
+      <Button
+        variant="primary"
+        type="button"
+        onClick={onInsert}
+        className="submit"
+      >
         Submit
       </Button>
 
@@ -134,8 +150,8 @@ function ProjectListModalAdd(props) {
 
       {/* --- 나가기 버튼--- */}
       <Button
-        name='exit'
-        className='exit'
+        name="exit"
+        className="exit"
         variant="secondary"
         style={{ marginLeft: '200px' }}
         onClick={() => {

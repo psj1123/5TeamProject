@@ -11,7 +11,7 @@
     word-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
-    -webkit-line-clamp: 2; /* 2줄이상 넘어가면 ellipsis */
+    -webkit-line-clamp: 5; /* 5줄이상 넘어가면 ellipsis */
   }
   
   .listCard:hover{
@@ -22,4 +22,12 @@
     width: 100px;
     height: 100px;
     background-color: aqua;
+  }
+
+  .colortest{
+    border: 1px solid red;
+  }
+
+  .dayred{
+    color: red;
   }

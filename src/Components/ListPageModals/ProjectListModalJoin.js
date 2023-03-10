@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../Styles/ListModal.css'
+import '../../Styles/ListModal.css';
 
 function ProjectListModalJoin(props) {
   const input_name = useRef('');
@@ -9,8 +9,7 @@ function ProjectListModalJoin(props) {
   };
   const onInsert = () => {
     let find = props.list.findIndex(
-      // Input 내용과 일치하는 프로젝트명의 data를 찾음 props.list의 list 부분이 수정될 예정
-      // data를 가져와서 management 를 0으로 수정하고 유저 데이터에 넣음
+      // Input 내용과 일치하는 프로젝트명의 data를 찾음
       (x) => x.projectName == input_name.current.value
     );
     if (
@@ -41,6 +40,8 @@ function ProjectListModalJoin(props) {
       {/* ---프로젝트 이름 입력--- */}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Project Name</Form.Label>
+        {/* 엔터키 버그 해결을 위한 보이지 않는 인풋 */}
+        <input type="text" style={{ display: 'none' }} />
         <Form.Control
           onChange={change}
           ref={input_name}
@@ -53,22 +54,25 @@ function ProjectListModalJoin(props) {
       </Form.Group>
       {/* ---프로젝트 이름 입력--- */}
 
-      {/* --- 입력버튼--- */}
-      <Button variant="primary" type="button" className='submit' onClick={onInsert}>
+      {/* --- 제출 버튼--- */}
+      <Button
+        variant="primary"
+        type="button"
+        className="submit"
+        onClick={onInsert}
+      >
         Submit
       </Button>
-      {/* --- 입력버튼--- */}
 
       {/* --- 리셋버튼--- */}
       <Button variant="secondary" style={{ marginLeft: '5px' }} type="reset">
         reset
       </Button>
-      {/* --- 리셋버튼--- */}
 
       {/* --- 나가기버튼--- */}
       <Button
         variant="secondary"
-        className='exit'
+        className="exit"
         style={{ marginLeft: '200px' }}
         onClick={() => {
           props.setModalIsOpen(false);
@@ -76,7 +80,6 @@ function ProjectListModalJoin(props) {
       >
         Exit
       </Button>
-      {/* --- 나가기버튼--- */}
     </Form>
   );
 }
