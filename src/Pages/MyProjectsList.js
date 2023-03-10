@@ -4,10 +4,11 @@ import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';
 import Listpage from '../Components/Listpage/Listpage';
+import ReturnTop from '../Components/ReturnTop.js';
 
 const MyProjectsList = () => {
   return (
-    <UserDataConsumer>
+    <><UserDataConsumer>
       {({ state }) => {
         // 로그인 여부를 판단, 로그인되지 않은 상태라면 로그인 페이지로 강제 이동
         if (!state.isLoggedIn) {
@@ -24,8 +25,9 @@ const MyProjectsList = () => {
             </div>
           );
         }
-      }}
-    </UserDataConsumer>
+      } }
+
+    </UserDataConsumer><ReturnTop /></>
   );
 };
 
