@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeaderLeft = ({ page, state }) => {
-  const myprojectslist = '/myprojectslist' + state.email;
+  const myprojectslist = '/myprojectslist/' + state.email;
   // props로 입력받은 page가 Project일 때만 헤더 레프트에 [참여 프로젝트 리스트] 링크 표시
   if (page === 'Project') {
     return (

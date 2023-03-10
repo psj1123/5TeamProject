@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import Managedlist from './Managedlist';
 import Participatinglist from './Participatinglist';
@@ -7,84 +7,157 @@ import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
 import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
-import data from './data';
-import './list.css';
+import axios from 'axios';
 
-function Listpage(props) {
-  const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
-  const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
+const Listpage = ({ state }) => {
+  const forceUpdate = useRef(null);
+  const [listBorder, setListBorder] = useState('');
+  const [joinedProjectlist, setJoinedProjectlist] = useState({
+    joinedProjectlist: [],
+  });
+  let havejoinedproject;
 
-  let [list, setList] = useState([]); // 생성된 프로젝트 데이터를 다루는 State
-  let [nextNum, setNextNum] = useState(1); // 생성된 프로젝트 데이터의  고유한 ID 부여를 위한 State
-
-  let [listBorder, setListBorder] = useState('');
   useEffect(() => {
-    // 프로젝트 테두리 border 컨트롤
-    if (list.length === 0) {
+    // 불러올 리스트가 없을 때 보더라인을 지움
+    if (joinedProjectlist.joinedProjectlist[0] === undefined) {
       setListBorder('');
     } else {
       setListBorder('listBorderTop');
     }
-  });
+
+    const fetchData = async () => {
+      try {
+        getJoinedlist();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 참여중인 프로젝트 리스트 불러오기
+  const getJoinedlist = () => {
+    axios.post(`/myprojectslist/${state.email}/joinedlist`, {}).then((res) => {
+      if (res.data === 0) {
+        havejoinedproject = false;
+        return;
+      } else {
+        havejoinedproject = true;
+        const { data } = res;
+        setJoinedProjectlist({
+          joinedProjectlist: data,
+        });
+      }
+    });
+  };
+
+  // 프로젝트 생성하기
+  const createProject = (data) => {
+    axios.post(`/myprojectslist/${state.email}/createproject`, {
+      title: data.title,
+      description: data.description,
+      deadline: data.deadline,
+    })
+    .then((res) => {
+      if (res.data === 1) {
+        alert('프로젝트 생성 성공')
+      } else {
+        alert('예기치 않은 오류로 프로젝트 생성에 실패했습니다.')
+      }
+    })
+    .fianlly(() => {
+      forceUpdate.current();
+    })
+  }
+
+  // 프로젝트 참여하기
+  const joinProject = (data) => {
+    axios.post(`/myprojectslist/${state.email}/joinproject`, {code: data.code})
+    .then((res) => {
+      if (res.data === 0) {
+alert('존재하지 않는 프로젝트 코드입니다.')
+      } else if (res.data === 1) {
+alert('이미 참여 중인 프로젝트입니다.')
+      } else if (res.data === 2) {
+alert('프로젝트 참여 성공')
+setModalIsOpen1(false)
+forceUpdate.current();
+      }
+    })
+  }
+
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
+  const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
 
   return (
-    <section>
-      {/* --------- 상단 , 참여중인 프로젝터 --------- */}
-      <div className="Project_Container">
-        <div className="Project_Name">
-          <h4> {props.nickname} 노트를 생성해보세요</h4>
-        </div>
-        <div>
-          <Container className="listBorderTop">
-            <Row className="row">
-              {list.map(function (a, i) {
-                return (
-                  <Participatinglist key={i} num={i} list={list} con={a} />
-                );
-              })}
-              <Col sm={2} className="ProjectContent">
-                <Card
-                  bg={'Light'.toLowerCase()}
-                  style={{ width: '11rem' }}
-                  className="mb-2 addCard"
-                >
-                  <br />
-                  <div className="projectButton">
-                    {/* ----- 프로젝트 [추가] 모달창 구현 , 버튼 ----- */}
-                    <div className="addModalh">
+    <>
+      {/* --------- 상단 , 관리중인 프로젝터 --------- */}
+      <div align="center" className="top">
+        <h4>관리중인 프로젝트</h4>
+      </div>
+      <div>
+        <Container className={listBorder}>
+          <Row>
+            {joinedProjectlist.joinedProjectlist[0] !== undefined && joinedProjectlist.joinedProjectlist.map((project) => {
+              return <Managedlist key={project.code} project={project} state={state} />;
+            })}
+          </Row>
+        </Container>
+      </div>
+      {/* --------- 상단 , 관리중인 프로젝터 --------- */}
+      <hr align="center" />
+      {/* --------- 하단 , 참여중인 프로젝터 --------- */}
+      <div align="center">
+        <h4>참여중인 프로젝트</h4>
+      </div>
+      <div>
+        <Container>
+          <Row>
+            {/* {joinedProjectlist.joinedProjectlist.map((project) => {
+              return <Participatinglist key={project.code} project={project} />;
+            })} */}
+            <Col sm={2}>
+              <Card
+                bg={'Light'.toLowerCase()}
+                style={{ width: '11rem' }}
+                className="mb-2"
+              >
+                <div>
+                  <Card.Header align="center" className="header">
+                    프로젝트 추가
+                  </Card.Header>
+                  <Card.Body align="center">
+                    {/* ----- 프로젝트 추가 모달창 구현 ----- */}
+                    <div style={{ marginTop: '7px' }}>
                       <Button
                         className="btn_add"
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen(true)}
                       >
-                        노트 추가
+                        프로젝트 추가
                       </Button>
                       <Modal
                         className="addModal addmodalBody"
                         isOpen={modalIsOpen}
                         onRequestClose={() => setModalIsOpen(false)}
                       >
-                        <div className="projectAdd">
+                        <div>
                           <ProjectListModalAdd
                             setModalIsOpen={setModalIsOpen}
-                            list={list}
-                            setList={setList}
-                            nextNum={nextNum}
-                            setNextNum={setNextNum}
+                            createProject={createProject}
                           />
                         </div>
                       </Modal>
-                      {/* ----- 프로젝트 [추가] 모달창 구현 ----- */}
+                      {/* ----- 프로젝트 추가 모달창 구현 ----- */}
                     </div>
-                    <br />
-                    {/* ----- 프로젝트 [참여] 모달창 구현 , 버튼 ----- */}
-                    <div className="addModalh1">
+                    {/* ----- 프로젝트 참여 모달창 구현 ----- */}
+                    <div style={{ marginTop: '25px', marginBottom: '5px' }}>
                       <Button
                         className="btn_join"
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen1(true)}
                       >
-                        협업 노트 참여
+                        프로젝트 참여
                       </Button>
                       <Modal
                         className="joinModal joinmodalBody"
@@ -94,43 +167,22 @@ function Listpage(props) {
                         <div>
                           <ProjectListModalJoin
                             setModalIsOpen={setModalIsOpen1}
-                            list={list}
-                            setList={setList}
-                            nextNum={nextNum}
-                            setNextNum={setNextNum}
+                            joinProject={joinProject}
                           />
                         </div>
                       </Modal>
                     </div>
-                    {/* ----- 프로젝트 [참여] 모달창 구현 ----- */}
-                  </div>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+                    {/* ----- 프로젝트 참여 모달창 구현 ----- */}
+                  </Card.Body>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
-      {/* --------- 상단 , 참여중인 프로젝터 --------- */}
-
-      {/* --------- 하단 , 관리중인 프로젝터 --------- */}
-      <div className="listSection" align="center">
-        <div className="Project_Container">
-          <div className="Project_Name">
-            <h4>생성한 노트로 가보아요</h4>
-          </div>
-          <div className="top_Project">
-            <Container className={listBorder}>
-              <Row>
-                {list.map(function (a, i) {
-                  return <Managedlist key={i} num={i} list={list} con={a} />;
-                })}
-              </Row>
-            </Container>
-          </div>
-        </div>
-      </div>
-    </section>
+      {/* --------- 하단 , 참여중인 프로젝터 --------- */}
+    </>
   );
-}
+};
 
 export default Listpage;

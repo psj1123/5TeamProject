@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
 const HeaderRight = ({ page, state, actions }) => {
@@ -14,15 +15,21 @@ const HeaderRight = ({ page, state, actions }) => {
   };
 
   if (state.isLoggedIn) {
-    const myprojectslist = '/myprojectslist' + state.email;
+    const myprojectslist = '/myprojectslist/' + state.email;
     // 로그인 한 상태에서, Home 페이지인 경우
     if (page === 'Home') {
       return (
-        <div className="rightLogin">
-          <Link to={myprojectslist}>
-            <div>나의 프로젝트 리스트</div>
-          </Link>
-          <div onClick={logoutClick}>로그아웃</div>
+        <div className="headerRight">
+          <ul>
+            <li>
+              <Link to={myprojectslist}>
+                <div>나의 프로젝트 리스트</div>
+              </Link>
+            </li>
+            <li>
+              <div onClick={logoutClick}>로그아웃</div>
+            </li>
+          </ul>
         </div>
       );
     }
@@ -30,14 +37,16 @@ const HeaderRight = ({ page, state, actions }) => {
     else if (page === 'NotFound') {
       return (
         <div className="headerRight">
-          <div className="rightLogin">
-            <Link to={myprojectslist} replace={true}>
-              <div>프로젝트 리스트</div>
-            </Link>
-          </div>
-          <div className="rightLogin">
-            <div onClick={logoutClick}>로그아웃</div>
-          </div>
+          <ul>
+            <li>
+              <Link to={myprojectslist} replace={true}>
+                <div>프로젝트 리스트</div>
+              </Link>
+            </li>
+            <li>
+              <div onClick={logoutClick}>로그아웃</div>
+            </li>
+          </ul>
         </div>
       );
     }
@@ -45,14 +54,17 @@ const HeaderRight = ({ page, state, actions }) => {
     else {
       return (
         <div className="headerRight">
-          <div className="rightLogin">
-            <div>
-                {state.nickname} {'(' + state.email + ')'}
-            </div>
-          </div>
-          <div className="rightLogin">
-            <div onClick={logoutClick}>로그아웃</div>
-          </div>
+          <ul>
+            <li>
+              <div>
+                <span>{state.nickname}</span>
+                <span>{'(' + state.email + ')'}</span>
+              </div>
+            </li>
+            <li>
+              <div onClick={logoutClick}>로그아웃</div>
+            </li>
+          </ul>
         </div>
       );
     }

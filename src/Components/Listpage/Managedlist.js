@@ -4,26 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import './list.css';
 import '../../Styles/Cards.css';
 
-function Managedlist(props) {
+function Managedlist({project, state}) {
   let Navigate = useNavigate();
-  // 배열의 props.num 번째에 위치한 id의 값을 가진 객체의 정보를 가져옴
-  let find = props.list.find((x) => x.id == props.list[props.num].id);
+  
   const onClick = () => {
-    Navigate('/project/' + find.id);
+    Navigate(`/project/${project.code}/★ 개요`, {state: {code: project.code, state: state}});
   };
 
   /* D-day를 위한 시간 함수  */
   const today = new Date();
-  let dday = new Date(props.list[props.num].deadline).getTime();
+  let dday = new Date(project.deadline).getTime();
   let gap = dday - today;
   let result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1; // 밀리초를 일수로 변경하는 식
 
   /* 카드 hover Overlay 기능 */
   const renderTooltip = (props) => (
     <Tooltip className="ellipsismany" id="button-tooltip" {...props}>
-      {find.projectName}
+      {project.title}
       <br />
-      {find.content}
+      {project.description}
     </Tooltip>
   );
 
@@ -36,9 +35,9 @@ function Managedlist(props) {
       setDdayColor('dayred');
     }
   }, []);
+
   return (
     <>
-      {props.list[props.num].management === 1 ? ( // management값이 1이면 관리중인 프로젝트에 보여짐
         <Col className="" sm={2}>
           <Card
             bg={'Light'.toLowerCase()}
@@ -54,14 +53,14 @@ function Managedlist(props) {
               <div className="listCard">
                 {/* --- 카드 최상단 --- */}
                 <Card.Header align="center" className="header">
-                  Note
+                  프로젝트
                 </Card.Header>
                 {/* --- 카드 최상단 --- */}
 
                 <Card.Body>
                   {/* --- 카드 상단 프로젝트 명 --- */}
                   <Card.Title align="center" className="listHeadEllipsis">
-                    <h4>{props.list[props.num].projectName}</h4>
+                    <h4>{project.title}</h4>
                   </Card.Title>
                   {/* --- 카드 상단 프로젝트 명 --- */}
 
@@ -71,7 +70,7 @@ function Managedlist(props) {
                     className="listHeadEllipsis"
                     style={{ marginTop: '-10px' }}
                   >
-                    <b> {props.list[props.num].content}</b>
+                    <b> {project.description}</b>
                   </Card.Text>
                   {/* --- 카드 중단 프로젝트 내용 --- */}
 
@@ -82,7 +81,7 @@ function Managedlist(props) {
                       className="listHeadEllipsis"
                       style={{ marginTop: '-10px' }}
                     >
-                      {props.list[props.num].deadline}
+                      {project.deadline}
                     </h6>
                     <b className={ddayColor}>
                       {result !== 0 ? 'D - ' + result : 'D-day'}
@@ -94,7 +93,6 @@ function Managedlist(props) {
             </OverlayTrigger>
           </Card>
         </Col>
-      ) : null}
     </>
   );
 }
