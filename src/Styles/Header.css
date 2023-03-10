@@ -74,7 +74,7 @@ a {
     display: block;
     width: auto;
     height: 60px;
-    
+    margin-right: 2em;
     float: right;
     line-height: 60px;
     font-size: 1.3rem;
