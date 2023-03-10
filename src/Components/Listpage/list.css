@@ -2,18 +2,24 @@
   display: block;
   width: 100%;
   height: auto;
-  min-height: 59em;
+  min-height: 40em;
   background-color: #E2E2E2;
 }
 
 .listBorderTop.container {
   display: flex;
-  justify-content: center;
   text-align: center;
   flex-wrap: wrap;
 }
 
 .listBorderTop {
+  display: flex;
+  padding: auto;
+  border: none;
+  justify-content: center;
+}
+
+.listBorderBottom {
   display: flex;
   padding: auto;
   border: none;
@@ -74,7 +80,7 @@
 
 .Project_Container {
   display: inline-block;
-  margin-top: 5em;
+  margin-top: 3em;
   width: auto;
   max-width: 70%;
   min-height: 17em;
@@ -118,21 +124,19 @@
 .ProjectContent.col-sm-2 {
   display: flex;
   justify-content: center;
-  align-items: center;
+  text-align: center;
   min-height: 70px;
 }
 
 .mb-2.addCard.card.bg-light {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   margin: 3px;
   padding: 0;
 }
 
 .projectButton {
   display: block;
-  align-items: center;
   min-height: 70px;
 }
 
@@ -146,11 +150,9 @@
 
 .addModalh button {
   min-width: 40px;
-  vertical-align: middle;
 
 }
 
 .addModalh1 button {
   min-width: 40px;
-  vertical-align: middle;
 }

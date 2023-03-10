@@ -304,7 +304,7 @@ const ProjectModal = ({
         isOpen={isOpen}
       >
         <div className="closeModal" onClick={modalClose}></div>
-        <section className="detailSection">
+        <div className="detailSection">
           <div>
             <div className="detailTitle" aria-label="글 제목">
               {nowPost.posttitle}
@@ -315,7 +315,7 @@ const ProjectModal = ({
             <div className="detailWriter">{nowPost.postwriter}</div>
             <div className="detailDate">{nowPost.postdate}</div>
           </div>
-        </section>
+        </div>
         <div className="buttonContainer">
           <button
             className="editButton"

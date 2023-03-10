@@ -2,39 +2,20 @@ import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../../Styles/ListModal.css';
 
-function ProjectListModalJoin(props) {
-  const input_name = useRef('');
-  const change = (e) => {
-    console.log(e.target.name, ':', e.target.value);
-  };
-  const onInsert = () => {
-    let find = props.list.findIndex(
-      // Input 내용과 일치하는 프로젝트명의 data를 찾음
-      (x) => x.projectName == input_name.current.value
-    );
-    if (
-      // 프로젝트 이름이 입력되고, 입력된 값의 이름이 데이터에 존재하면 실행
-      input_name.current.value !== '' &&
-      find !== -1 &&
-      props.list[find].join === 0
-    ) {
-      let copy = [...props.list];
-      copy[find].join = 1;
-      props.setList(copy);
+function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
+  const input_code = useRef('');
 
-      input_name.current.value = '';
-      props.setModalIsOpen(false);
-    } else if (input_name.current.value === '') {
+  const onInsert = () => {
+    if (input_code.current.value === '') {
       // 입력이 주어지지 않으면
-      alert('프로젝트명을 입력해주세요!');
-      input_name.current.focus();
-    } else if (input_name.current.value !== '' && find === -1) {
-      // 입력값과 일치하는 프로젝트명이 없으면
-      alert('일치하는 프로젝트명이 없습니다!');
+      alert('프로젝트 코드를 입력해주세요!');
+      input_code.current.focus();
+      return;
     } else {
-      alert('이미 참여중인 프로젝트 입니다!');
+      joinProject(input_code.current.value);
     }
   };
+
   return (
     <Form>
       {/* ---프로젝트 이름 입력--- */}
@@ -42,12 +23,7 @@ function ProjectListModalJoin(props) {
         <Form.Label>프로젝트 이름</Form.Label>
         {/* 엔터키 버그 해결을 위한 보이지 않는 인풋 */}
         <input type="text" style={{ display: 'none' }} />
-        <Form.Control
-          onChange={change}
-          ref={input_name}
-          placeholder="프로젝트 이름"
-          autoFocus
-        />
+        <Form.Control ref={input_code} placeholder="프로젝트 이름" autoFocus />
         <Form.Text className="text-muted">
           참여하려는 프로젝트명을 적어주세요.
         </Form.Text>
@@ -80,7 +56,7 @@ function ProjectListModalJoin(props) {
         className="exit"
         style={{ marginLeft: '100px' }}
         onClick={() => {
-          props.setModalIsOpen(false);
+          setModalIsOpen(false);
         }}
       >
         나가기

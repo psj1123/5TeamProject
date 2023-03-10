@@ -27,17 +27,21 @@ app.post('/register/commit', (req, res) => {
   const { email, name, nickname, birthday } = req.body;
   const password = req.body.password1;
 
+  console.log(email);
+
   const sqlQuery1 = 'SELECT COUNT(*) FROM users WHERE email = ?;';
   const sqlQuery2 = 'INSERT INTO users VALUES(?, ?, ?, ?, ?);';
 
   db.query(sqlQuery1, [email], (err, result) => {
     if (result[0]['COUNT(*)'] === 1) {
+      console.log('1번째 쿼리 실행 완료');
       res.send('0'); // 이미 존재하는 email
     } else {
       db.query(
         sqlQuery2,
         [email, password, name, nickname, birthday],
         (err, result) => {
+          console.log('2번째 쿼리 실행 완료');
           res.send('1'); // 회원가입 성공
         }
       );
@@ -64,8 +68,8 @@ app.post('/login/commit', (req, res) => {
   });
 });
 
-// 프로젝트 리스트 불러오기 1 (관리 중인 리스트)
-app.post('/myprojectslist/:email/masterlist', (req, res) => {
+// 프로젝트 리스트 불러오기 (관리/참여 중인 리스트)
+app.post('/myprojectslist/:email/joinedlist', (req, res) => {
   const { email } = req.params;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM joinedprojects WHERE email = ?;';
@@ -83,24 +87,24 @@ app.post('/myprojectslist/:email/masterlist', (req, res) => {
   });
 });
 
-// 프로젝트 리스트 불러오기 2 (관리/참여 중인 프로젝트)
-app.post('/myprojectslist/:email/joinedlist', (req, res) => {
-  const { email } = req.params;
+// // 프로젝트 리스트 불러오기 2 (관리 중인 프로젝트)
+// app.post('/myprojectslist/:email/masterlist', (req, res) => {
+//   const { email } = req.params;
 
-  const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE creatoremail = ?;';
-  const sqlQuery2 =
-    'SELECT code, title, description, deadline FROM projects WHERE creatoremail = ? ORDER BY deadline ASC;';
+//   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE creatoremail = ?;';
+//   const sqlQuery2 =
+//     'SELECT code, title, description, deadline FROM projects WHERE creatoremail = ? ORDER BY deadline ASC;';
 
-  db.query(sqlQuery1, [email], (err, result) => {
-    if (result[0]['COUNT(*)'] === 0) {
-      res.send('0'); // 관리 중인 프로젝트가 존재하지 않음
-    } else {
-      db.query(sqlQuery2, [email], (err, result) => {
-        res.send(result); // 관리 중인 프로젝트 목록 저장
-      });
-    }
-  });
-});
+//   db.query(sqlQuery1, [email], (err, result) => {
+//     if (result[0]['COUNT(*)'] === 0) {
+//       res.send('0'); // 관리 중인 프로젝트가 존재하지 않음
+//     } else {
+//       db.query(sqlQuery2, [email], (err, result) => {
+//         res.send(result); // 관리 중인 프로젝트 목록 저장
+//       });
+//     }
+//   });
+// });
 
 // 프로젝트 생성하기
 app.post('/myprojectslist/:email/createproject', (req, res) => {
@@ -158,6 +162,8 @@ app.post('/myprojectslist/:email/createproject', (req, res) => {
 app.post('/myprojectslist/:email/joinproject', (req, res) => {
   const { email } = req.params;
   const { code } = req.body;
+
+  console.log('code')
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
   const sqlQuery2 =

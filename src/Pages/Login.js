@@ -46,7 +46,7 @@ const Login = () => {
         };
         // 로그인한 상태라면 자신의 프로젝트 리스트 페이지로 이동
         if (state.isLoggedIn) {
-          const myprojectslist = '/myprojectslist/';
+          const myprojectslist = '/myprojectslist/' + state.email;
           return <Navigate to={myprojectslist} replace={true} />;
         } else {
           return (

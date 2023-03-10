@@ -14,7 +14,7 @@ const HeaderRight = ({ page, state, actions }) => {
   };
 
   if (state.isLoggedIn) {
-    const myprojectslist = '/myprojectslist' + state.email;
+    const myprojectslist = '/myprojectslist/' + state.email;
     // 로그인 한 상태에서, Home 페이지인 경우
     if (page === 'Home') {
       return (
@@ -47,7 +47,7 @@ const HeaderRight = ({ page, state, actions }) => {
         <div className="headerRight">
           <div className="rightLogin">
             <div>
-                {state.nickname} {'(' + state.email + ')'}
+              {state.nickname} {'(' + state.email + ')'}
             </div>
           </div>
           <div className="rightLogin">
