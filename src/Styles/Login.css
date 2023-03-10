@@ -9,9 +9,9 @@
     display: block;
     margin-left: 80px;
     min-height: 32em;
-    width: 320px;
-    margin: 60px 40px 60px 100px;
-    padding: 50px;
+    width: 400px;
+    margin: 30px 20px 60px 70px;
+    padding: 90px;
     border: none;
     background-color: #ffffff;
     border-radius: 15px;
@@ -115,7 +115,7 @@
       display: block;
       margin: 0 auto;
       width: 500px;
-      height: 600px;
+      height: 580px;
       object-fit: cover;
       border: none;
   }
