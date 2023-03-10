@@ -23,49 +23,71 @@ const RegisterSection = () => {
 
   //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음
   const handleFormSubmit = (e) => {
-    e.preventDefault();
+    e?.preventDefault(); //입력 데이터 유지
     // 여기서 회원가입 정보를 데이터베이스에 저장
+    axios
+      .post('http://localhost:8008/register/commit', {
+        email: formData.email,
+        password1: formData.password,
+        name: formData.name,
+        nickname: formData.nickname,
+        birthday: formData.dateOfBirth,
+      })
+      .then((response) => {
+        if (response.data === true) {
+          alert('이미 등록된 이메일입니다.');
+          setFormData({
+            email: '',
+          });
+        } else {
+          alert('회원가입이 완료되었습니다.');
+          const confirmation = confirm('로그인하시겠습니까?');
+          if (confirmation) {
+            window.location.assign('/login');
+          }
+        }
+      })
+      .catch((error) => {
+        alert('예상치 못한 오류가 발생했습니다. ' + error.message);
+      });
   };
 
   const handleButtonClick = () => {
     const { email, password, confirmPassword, name, nickname, dateOfBirth } =
       formData;
-
-    // 입력한 것이 없을 시에 경고창 생성
-    if (
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !name ||
-      !nickname ||
-      !dateOfBirth
-    ) {
-      alert('모든 항목을 입력해주세요!');
+    try {
+      switch (true) {
+        case !email ||
+          !password ||
+          !confirmPassword ||
+          !name ||
+          !nickname ||
+          !dateOfBirth:
+          alert('모든 항목을 입력해주세요!');
+          break;
+        case !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
+          password
+        ):
+          alert(
+            '비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.'
+          );
+          setFormData({ ...formData, password: '' });
+          break;
+        case password !== confirmPassword:
+          alert('비밀번호가 일치하지 않습니다!');
+          setFormData({ ...formData, confirmPassword: '' });
+          break;
+        case !/\S+@\S+\.\S+/.test(email):
+          alert('이메일 양식에 맞게 작성하세요!');
+          setFormData({ ...formData, email: '' });
+          break;
+        default:
+          handleFormSubmit();
+          break;
+      }
+    } catch (e) {
+      alert('예상치 못한 오류가 발생했습니다.' + e);
       return;
-    }
-
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if (!passwordRegex.test(password)) {
-      alert('비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다!');
-      return;
-    }
-
-    const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(email)) {
-      alert('이메일 양식에 맞게 작성하세요!');
-      return;
-    }
-
-    alert('회원가입이 완료되었습니다.');
-
-    const confirmation = confirm('로그인하시겠습니까?');
-    if (confirmation) {
-      window.location.assign('/login');
     }
   };
 
@@ -74,7 +96,8 @@ const RegisterSection = () => {
       {({ state }) => {
         // 로그인 여부를 판단, 로그인된 상태라면 프로젝트 리스트 페이지로 강제 이동
         if (state.isLoggedIn) {
-          return <Navigate to="/myprojectslist" replace={true} />;
+          const myprojectslist = '/myprojectslist/' + state.email;
+          return <Navigate to={myprojectslist} replace={true} />;
         } else {
           return (
             <>
