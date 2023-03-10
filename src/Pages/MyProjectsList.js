@@ -11,7 +11,8 @@ const MyProjectsList = () => {
       {({ state }) => {
         // 로그인 여부를 판단, 로그인되지 않은 상태라면 로그인 페이지로 강제 이동
         if (!state.isLoggedIn) {
-          return <Navigate to="/login" replace={true} />;
+          //return <Navigate to="/login" replace={true} />;
+          return 0;
         } else {
           // 정상적인 경우에 아래의 리턴문이 컴포넌트 결과로 출력됩니다.
           return (
