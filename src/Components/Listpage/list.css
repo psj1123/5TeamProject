@@ -1,3 +1,18 @@
+.listSection {
+  margin-top: 5em;
+  width: 100%;
+  height: auto;
+  min-height: 59em;
+  background-color: #E2E2E2;
+}
+
+.listBorderTop{
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 5px;
+  width: auto;
+  height: auto;
+}
 
   .listHeadEllipsis{
     text-overflow: ellipsis;
@@ -16,6 +31,15 @@
   
   .listCard:hover{
     opacity: 0.5;
+  }
+
+  .addModalh{
+    margin-top: 7px;
+  }
+
+  .addModalh1{
+    margin-top: 25px;
+    margin-bottom: 5px;
   }
   
   .addbtn{

@@ -20,16 +20,14 @@ const HeaderRight = ({ page, state, actions }) => {
     if (page === 'Home') {
       return (
         <div className="headerRight">
-          <ul>
-            <li>
-              <Link to={myprojectslist}>
-                <div>나의 프로젝트 리스트</div>
-              </Link>
-            </li>
-            <li>
-              <div onClick={logoutClick}>로그아웃</div>
-            </li>
-          </ul>
+          <div className="rightLogin">
+            <Link to={myprojectslist}>
+              <div>나의 프로젝트 리스트</div>
+            </Link>
+            <div className="rightLogin" onClick={logoutClick}>
+              로그아웃
+            </div>
+          </div>
         </div>
       );
     }
@@ -37,16 +35,15 @@ const HeaderRight = ({ page, state, actions }) => {
     else if (page === 'NotFound') {
       return (
         <div className="headerRight">
-          <ul>
-            <li>
-              <Link to={myprojectslist} replace={true}>
-                <div>프로젝트 리스트</div>
-              </Link>
-            </li>
-            <li>
-              <div onClick={logoutClick}>로그아웃</div>
-            </li>
-          </ul>
+          <div className="rightLogin">
+            <Link to={myprojectslist} replace={true}>
+              <div>프로젝트 리스트</div>
+            </Link>
+            </div>
+            <div className="rightLogin" onClick={logoutClick}>
+              로그아웃
+            </div>
+          
         </div>
       );
     }
@@ -54,17 +51,15 @@ const HeaderRight = ({ page, state, actions }) => {
     else {
       return (
         <div className="headerRight">
-          <ul>
-            <li>
-              <div>
-                <span>{state.nickname}</span>
-                <span>{'(' + state.email + ')'}</span>
-              </div>
-            </li>
-            <li>
-              <div onClick={logoutClick}>로그아웃</div>
-            </li>
-          </ul>
+          <div className="rightLogin">
+            <div>
+              <span>{state.nickname}</span>
+              <span>{'(' + state.email + ')'}</span>
+            </div>
+            <div className="rightLogin" onClick={logoutClick}>
+              로그아웃
+            </div>
+          </div>
         </div>
       );
     }

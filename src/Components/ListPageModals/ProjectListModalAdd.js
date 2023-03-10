@@ -88,39 +88,39 @@ function ProjectListModalAdd(props) {
   return (
     <Form>
       {/* 프로젝트 이름 입력 */}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Project Name</Form.Label>
+      <Form.Group className="mb-3 addTop" controlId="formBasicEmail">
+        <Form.Label>프로젝트명</Form.Label>
         <Form.Control
           onChange={change}
           onKeyDown={handleKeyPress}
           name="project"
           ref={input_name}
           autoFocus
-          placeholder="Write Project Name"
+          placeholder="프로젝트 이름"
         />
         <Form.Text className="text-muted">
-          Please write down the name of the project you want.
+          생성하려는 프로젝트명을 적어주세요.
         </Form.Text>
       </Form.Group>
 
       {/* 프로젝트 내용 입력 */}
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contents</Form.Label>
+        <Form.Label>프로젝트 내용</Form.Label>
         <Form.Control
           onChange={change}
           onKeyDown={handleKeyPress}
           name="contents"
           ref={input_contents}
-          placeholder="Write Contents"
+          placeholder="프로젝트 내용"
         />
         <Form.Text className="text-muted">
-          Please write it down briefly.
+          프로젝트 내용을 간단히 적어주세요.
         </Form.Text>
       </Form.Group>
 
       {/* 프로젝트 기간 입력 */}
       <Form.Group className="mb-3" controlId="formBasicContents">
-        <Form.Label>Deadline</Form.Label>
+        <Form.Label>마감일</Form.Label>
         <Form.Control
           type="date"
           name="deadline"
@@ -128,9 +128,7 @@ function ProjectListModalAdd(props) {
           onChange={change}
           ref={input_deadline}
         />
-        <Form.Text className="text-muted">
-          Please write it down Deadline.
-        </Form.Text>
+        <Form.Text className="text-muted">마감일을 체크해주세요.</Form.Text>
       </Form.Group>
 
       {/* --- 제출 버튼--- */}
@@ -140,12 +138,17 @@ function ProjectListModalAdd(props) {
         onClick={onInsert}
         className="submit"
       >
-        Submit
+        저장
       </Button>
 
       {/* --- 리셋 버튼--- */}
-      <Button variant="secondary" style={{ marginLeft: '5px' }} type="reset">
-        reset
+      <Button
+        variant="secondary"
+        style={{ marginLeft: '5px' }}
+        type="reset"
+        className="reset"
+      >
+        초기화
       </Button>
 
       {/* --- 나가기 버튼--- */}
@@ -153,12 +156,12 @@ function ProjectListModalAdd(props) {
         name="exit"
         className="exit"
         variant="secondary"
-        style={{ marginLeft: '200px' }}
+        style={{ marginLeft: '100px' }}
         onClick={() => {
           props.setModalIsOpen(false);
         }}
       >
-        Exit
+        나가기
       </Button>
     </Form>
   );
