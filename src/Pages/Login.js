@@ -4,6 +4,7 @@ import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';
 import './../Styles/Login.css';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,34 +22,47 @@ const Login = () => {
   return (
     <UserDataConsumer>
       {({ state, actions }) => {
-        // 로그인 이벤트
-        const loginClick = () => {
-          if (!email) {
-            alert('이메일을 입력해주세요.');
+        // 정상 수행 여부를 판별
+        const loginClick = async () => {
+          try {
+            switch (true) {
+              case !email:
+                throw new Error('이메일을 입력해주세요.');
+              case !validateEmail(email):
+                throw new Error('유효한 이메일 주소를 입력해주세요.');
+              case !password:
+                throw new Error('비밀번호를 입력해주세요.');
+              case !validatePassword(password):
+                throw new Error(
+                  '비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.'
+                );
+              default:
+                const response = await axios.post(
+                  'http://localhost:8008/login/commit',
+                  {
+                    email: email,
+                    password: password,
+                  }
+                );
+                if (response.status === 200) {
+                  actions.setEmail(email);
+                  actions.setNickname(response.data.nickname);
+                  actions.setIsLoggedIn(true);
+                } else {
+                  throw new Error('로그인에 실패했습니다.');
+                }
+                break;
+            }
+          } catch (e) {
+            alert('예상치 못한 오류가 발생했습니다.' + e);
             return;
           }
-          if (!validateEmail(email)) {
-            alert('유효한 이메일 주소를 입력해주세요.');
-            return;
-          }
-          if (!password) {
-            alert('비밀번호를 입력해주세요.');
-            return;
-          }
-          if (!validatePassword(password)) {
-            alert(
-              '비밀번호는 8자 이상이며, 대/소문자와 숫자가 포함되어야 합니다.'
-            );
-            return;
-          }
-
-          actions.setIsLoggedIn(true);
-          actions.setEmail(email);
-          actions.setNickname('테스트');
         };
 
         if (state.isLoggedIn) {
-          return <Navigate to="/myprojectslist" replace={true} />;
+          return (
+            <Navigate to="/myprojectslist/${state.email}" replace={true} />
+          );
         } else {
           return (
             <>
