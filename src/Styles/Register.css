@@ -1,5 +1,6 @@
 .register_form {
     align-items: center;
+    margin: 10px auto;
     height: 100%;
     width: 30%;
     display: block;
@@ -15,7 +16,6 @@
     margin: 0.8em 0 0.8em 0;
     font-size: 4.7vmin;
     text-align: center;
-    font-weight: bold;
 }
 
 .register_form label {
@@ -64,7 +64,7 @@
     margin-left: 20px;
 }
 
-button {
+.registerSubmit {
     background-color: #5e308c;
     margin: 0 0 50px 0;
     width: 20vmin;
@@ -82,7 +82,7 @@ button {
     align-items: center;
 }
 
-button:hover {
+.registerSubmit:hover {
     background-color: #a676a3;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
 }

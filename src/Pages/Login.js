@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
@@ -7,8 +7,8 @@ import './../Styles/Login.css';
 import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   return (
     <UserDataConsumer>
@@ -17,37 +17,37 @@ const Login = () => {
         const loginClick = async () => {
           try {
             switch (true) {
-              case !email:
+              case !emailRef.current.value:
                 throw new Error('이메일을 입력해주세요.');
-              case !password:
+              case !passwordRef.current.value:
                 throw new Error('비밀번호를 입력해주세요.');
               default:
-                const response = await axios.post(
-                  'http://localhost:8008/login/commit',
-                  {
-                    email: email,
-                    password: password,
-                  }
-                );
-                if (response.status === 200) {
-                  actions.setEmail(email);
-                  actions.setNickname(response.data.nickname);
-                  actions.setIsLoggedIn(true);
+                const res = await axios.post('/login/commit', {
+                  email: emailRef.current.value,
+                  password: passwordRef.current.value,
+                });
+                if (res.data === 0) {
+                  emailRef.current.value = '';
+                  passwordRef.current.value = '';
+                  emailRef.current.focus();
+                  throw new Error('이메일 혹은 비밀번호가 올바르지 않습니다.');
                 } else {
-                  throw new Error('로그인에 실패했습니다.');
+                  actions.setEmail(res.data[0].email);
+                  actions.setNickname(res.data[0].nickname);
+                  actions.setIsLoggedIn(true);
+                  alert('돌아오신 것을 환영합니다!');
                 }
                 break;
             }
           } catch (e) {
-            alert('예상치 못한 오류가 발생했습니다.' + e);
+            alert(e);
             return;
           }
         };
-
+        // 로그인한 상태라면 자신의 프로젝트 리스트 페이지로 이동
         if (state.isLoggedIn) {
-          return (
-            <Navigate to="/myprojectslist/${state.email}" replace={true} />
-          );
+          const myprojectslist = '/myprojectslist/' + state.email;
+          return <Navigate to={myprojectslist} replace={true} />;
         } else {
           return (
             <>
@@ -57,44 +57,49 @@ const Login = () => {
                   <div className="login-image">
                     <img src="img/LoginImage.png" alt="login" />
                   </div>
+
                   <div className="login-form">
                     <h2>Jellabo</h2>
+
                     <br />
+
                     <div className="login-form-input">
                       <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onKeyPress={(e) => {
+                        type="email"
+                        onKeyDown={(e) => {
                           if (e.key === 'Enter') {
-                            loginClick();
+                            passwordRef.current.focus();
                           }
                         }}
                         placeholder=" 이메일"
+                        ref={emailRef}
                       />
                     </div>
+
                     <div className="login-form-input">
                       <input
                         type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onKeyPress={(e) => {
+                        onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             loginClick();
                           }
                         }}
                         placeholder=" 비밀번호"
+                        ref={passwordRef}
                       />
                     </div>
+
                     <div className="login-form-button">
                       <button onClick={loginClick}>로그인</button>
                     </div>
+
                     <div className="signup">
                       <p>계정이 아직 없으신가요?</p>
                     </div>
+
                     <div className="signup-link">
                       <div>
-                        <Link to="/register" replace={true}>
+                        <Link to="/register">
                           <p>회원가입</p>
                         </Link>
                       </div>
