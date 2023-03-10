@@ -7,26 +7,14 @@ import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
 import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
+import data from './data';
 
 function Listpage(props) {
-  let data = [
-    // 생성된 프로젝트 데이터
-    {
-      id: 99, // 페이지 이동을 위한 프로젝트 고유 ID
-      projectName: 'test1', // 프로젝트 이름
-      content: 'test1', // 프로젝트 내용
-      deadline: '2023-12-31', // 마감일
-      management: 1, // 유저가 생성한 페이지면 1 , 아니면 0
-      join: 1, // 유저가 참여중인 페이지면 1 , 아니면 0
-    },
-  ];
-
   const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
   const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
 
   let [list, setList] = useState(data); // 생성된 프로젝트 데이터를 다루는 State
   let [nextNum, setNextNum] = useState(1); // 생성된 프로젝트 데이터의  고유한 ID 부여를 위한 State
-
   return (
     <>
       {/* --------- 상단 , 관리중인 프로젝터 --------- */}

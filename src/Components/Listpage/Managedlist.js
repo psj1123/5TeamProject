@@ -36,7 +36,6 @@ function Managedlist(props) {
       setDdayColor('dayred');
     }
   }, []);
-
   return (
     <>
       {props.list[props.num].management === 1 ? ( // management값이 1이면 관리중인 프로젝트에 보여짐
