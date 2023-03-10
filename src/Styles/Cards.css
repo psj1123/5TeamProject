@@ -14,11 +14,21 @@
     min-height: 160px;
 }
 
+.addCard{
+    height: 191px;
+}
+
 .btn_add {
     background-color: #a676a3;
     border-color: #a676a3;
     color: white;
     font-size: medium;
+    width:150px;
+    margin-top: -10px;
+    margin-left: -4px;
+    min-width: 100px;
+    min-height: 50px;
+    max-height: 50px;
 }
 
 .btn_join {
@@ -26,6 +36,12 @@
     border-color: #a676a3;
     color: white;
     font-size: medium;
+    width:150px;
+    margin-top: -50px;
+    margin-left: -4px;
+    min-width: 100px;
+    min-height: 50px;
+    max-height: 50px;
 }
 
 hr {

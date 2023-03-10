@@ -8,10 +8,6 @@ import MyProjectsList from './Pages/MyProjectsList';
 import Project from './Pages/Project';
 import NotFound from './Pages/NotFound';
 import { UserDataProvider } from './Contexts/UserData';
-import ReactModal from 'react-modal';
-import App from './App';
-
-ReactModal.setAppElement('#root');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

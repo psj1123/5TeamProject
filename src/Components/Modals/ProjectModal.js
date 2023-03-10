@@ -1,301 +1,81 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import '../../Styles/ProjectModal.css';
-import axios from 'axios';
+import NoteCard from '../Projects/ProjectNoteCard';
 
-const ProjectModal = ({
-  isOpen,
-  modalMode,
-  modalClose,
-  setModalMode,
-  reSettingProject,
-  code,
-  selectedCategory,
-  projectInfo,
-  deleteProject,
-  categories,
-  state,
-  getposts,
-  pageload,
-  nowPost,
-  setNowPost,
-}) => {
-  const [userlist, setUserlist] = useState([]);
+const ProjectModal = ({ isOpen, modalMode, modalClose }) => {
   const [isGeneralTabSelected, setIsGeneralTabSelected] = useState(true);
-  const forceUpdate = useRef(null);
-
-  const createCategoryRef = useRef();
-  const createTitleRef = useRef();
-  const createContentRef = useRef();
-  const createDeadlineRef = useRef();
-
-  const updateCategoryRef = useRef();
-  const updateTitleRef = useRef();
-  const updateContentRef = useRef();
-  const updateDeadlineRef = useRef();
-
-  const settingTitleRef = useRef();
-  const settingDescriptionRef = useRef();
-  const settingDeadlineRef = useRef();
-
-  useEffect(() => {
-    loadUserlist();
-  }, []);
-
-  const loadUserlist = () => {
-    axios
-      .post(`/project/${code}/${selectedCategory}/userlist`, {})
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
-        setUserlist(data);
-      })
-      .finally(() => {
-        forceUpdate.current();
-      });
+  const [titleInputValue, setTitleInputValue] = useState('');
+  const [descriptionInputValue, setDescriptionInputValue] = useState('');
+  const [writtenDateInputValue, setWrittenDateInputValue] = useState('');
+  const [deadlineInputValue, setDeadlineInputValue] = useState('');
+  const [categories, setCategories] = useState([
+    { id: 1, name: '개요' },
+    { id: 2, name: '공지사항' },
+  ]);
+  const addCategory = () => {
+    const id = categories.length + 1;
+    const name = prompt('새로운 카테고리 이름을 입력하세요.');
+    if (name) {
+      const newCategory = { id, name };
+      setCategories([...categories, newCategory]);
+    }
   };
 
-  const addUser = (targetEmail) => {
-    console.log(targetEmail);
-    axios
-      .post(`/project/${code}/${selectedCategory}/adduser`, {
-        email: targetEmail,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data === 0) {
-          alert('존재하지 않는 유저입니다.');
-        } else if (res.data === 1) {
-          alert('이미 참여중인 유저입니다.');
-        } else if (res.data === 2) {
-          alert('멤버 추가 성공');
-        }
-      })
-      .finally(loadUserlist());
-  };
-
-  const kickUser = (targetEmail) => {
-    axios
-      .post(`/project/${code}/${selectedCategory}/kickuser`, {
-        email: targetEmail,
-      })
-      .then((res) => {
-        if (res.data === 1) {
-          alert('멤버 추방 성공');
-        }
-      })
-      .finally(loadUserlist());
-  };
-
-  const writePost = (postData) => {
-    axios
-      .post(`/project/${code}/${selectedCategory}/writepost/write`, {
-        category: postData.category,
-        posttitle: postData.title,
-        postcontent: postData.content,
-        postdeadline: postData.deadline,
-        email: state.email,
-      })
-      .then((res) => {
-        if (res.data === 1) {
-          alert('등록 완료');
-          createCategoryRef.current.value = '';
-          createTitleRef.current.value = '';
-          createContentRef.current.value = '';
-          createDeadlineRef.current.value = '';
-          modalClose();
-          getposts();
-          pageload();
-        }
-      })
-      .finally(() => {
-        forceUpdate.current();
-      });
-  };
-
-  const updatePost = (postData) => {
-    axios
-      .post(`/project/${code}/${selectedCategory}/${nowPost.postnum}/update`, {
-        category: postData.category,
-        posttitle: postData.title,
-        postcontent: postData.content,
-        postdeadline: postData.deadline,
-      })
-      .then((res) => {
-        if (res.data === 1) {
-          alert('수정 완료');
-          updateCategoryRef.current.value = '';
-          updateTitleRef.current.value = '';
-          updateContentRef.current.value = '';
-          updateDeadlineRef.current.value = '';
-          modalClose();
-          getposts();
-          pageload();
-        }
-      })
-      .finally(() => {
-        forceUpdate.current();
-      });
-  };
-
-  const deletePost = () => {
-    axios
-      .post(
-        `/project/${code}/${selectedCategory}/${nowPost.postnum}/delete`,
-        {}
+  const selectCategory = (id) => {
+    setCategories(
+      categories.map((category) =>
+        category.id === id
+          ? { ...category, selected: true }
+          : { ...category, selected: false }
       )
-      .then((res) => {
-        if (res.data === 1) {
-          alert('삭제 완료');
-          modalClose();
-          getposts();
-          pageload();
-        }
-      })
-      .finally(() => {
-        forceUpdate.current();
-      });
+    );
   };
 
-  const projectResetting = () => {
-    if (settingTitleRef.current.value === '') {
-      alert('프로젝트 제목을 입력해주세요');
-      settingTitleRef.current.focus();
+  const deleteCategory = (id) => {
+    if (id <= 2) {
       return;
     }
-    if (settingDescriptionRef.current.value === '') {
-      alert('프로젝트 설명을 입력해주세요');
-      settingDescriptionRef.current.focus();
-      return;
-    }
-    if (settingDeadlineRef.current.value === '') {
-      alert('프로젝트 마감일을 입력해주세요');
-      settingDeadlineRef.current.focus();
-      return;
-    }
-    const data = {
-      title: settingTitleRef.current.value,
-      description: settingDescriptionRef.current.value,
-      deadline: settingDeadlineRef.current.value,
-    };
-    reSettingProject(data);
+    setCategories(categories.filter((category) => category.id !== id));
   };
 
-  const addUserBtn = () => {
-    let checkCancel;
-    let targetEmail;
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
 
-    while (true) {
-      targetEmail = prompt('추가할 멤버의 E-mail을 입력하세요.');
-      if (targetEmail === null) {
-        checkCancel = true;
-        break;
-      } else {
-        checkCancel = false;
-        break;
-      }
-    }
-
-    if (checkCancel) {
-      return;
-    } else {
-      return addUser(targetEmail);
-    }
-  };
-
-  const kickUserBtn = (e) => {
-    if (!window.confirm('이 멤버를 추방하시겠습니까?')) {
-      return;
-    } else {
-      kickUser(e.target.id);
-    }
-  };
-
-  const deleteProjectBtn = () => {
-    if (!window.confirm('정말 프로젝트를 삭제하시겠습니까?')) {
-      return;
-    } else {
-      deleteProject();
-    }
-  };
-
-  const writePostBtn = () => {
-    if (createCategoryRef.current.value === '') {
-      alert('카테고리를 설정해주세요');
-      createCategoryRef.current.focus();
-      return;
-    }
-    if (createTitleRef.current.value === '') {
-      alert('제목을 입력해주세요');
-      createTitleRef.current.focus();
-      return;
-    }
-    if (createContentRef.current.value === '') {
-      alert('내용을 입력해주세요');
-      createContentRef.current.focus();
-      return;
-    }
-    if (createDeadlineRef.current.value === '') {
-      alert('마감일을 입력해주세요');
-      createDeadlineRef.current.focus();
-      return;
-    }
-
-    const postData = {
-      category: createCategoryRef.current.value,
-      title: createTitleRef.current.value,
-      content: createContentRef.current.value,
-      deadline: createDeadlineRef.current.value,
+    // NoteCard에 전달할 props를 객체로 설정
+    const noteCardProps = {
+      title: titleInputValue,
+      description: descriptionInputValue,
+      writtenDate: writtenDateInputValue,
+      modalOpen: modalClose,
+      category: categories.find((category) => category.selected)?.name,
     };
 
-    writePost(postData);
-  };
-
-  const updatePostBtn = () => {
-    if (updateCategoryRef.current.value === '') {
-      alert('카테고리를 설정해주세요');
-      updateCategoryRef.current.focus();
-      return;
-    }
-    if (updateTitleRef.current.value === '') {
-      alert('제목을 입력해주세요');
-      updateTitleRef.current.focus();
-      return;
-    }
-    if (updateContentRef.current.value === '') {
-      alert('내용을 입력해주세요');
-      updateContentRef.current.focus();
-      return;
-    }
-    if (updateDeadlineRef.current.value === '') {
-      alert('마감일을 입력해주세요');
-      updateDeadlineRef.current.focus();
-      return;
-    }
-
-    const postData = {
-      category: updateCategoryRef.current.value,
-      title: updateTitleRef.current.value,
-      content: updateContentRef.current.value,
-      deadline: updateDeadlineRef.current.value,
+    const createNoteCardComponent = ({
+      title,
+      description,
+      date,
+      modalOpen,
+      category,
+    }) => {
+      return (
+        <NoteCard
+          title={title}
+          description={description}
+          date={date}
+          modalOpen={modalOpen}
+          category={category}
+        />
+      );
     };
-
-    updatePost(postData);
+    const noteCardComponent = createNoteCardComponent(noteCardProps);
+    console.log(noteCardComponent);
   };
 
-  const deletePostBtn = () => {
-    if (!window.confirm('정말 이 글을 삭제하시겠습니까?')) {
-      return;
-    } else {
-      deletePost();
-    }
-  };
-
-  // modalMode
-  // 0: 글 상세보기 모달 (글 수정, 삭제 버튼)
-  // 1: 글 수정 모달
-  // 2: 글 작성 모달
-  // 3: 설정 모달
+  // modalMode 0: 글 상세보기 모달
+  // 1: 글 작성 모달
+  // 2: 참여자 목록 모달(삭제)
+  // 2: 설정 모달
   if (modalMode === 0) {
     return (
       <ReactModal
@@ -303,31 +83,33 @@ const ProjectModal = ({
         overlayClassName="projectModalOverlay"
         isOpen={isOpen}
       >
-        <div className="closeModal" onClick={modalClose}></div>
+        <div className="closeModal" onClick={modalClose}>
+          X
+        </div>
         <section className="detailSection">
           <div>
             <div className="detailTitle" aria-label="글 제목">
-              {nowPost.posttitle}
+              글제목Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </div>
-            <div className="detailescription">{nowPost.postcontent}</div>
+            <div className="detailescription">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
+              praesentium esse, pariatur, numquam, dolorem in labore ad atque
+              quas asperiores commodi et quo dicta! Nulla adipisci porro
+              officiis eaque aperiam. Lorem ipsum dolor sit amet consectetur,
+              adipisicing elit. Excepturi, voluptate consectetur, nostrum odio
+              laboriosam numquam, ex itaque dolor porro nam quisquam suscipit
+              laborum esse mollitia! Cum reprehenderit necessitatibus eveniet
+              neque!
+            </div>
           </div>
           <div>
-            <div className="detailWriter">{nowPost.postwriter}</div>
-            <div className="detailDate">{nowPost.postdate}</div>
+            <div className="detailWriter">작성자sfasfsadfsadfassdfsfasf</div>
+            <div className="detailDate">03-07-23</div>
           </div>
         </section>
         <div className="buttonContainer">
-          <button
-            className="editButton"
-            onClick={() => {
-              setModalMode(1);
-            }}
-          >
-            수정
-          </button>
-          <button className="deleteButton" onClick={deletePostBtn}>
-            삭제
-          </button>
+          <button className="editButton">수정</button>
+          <button className="deleteButton">삭제</button>
         </div>
       </ReactModal>
     );
@@ -338,139 +120,87 @@ const ProjectModal = ({
         overlayClassName="projectModalOverlay"
         isOpen={isOpen}
       >
-        <label htmlFor="selectCategory">
-          <h4>카테고리</h4>
-        </label>
+        <h4>카테고리</h4>
         <div className="categoryContainer">
-          <select
-            name="category"
-            id="selectCategory"
-            defaultValue={nowPost.category}
-            ref={updateCategoryRef}
-          >
-            <option value="">---- 선택 ----</option>
-            {categories.categorieslist.map((category) => {
-              return (
-                <option key={category.category} value={category.category}>
-                  {category.category}
-                </option>
-              );
-            })}
-          </select>
+          {categories.map((category) => (
+            <div
+              className={`categoryItem ${category.selected ? 'selected' : ''}`}
+              key={category.id}
+              onClick={() => selectCategory(category.id)}
+              onDoubleClick={() => deleteCategory(category.id)}
+            >
+              {category.name}
+            </div>
+          ))}
+          <div className="categoryItem addCategory" onClick={addCategory}>
+            +
+          </div>
         </div>
+        <form onSubmit={handleFormSubmit}>
+          <div className="inputGroup">
+            <label htmlFor="noteTitle">글 제목</label>
+            <input
+              id="noteTitle"
+              type="text"
+              value={titleInputValue}
+              onChange={(e) => setTitleInputValue(e.target.value)}
+            />
+          </div>
 
-        <div className="inputGroup">
-          <label htmlFor="noteTitle">글 제목</label>
-          <input
-            id="noteTitle"
-            type="text"
-            maxLength="40"
-            ref={updateTitleRef}
-            defaultValue={nowPost.posttitle}
-          />
+          <div className="inputGroup">
+            <label htmlFor="noteDescription">글 내용</label>
+            <textarea
+              id="noteDescription"
+              value={descriptionInputValue}
+              onChange={(e) => setDescriptionInputValue(e.target.value)}
+            />
+          </div>
+          <div className="inputGroup">
+            <label htmlFor="noteWrittenDate">작성일</label>
+            <input
+              id="noteWrittenDate"
+              type="date"
+              value={writtenDateInputValue}
+              onChange={(e) => setWrittenDateInputValue(e.target.value)}
+            />
+            <button className="writeNoteButton" type="submit">
+              작성 완료
+            </button>
+          </div>
+        </form>
+        <div className="closeModal" onClick={modalClose}>
+          X
         </div>
-
-        <div className="inputGroup">
-          <label htmlFor="noteDescription">글 내용</label>
-          <textarea
-            id="noteDescription"
-            maxLength="5000"
-            ref={updateContentRef}
-            defaultValue={nowPost.postcontent}
-          />
-        </div>
-
-        <div className="inputGroup">
-          <label htmlFor="noteEndDate">마감일</label>
-          <input id="noteEndDate" type="date" ref={updateDeadlineRef} />
-        </div>
-
-        <button className="updateNoteButton" onClick={updatePostBtn}>
-          수정 완료
-        </button>
-
-        <div
-          className="closeModal"
-          onClick={() => {
-            setNowPost({});
-            modalClose();
-          }}
-        ></div>
       </ReactModal>
     );
   } else if (modalMode === 2) {
-    return (
-      <ReactModal
-        className="projectModal"
-        overlayClassName="projectModalOverlay"
-        isOpen={isOpen}
-      >
-        <label htmlFor="selectCategory">
-          <h4>카테고리</h4>
-        </label>
-        <div className="categoryContainer">
-          <select name="category" id="selectCategory" ref={createCategoryRef}>
-            <option value="">---- 선택 ----</option>
-            {categories.categorieslist.map((category) => {
-              return (
-                <option key={category.category} value={category.category}>
-                  {category.category}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
-        <div className="inputGroup">
-          <label htmlFor="noteTitle">글 제목</label>
-          <input
-            id="noteTitle"
-            type="text"
-            maxLength="40"
-            ref={createTitleRef}
-          />
-        </div>
-
-        <div className="inputGroup">
-          <label htmlFor="noteDescription">글 내용</label>
-          <textarea
-            id="noteDescription"
-            maxLength="5000"
-            ref={createContentRef}
-          />
-        </div>
-
-        <div className="inputGroup">
-          <label htmlFor="noteEndDate">마감일</label>
-          <input id="noteEndDate" type="date" ref={createDeadlineRef} />
-        </div>
-
-        <button className="writeNoteButton" onClick={writePostBtn}>
-          작성 완료
-        </button>
-
-        <div className="closeModal" onClick={modalClose}></div>
-      </ReactModal>
-    );
-  } else if (modalMode === 3) {
     const handleTabClick = (e) => {
       setIsGeneralTabSelected(e.target.id === 'general-tab');
     };
 
+    const handleTitleInputChange = (e) => {
+      setTitleInputValue(e.target.value);
+    };
+
+    const handleDescriptionInputChange = (e) => {
+      setDescriptionInputValue(e.target.value);
+    };
+
+    const handleDeadlineInputChange = (e) => {
+      setDeadlineInputValue(e.target.value);
+    };
+
+    const handleFormSubmit = (e) => {
+      e.preventDefault();
+      // 폼 제출 시 처리할 함수
+    };
     return (
       <ReactModal
         className="projectModal"
         overlayClassName="projectModalOverlay"
         isOpen={isOpen}
       >
-        <div
-          className="closeModal"
-          onClick={() => {
-            setIsGeneralTabSelected(true);
-            modalClose();
-          }}
-        ></div>
-        <div className="settingModalContainer">
+        <div className="settingModalContent">
           <div className="settingModalSidebar">
             <ul>
               <li
@@ -478,90 +208,70 @@ const ProjectModal = ({
                 className={isGeneralTabSelected ? 'active' : ''}
                 onClick={handleTabClick}
               >
-                프로젝트 설정
+                일반
               </li>
               <li
                 id="member-tab"
                 className={!isGeneralTabSelected ? 'active' : ''}
                 onClick={handleTabClick}
               >
-                멤버 관리 설정
+                멤버 관리
               </li>
             </ul>
           </div>
           <div className="settingModalMain">
             {isGeneralTabSelected && (
-              <>
-                <h2>프로젝트 설정</h2>
+              <form onSubmit={handleFormSubmit}>
                 <div className="inputGroup">
                   <label htmlFor="project-title">프로젝트 제목</label>
-                  <input id="project-title" type="text" ref={settingTitleRef} />
+                  <input
+                    id="project-title"
+                    type="text"
+                    value={titleInputValue}
+                    onChange={handleTitleInputChange}
+                  />
                 </div>
                 <div className="inputGroup">
                   <label htmlFor="project-description">프로젝트 설명</label>
                   <textarea
                     id="project-description"
-                    ref={settingDescriptionRef}
+                    value={descriptionInputValue}
+                    onChange={handleDescriptionInputChange}
                   />
                 </div>
                 <div className="inputGroup">
-                  <label htmlFor="project-deadline">프로젝트 마감일</label>
+                  <label htmlFor="project-deadline">데드라인</label>
                   <input
                     id="project-deadline"
                     type="date"
-                    ref={settingDeadlineRef}
+                    value={deadlineInputValue}
+                    onChange={handleDeadlineInputChange}
                   />
                 </div>
-                <div className="saveCloseContainer">
-                  <button className="saveClose" onClick={projectResetting}>
-                    저장
-                  </button>
-                </div>
-                <div className="delProject" onClick={deleteProjectBtn}>
-                  프로젝트 삭제
-                </div>
-              </>
+                <button className="saveClose" type="submit">
+                  저장
+                </button>
+              </form>
             )}
             {!isGeneralTabSelected && (
-              <div className="memberManagement">
-                <h2>멤버 관리 설정</h2>
+              <div class="memberManagement">
+                <h2>멤버 관리</h2>
                 <ul>
-                  {userlist.map((user) => {
-                    return (
-                      <li key={user.email}>
-                        <div>
-                          {user.nickname}({user.name})
-                        </div>
-                        {user.email !== projectInfo.email && (
-                          <div id={user.email} onClick={kickUserBtn}>
-                            추방
-                          </div>
-                        )}
-                        {user.email === projectInfo.email && (
-                          <div
-                            id={user.email}
-                            style={{
-                              width: '47px',
-                              cursor: 'default',
-                            }}
-                          >
-                            관리자
-                          </div>
-                        )}
-                      </li>
-                    );
-                  })}
+                  <li>사용자 1</li>
+                  <li>사용자 2</li>
+                  <li>사용자 3</li>
                 </ul>
-                <div className="addUserBtnContainer">
-                  <button onClick={addUserBtn}>멤버 추가</button>
-                </div>
+                <button>추가</button>
               </div>
             )}
           </div>
         </div>
+        <button className="settingClose" onClick={modalClose}>
+          닫기
+        </button>
       </ReactModal>
     );
   }
 };
 
-export default React.memo(ProjectModal);
+export default ProjectModal;
