@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../../Styles/ListModal.css';
 import './ProjectListModal.css';
+import data from '../Listpage/data';
 
 function ProjectListModalAdd(props) {
   const input_name = useRef('');
@@ -56,7 +57,6 @@ function ProjectListModalAdd(props) {
 
       props.setList(nextProjects);
       props.setNextNum(props.nextNum + 1);
-      console.log(props.nextNum);
 
       input_name.current.value = '';
       input_contents.current.value = '';

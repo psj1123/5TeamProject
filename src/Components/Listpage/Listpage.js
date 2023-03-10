@@ -19,7 +19,7 @@ function Listpage(props) {
 
   useEffect(() => {
     console.log(data.length);
-    if (list.length === 1) {
+    if (list.length === 0) {
       setListBorder('');
     } else {
       setListBorder('listBorderTop');
