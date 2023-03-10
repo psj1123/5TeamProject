@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../../Styles/ListModal.css';
 import './ProjectListModal.css';
-import data from '../Listpage/data';
 
 function ProjectListModalAdd(props) {
   const input_name = useRef('');

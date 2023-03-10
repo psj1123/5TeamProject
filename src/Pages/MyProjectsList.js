@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
 import Footer from '../Components/Footer.js';

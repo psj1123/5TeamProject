@@ -7,18 +7,17 @@ import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
 import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
-import data from './data';
 
 function Listpage(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
   const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
 
-  let [list, setList] = useState(data); // 생성된 프로젝트 데이터를 다루는 State
+  let [list, setList] = useState([]); // 생성된 프로젝트 데이터를 다루는 State
   let [nextNum, setNextNum] = useState(1); // 생성된 프로젝트 데이터의  고유한 ID 부여를 위한 State
   let [listBorder, setListBorder] = useState('');
 
   useEffect(() => {
-    console.log(data.length);
+    // 프로젝트 테두리 border 컨트롤
     if (list.length === 0) {
       setListBorder('');
     } else {
