@@ -6,7 +6,14 @@
   background-color: #E2E2E2;
 }
 
-.listBorderTop{
+.listBorderTop.container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.listBorderTop {
   display: flex;
   padding: auto;
   border: none;
@@ -14,27 +21,26 @@
   border-radius: 15px;
   box-shadow: 0px 0px 2px #808080;
   justify-content: center;
-  align-items: center;
 }
 
-  .listHeadEllipsis{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
-  .ellipsismany { /* 프로젝트 내용 상세설명 3줄이상 입력 시 ellipsis 처리 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    -webkit-line-clamp: 5; /* 5줄이상 넘어가면 ellipsis */
-  }
-  
-  .listCard:hover{
-    opacity: 0.5;
-  }
+.listHeadEllipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ellipsismany {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+}
+
+.listCard:hover {
+  opacity: 0.5;
+}
 
 .ProjectContent {
   display: flex;
@@ -43,28 +49,28 @@
   margin: 5px;
 }
 
-  .addModalh{
-    margin: 3px;
-  }
+.addModalh {
+  margin: 3px;
+}
 
-  .addModalh1{
-    margin-top: 25px;
-    margin-bottom: 5px;
-  }
-  
-  .addbtn{
-    width: 100px;
-    height: 100px;
-    background-color: aqua;
-  }
+.addModalh1 {
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
 
-  .colortest{
-    border: 1px solid red;
-  }
+.addbtn {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
 
-  .dayred{
-    color: red;
-  }
+.colortest {
+  border: 1px solid red;
+}
+
+.dayred {
+  color: red;
+}
 
 .Project_Container {
   display: inline-block;
@@ -73,7 +79,6 @@
   max-width: 70%;
   min-height: 17em;
   align-items: center;
-  
 }
 
 .Project_Name {
@@ -87,5 +92,65 @@
 }
 
 .addModalh button {
-  margin : 2px;
+  display: inline;
+  text-align: center;
+  padding: 1px;
+}
+
+.addModalh1 button {
+  display: inline;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  padding: 1em;
+  min-width: 150px;
+}
+
+.col-sm-2 {
+  display: block;
+  position: relative;
+  margin: 3px;
+  min-width: 200px;
+}
+
+.ProjectContent.col-sm-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+}
+
+.mb-2.addCard.card.bg-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  padding: 0;
+}
+
+.projectButton {
+  display: block;
+  align-items: center;
+  min-height: 70px;
+}
+
+.addModalh {
+  display: block;
+}
+
+.addModalh1 {
+  display: block;
+}
+
+.addModalh button {
+  min-width: 40px;
+  vertical-align: middle;
+
+}
+
+.addModalh1 button {
+  min-width: 40px;
+  vertical-align: middle;
 }

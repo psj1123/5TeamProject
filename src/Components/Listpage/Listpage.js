@@ -32,11 +32,11 @@ function Listpage(props) {
       {/* --------- 상단 , 참여중인 프로젝터 --------- */}
       <div className="Project_Container">
         <div className="Project_Name">
-          <h4>프로젝트 생성</h4>
+          <h4> {props.nickname} 노트를 생성해보세요</h4>
         </div>
         <div>
           <Container className="listBorderTop">
-            <Row>
+            <Row className="row">
               {list.map(function (a, i) {
                 return (
                   <Participatinglist key={i} num={i} list={list} con={a} />
@@ -48,6 +48,7 @@ function Listpage(props) {
                   style={{ width: '11rem' }}
                   className="mb-2 addCard"
                 >
+                  <br />
                   <div className="projectButton">
                     {/* ----- 프로젝트 [추가] 모달창 구현 , 버튼 ----- */}
                     <div className="addModalh">
@@ -56,7 +57,7 @@ function Listpage(props) {
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen(true)}
                       >
-                        프로젝트 추가
+                        노트 추가
                       </Button>
                       <Modal
                         className="addModal addmodalBody"
@@ -75,6 +76,7 @@ function Listpage(props) {
                       </Modal>
                       {/* ----- 프로젝트 [추가] 모달창 구현 ----- */}
                     </div>
+                    <br />
                     {/* ----- 프로젝트 [참여] 모달창 구현 , 버튼 ----- */}
                     <div className="addModalh1">
                       <Button
@@ -82,7 +84,7 @@ function Listpage(props) {
                         variant="outline-secondary"
                         onClick={() => setModalIsOpen1(true)}
                       >
-                        프로젝트 참여
+                        협업 노트 참여
                       </Button>
                       <Modal
                         className="joinModal joinmodalBody"
