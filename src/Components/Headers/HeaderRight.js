@@ -47,12 +47,11 @@ const HeaderRight = ({ page, state, actions }) => {
         <div className="headerRight">
           <div className="rightLogin">
             <div>
-              <span>{state.nickname}</span>
-              <span>{'(' + state.email + ')'}</span>
+                {state.nickname} {'(' + state.email + ')'}
             </div>
-            <div className="rightLogin">
-              <div onClick={logoutClick}>로그아웃</div>
-            </div>
+          </div>
+          <div className="rightLogin">
+            <div onClick={logoutClick}>로그아웃</div>
           </div>
         </div>
       );
