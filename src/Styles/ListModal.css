@@ -1,11 +1,14 @@
-.mb-3 {
-
-}
 
 .submit {
+    width:100px;
     background-color: #5e308c;
 }
 
+.reset{
+    width:100px;
+}
+
 .exit {
+    width:100px;
     background-color: rgb(177, 44, 44);
 }

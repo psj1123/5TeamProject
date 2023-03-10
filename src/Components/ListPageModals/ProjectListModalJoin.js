@@ -38,18 +38,18 @@ function ProjectListModalJoin(props) {
   return (
     <Form>
       {/* ---프로젝트 이름 입력--- */}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Project Name</Form.Label>
+      <Form.Group className="mb-3 joinTop" controlId="formBasicEmail">
+        <Form.Label>프로젝트 이름</Form.Label>
         {/* 엔터키 버그 해결을 위한 보이지 않는 인풋 */}
         <input type="text" style={{ display: 'none' }} />
         <Form.Control
           onChange={change}
           ref={input_name}
-          placeholder="Write Project Name"
+          placeholder="프로젝트 이름"
           autoFocus
         />
         <Form.Text className="text-muted">
-          Please write down the name of the project you want.
+          참여하려는 프로젝트명을 적어주세요.
         </Form.Text>
       </Form.Group>
       {/* ---프로젝트 이름 입력--- */}
@@ -61,24 +61,29 @@ function ProjectListModalJoin(props) {
         className="submit"
         onClick={onInsert}
       >
-        Submit
+        저장
       </Button>
 
       {/* --- 리셋버튼--- */}
-      <Button variant="secondary" style={{ marginLeft: '5px' }} type="reset">
-        reset
+      <Button
+        variant="secondary"
+        style={{ marginLeft: '5px' }}
+        type="reset"
+        className="reset"
+      >
+        초기화
       </Button>
 
       {/* --- 나가기버튼--- */}
       <Button
         variant="secondary"
         className="exit"
-        style={{ marginLeft: '200px' }}
+        style={{ marginLeft: '100px' }}
         onClick={() => {
           props.setModalIsOpen(false);
         }}
       >
-        Exit
+        나가기
       </Button>
     </Form>
   );

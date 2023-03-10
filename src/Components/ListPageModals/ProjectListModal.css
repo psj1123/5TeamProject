@@ -1,5 +1,5 @@
 .top {
-    margin-top: 100px;
+    margin-top: 90px;
 }
 
 .addModal {
@@ -50,4 +50,12 @@
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 1px 1px 1px 3px rgba(34, 36, 38, 0.15);
+  }
+
+  .addTop{
+    margin-top: 45px;
+  }
+
+  .joinTop{
+    margin-top: 45px;
   }

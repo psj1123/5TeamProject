@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import Managedlist from './Managedlist';
 import Participatinglist from './Participatinglist';
-import Modal from 'react-modal';
+import Modal from 'react-modal'
 import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
 import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
@@ -50,11 +50,11 @@ function Listpage(props) {
       </div>
       <div>
         <Container>
-          <Row>
+          <Row className='row'>
             {list.map(function (a, i) {
               return <Participatinglist key={i} num={i} list={list} con={a} />;
             })}
-            <Col sm={2}>
+            <Col sm={2} className='col'>
               <Card
                 bg={'Light'.toLowerCase()}
                 style={{ width: '11rem' }}
