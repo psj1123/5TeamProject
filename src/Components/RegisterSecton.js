@@ -209,13 +209,13 @@ const RegisterSection = () => {
                   </div>
                 </form>
                 <div className="inputContainer2">
-                  <br />
                   <p>
                     위의 "회원가입" 버튼을 클릭하면 Jellabo의 이용약관 및
                     개인정보보호정책을 읽고
                     <br />
                     이해했으며 그에 동의하는 것으로 간주합니다.
                   </p>
+                  <br />
                 </div>
               </section>
             </>

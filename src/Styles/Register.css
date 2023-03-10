@@ -1,6 +1,5 @@
 .register_form {
     align-items: center;
-    margin: 10px auto;
     height: 100%;
     width: 30%;
     display: block;
@@ -16,10 +15,11 @@
     margin: 0.8em 0 0.8em 0;
     font-size: 4.7vmin;
     text-align: center;
+    font-weight: bold;
 }
 
 .register_form label {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
     text-align: left;
     
@@ -31,12 +31,12 @@
     border: 1px solid #d4d3d3;
     border-radius: 4px;
     width: 220px;
-    height: 27px;
+    height: 47px;
 }
 
 .inputContainer {
     display: block;
-    margin-top: 3.5vmin;
+    margin-top: 3.2vmin;
     text-align: center;
     align-content: stretch;
 }
