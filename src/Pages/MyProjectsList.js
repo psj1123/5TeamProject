@@ -20,9 +20,6 @@ const MyProjectsList = () => {
               {/* 프로젝트 리스트 페이지 */}
               {<Listpage />}
               {/* 프로젝트 리스트 페이지 */}
-              <button>
-                <Link to="/project">프로젝트</Link>
-              </button>
               <Footer />
             </div>
           );
