@@ -388,6 +388,25 @@ app.post('/project/:code/:category/deleteproject', (req, res) => {
   });
 });
 
+// 글 작성하기
+app.post('/project/:code/:category/writepost/write', (req, res) => {
+  const { code } = req.params;
+  const { category, posttitle, postcontent, postdeadline, email } = req.body;
+
+  const sqlQuery1 = 'SELECT name FROM users WHERE email = ?;';
+  db.query(sqlQuery1, [email], (err, result) => {
+    const postwriter = result[0]['name'];
+    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, postdeadline, email) VALUES(?, ?, ?, ?, ?, ?);`;
+    db.query(
+      sqlQuery2,
+      [category, posttitle, postcontent, postwriter, postdeadline, email],
+      (err, result) => {
+        res.send('1'); // 글 작성 성공
+      }
+    );
+  });
+});
+
 // 글 상세보기
 app.post('/project/:code/:category/:postnum/detail', (req, res) => {
   const { code, postnum } = req.params;
@@ -422,22 +441,14 @@ app.post('/project/:code/:category/:postnum/update', (req, res) => {
   );
 });
 
-// 글 작성하기
-app.post('/project/:code/:category/writepost/write', (req, res) => {
-  const { code } = req.params;
-  const { category, posttitle, postcontent, postdeadline, email } = req.body;
+// 글 삭제하기
+app.post('/project/:code/:category/:postnum/delete', (req, res) => {
+  const { code, postnum } = req.params;
 
-  const sqlQuery1 = 'SELECT name FROM users WHERE email = ?;';
-  db.query(sqlQuery1, [email], (err, result) => {
-    const postwriter = result[0]['name'];
-    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, postdeadline, email) VALUES(?, ?, ?, ?, ?, ?);`;
-    db.query(
-      sqlQuery2,
-      [category, posttitle, postcontent, postwriter, postdeadline, email],
-      (err, result) => {
-        res.send('1'); // 글 작성 성공
-      }
-    );
+  const sqlQuery1 = `DELETE FROM posts${code} WHERE postnum = ?;`;
+
+  db.query(sqlQuery1, [postnum], (err, result) => {
+    res.send('1'); // 글 삭제 완료
   });
 });
 

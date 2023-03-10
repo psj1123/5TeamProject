@@ -1,0 +1,114 @@
+.settingModalContainer {
+  background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  width: auto;
+  max-width: calc(100% - 450px);
+  min-width: 400px;
+  height: auto;
+  max-height: calc(100% - 100px);
+  min-height: 300px;
+  overflow: hidden;
+  padding: 20px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+.settingModalContent {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.settingModalSidebar {
+  width: 30%;
+  padding-right: 20px;
+}
+
+.settingModalSidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settingModalSidebar li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  color: #555555;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.settingModalSidebar li.active {
+  color: #000000;
+  border-right: 3px solid #000000;
+  background-color: #f5f5f5;
+}
+
+.settingModalMain {
+  width: 70%;
+}
+
+.settingModalMain form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555555;
+  font-weight: bold;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  resize: none;
+  font-size: 1rem;
+}
+
+.settingModalMain button[type='submit'] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.settingModalMain button[type='submit']:hover {
+  background-color: #111111;
+}
+
+.settingClose {
+  background-color: #5e308c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.settingClose:hover {
+  background-color: #845f99;
+  box-shadow: 0px 0px 3px #444444;
+}
+
+.settingClose:active {
+  background-color: #a676a3;
+  color: #000000;
+}

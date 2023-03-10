@@ -1,25 +1,17 @@
 import React from 'react';
 
-const NoteCard = ({
-  item,
-  modalOpen,
-  title,
-  description,
-  writtenDate,
-  category,
-}) => {
+const NoteCard = ({ post, modalOpen }) => {
   return (
     <div className="noteCard">
-      <div className="pin">#{item}</div>
+      <div className="pin">#{post.postnum}</div>
       <div>
-        <div className="noteCategory">{category}</div>
-        <div className="noteTitle">{title}</div>
-        <div className="noteDescription">{description}</div>
+        <div className="noteTitle">{post.posttitle}</div>
+        <div className="noteDescription">{post.postcontent}</div>
       </div>
       <div>
-        <div className="noteWriter">작성자</div>
-        <div className="noteDate">{writtenDate}</div>
-        <div className="noteOption" onClick={modalOpen}>
+        <div className="noteWriter">{post.postwriter}</div>
+        <div className="noteDate">{post.postdate}</div>
+        <div id={post.postnum} className="noteOption" onClick={modalOpen}>
           자세히 보기
         </div>
       </div>
@@ -27,4 +19,4 @@ const NoteCard = ({
   );
 };
 
-export default NoteCard;
+export default React.memo(NoteCard);

@@ -1,40 +1,98 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProjectAsideCategory from './Projects/ProjectAsideCategory';
 import '../Styles/ProjectAside.css';
 
-const ProjectAside = ({ modalOpen }) => {
+const ProjectAside = ({
+  modalOpen,
+  projectInfo,
+  categories,
+  getCategories,
+  selectedCategory,
+  changeSelectedCategory,
+  createCategory,
+  deleteCategory,
+}) => {
+  useEffect(() => {
+    getCategories();
+  }, [categories]);
+
+  const createCategoryBtn = () => {
+    const maxLength = 15;
+    let checkCancel;
+    let categoryName;
+
+    while (true) {
+      categoryName = prompt('추가할 카테고리 이름을 입력하세요. (최대 15글자)');
+      if (categoryName === '') {
+        alert('공백은 카테고리로 사용할 수 없습니다.\n다시 입력해주세요.');
+        continue;
+      } else if (categoryName.length > maxLength) {
+        alert('카테고리 이름은 15글자를 넘길 수 없습니다.\n다시 입력해주세요.');
+        continue;
+      } else if (categoryName === null) {
+        checkCancel = true;
+        break;
+      } else {
+        checkCancel = false;
+        break;
+      }
+    }
+
+    if (checkCancel) {
+      return;
+    } else {
+      return createCategory(categoryName);
+    }
+  };
+
   return (
     <>
       <aside>
         <div className="asideTop">
           <div className="blockBox"></div>
           <div className="projectCreator">
-            <p>관리자</p>
-            <p>(관리자이메일@example.com)</p>
+            <p>관리자: {projectInfo.nickname}</p>
+            <p>({projectInfo.email})</p>
           </div>
           <div className="projectCategory">
             <ul>
-              <li>★ 개요</li>
-              <li>공지사항</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              <li>분류 1</li>
-              {/*<li>카테고리 추가</li>*/}
+              <li
+                className={
+                  selectedCategory === '★ 개요' ? 'categoryActive' : ''
+                }
+                onClick={changeSelectedCategory}
+              >
+                <div>★ 개요</div>
+              </li>
+              <li
+                className={
+                  selectedCategory === '공지사항' ? 'categoryActive' : ''
+                }
+                onClick={changeSelectedCategory}
+              >
+                <div>공지사항</div>
+              </li>
+              {categories.categorieslist.map((category) => {
+                if (
+                  category.category === '★ 개요' ||
+                  category.category === '공지사항'
+                ) {
+                  return;
+                } else {
+                  return (
+                    <ProjectAsideCategory
+                      key={category.category}
+                      category={category}
+                      selectedCategory={selectedCategory}
+                      changeSelectedCategory={changeSelectedCategory}
+                      deleteCategory={deleteCategory}
+                    />
+                  );
+                }
+              })}
+              <li onClick={createCategoryBtn}>
+                <div>카테고리 추가</div>
+              </li>
             </ul>
           </div>
         </div>
@@ -56,4 +114,4 @@ const ProjectAside = ({ modalOpen }) => {
   );
 };
 
-export default ProjectAside;
+export default React.memo(ProjectAside);
