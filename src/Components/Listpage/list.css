@@ -1,5 +1,5 @@
 .listSection {
-  margin-top: 5em;
+  display: block;
   width: 100%;
   height: auto;
   min-height: 59em;
@@ -7,11 +7,11 @@
 }
 
 .listBorderTop{
-  border: 3px solid black;
+  padding: auto;
+  border: none;
+  background-color: #ffffff;
   border-radius: 15px;
-  padding: 5px;
-  width: auto;
-  height: auto;
+  box-shadow: 0px 0px 2px #808080;
 }
 
   .listHeadEllipsis{
@@ -55,3 +55,22 @@
   .dayred{
     color: red;
   }
+
+.Project_Container {
+  display: block;
+  margin-top: 5em;
+  width: 70%;
+  min-height: 17em;
+  align-items: center;
+  
+}
+
+.Project_Name {
+  margin: 1.2em 0;
+}
+
+.Project_Container div h4 {
+  font-size: 3vmin;
+  text-align: center;
+  margin: 1em;
+}
