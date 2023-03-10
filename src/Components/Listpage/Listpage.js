@@ -116,7 +116,7 @@ function Listpage(props) {
       <div className="listSection" align="center">
         <div className="Project_Container">
           <div className="Project_Name">
-            <h4>프로젝트를 관리해보세요</h4>
+            <h4>생성한 노트로 가보아요</h4>
           </div>
           <div className="top_Project">
             <Container className={listBorder}>

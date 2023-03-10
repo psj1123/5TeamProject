@@ -19,7 +19,7 @@
 .addmodalBody {
     position: absolute;
     width: 500px;
-    height: 400px;
+    height: 450px;
     padding: 40px;
     /* text-align: center; */
     background-color: rgb(255, 255, 255);
@@ -44,7 +44,7 @@
 .joinmodalBody {
     position: absolute;
     width: 500px;
-    height: 200px;
+    height: 220px;
     padding: 40px;
     /* text-align: center; */
     background-color: rgb(255, 255, 255);
@@ -57,5 +57,6 @@
   }
 
   .joinTop{
-    margin-top: 45px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }

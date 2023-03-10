@@ -56,7 +56,7 @@ const Participatinglist = (props) => {
               <div className="listCard " style={{ minHeight: '160px' }}>
                 {/* --- 카드 최상단 --- */}
                 <Card.Header align="center" className="header">
-                  프로젝트
+                  Note
                 </Card.Header>
                 {/* --- 카드 최상단 --- */}
 

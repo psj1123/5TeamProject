@@ -131,6 +131,29 @@ function ProjectListModalAdd(props) {
         <Form.Text className="text-muted">마감일을 체크해주세요.</Form.Text>
       </Form.Group>
 
+      {/* --- 나가기 버튼--- */}
+      <Button
+        name="exit"
+        className="exit"
+        variant="secondary"
+        style={{ marginRight: '100px' }}
+        onClick={() => {
+          props.setModalIsOpen(false);
+        }}
+      >
+        나가기
+      </Button>
+
+      {/* --- 리셋 버튼--- */}
+      <Button
+        variant="secondary"
+        style={{ margin: '10px' }}
+        type="reset"
+        className="reset"
+      >
+        초기화
+      </Button>
+
       {/* --- 제출 버튼--- */}
       <Button
         variant="primary"
@@ -139,29 +162,6 @@ function ProjectListModalAdd(props) {
         className="submit"
       >
         저장
-      </Button>
-
-      {/* --- 리셋 버튼--- */}
-      <Button
-        variant="secondary"
-        style={{ marginLeft: '5px' }}
-        type="reset"
-        className="reset"
-      >
-        초기화
-      </Button>
-
-      {/* --- 나가기 버튼--- */}
-      <Button
-        name="exit"
-        className="exit"
-        variant="secondary"
-        style={{ marginLeft: '100px' }}
-        onClick={() => {
-          props.setModalIsOpen(false);
-        }}
-      >
-        나가기
       </Button>
     </Form>
   );

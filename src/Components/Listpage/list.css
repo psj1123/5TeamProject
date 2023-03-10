@@ -65,11 +65,11 @@
 }
 
 .colortest {
-  border: 1px solid red;
+  border: 1px solid rgb(179, 9, 182);
 }
 
 .dayred {
-  color: red;
+  color: rgb(179, 9, 182);
 }
 
 .Project_Container {
