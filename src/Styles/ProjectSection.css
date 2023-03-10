@@ -1,0 +1,109 @@
+.projectSection {
+    margin: 62px 0 0 250px;
+    padding: 50px 30px;
+    width: auto;
+    height: auto;
+}
+.projectSection * {
+    box-sizing: border-box;
+}
+.whiteBoard {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 150vmin;
+    min-width: 240px;
+    height: auto;
+    border: 1vmin solid #d1d1d1;
+    border-radius: 15px;
+}
+.noteCard {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    margin: 30px 25px 0 25px;
+    padding: 30px 5px 5px 5px;
+    width: 200px;
+    min-width: 130px;
+    height: 330px;
+    border: 2px solid black;
+}
+.pin {
+    background-color: #9c154d;
+    position: absolute;
+    left: calc(50% - 25px);
+    top: -25px;
+    width: 50px;
+    height: 50px;
+    padding: 15px 0 0 15px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px #444444;
+    font-weight: bold;
+    color: #ffffff;
+}
+.noteTitle {
+    padding-bottom: 5px;
+    height: 35px;
+    line-height: 29px;
+    border-bottom: 1px solid #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.noteDescription {
+    padding: 5px 0;
+    line-height: 1.6;
+    max-height: 11.2rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+.noteCard > div:last-of-type {
+    border-top: 1px solid #000000;
+    height: 60px;
+}
+.noteWriter {
+    padding-top: 5px;
+    min-width: 48px;
+    max-width: 50%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.noteDate {
+    padding-top: 5px;
+    min-width: 48px;
+    max-width: 50%;
+    float: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.noteOption {
+    clear: both;
+    background-color: #eeeeee;
+    margin: 32px auto 0 auto;
+    width: 115px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.95rem;
+    line-height: 25px;
+
+}
+.noteOption:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px #444444;
+}
+.noteOption:active {
+    background-color: #bbbbbb;
+    color: #eeeeee;
+}

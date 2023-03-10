@@ -1,0 +1,46 @@
+.mb-2 {
+    background: light;
+    width: 11rem;
+    box-shadow: 1px 1px 10px -5px gray inset;
+    min-height: '160px'
+}
+
+.header {
+    background-color: #5e308c;
+    color: white;
+}
+
+.listCard {
+    min-height: 160px;
+}
+
+.addCard{
+    height: 191px;
+}
+
+.btn_add {
+    background-color: #a676a3;
+    border-color: #a676a3;
+    color: white;
+    font-size: medium;
+    width:150px;
+    margin-top: -10px;
+    margin-left: -4px;
+}
+
+.btn_join {
+    background-color: #a676a3;
+    border-color: #a676a3;
+    color: white;
+    font-size: medium;
+    width:150px;
+    margin-top: -50px;
+    margin-left: -4px;
+}
+
+hr {
+    border: 1px black solid;
+    width: 95%;
+    margin-left: 40px;
+    /* text-shadow: 10px 100px; */
+}

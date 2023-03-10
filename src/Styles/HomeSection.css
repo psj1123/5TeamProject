@@ -1,0 +1,175 @@
+section {
+    margin-top: 5em;
+    width: 100%;
+    height: auto;
+    min-height: 59em;
+    background-color: #E2E2E2;
+}
+
+.homeSectionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.homeSectionHead_Container {
+    margin: 0 0 10em 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.homeSectionHead_image {
+    display: inline;
+    float: left;
+    margin-right: 30px;
+}
+
+.homeSectionHead_image > img {
+    border-radius: 1%;
+    width: 68vmin;
+    z-index: 1;
+    margin: 10px;
+    position: relative;
+}
+
+.homeSectionHeader {
+    display: inline;
+    margin: 150px 0 0 0;
+    position: relative;
+    float: left;
+    justify-content: center;
+    align-items: center;
+}
+.homeSectionHeader h2 {
+    margin: 20px 0;
+    font-size: 3vmin;
+    text-align: center;
+}
+.homeSectionHeader h1 {
+    margin: 20px 0;
+    font-size: 5vmin;
+}
+
+.homeArticle {
+    position: static;
+    margin: 0 0 50px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.homeArticle img {
+    vertical-align: middle;
+    width: 60vmin;
+    border-radius: 5%;
+}
+.homeTextContainer {
+    margin: 30px;
+    width: auto;
+    justify-content: center;
+}
+
+.homeTextContainer > img {
+    margin: 0 0 100px 0;
+}
+
+.homeTitle {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.homeTitle span {
+    font-size: 3rem;
+}
+
+.homeTitle1 {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: right;
+}
+.homeTitle1 span {
+    font-size: 3rem;
+    text-align: right;
+}
+
+.homeTitle2 {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: left;
+}
+
+.homeTitle2 span {
+    font-size: 3rem;
+    text-align: left;
+}
+
+.homeTitle3 {
+    display: flex;
+    margin: 100px 0 0 0;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.homeTitle3 span {
+    font-size: 3rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.homeContent1 {
+    display: inline;
+    font-size: 1.1rem;
+}
+
+.homeContent1 span {
+    display: block;
+    margin: 30px 0 300px 0;
+    text-align: right;
+    line-height: 30px;
+}
+
+.homeContent2 {
+    display: inline;
+    font-size: 1.1rem;
+}
+
+.homeContent2 span {
+    display: block;
+    margin: 30px 0 0 0;
+    text-align: left;
+    line-height: 30px;
+}
+
+.login {
+    background-color: #5e308c;
+    margin: 30px auto;
+    width: 20vmin;
+    height: 5.5vmin;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    line-height: 3.5vmin;
+    font-size: 2vmin;
+    font-weight: normal;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login:hover {
+    background-color: #a676a3;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+}

@@ -1,0 +1,33 @@
+
+  .listHeadEllipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .ellipsismany { /* 프로젝트 내용 상세설명 3줄이상 입력 시 ellipsis 처리 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 5; /* 5줄이상 넘어가면 ellipsis */
+  }
+  
+  .listCard:hover{
+    opacity: 0.5;
+  }
+  
+  .addbtn{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+  }
+
+  .colortest{
+    border: 1px solid red;
+  }
+
+  .dayred{
+    color: red;
+  }
