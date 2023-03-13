@@ -165,7 +165,7 @@
   }
 
   .delProject {
-    background-color: #ee0000;
+    background-color: #c00505;
     border-radius: 5px;
     color: #ffffff;
     font-size: 0.8rem;
@@ -181,7 +181,7 @@
   
   .delProject:hover {
     cursor: pointer;
-    background-color: #ff4444;
+    background-color: #920e0e;
   }
 
   .delProject:active {

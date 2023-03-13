@@ -13,7 +13,7 @@ aside > * {
     height: 100%;
     z-index: 50;
     background-color: #eeeeee;
-    border-right: 2px solid #000000;
+    box-shadow: 0px 0px 2px #808080;
     box-sizing: border-box;
   }
   .asideTop {
@@ -24,14 +24,14 @@ aside > * {
   }
   .blockBox {
     height: 62px;
-    margin-bottom: 20px;
+    margin: 20px;
   }
   .projectCreator {
     width: 220px;
     height: auto;
-    margin: 10px auto;
+    margin: 20px auto;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #000000;
+    border-bottom: 1px solid #000000;
   }
   .projectCreator p {
     margin: 0;
@@ -56,7 +56,7 @@ aside > * {
   }
   .projectCategory ul li {
     border-radius: 10px;
-    margin: 0;
+    margin: 10px 0;
     padding: 0 10px;
     height: auto;
     white-space: nowrap;
@@ -69,10 +69,10 @@ aside > * {
     cursor: pointer;
   }
   .projectCategory ul li:active {
-    background-color: #ffffff;
+    background-color: #a9a9a9;
   }
   .categoryActive {
-    background-color: #ffffff;
+    background-color: #a9a9a9;
     box-shadow: 0px 0px 2px #444444;
   }
   .projectCategory ul li div {
@@ -148,14 +148,14 @@ aside > * {
     color: #ffffff;
   }
   .writeBtn {
-    width: 210px;
+    width: 80%;
+    min-height: 30px;
     font-size: 1.1rem;
   }
   
   .settingsBtn {
-    margin-right: 25px;
-    width: 210px;
-    float: right;
+    width: 80%;
+    min-height: 30px;
   }
   .writeAndUserListAndSettings > div div:hover {
     background-color: #845f99;

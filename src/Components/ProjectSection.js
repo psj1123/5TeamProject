@@ -8,7 +8,9 @@ const ProjectSection = ({ isOpen, modalMode, modalOpen, posts }) => {
       <section>
         <div className="projectSection">
           <div className="whiteBoard">
-            <div className="noPosts">작성된 글이 없습니다</div>
+            <div className="noPosts">
+              <h3>작성한 글이 없어요!</h3>
+            </div>
           </div>
         </div>
       </section>
