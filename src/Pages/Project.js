@@ -162,6 +162,8 @@ const Project = () => {
     const abc = e.target.innerHTML.substr(0, 2);
     if (abc === '<d') {
       selectedCategory = e.target.lastChild.id;
+    } else if (e.target.innerText === 'X') {
+      return;
     } else {
       selectedCategory = e.target.innerText;
     }

@@ -2,15 +2,7 @@
 따라서 그에 필요한 라이브러리를 설치했으며, 그 외 디자인을 위한 BootStrap, 모달 창 작업을 위한 react-modal 또한 설치했습니다.
 설치한 라이브러리 전체 목록은 아래와 같습니다.
 
-react-bootstrap bootstrap@5.1.3
-react-router-dom
-axios
-express
-body-parser
-mysql
-cors
-nodemon
-react-modal
+react-bootstrap bootstrap@5.1.3 react-router-dom axios express body-parser mysql cors nodemon react-modal
 
 
 또한 DB와의 연동으로 데이터를 처리하기 때문에 MySQL에서 다음과 같은 쿼리문 실행이 요구됩니다.
