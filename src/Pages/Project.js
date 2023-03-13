@@ -29,20 +29,19 @@ const Project = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalMode, setModalMode] = useState(0);
 
-  useEffect(() => {
-    pageload();
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        getposts();
+        pageload();
+        await getposts();
       } catch (e) {
         console.error(e);
       }
     };
     fetchData();
-  }, [selectedCategory, categories, projectInfo]);
+  }, [selectedCategory]);
 
   const pageload = () => {
     axios
@@ -167,11 +166,11 @@ const Project = () => {
     } else {
       selectedCategory = e.target.innerText;
     }
-    await setSelectedCategory(selectedCategory);
-    await getCategories();
     await navigate(`/project/${code}/${selectedCategory}`, {
       state: { code, state },
     });
+    await setSelectedCategory(selectedCategory);
+    await getCategories();
   }
 
   async function deleteCategory(e) {
@@ -188,6 +187,7 @@ const Project = () => {
     await navigate(`/project/${code}/${selectedCategory}`, {
       state: { code, state },
     });
+    await getposts();
   }
 
   const modalOpen = (e) => {

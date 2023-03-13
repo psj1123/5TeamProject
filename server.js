@@ -163,7 +163,7 @@ app.post('/myprojectslist/:email/joinproject', (req, res) => {
   const { email } = req.params;
   const { code } = req.body;
 
-  console.log('code')
+  console.log('code');
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
   const sqlQuery2 =
