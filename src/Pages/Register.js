@@ -17,7 +17,9 @@ const Register = () => {
           return (
             <>
               <Header page={'Register'} />
-              <RegisterSection />
+              <session>
+                <RegisterSection />
+              </session>
               <Footer />
             </>
           );

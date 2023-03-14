@@ -1,10 +1,10 @@
 .register_form {
     align-items: center;
-    margin: 10px auto;
+    margin-top: 1em;
     height: 100%;
-    width: 30%;
+    min-width: 30%;
+    padding: 10px;
     display: block;
-    margin: auto;
     border: none;
     background-color: #ffffff;
     border-radius: 15px;
@@ -20,7 +20,6 @@
 
 .register_form label {
     font-size: 17px;
-    font-weight: bold;
     text-align: left;
     
 }
