@@ -142,7 +142,6 @@ app.post('/myprojectslist/:email/createproject', (req, res) => {
               postcontent		VARCHAR(5000) NOT NULL,
               postwriter		VARCHAR(10) NOT NULL,
               posteddate		DATETIME DEFAULT CURRENT_TIMESTAMP,
-              postdeadline	DATE NOT NULL,
               email			    VARCHAR(40) NOT NULL
           );`;
           db.query(sqlQuery4, [], (err, result) => {
@@ -397,15 +396,15 @@ app.post('/project/:code/:category/deleteproject', (req, res) => {
 // 글 작성하기
 app.post('/project/:code/:category/writepost/write', (req, res) => {
   const { code } = req.params;
-  const { category, posttitle, postcontent, postdeadline, email } = req.body;
+  const { category, posttitle, postcontent, email } = req.body;
 
   const sqlQuery1 = 'SELECT name FROM users WHERE email = ?;';
   db.query(sqlQuery1, [email], (err, result) => {
     const postwriter = result[0]['name'];
-    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, postdeadline, email) VALUES(?, ?, ?, ?, ?, ?);`;
+    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, email) VALUES(?, ?, ?, ?, ?);`;
     db.query(
       sqlQuery2,
-      [category, posttitle, postcontent, postwriter, postdeadline, email],
+      [category, posttitle, postcontent, postwriter, email],
       (err, result) => {
         res.send('1'); // 글 작성 성공
       }
@@ -434,13 +433,13 @@ app.post('/project/:code/:category/:postnum/detail', (req, res) => {
 // 글 수정하기
 app.post('/project/:code/:category/:postnum/update', (req, res) => {
   const { code, postnum } = req.params;
-  const { category, posttitle, postcontent, postdeadline } = req.body;
+  const { category, posttitle, postcontent } = req.body;
 
-  const sqlQuery1 = `UPDATE posts${code} SET category = ?, posttitle = ?, postcontent = ?, postdeadline = ? WHERE postnum = ?;`;
+  const sqlQuery1 = `UPDATE posts${code} SET category = ?, posttitle = ?, postcontent = ? WHERE postnum = ?;`;
 
   db.query(
     sqlQuery1,
-    [category, posttitle, postcontent, postdeadline, postnum],
+    [category, posttitle, postcontent, postnum],
     (err, result) => {
       res.send('1'); // 글 수정 완료
     }

@@ -25,11 +25,10 @@ const Project = () => {
   const [categories, setCategories] = useState({ categorieslist: [] });
   const [selectedCategory, setSelectedCategory] = useState('★ 개요');
   const [posts, setPosts] = useState({ postslist: [] });
-  const [nowPost, setNowPost] = useState({});
+  const [isPostOpened, setIsPostOpened] = useState(false);
+  const [isPostUpdating, setIsPostUpdating] = useState(false);
+  const [isPostWriting, setIsPostWriting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalMode, setModalMode] = useState(0);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +53,6 @@ const Project = () => {
         } else {
           const { data } = res;
           setProjectInfo({
-            ...projectInfo,
             code: data[0].code,
             title: data[0].title,
             description: data[0].description,
@@ -134,11 +132,98 @@ const Project = () => {
       })
       .then((res) => {
         alert('프로젝트 설정 저장 완료');
+        pageload();
       })
       .catch((e) => {
         console.error(e);
       });
   };
+
+  async function changeSelectedCategory(e) {
+    let selectedCategory;
+    const abc = e.target.innerHTML.substr(0, 2);
+    if (abc === '<d') {
+      selectedCategory = e.target.lastChild.id;
+    } else if (e.target.innerText === 'X') {
+      return;
+    } else {
+      selectedCategory = e.target.innerText;
+    }
+
+    if (isPostUpdating && isPostOpened) {
+      if (
+        window.confirm(
+          '현재 수정 중인 글이 존재합니다.\n정말 카테고리를 변경하시겠습니까?\n\n수정 중인 내용이 사라집니다.'
+        )
+      ) {
+        setIsPostOpened(false);
+        setIsPostUpdating(false);
+      } else {
+        return;
+      }
+    } else if (isPostWriting) {
+      if (
+        window.confirm(
+          '현재 작성 중인 글이 존재합니다.\n정말 카테고리를 변경하시겠습니까?\n\n작성 중인 내용이 사라집니다.'
+        )
+      ) {
+        setIsPostOpened(false);
+        setIsPostWriting(false);
+      } else {
+        return;
+      }
+    } else if (!isPostUpdating && isPostOpened) {
+      setIsPostOpened(false);
+    }
+
+    await navigate(`/project/${code}/${selectedCategory}`, {
+      state: { code, state },
+    });
+    await setSelectedCategory(selectedCategory);
+    await getCategories();
+  }
+
+  async function deleteCategory(e) {
+    let nowChangeCategory;
+    const targetCategory = e.target.id;
+    if (targetCategory === selectedCategory) {
+      if (isPostUpdating && isPostOpened) {
+        if (
+          window.confirm(
+            '현재 수정 중인 글 내용이 사라집니다.\n그래도 삭제하시겠습니까?'
+          )
+        ) {
+          setIsPostOpened(false);
+          setIsPostUpdating(false);
+        } else {
+          return;
+        }
+      } else if (isPostWriting) {
+        if (
+          window.confirm(
+            '현재 작성 중인 글 내용이 사라집니다.\n그래도 삭제하시겠습니까?'
+          )
+        ) {
+          setIsPostOpened(false);
+          setIsPostWriting(false);
+        } else {
+          return;
+        }
+      } else if (!isPostUpdating && isPostOpened) {
+        return;
+      }
+      nowChangeCategory = '★ 개요';
+    } else {
+      nowChangeCategory = selectedCategory;
+    }
+    await deleteCategories(targetCategory);
+    await setSelectedCategory(nowChangeCategory);
+    await getCategories();
+    await navigate(`/project/${code}/${selectedCategory}`, {
+      state: { code, state },
+    });
+    await getposts();
+  }
 
   const deleteProject = () => {
     axios
@@ -156,60 +241,31 @@ const Project = () => {
       });
   };
 
-  async function changeSelectedCategory(e) {
-    let selectedCategory;
-    const abc = e.target.innerHTML.substr(0, 2);
-    if (abc === '<d') {
-      selectedCategory = e.target.lastChild.id;
-    } else if (e.target.innerText === 'X') {
+  const postWriteBtnClick = () => {
+    if (isPostUpdating && isPostOpened) {
+      if (
+        window.confirm(
+          '현재 수정 중인 글 내용이 사라집니다.\n그래도 글 작성을 하시겠습니까?'
+        )
+      ) {
+        setIsPostOpened(false);
+        setIsPostUpdating(false);
+        setIsPostWriting(true);
+      } else {
+        return;
+      }
+    } else if (isPostWriting) {
       return;
+    } else if (!isPostUpdating && isPostOpened) {
+      setIsPostOpened(false);
+      setIsPostWriting(true);
     } else {
-      selectedCategory = e.target.innerText;
+      setIsPostWriting(true);
     }
-    await navigate(`/project/${code}/${selectedCategory}`, {
-      state: { code, state },
-    });
-    await setSelectedCategory(selectedCategory);
-    await getCategories();
-  }
+  };
 
-  async function deleteCategory(e) {
-    let nowChangeCategory;
-    const targetCategory = e.target.id;
-    if (targetCategory === selectedCategory) {
-      nowChangeCategory = '★ 개요';
-    } else {
-      nowChangeCategory = selectedCategory;
-    }
-    await deleteCategories(targetCategory);
-    await setSelectedCategory(nowChangeCategory);
-    await getCategories();
-    await navigate(`/project/${code}/${selectedCategory}`, {
-      state: { code, state },
-    });
-    await getposts();
-  }
-
-  const modalOpen = (e) => {
-    console.log(e);
-    if (e.target.innerText === '자세히 보기') {
-      axios
-        .post(`/project/${code}/${selectedCategory}/${e.target.id}/detail`, {})
-        .then((res) => {
-          const { data } = res;
-          setNowPost(data[0]);
-        })
-        .finally(() => {
-          setModalMode(0);
-          setIsOpen(true);
-        });
-    } else if (e.target.innerText === '글 작성') {
-      setModalMode(2);
-      setIsOpen(true);
-    } else if (e.target.innerText === '설정') {
-      setModalMode(3);
-      setIsOpen(true);
-    }
+  const modalOpen = () => {
+    setIsOpen(true);
   };
 
   const modalClose = () => {
@@ -229,24 +285,15 @@ const Project = () => {
               <Modal
                 isOpen={isOpen}
                 modalClose={modalClose}
-                modalMode={modalMode}
-                setModalMode={setModalMode}
                 reSettingProject={reSettingProject}
-                code={code}
-                selectedCategory={selectedCategory}
                 projectInfo={projectInfo}
+                selectedCategory={selectedCategory}
                 deleteProject={deleteProject}
-                categories={categories}
                 state={state}
-                getposts={getposts}
                 pageload={pageload}
-                nowPost={nowPost}
-                setNowPost={setNowPost}
               />
               <Header page={'Project'} />
               <ProjectAside
-                isOpen={isOpen}
-                modalMode={modalMode}
                 modalOpen={modalOpen}
                 projectInfo={projectInfo}
                 categories={categories}
@@ -255,12 +302,22 @@ const Project = () => {
                 changeSelectedCategory={changeSelectedCategory}
                 createCategory={createCategories}
                 deleteCategory={deleteCategory}
+                isPostWriting={isPostWriting}
+                postWriteBtnClick={postWriteBtnClick}
               />
               <ProjectSection
-                isOpen={isOpen}
-                modalMode={modalMode}
-                modalOpen={modalOpen}
+                state={state}
                 posts={posts}
+                getposts={getposts}
+                categories={categories}
+                projectInfo={projectInfo}
+                selectedCategory={selectedCategory}
+                isPostOpened={isPostOpened}
+                setIsPostOpened={setIsPostOpened}
+                isPostUpdating={isPostUpdating}
+                setIsPostUpdating={setIsPostUpdating}
+                isPostWriting={isPostWriting}
+                setIsPostWriting={setIsPostWriting}
               />
               <ReturnTop />
             </div>
