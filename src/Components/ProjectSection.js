@@ -70,7 +70,7 @@ const ProjectSection = ({
   const postWrite = (postData) => {
     axios
       .post(
-        `/project/${projectInfo.code}/${selectedCategory}/${nowPost.postNum}/write`,
+        `/project/${projectInfo.code}/${selectedCategory}/writepost/write`,
         {
           category: postData.category,
           posttitle: postData.title,
