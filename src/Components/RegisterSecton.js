@@ -14,7 +14,7 @@ const RegisterSection = () => {
   const nicknameRef = useRef();
   const dateOfBirthRef = useRef();
 
-  //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음
+  //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음.
   const handleFormSubmit = () => {
     axios
       .post('http://localhost:8008/register/commit', {
