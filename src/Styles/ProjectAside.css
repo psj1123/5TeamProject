@@ -125,6 +125,7 @@ aside > * {
   }
 
   .asideBottom {
+    background-color: #eeeeee;
     height: 120px;
   }
   .writeAndUserListAndSettings {
