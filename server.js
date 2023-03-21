@@ -74,7 +74,7 @@ app.post('/myprojectslist/:email/joinedlist', (req, res) => {
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM joinedprojects WHERE email = ?;';
   const sqlQuery2 =
-    'SELECT j.code, p.title, p.description, p.deadline FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
+    'SELECT j.code, p.title, p.description, DATE_FORMAT(p.deadline, "%Y-%m-%d") AS deadline FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
 
   db.query(sqlQuery1, [email], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {

@@ -13,27 +13,33 @@ const ProjectPostDetail = ({
       <div className="postTitleBox">
         <div>{nowPost.postTitle}</div>
       </div>
-      <div className="postWriterBox">
-        <div>{nowPost.postWriter}</div>
+
+      <div className="postWirterAndDateBox">
+        <div className="postWriterBox">
+          <div>{nowPost.postWriter}</div>
+        </div>
+        <div className="postedDateBox">
+          <div>{nowPost.postedDate}</div>
+        </div>
       </div>
-      <div className="postedDateBox">
-        <div>{nowPost.postedDate}</div>
-      </div>
+
       <div className="postContentBox">
         <div>{nowPost.postContent}</div>
       </div>
-      <div>
+
+      <div className="repleAndBackToListBox">
+        <button onClick={() => {}}>댓글</button>
+
         <button
           onClick={() => {
-            if (state.email === nowPost.writerEmail) {
-              setIsPostUpdating(true);
-            } else {
-              alert('작성자만 수정이 가능합니다.');
-            }
+            setIsPostOpened(false);
           }}
         >
-          수정
+          목록으로 돌아가기
         </button>
+      </div>
+
+      <div className="deleteAndUpdateBox">
         <button
           onClick={() => {
             if (
@@ -52,12 +58,17 @@ const ProjectPostDetail = ({
         >
           삭제
         </button>
+
         <button
           onClick={() => {
-            setIsPostOpened(false);
+            if (state.email === nowPost.writerEmail) {
+              setIsPostUpdating(true);
+            } else {
+              alert('작성자만 수정이 가능합니다.');
+            }
           }}
         >
-          목록으로 돌아가기
+          수정
         </button>
       </div>
     </div>

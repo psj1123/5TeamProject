@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../../Styles/ListModal.css';
+import './ProjectListModal.css';
 
 function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
   const input_code = useRef('');
@@ -20,15 +21,37 @@ function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
     <Form>
       {/* ---프로젝트 이름 입력--- */}
       <Form.Group className="mb-3 joinTop" controlId="formBasicEmail">
-        <Form.Label>프로젝트 이름</Form.Label>
+        <Form.Label>프로젝트 코드</Form.Label>
         {/* 엔터키 버그 해결을 위한 보이지 않는 인풋 */}
         <input type="text" style={{ display: 'none' }} />
-        <Form.Control ref={input_code} placeholder="프로젝트 이름" autoFocus />
+        <Form.Control ref={input_code} placeholder="프로젝트 코드" autoFocus />
         <Form.Text className="text-muted">
-          참여하려는 프로젝트명을 적어주세요.
+          참여하려는 프로젝트의 코드를 적어주세요.
         </Form.Text>
       </Form.Group>
       {/* ---프로젝트 이름 입력--- */}
+
+      {/* --- 나가기버튼--- */}
+      <Button
+        variant="secondary"
+        className="exit"
+        style={{ marginRight: '100px' }}
+        onClick={() => {
+          setModalIsOpen(false);
+        }}
+      >
+        나가기
+      </Button>
+
+      {/* --- 리셋버튼--- */}
+      <Button
+        variant="secondary"
+        style={{ margin: '10px' }}
+        type="reset"
+        className="reset"
+      >
+        초기화
+      </Button>
 
       {/* --- 제출 버튼--- */}
       <Button
@@ -37,29 +60,7 @@ function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
         className="submit"
         onClick={onInsert}
       >
-        저장
-      </Button>
-
-      {/* --- 리셋버튼--- */}
-      <Button
-        variant="secondary"
-        style={{ marginLeft: '5px' }}
-        type="reset"
-        className="reset"
-      >
-        초기화
-      </Button>
-
-      {/* --- 나가기버튼--- */}
-      <Button
-        variant="secondary"
-        className="exit"
-        style={{ marginLeft: '100px' }}
-        onClick={() => {
-          setModalIsOpen(false);
-        }}
-      >
-        나가기
+        참여
       </Button>
     </Form>
   );

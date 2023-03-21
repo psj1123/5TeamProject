@@ -8,6 +8,8 @@ import ProjectAside from '../Components/ProjectAside';
 import Modal from '../Components/Modals/ProjectModal';
 import axios from 'axios';
 
+/*!프로젝트 페이지 접근 시 D day 체크하고 오버된 페이지면 강제로 리스트페이지로 돌아가는 기능 추가하기 */
+
 const Project = () => {
   const forceUpdate = useRef(null);
   const navigate = useNavigate();

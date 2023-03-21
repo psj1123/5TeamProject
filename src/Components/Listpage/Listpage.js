@@ -89,62 +89,67 @@ function Listpage({ state }) {
       {/* --------- 상단 , 참여중인 프로젝터 --------- */}
       <div className="Project_Container">
         <div className="Project_Name">
-          <h4> {state.nickname}님! 노트를 생성해보세요</h4>
+          <h4>
+            {' '}
+            {state.nickname}님!
+            <br />
+            프로젝트를 생성하거나 참여해보세요
+          </h4>
         </div>
         <div>
           <Container className="listBorderTop">
             <Row className="row">
               <Col sm={2} className="ProjectContent">
-                  <br />
-                  <div className="projectButton">
-                    {/* ----- 프로젝트 [추가] 모달창 구현 , 버튼 ----- */}
-                    <div className="addModalh">
-                      <Button
-                        className="btn_add"
-                        variant="outline-secondary"
-                        onClick={() => setModalIsOpen(true)}
-                      >
-                        노트 추가
-                      </Button>
-                      <Modal
-                        className="addModal addmodalBody"
-                        isOpen={modalIsOpen}
-                        onRequestClose={() => setModalIsOpen(false)}
-                      >
-                        <div className="projectAdd">
-                          <ProjectListModalAdd
-                            setModalIsOpen={setModalIsOpen}
-                            createProject={createProject}
-                          />
-                        </div>
-                      </Modal>
-                      {/* ----- 프로젝트 [추가] 모달창 구현 ----- */}
-                    </div>
-                    <br />
-                    {/* ----- 프로젝트 [참여] 모달창 구현 , 버튼 ----- */}
-                    <div className="addModalh1">
-                      <Button
-                        className="btn_join"
-                        variant="outline-secondary"
-                        onClick={() => setModalIsOpen1(true)}
-                      >
-                        협업 노트 참여
-                      </Button>
-                      <Modal
-                        className="joinModal joinmodalBody"
-                        isOpen={modalIsOpen1}
-                        onRequestClose={() => setModalIsOpen1(false)}
-                      >
-                        <div>
-                          <ProjectListModalJoin
-                            setModalIsOpen={setModalIsOpen1}
-                            joinProject={joinProject}
-                          />
-                        </div>
-                      </Modal>
-                    </div>
-                    {/* ----- 프로젝트 [참여] 모달창 구현 ----- */}
+                <br />
+                <div className="projectButton">
+                  {/* ----- 프로젝트 [추가] 모달창 구현 , 버튼 ----- */}
+                  <div className="addModalh">
+                    <Button
+                      className="btn_add"
+                      variant="outline-secondary"
+                      onClick={() => setModalIsOpen(true)}
+                    >
+                      프로젝트 추가
+                    </Button>
+                    <Modal
+                      className="addModal addmodalBody"
+                      isOpen={modalIsOpen}
+                      onRequestClose={() => setModalIsOpen(false)}
+                    >
+                      <div className="projectAdd">
+                        <ProjectListModalAdd
+                          setModalIsOpen={setModalIsOpen}
+                          createProject={createProject}
+                        />
+                      </div>
+                    </Modal>
+                    {/* ----- 프로젝트 [추가] 모달창 구현 ----- */}
                   </div>
+                  <br />
+                  {/* ----- 프로젝트 [참여] 모달창 구현 , 버튼 ----- */}
+                  <div className="addModalh1">
+                    <Button
+                      className="btn_join"
+                      variant="outline-secondary"
+                      onClick={() => setModalIsOpen1(true)}
+                    >
+                      프로젝트 참여
+                    </Button>
+                    <Modal
+                      className="joinModal joinmodalBody"
+                      isOpen={modalIsOpen1}
+                      onRequestClose={() => setModalIsOpen1(false)}
+                    >
+                      <div>
+                        <ProjectListModalJoin
+                          setModalIsOpen={setModalIsOpen1}
+                          joinProject={joinProject}
+                        />
+                      </div>
+                    </Modal>
+                  </div>
+                  {/* ----- 프로젝트 [참여] 모달창 구현 ----- */}
+                </div>
               </Col>
             </Row>
           </Container>
@@ -156,7 +161,7 @@ function Listpage({ state }) {
       <div className="listSection" align="center">
         <div className="Project_Container">
           <div className="Project_Name">
-            <h4>생성한 노트로 가보아요</h4>
+            <h4>참여중인 프로젝트로 가보아요</h4>
           </div>
           <div className="top_Project">
             <Container className="listBorderBottom">
