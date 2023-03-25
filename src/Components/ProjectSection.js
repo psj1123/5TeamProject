@@ -43,13 +43,13 @@ const ProjectSection = ({
 
   const postOpen = (e) => {
     axios
-      .post(
+      .get(
         `/project/${projectInfo.code}/${selectedCategory}/${e.target.id}/detail`,
         {}
       )
       .then((res) => {
         if (res.data === 0) {
-          alert('존재하지 않는 포스트입니다!');
+          alert('존재하지 않는 글입니다!');
         } else {
           const { data } = res;
           setNowPost({

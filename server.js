@@ -413,7 +413,7 @@ app.post('/project/:code/:category/writepost/write', (req, res) => {
 });
 
 // 글 상세보기
-app.post('/project/:code/:category/:postnum/detail', (req, res) => {
+app.get('/project/:code/:category/:postnum/detail', (req, res) => {
   const { code, postnum } = req.params;
 
   const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE postnum = ?;`;

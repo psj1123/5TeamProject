@@ -46,7 +46,7 @@ const Project = () => {
 
   const pageload = () => {
     axios
-      .post(`http://localhost:8008/project/${code}/${selectedCategory}`, {
+      .post(`/project/${code}/${selectedCategory}`, {
         email: state.email,
       })
       .then((res) => {
