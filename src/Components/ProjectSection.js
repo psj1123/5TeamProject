@@ -117,11 +117,20 @@ const ProjectSection = ({
       <div>
         <div className="projectSection">
           <div>
-            <p>{projectInfo.title}</p>
-            <p>{projectInfo.description}</p>
-            <p>{projectInfo.deadline}</p>
-            <p>관리자: {projectInfo.nickname}</p>
-            <p>({projectInfo.email})</p>
+            <p>프로젝트 제목 : {projectInfo.title}</p>
+            <p>프로젝트 설명 : {projectInfo.description}</p>
+            <p>프로젝트 생성일 : {projectInfo.deadline}</p>
+            <p>
+              프로젝트 D-Day :{' '}
+              {Math.floor(
+                (new Date(projectInfo.deadline).getTime() -
+                  new Date().getTime()) /
+                  (1000 * 60 * 60 * 24)
+              ) + 1}
+            </p>
+            <p>
+              관리자: {projectInfo.nickname} ({projectInfo.email})
+            </p>
           </div>
         </div>
       </div>
