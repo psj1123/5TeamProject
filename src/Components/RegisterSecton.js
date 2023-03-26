@@ -17,9 +17,9 @@ const RegisterSection = () => {
   //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음.
   const handleFormSubmit = () => {
     axios
-      .post('http://localhost:8008/register/commit', {
+      .post('/register/commit', {
         email: emailRef.current.value,
-        password1: passwordRef.current.value,
+        password: passwordRef.current.value,
         name: nameRef.current.value,
         nickname: nicknameRef.current.value,
         birthday: dateOfBirthRef.current.value,
@@ -30,7 +30,7 @@ const RegisterSection = () => {
           emailRef.current.value = '';
           emailRef.current.focus();
         } else {
-          alert('회원가입이 완료되었습니다.\n\n로그인 화면으로 이동합니다.');
+          alert('회원가입이 완료되었습니다.\n로그인 화면으로 이동합니다.');
           navigate('/login');
         }
       })
