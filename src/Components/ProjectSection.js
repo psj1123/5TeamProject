@@ -5,7 +5,7 @@ import ProjectPostList from './Projects/ProjectPostList';
 import ProjectPostDetail from './Projects/ProjectPostDetail';
 import ProjectPostUpdate from './Projects/ProjectPostUpdate';
 import ProjectPostWrite from './Projects/ProjectPostWrite';
-import ProjectOverview from './Projects/ProjectOverview';
+import Managedlist from './Listpage/Managedlist';
 
 const ProjectSection = ({
   state,
@@ -113,11 +113,16 @@ const ProjectSection = ({
   };
 
   if (selectedCategory === '★ 개요') {
-    // check if selectedCategory is '개요'
     return (
       <div>
         <div className="projectSection">
-          <ProjectOverview projectInfo={projectInfo} />
+          <div>
+            <p>{projectInfo.title}</p>
+            <p>{projectInfo.description}</p>
+            <p>{projectInfo.deadline}</p>
+            <p>관리자: {projectInfo.nickname}</p>
+            <p>({projectInfo.email})</p>
+          </div>
         </div>
       </div>
     );

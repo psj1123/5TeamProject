@@ -58,8 +58,6 @@ const ProjectAside = ({
             onClick={() => setShowDialogBox(true)}
           >
             <div className="projectCreator">
-              <p>{projectInfo.title}</p>
-              <p>{projectInfo.description}</p>
               <p>관리자: {projectInfo.nickname}</p>
               <p>({projectInfo.email})</p>
             </div>
