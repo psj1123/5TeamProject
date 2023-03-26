@@ -13,37 +13,44 @@ const Login = () => {
   return (
     <UserDataConsumer>
       {({ state, actions }) => {
-        // 정상 수행 여부를 판별
-        const loginClick = async () => {
-          try {
-            switch (true) {
-              case !emailRef.current.value:
-                throw new Error('이메일을 입력해주세요.');
-              case !passwordRef.current.value:
-                throw new Error('비밀번호를 입력해주세요.');
-              default:
-                const res = await axios.post('/login/commit', {
-                  email: emailRef.current.value,
-                  password: passwordRef.current.value,
-                });
-                if (res.data === 0) {
-                  emailRef.current.value = '';
-                  passwordRef.current.value = '';
-                  emailRef.current.focus();
-                  throw new Error('이메일 혹은 비밀번호가 올바르지 않습니다.');
-                } else {
-                  actions.setEmail(res.data[0].email);
-                  actions.setNickname(res.data[0].nickname);
-                  actions.setIsLoggedIn(true);
-                  alert('돌아오신 것을 환영합니다!');
-                }
-                break;
-            }
-          } catch (e) {
-            alert(e);
-            return;
+        // 로그인 유효성 검사
+        const loginCheck = () => {
+          if (emailRef.current.value === '') {
+            alert('이메일을 입력해주세요.');
+          } else if (passwordRef.current.value === '') {
+            alert('비밀번호를 입력해주세요.');
+          } else {
+            loginProcess();
           }
         };
+
+        // 로그인
+        const loginProcess = () => {
+          axios
+            .post('/login/commit', {
+              email: emailRef.current.value,
+              password: passwordRef.current.value,
+            })
+            .then((res) => {
+              if (res.data === -1) {
+                emailRef.current.value = '';
+                emailRef.current.focus();
+                alert('존재하지 않는 이메일입니다.');
+              } else if (res.data === 0) {
+                passwordRef.current.value = '';
+                passwordRef.current.focus();
+                alert('비밀번호가 올바르지 않습니다.');
+              } else {
+                actions.setEmail(res.data[0].email);
+                actions.setNickname(res.data[0].nickname);
+                actions.setIsLoggedIn(true);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        };
+
         // 로그인한 상태라면 자신의 프로젝트 리스트 페이지로 이동
         if (state.isLoggedIn) {
           const myprojectslist = '/myprojectslist/' + state.email;
@@ -81,7 +88,7 @@ const Login = () => {
                         type="password"
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
-                            loginClick();
+                            loginCheck();
                           }
                         }}
                         placeholder=" 비밀번호"
@@ -90,7 +97,7 @@ const Login = () => {
                     </div>
 
                     <div className="login-form-button">
-                      <button onClick={loginClick}>로그인</button>
+                      <button onClick={loginCheck}>로그인</button>
                     </div>
 
                     <div className="signup">
