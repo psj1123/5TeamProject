@@ -5,6 +5,7 @@ import ProjectPostList from './Projects/ProjectPostList';
 import ProjectPostDetail from './Projects/ProjectPostDetail';
 import ProjectPostUpdate from './Projects/ProjectPostUpdate';
 import ProjectPostWrite from './Projects/ProjectPostWrite';
+import ProjectOverview from './Projects/ProjectOverview';
 
 const ProjectSection = ({
   state,
@@ -20,17 +21,6 @@ const ProjectSection = ({
   isPostWriting,
   setIsPostWriting,
 }) => {
-  // postPageingList = 글 페이지 수 저장용 변수. 10post 당 1
-  // postPageingList - 1 * 10 한 값 = offset
-  // SELECT * FROM post난수 ORDER BY postnum DESC LIMIT offset, 10; = 1페이지 당 10개의 글 출력 가능
-  // const [postPageingList, setPageingList] = useState();
-  // const [postPaging]
-
-  // useEffect(async () => {
-  //   setPageingList(Math.ceil(posts.postslist.length / 10));
-  //   await
-  // }, [posts]);
-
   const [nowPost, setNowPost] = useState({
     postCategory: '',
     postNum: '',
@@ -122,6 +112,17 @@ const ProjectSection = ({
       });
   };
 
+  if (selectedCategory === '★ 개요') {
+    // check if selectedCategory is '개요'
+    return (
+      <div>
+        <div className="projectSection">
+          <ProjectOverview projectInfo={projectInfo} />
+        </div>
+      </div>
+    );
+  }
+
   if (isPostOpened) {
     if (!isPostUpdating) {
       return (
@@ -204,17 +205,6 @@ const ProjectSection = ({
               })}
             </ul>
           </div>
-
-          {/* <div>
-            <ul>
-              {postPageingList.map((Pages, i) => {
-                return (
-                  <li key={i}></li>
-                )
-              })}
-              <li></li>
-            </ul>
-          </div> */}
         </div>
       );
     }
