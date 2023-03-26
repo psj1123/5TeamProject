@@ -56,14 +56,21 @@ function Managedlist({ project, state }) {
             <div className="listCard">
               {/* --- 카드 최상단 --- */}
               <Card.Header align="center" className="header">
-                Note
+                Project
               </Card.Header>
               {/* --- 카드 최상단 --- */}
 
               <Card.Body>
                 {/* --- 카드 상단 프로젝트 명 --- */}
-                <Card.Title align="center" className="listHeadEllipsis">
-                  <h4>{project.title}</h4>
+                <Card.Title
+                  align="center"
+                  className="listHeadEllipsis"
+                  style={{
+                    width: '100%',
+                    marginBottom: '20px',
+                  }}
+                >
+                  <b>{project.title}</b>
                 </Card.Title>
                 {/* --- 카드 상단 프로젝트 명 --- */}
 

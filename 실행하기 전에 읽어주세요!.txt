@@ -1,0 +1,89 @@
+기능 구현을 확인하기 위해 MySQL과의 연동 작업을 진행했습니다.
+따라서 그에 필요한 라이브러리를 설치했으며, 그 외 디자인을 위한 BootStrap, 모달 창 작업을 위한 react-modal 또한 설치했습니다.
+설치한 라이브러리 전체 목록은 아래와 같습니다.
+
+react-bootstrap bootstrap@5.1.3 react-router-dom axios express body-parser mysql cors nodemon react-modal
+
+
+또한 DB와의 연동으로 데이터를 처리하기 때문에 MySQL에서 다음과 같은 쿼리문 실행이 요구됩니다.
+
+-- 데이터베이스 생성
+CREATE DATABASE 5teams;
+USE 5team;
+
+-- 유저 테이블 생성 (사이트 전반에서 사용)
+CREATE TABLE users (
+	email		VARCHAR(40) NOT NULL PRIMARY KEY,
+    	password		VARCHAR(20) NOT NULL,
+    	name		VARCHAR(10) NOT NULL,
+    	nickname		VARCHAR(10) NOT NULL,
+    	birthday		DATE NOT NULL
+);
+
+-- 프로젝트 테이블 생성 (프로젝트 생성 및 관리에 사용)
+CREATE TABLE projects (
+	code		INT NOT NULL PRIMARY KEY,
+    	title		VARCHAR(40) NOT NULL,
+    	description	VARCHAR(200) NOT NULL,
+    	creatoremail	VARCHAR(40) NOT NULL,
+    	deadline		DATE NOT NULL
+);
+
+-- 현재 참여중인 프로젝트 리스트 테이블 생성 (프로젝트 참여, 탈퇴, 프로젝트 페이지 접근 권한 관리에 사용)
+CREATE TABLE joinedprojects (
+	email		VARCHAR(40) NOT NULL,
+    	code		INT NOT NULL
+);
+
+-- 프로젝트 내 게시글 카테고리 테이블 생성 (각각의 프로젝트 페이지 내에서 사용)
+CREATE TABLE category (
+	code		INT NOT NULL,
+    	category		VARCHAR(15) NOT NULL
+);
+
+-- 각 프로젝트 내 게시글 테이블 생성 (프로젝트 생성 시 해당 테이블도 함께 생성. 각 프로젝트 페이지 내에서 사용)
+CREATE TABLE posts{6자리 난수(projects 테이블의 code와 짝을 이룸)} (
+	postnum		INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	category		VARCHAR(15) NOT NULL,
+    	posttitle		VARCHAR(40) NOT NULL,
+    	postcontent	VARCHAR(5000) NOT NULL,
+    	postwriter	VARCHAR(10) NOT NULL,
+    	posteddate	DATETIME DEFAULT CURRENT_TIMESTAMP,
+    	email		VARCHAR(40) NOT NULL
+);
+
+-- =========================================
+-- 필요한 경우 아래의 더미 데이터를 사용해 빠르게 테스트해볼 수 있습니다.
+INSERT INTO users VALUES('example01@example.com','password01','홍길동','12회차수강생','2000-01-01');
+INSERT INTO users VALUES('example02@example.com','password02','김수한무','11회차수강생','1850-01-01');
+INSERT INTO users VALUES('example03@example.com','password03','Doe John','10회차수강생','1980-01-01');
+INSERT INTO users VALUES('example04@example.com','password04','김철수','9회차수강생','1970-01-01');
+
+INSERT INTO projects VALUES(102354, '멀티잇 5조 미니 프로젝트 1차', '멀티캠퍼스에서 제공하는 멀티잇 JAVA 풀스택 12회차 수업 1차 미니 프로젝트', 'example01@example.com', '2023-03-10');
+INSERT INTO projects VALUES(246491, '개인 프로젝트', '개인적으로 작업하는 프로젝트', 'example02@example.com', '2023-06-23');
+INSERT INTO projects VALUES(329424, '협업 프로젝트', '협업하는 프로젝트', 'example03@example.com', '2023-05-12');
+INSERT INTO projects VALUES(497552, '인생 최후의 프로젝트', '삼도천 횡단 대비 수영 프로젝트', 'example04@example.com', '2094-01-30');
+
+INSERT INTO joinedprojects VALUES('example01@example.com', 102354);
+INSERT INTO joinedprojects VALUES('example01@example.com', 246491);
+INSERT INTO joinedprojects VALUES('example01@example.com', 329424);
+INSERT INTO joinedprojects VALUES('example02@example.com', 246491);
+INSERT INTO joinedprojects VALUES('example02@example.com', 102354);
+INSERT INTO joinedprojects VALUES('example03@example.com', 329424);
+INSERT INTO joinedprojects VALUES('example04@example.com', 497552);
+INSERT INTO joinedprojects VALUES('example04@example.com', 102354);
+
+INSERT INTO category VALUES(102354, '작업 내역');
+INSERT INTO category VALUES(102354, '준비사항');
+INSERT INTO category VALUES(102354, '회의록');
+INSERT INTO category VALUES(246491, '작업 내역');
+INSERT INTO category VALUES(246491, '일기');
+INSERT INTO category VALUES(329424, '작업 내역');
+INSERT INTO category VALUES(329424, '역할 분담표');
+INSERT INTO category VALUES(329424, '회의록');
+INSERT INTO category VALUES(497552, '삼도천 건너기 계획서');
+INSERT INTO category VALUES(497552, '개인 스케줄표');
+INSERT INTO category VALUES(497552, '연습 과정');
+INSERT INTO category VALUES(102354, '연습 과정');
+
+INSERT INTO posts102354 (category, posttitle, postcontent, postwriter, postdeadline, email) VALUES('작업 내역', '테스트용 작업 내역', '테스트를 위해 한 번 작성해 본 게시글입니다. 잘 작동하나요?', '홍길동', '2023-03-10', 'example01@example.com');

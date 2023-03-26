@@ -11,6 +11,8 @@ const ProjectAside = ({
   changeSelectedCategory,
   createCategory,
   deleteCategory,
+  isPostWriting,
+  postWriteBtnClick,
 }) => {
   useEffect(() => {
     getCategories();
@@ -100,7 +102,7 @@ const ProjectAside = ({
         <div className="asideBottom">
           <div className="writeAndUserListAndSettings">
             <div>
-              <div className="writeBtn" onClick={modalOpen}>
+              <div className="writeBtn" onClick={postWriteBtnClick}>
                 글 작성
               </div>
               <div className="settingsBtn" onClick={modalOpen}>

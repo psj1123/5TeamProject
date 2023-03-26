@@ -9,10 +9,10 @@ const AsideCategory = ({
   const categoryArticle = category.category;
   const selected = selectedCategory === categoryArticle;
   const deleteClick = (e) => {
-    if (!window.confirm('이 카테고리를 삭제하시겠습니까?\n' + e.target.id)) {
-      return;
-    } else {
+    if (window.confirm('이 카테고리를 삭제하시겠습니까?\n' + e.target.id)) {
       deleteCategory(e);
+    } else {
+      return;
     }
   };
 

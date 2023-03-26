@@ -74,7 +74,7 @@ app.post('/myprojectslist/:email/joinedlist', (req, res) => {
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM joinedprojects WHERE email = ?;';
   const sqlQuery2 =
-    'SELECT j.code, p.title, p.description, p.deadline FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
+    'SELECT j.code, p.title, p.description, DATE_FORMAT(p.deadline, "%Y-%m-%d") AS deadline FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
 
   db.query(sqlQuery1, [email], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {
@@ -142,7 +142,6 @@ app.post('/myprojectslist/:email/createproject', (req, res) => {
               postcontent		VARCHAR(5000) NOT NULL,
               postwriter		VARCHAR(10) NOT NULL,
               posteddate		DATETIME DEFAULT CURRENT_TIMESTAMP,
-              postdeadline	DATE NOT NULL,
               email			    VARCHAR(40) NOT NULL
           );`;
           db.query(sqlQuery4, [], (err, result) => {
@@ -163,7 +162,7 @@ app.post('/myprojectslist/:email/joinproject', (req, res) => {
   const { email } = req.params;
   const { code } = req.body;
 
-  console.log('code')
+  console.log('code');
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
   const sqlQuery2 =
@@ -397,15 +396,15 @@ app.post('/project/:code/:category/deleteproject', (req, res) => {
 // 글 작성하기
 app.post('/project/:code/:category/writepost/write', (req, res) => {
   const { code } = req.params;
-  const { category, posttitle, postcontent, postdeadline, email } = req.body;
+  const { category, posttitle, postcontent, email } = req.body;
 
   const sqlQuery1 = 'SELECT name FROM users WHERE email = ?;';
   db.query(sqlQuery1, [email], (err, result) => {
     const postwriter = result[0]['name'];
-    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, postdeadline, email) VALUES(?, ?, ?, ?, ?, ?);`;
+    const sqlQuery2 = `INSERT INTO posts${code} (category, posttitle, postcontent, postwriter, email) VALUES(?, ?, ?, ?, ?);`;
     db.query(
       sqlQuery2,
-      [category, posttitle, postcontent, postwriter, postdeadline, email],
+      [category, posttitle, postcontent, postwriter, email],
       (err, result) => {
         res.send('1'); // 글 작성 성공
       }
@@ -414,7 +413,7 @@ app.post('/project/:code/:category/writepost/write', (req, res) => {
 });
 
 // 글 상세보기
-app.post('/project/:code/:category/:postnum/detail', (req, res) => {
+app.get('/project/:code/:category/:postnum/detail', (req, res) => {
   const { code, postnum } = req.params;
 
   const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE postnum = ?;`;
@@ -434,13 +433,13 @@ app.post('/project/:code/:category/:postnum/detail', (req, res) => {
 // 글 수정하기
 app.post('/project/:code/:category/:postnum/update', (req, res) => {
   const { code, postnum } = req.params;
-  const { category, posttitle, postcontent, postdeadline } = req.body;
+  const { category, posttitle, postcontent } = req.body;
 
-  const sqlQuery1 = `UPDATE posts${code} SET category = ?, posttitle = ?, postcontent = ?, postdeadline = ? WHERE postnum = ?;`;
+  const sqlQuery1 = `UPDATE posts${code} SET category = ?, posttitle = ?, postcontent = ? WHERE postnum = ?;`;
 
   db.query(
     sqlQuery1,
-    [category, posttitle, postcontent, postdeadline, postnum],
+    [category, posttitle, postcontent, postnum],
     (err, result) => {
       res.send('1'); // 글 수정 완료
     }

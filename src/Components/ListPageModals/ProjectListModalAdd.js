@@ -52,10 +52,10 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
       input_deadline.current.value === ''
     ) {
       if (input_name.current.value === '') {
-        alert('프로젝트명을 입력해주세요!');
+        alert('프로젝트 명을 입력해주세요!');
         input_name.current.focus();
       } else if (input_contents.current.value === '') {
-        alert('프로젝트 내용을 입력해주세요!');
+        alert('프로젝트 설명을 입력해주세요!');
         input_contents.current.focus();
       } else {
         alert('프로젝트 마감일을 선택해주세요!');
@@ -70,30 +70,30 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
     <Form>
       {/* 프로젝트 이름 입력 */}
       <Form.Group className="mb-3 addTop" controlId="formBasicEmail">
-        <Form.Label>프로젝트명</Form.Label>
+        <Form.Label>프로젝트 명</Form.Label>
         <Form.Control
           onKeyDown={handleKeyPress}
           name="project"
           ref={input_name}
           autoFocus
-          placeholder="프로젝트 이름"
+          placeholder="프로젝트 명"
         />
         <Form.Text className="text-muted">
-          생성하려는 프로젝트명을 적어주세요.
+          생성하려는 프로젝트 명을 적어주세요.
         </Form.Text>
       </Form.Group>
 
       {/* 프로젝트 내용 입력 */}
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>프로젝트 내용</Form.Label>
+        <Form.Label>프로젝트 설명</Form.Label>
         <Form.Control
           onKeyDown={handleKeyPress}
           name="contents"
           ref={input_contents}
-          placeholder="프로젝트 내용"
+          placeholder="프로젝트 설명"
         />
         <Form.Text className="text-muted">
-          프로젝트 내용을 간단히 적어주세요.
+          프로젝트 설명을 간단히 적어주세요.
         </Form.Text>
       </Form.Group>
 
@@ -139,7 +139,7 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
         onClick={onInsert}
         className="submit"
       >
-        저장
+        생성
       </Button>
     </Form>
   );

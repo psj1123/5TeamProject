@@ -1,6 +1,7 @@
 aside > * {
     box-sizing: border-box;
     width: 250px;
+    user-select: none;
   }
   aside {
     display: flex;
@@ -32,6 +33,7 @@ aside > * {
     margin: 20px auto;
     padding-bottom: 1rem;
     border-bottom: 1px solid #000000;
+    cursor: default;
   }
   .projectCreator p {
     margin: 0;
@@ -125,6 +127,7 @@ aside > * {
   }
 
   .asideBottom {
+    background-color: #eeeeee;
     height: 120px;
   }
   .writeAndUserListAndSettings {

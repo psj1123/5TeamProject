@@ -1,14 +1,416 @@
 .projectSection {
-    background-color: #E2E2E2;;
-    margin: 62px 0 0 250px;
-    padding: 50px 30px;
-    width: auto;
+    background-color: #E2E2E2;
+    margin: 80px 0 0 250px;
+    padding-bottom: 50px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 80px);
+    padding-top: 30px;
     height: auto;
 }
 .projectSection * {
     box-sizing: border-box;
 }
-.whiteBoard {
+.postsBoard {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 30px;
+    width: 1200px;
+    min-width: auto;
+    /* height: 600px; */
+    min-height: auto;
+}
+.postsBoard > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.postList {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 0 0 5px 0;
+    width: 80%;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.postList:not(.postList-firstLine):hover {
+    background-color: #dddddd;
+    font-size: large;
+    font-weight: bold;
+}
+
+.postList-firstLine {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    font-size: large;
+    font-weight: bold;
+}
+.postListTitle {
+    text-align: center;
+}
+.postListLeftbox {
+   width: 100%;
+}
+.postListLeftbox > div {
+    float: left;
+}
+.postListLeftbox > div:first-of-type {
+    width: 10%;
+    text-align: center;
+}
+.postListLeftbox > div:last-of-type {
+    width: 90%;
+}
+.postListLeftbox > div:last-of-type:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.postListRightbox {
+    width: 15%;
+}
+.postListRightbox > div {
+    text-align: center;
+}
+
+
+
+
+
+
+.postVeiwBox {
+    background-color: #E2E2E2;
+    padding: 50px 0 0 0;
+    width: 100%;
+    height: auto;
+}
+
+.postView {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    min-width: 500px;
+    height: 75vh;
+    min-height: 570px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.postTitleBox {
+    padding: 5px 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.postWirterAndDateBox {
+    padding: 5px 0;
+    border-bottom: 2px solid #dddddd;
+}
+.postWriterBox {
+    float: left;
+    font-size: 0.95rem;
+}
+.postedDateBox {
+    float: right;
+    font-size: 0.95rem;
+    color: #999999;
+}
+
+.postContentBox {
+    margin: 11px 0;
+    padding: 0 10px;
+    height: 82.5%;
+    overflow-y: auto;
+    text-align: justify;
+    font-size: 1.05rem;
+}
+
+/* 댓글, 목록으로 돌아가기, 삭제, 수정 버튼 */
+.buttons {
+    padding: 20px 0 0 0;
+    border-top: 2px solid #dddddd;
+}
+.commentAndBackToListBox {
+    float: left;
+    margin-right: 20px;
+}
+.deleteAndUpdateBox {
+    float: right;
+    margin-left: 20px;    
+}
+
+.commentBtn, 
+.backToList, 
+.deletePost, 
+.updatePost {
+    display: inline-block;
+    height: 30px;
+    padding: 2px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    line-height: 26px;
+}
+.commentBtn,
+.backToList {
+    margin-right: 10px;
+}
+.deletePost,
+.updatePost {
+    margin-left: 10px;
+}
+
+/* 각 버튼 세부 설정 */
+.commentBtn {
+    background-color: #9747ff;
+    color: #ffffff;
+}
+.commentBtn:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #b985fd;
+}
+.commentBtn:active {
+    border: 1px solid #000000;
+}
+
+.backToList {
+    background-color: #dfdfdf;
+}
+.backToList:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #bbbbbb;
+}
+.backToList:active {
+    border: 1px solid #000000;
+}
+
+.deletePost {
+    background-color: #ec3f18;
+    color: #ffffff;
+}
+.deletePost:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #f16d4f;
+    color: #ffffff;
+}
+.deletePost:active {
+    border: 1px solid #000000;
+}
+
+.updatePost {
+    background-color: #e4ccff;
+}
+.updatePost:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #cdaef0;
+    /* color: #ffffff; */
+}
+.updatePost:active {
+    border: 1px solid #000000;
+}
+
+
+/* 댓글 박스 */
+.commentViewBox {
+    background-color: #E2E2E2;
+    padding: 15px 0 50px 0;
+    width: 100%;
+    height: auto;
+}
+
+.commentView {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    min-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.commentBox {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 5px 0;
+    border-bottom: 1px dashed #cccccc;
+}
+.commentWriter {
+    font-size: 0.85rem;
+}
+.commentContent {
+    padding: 5px 0;
+    font-size: 1rem;
+}
+
+.repleBtnAndOthersBox {
+    font-size: 0.85rem;
+}
+.repleBtnBox,
+.deleteComment,
+.updateComment {
+    float: left;
+    cursor: pointer;
+    height: 22px;
+    padding: 1px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    line-height: 20px;
+}
+.repleBtnBox:hover,
+.deleteComment:hover,
+.updateComment:hover {
+    background-color: #ebebeb;
+    box-shadow: 0px 0px 2px #808080;
+}
+.repleBtnBox:active,
+.deleteComment:active,
+.updateComment:active {
+    border: 1px solid #000000;
+}
+.repleBtnBox {
+    margin-right: 10px;
+}
+.OthersBox {
+    float: right;
+}
+.deleteComment {
+    margin-left: 10px;
+    float: right;
+}
+.updateComment {
+    margin-left: 5px;
+    float: right;
+}
+
+/* 댓글 작성란 */
+.commentWriteBox,
+.commentUpdateBox,
+.repleUpdateBox {
+    padding: 10px 0;
+}
+.commentUpdate,
+.repleUpdate {
+    float: left;
+    width: calc(100% - 70px);
+}
+.commentWrite,
+.repleWrite {
+    float: left;
+    width: calc(100% - 90px);
+}
+.commentWrite > input,
+.repleWrite > input,
+.commentUpdate > input,
+.repleUpdate > input {
+    border: none;
+    border-bottom: 1px solid #aaaaaa;
+    outline: none;
+    height: 30px;
+    width: 100%;
+}
+.repleUpdate > input {
+    background-color: #f4f4f4;
+}
+.commentWrite > input:focus,
+.repleWrite > input:focus,
+.commentUpdate > input:focus,
+.repleUpdate > input:focus {
+    border-bottom: 1px solid #000000;
+}
+.commentWriteBtn,
+.repleWriteBtn,
+.commentUpdateBtn,
+.repleUpdateBtn {
+    background-color: #9747ff;
+    padding: 0 10px;
+    color: #ffffff;
+    float: right;
+    height: 30px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    line-height: 30px;
+    cursor: pointer;
+}
+.commentWriteBtn:hover,
+.repleWriteBtn:hover,
+.commentUpdateBtn:hover,
+.repleUpdateBtn:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #b985fd;
+}
+.commentWriteBtn:active,
+.repleWriteBtn:active,
+.commentUpdateBtn:active,
+.repleUpdateBtn:active {
+    border: 1px solid #000000;
+}
+
+/* 답글 박스 */
+.repleViewBox {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+.repleBox {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border-bottom: 1px dashed #cccccc;
+}
+.repleWriter {
+    font-size: 0.85rem;
+}
+.repleContent {
+    padding: 5px 0;
+    font-size: 1rem;
+}
+.deleteReple,
+.updateReple {
+    cursor: pointer;
+    height: 22px;
+    padding: 1px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    line-height: 20px;
+    font-size: 0.85rem;
+}
+.deleteReple:hover,
+.updateReple:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 2px #808080;
+}
+
+.deleteReple {
+    margin-left: 5px;
+    float: right;
+}
+.updateReple {
+    margin-left: 10px;
+    float: right;
+}
+
+/* 답글 작성란 */
+.repleWriteBox {
+    padding: 10px 0;
+}
+.repleWrite > input {
+    background-color: #f4f4f4;
+}
+
+
+
+
+/* 노트 카드 디자인 */
+/* .whiteBoard {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -121,4 +523,4 @@
 .noteOption:active {
     background-color: #bbbbbb;
     color: #eeeeee;
-}
+} */
