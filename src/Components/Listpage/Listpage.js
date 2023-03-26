@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Managedlist from './Managedlist';
 import Modal from 'react-modal';
 import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
@@ -12,19 +12,12 @@ import axios from 'axios';
 function Listpage({ state }) {
   const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
   const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
-  const [listBorder, setListBorder] = useState('');
+  const [pjList, setPjList] = useState(false);
   const [joinedProjectlist, setJoinedProjectlist] = useState({
     joinedProjectlist: [],
   });
 
   useEffect(() => {
-    // 불러올 리스트가 없을 때 보더라인을 지움
-    if (joinedProjectlist.joinedProjectlist[0] === undefined) {
-      setListBorder('');
-    } else {
-      setListBorder('listBorderTop');
-    }
-
     const fetchData = async () => {
       try {
         getJoinedlist();
@@ -39,12 +32,14 @@ function Listpage({ state }) {
   const getJoinedlist = () => {
     axios.post(`/myprojectslist/${state.email}/joinedlist`, {}).then((res) => {
       if (res.data === 0) {
+        setPjList(false);
         return;
       } else {
         const { data } = res;
         setJoinedProjectlist({
           joinedProjectlist: data,
         });
+        setPjList(true);
       }
     });
   };
@@ -154,30 +149,32 @@ function Listpage({ state }) {
           </Container>
         </div>
       </div>
-      {/* --------- 상단 , 참여중인 프로젝터 --------- */}
-
-      {/* --------- 하단 , 관리중인 프로젝터 --------- */}
+      {/* --------- 참여중인 프로젝트 --------- */}
       <div className="listSection" align="center">
         <div className="Project_Container">
           <div className="Project_Name">
             <h4>참여중인 프로젝트로 가보아요</h4>
           </div>
-          <div className="top_Project">
-            <Container className="listBorderBottom">
-              <Row>
-                {joinedProjectlist.joinedProjectlist[0] !== undefined &&
-                  joinedProjectlist.joinedProjectlist.map((project) => {
-                    return (
-                      <Managedlist
-                        key={project.code}
-                        project={project}
-                        state={state}
-                      />
-                    );
-                  })}
-              </Row>
-            </Container>
-          </div>
+          {pjList ? (
+            <div className="top_Project">
+              <Container className="listBorderBottom">
+                <Row>
+                  {joinedProjectlist.joinedProjectlist[0] !== undefined &&
+                    joinedProjectlist.joinedProjectlist.map((project) => {
+                      return (
+                        <Managedlist
+                          key={project.code}
+                          project={project}
+                          state={state}
+                        />
+                      );
+                    })}
+                </Row>
+              </Container>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </section>
