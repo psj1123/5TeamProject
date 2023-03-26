@@ -24,8 +24,7 @@ const db = mysql.createPool({
 
 // 회원가입 요청
 app.post('/register/commit', (req, res) => {
-  const { email, name, nickname, birthday } = req.body;
-  const password = req.body.password1;
+  const { email, password, name, nickname, birthday } = req.body;
 
   console.log(email);
 
@@ -34,14 +33,12 @@ app.post('/register/commit', (req, res) => {
 
   db.query(sqlQuery1, [email], (err, result) => {
     if (result[0]['COUNT(*)'] === 1) {
-      console.log('1번째 쿼리 실행 완료');
       res.send('0'); // 이미 존재하는 email
     } else {
       db.query(
         sqlQuery2,
         [email, password, name, nickname, birthday],
         (err, result) => {
-          console.log('2번째 쿼리 실행 완료');
           res.send('1'); // 회원가입 성공
         }
       );
@@ -53,28 +50,35 @@ app.post('/register/commit', (req, res) => {
 app.post('/login/commit', (req, res) => {
   const { email, password } = req.body;
 
-  const sqlQuery1 =
+  const sqlQuery1 = 'SELECT COUNT(*) FROM users WHERE email = ?;';
+  const sqlQuery2 =
     'SELECT COUNT(*) FROM users WHERE email = ? AND password = ?;';
-  const sqlQuery2 = 'SELECT * FROM users WHERE email=? AND password=?;';
+  const sqlQuery3 = 'SELECT * FROM users WHERE email = ? AND password = ?;';
 
-  db.query(sqlQuery1, [email, password], (err, result) => {
-    if (result[0]['COUNT(*)'] === 1) {
-      db.query(sqlQuery2, [email, password], (err, result) => {
-        res.send(result); // 로그인 성공 및 유저 데이터 리턴
-      });
+  db.query(sqlQuery1, [email], (err, result) => {
+    if (result[0]['COUNT(*)'] === 0) {
+      res.send('-1'); // 존재하지 않는 email
     } else {
-      res.send('0'); // 존재하지 않는 email, 또는 잘못된 password
+      db.query(sqlQuery2, [email, password], (err, result) => {
+        if (result[0]['COUNT(*)'] === 0) {
+          res.send('0'); // 비밀번호가 일치하지 않음
+        } else {
+          db.query(sqlQuery3, [email, password], (err, result) => {
+            res.send(result); // 로그인 성공 및 유저 데이터 리턴
+          });
+        }
+      });
     }
   });
 });
 
 // 프로젝트 리스트 불러오기 (관리/참여 중인 리스트)
-app.post('/myprojectslist/:email/joinedlist', (req, res) => {
+app.get('/myprojectslist/:email', (req, res) => {
   const { email } = req.params;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM joinedprojects WHERE email = ?;';
   const sqlQuery2 =
-    'SELECT j.code, p.title, p.description, DATE_FORMAT(p.deadline, "%Y-%m-%d") AS deadline FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
+    'SELECT j.code, p.title, p.description, DATE_FORMAT(p.deadline, "%Y-%m-%d") AS deadline, p.creatoremail FROM joinedprojects j INNER JOIN projects p ON j.code = p.code WHERE j.email = ? ORDER BY p.deadline ASC;';
 
   db.query(sqlQuery1, [email], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {
@@ -87,41 +91,22 @@ app.post('/myprojectslist/:email/joinedlist', (req, res) => {
   });
 });
 
-// // 프로젝트 리스트 불러오기 2 (관리 중인 프로젝트)
-// app.post('/myprojectslist/:email/masterlist', (req, res) => {
-//   const { email } = req.params;
-
-//   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE creatoremail = ?;';
-//   const sqlQuery2 =
-//     'SELECT code, title, description, deadline FROM projects WHERE creatoremail = ? ORDER BY deadline ASC;';
-
-//   db.query(sqlQuery1, [email], (err, result) => {
-//     if (result[0]['COUNT(*)'] === 0) {
-//       res.send('0'); // 관리 중인 프로젝트가 존재하지 않음
-//     } else {
-//       db.query(sqlQuery2, [email], (err, result) => {
-//         res.send(result); // 관리 중인 프로젝트 목록 저장
-//       });
-//     }
-//   });
-// });
-
 // 프로젝트 생성하기
 app.post('/myprojectslist/:email/createproject', (req, res) => {
-  const { title, description, deadline } = req.body;
-  const creatoremail = req.params.email;
+  const { title, description, creatoremail, deadline } = req.body;
   let code;
 
   const sqlQuery1 = 'SELECT code FROM projects;';
   const sqlQuery2 = 'INSERT INTO projects VALUES(?, ?, ?, ?, ?);';
   const sqlQuery3 = 'INSERT INTO joinedprojects VALUES(?, ?);';
-  const sqlQuery5 = 'INSERT INTO category VALUES(?, "★ 개요");';
-  const sqlQuery6 = 'INSERT INTO category VALUES(?, "공지사항");';
 
+  // 랜덤 code 생성 및 중복 체크
   db.query(sqlQuery1, [], (err, result) => {
     loop: while (true) {
+      // 랜덤 code 생성
       code = Math.floor(Math.random() * 1000000);
 
+      // 중복 체크
       for (let i = 0; i < result.length; i++) {
         if (code === result[i][code]) {
           continue loop;
@@ -129,25 +114,64 @@ app.post('/myprojectslist/:email/createproject', (req, res) => {
       }
       break;
     }
+    // 프로젝트 별 작성 글 테이블 생성
+    const sqlQuery4 = `CREATE TABLE posts${code} (
+      postnum	        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      category		    VARCHAR(15) NOT NULL,
+      posttitle		    VARCHAR(40) NOT NULL,
+      postcontent	    VARCHAR(5000) NOT NULL,
+      powriteremail	  VARCHAR(40) NOT NULL,
+      posteddate		  DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(powriteremail) REFERENCES users(email)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+    );`;
 
+    // 프로젝트 별 댓글 테이블 생성
+    const sqlQuery5 = `CREATE TABLE comments${code} (
+      commentnum		  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      postnum			    INT NOT NULL,
+      commentcontent	VARCHAR(200) NOT NULL,
+      cowriteremail	  VARCHAR(40) NOT NULL,
+      FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+      ON DELETE CASCADE,
+      FOREIGN KEY(cowriteremail) REFERENCES users(email)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+    );`;
+
+    // 프로젝트 별 답글 테이블 생성
+    const sqlQuery6 = `CREATE TABLE reples${code} (
+      replenum		    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      postnum			    INT NOT NULL,
+      commentnum		  INT NOT NULL,
+      replecontent	  VARCHAR(200) NOT NULL,
+      rewriteremail	  VARCHAR(40) NOT NULL,
+      FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+      ON DELETE CASCADE,
+      FOREIGN KEY(commentnum) REFERENCES comments102354(commentnum),
+      FOREIGN KEY(rewriteremail) REFERENCES users(email)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+    );`;
+
+    const sqlQuery7 = 'INSERT INTO category VALUES(?, "★ 개요");';
+    const sqlQuery8 = 'INSERT INTO category VALUES(?, "공지사항");';
+
+    // code 생성 완료 후 프로젝트 생성 과정 진행
     db.query(
       sqlQuery2,
       [code, title, description, creatoremail, deadline],
       (err, result) => {
         db.query(sqlQuery3, [creatoremail, code], (err, result) => {
-          const sqlQuery4 = `CREATE TABLE posts${code} (
-              postnum			  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-              category		  VARCHAR(15) NOT NULL,
-              posttitle		  VARCHAR(40) NOT NULL,
-              postcontent		VARCHAR(5000) NOT NULL,
-              postwriter		VARCHAR(10) NOT NULL,
-              posteddate		DATETIME DEFAULT CURRENT_TIMESTAMP,
-              email			    VARCHAR(40) NOT NULL
-          );`;
           db.query(sqlQuery4, [], (err, result) => {
-            db.query(sqlQuery5, [code], (err, result) => {
-              db.query(sqlQuery6, [code], (err, result) => {
-                res.send('1'); // 프로젝트 생성 완료
+            db.query(sqlQuery5, [], (err, result) => {
+              db.query(sqlQuery6, [], (err, result) => {
+                db.query(sqlQuery7, [code], (err, result) => {
+                  db.query(sqlQuery8, [code], (err, result) => {
+                    res.send('1'); // 프로젝트 생성 완료
+                  });
+                });
               });
             });
           });
@@ -159,10 +183,7 @@ app.post('/myprojectslist/:email/createproject', (req, res) => {
 
 // 프로젝트 참여하기
 app.post('/myprojectslist/:email/joinproject', (req, res) => {
-  const { email } = req.params;
-  const { code } = req.body;
-
-  console.log('code');
+  const { email, code } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
   const sqlQuery2 =
@@ -171,14 +192,14 @@ app.post('/myprojectslist/:email/joinproject', (req, res) => {
 
   db.query(sqlQuery1, [code], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {
-      res.send('0'); // 해당 프로젝트가 존재하지 않음
+      res.send('-1'); // 해당 프로젝트가 존재하지 않음
     } else {
       db.query(sqlQuery2, [email, code], (err, result) => {
         if (result[0]['COUNT(*)'] === 1) {
-          res.send('1'); // 이미 참여 중인 프로젝트
+          res.send('0'); // 이미 참여 중인 프로젝트
         } else {
           db.query(sqlQuery3, [email, code], (err, result) => {
-            res.send('2'); // 정상적으로 참여 완료
+            res.send('1'); // 정상적으로 참여 완료
           });
         }
       });
@@ -188,8 +209,7 @@ app.post('/myprojectslist/:email/joinproject', (req, res) => {
 
 // 프로젝트 탈퇴하기
 app.post('/myprojectslist/:email/exitproject', (req, res) => {
-  const { email } = req.params;
-  const { code } = req.body;
+  const { email, code } = req.body;
 
   const sqlQuery1 =
     'SELECT COUNT(*) FROM projects WHERE code = ? AND creatoremail = ?;';
