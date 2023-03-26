@@ -112,6 +112,7 @@
   display: flex;
   padding: 1em;
   min-width: 150px;
+  width: auto;
 }
 
 .col-sm-2 {
@@ -119,6 +120,8 @@
   position: relative;
   margin: 3px;
   min-width: 200px;
+  width: auto;
+  margin: 3px 10px;
 }
 
 .ProjectContent.col-sm-2 {
