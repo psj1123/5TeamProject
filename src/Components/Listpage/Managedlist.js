@@ -4,13 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import './list.css';
 import '../../Styles/Cards.css';
 
-function Managedlist({ project, state }) {
-  const Navigate = useNavigate();
+function Managedlist({ state, exitProject, project }) {
+  const navigate = useNavigate();
 
-  const onClick = () => {
-    Navigate(`/project/${project.code}/★ 개요`, {
+  const gotoProject = () => {
+    navigate(`/project/${project.code}/★ 개요`, {
       state: { code: project.code, state: state },
     });
+  };
+
+  const exitProjectBtn = () => {
+    if (window.confirm('정말 이 프로젝트에서 탈퇴하시겠습니까?')) {
+      exitProject(project.code);
+    } else {
+      return false;
+    }
   };
 
   /* D-day를 위한 시간 함수  */
@@ -46,7 +54,7 @@ function Managedlist({ project, state }) {
           bg={'Light'.toLowerCase()}
           style={{ width: '11rem' }}
           className="mb-2"
-          onClick={onClick}
+          onClick={gotoProject}
         >
           <OverlayTrigger
             placement="top"
@@ -106,6 +114,13 @@ function Managedlist({ project, state }) {
             </div>
           </OverlayTrigger>
         </Card>
+        {project.creatoremail === state.email ? (
+          <></>
+        ) : (
+          <div className="exitProjectBtn" onClick={exitProjectBtn}>
+            탈퇴
+          </div>
+        )}
       </Col>
     </>
   );
