@@ -5,7 +5,6 @@ import ProjectPostList from './Projects/ProjectPostList';
 import ProjectPostDetail from './Projects/ProjectPostDetail';
 import ProjectPostUpdate from './Projects/ProjectPostUpdate';
 import ProjectPostWrite from './Projects/ProjectPostWrite';
-import Managedlist from './Listpage/Managedlist';
 
 const ProjectSection = ({
   state,
@@ -112,25 +111,68 @@ const ProjectSection = ({
       });
   };
 
+  const deadline = new Date(projectInfo.deadline);
+  const today = new Date();
+  const diffTime = deadline - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const result =
+    diffDays > 0 ? `D - ${diffDays}` : diffDays === 0 ? 'D-day' : '종료';
+
   if (selectedCategory === '★ 개요') {
     return (
       <div>
         <div className="projectSection">
-          <div>
-            <p>프로젝트 제목 : {projectInfo.title}</p>
-            <p>프로젝트 설명 : {projectInfo.description}</p>
-            <p>프로젝트 생성일 : {projectInfo.deadline}</p>
-            <p>
-              프로젝트 D-Day :{' '}
-              {Math.floor(
-                (new Date(projectInfo.deadline).getTime() -
-                  new Date().getTime()) /
-                  (1000 * 60 * 60 * 24)
-              ) + 1}
-            </p>
-            <p>
-              관리자: {projectInfo.nickname} ({projectInfo.email})
-            </p>
+          <div className="overview_container">
+            <table className="overview_table">
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 제목 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.title}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 설명 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.description}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 생성일 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.deadline}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 D-Day &nbsp;</p>
+                </td>
+                <td>
+                  <p>
+                    {result > 0
+                      ? 'D - ' + result
+                      : result === 0
+                      ? 'D-day'
+                      : '종료'}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 관리자 &nbsp;</p>
+                </td>
+                <td>
+                  <p>
+                    {projectInfo.nickname} ({projectInfo.email})
+                  </p>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

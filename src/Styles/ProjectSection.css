@@ -1,10 +1,13 @@
 .projectSection {
+    display: flex;
     background-color: #E2E2E2;;
     position: absolute;
     margin: 0;
     padding: 130px 50px 50px 300px;
     width: 100%;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 .projectSection * {
     box-sizing: border-box;
@@ -75,9 +78,35 @@
     min-height: auto;
 }
 
+/*** 개요 Styles **/
+.projectSection .overview_container {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center
+}
 
+.overview_table {
+    display: inline-block;
+    margin: auto;
+    border-collapse: collapse;
+}
 
+.overview_table td, th {
+    text-align: left;
+    padding: 8px;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
 
+.overview_table .overview_title {
+    font-weight: bold;
+    color: #5e308c;
+}
+
+.overview_table p {
+    text-align: left;
+}
 
 
 
