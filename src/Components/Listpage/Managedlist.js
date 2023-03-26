@@ -94,7 +94,11 @@ function Managedlist({ project, state }) {
                     {project.deadline}
                   </h6>
                   <b className={ddayColor}>
-                    {result !== 0 ? 'D - ' + result : 'D-day'}
+                    {result > 0
+                      ? 'D - ' + result
+                      : result === 0
+                      ? 'D - day'
+                      : '종료'}
                   </b>
                 </div>
                 {/* --- 카드 하단 프로젝트 마감일 --- */}

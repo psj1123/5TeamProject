@@ -90,7 +90,6 @@ function Listpage({ state }) {
       <div className="Project_Container">
         <div className="Project_Name">
           <h4>
-            {' '}
             {state.nickname}님!
             <br />
             프로젝트를 생성하거나 참여해보세요
