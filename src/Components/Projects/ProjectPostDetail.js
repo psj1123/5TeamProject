@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import ProjectPostComment from './ProjectPostComment';
 
 const ProjectPostDetail = ({
@@ -53,6 +53,7 @@ const ProjectPostDetail = ({
         if (res.data === 0) {
           alert('댓글 작성에 실패했습니다');
         } else {
+          commentWriteRef.current.value = '';
           loadComments();
         }
       })
@@ -204,6 +205,7 @@ const ProjectPostDetail = ({
                     key={comment.commentnum}
                     state={state}
                     projectInfo={projectInfo}
+                    nowPost={nowPost}
                     comment={comment}
                     updateComment={updateComment}
                     deleteComment={deleteComment}
@@ -213,7 +215,16 @@ const ProjectPostDetail = ({
             )}
             <div className="commentWriteBox">
               <div className="commentWrite">
-                <input type="text" maxLength="200" ref={commentWriteRef} />
+                <input
+                  type="text"
+                  maxLength="200"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      addComment();
+                    }
+                  }}
+                  ref={commentWriteRef}
+                />
               </div>
               <div className="commentWriteBtn" onClick={addComment}>
                 댓글 작성

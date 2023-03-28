@@ -517,6 +517,61 @@ app.post('/project/:code/:category/:postnum/deleteComment', (req, res) => {
   });
 });
 
+// 대댓글 불러오기
+app.post('/project/:code/:category/:postnum/loadReples', (req, res) => {
+  const { code, commentnum } = req.body;
+
+  const sqlQuery1 = `SELECT COUNT(*) FROM reples${code} WHERE commentnum = ?;`;
+  const sqlQuery2 = `SELECT re.replenum, re.replecontent, re.rewriteremail, u.nickname  FROM reples${code} re INNER JOIN users u ON re.rewriteremail = u.email WHERE re.commentnum = ? ORDER BY re.replenum ASC;`;
+
+  db.query(sqlQuery1, [commentnum], (err, result) => {
+    if (result[0]['COUNT(*)'] === 0) {
+      res.send('0'); // 불러올 대댓글이 없음
+    } else {
+      db.query(sqlQuery2, [commentnum], (err, result) => {
+        res.send(result);
+      });
+    }
+  });
+});
+
+// 대댓글 작성하기
+app.post('/project/:code/:category/:postnum/addReple', (req, res) => {
+  const { code, postnum, commentnum, replecontent, rewriteremail } = req.body;
+
+  const sqlQuery1 = `INSERT INTO reples${code} (postnum, commentnum, replecontent, rewriteremail) VALUES(?, ?, ?, ?);`;
+
+  db.query(
+    sqlQuery1,
+    [postnum, commentnum, replecontent, rewriteremail],
+    (err, result) => {
+      res.send('1');
+    }
+  );
+});
+
+// 대댓글 수정하기
+app.post('/project/:code/:category/:postnum/updateReple', (req, res) => {
+  const { code, replenum, replecontent } = req.body;
+
+  const sqlQuery1 = `UPDATE reples${code} SET replecontent = ? WHERE replenum = ?;`;
+
+  db.query(sqlQuery1, [replecontent, replenum], (err, result) => {
+    res.send('1');
+  });
+});
+
+// 대댓글 삭제하기
+app.post('/project/:code/:category/:postnum/deleteReple', (req, res) => {
+  const { code, replenum } = req.body;
+
+  const sqlQuery1 = `DELETE FROM reples${code} WHERE replenum = ?;`;
+
+  db.query(sqlQuery1, [replenum], (err, result) => {
+    res.send('1');
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });
