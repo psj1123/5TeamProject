@@ -84,7 +84,7 @@ const ProjectPostComment = ({
                 삭제
               </div>
             </>
-          ) : comment.cowriteremail === projectInfo.creatoremail ? (
+          ) : projectInfo.email === state.email ? (
             <>
               <div className="deleteComment" onClick={deleteCommentBtn}>
                 삭제

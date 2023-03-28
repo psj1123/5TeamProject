@@ -170,7 +170,7 @@ const ProjectPostDetail = ({
                     수정
                   </div>
                 </>
-              ) : projectInfo.creatoremail === state.email ? (
+              ) : projectInfo.email === state.email ? (
                 <>
                   <div
                     className="deletePost"
