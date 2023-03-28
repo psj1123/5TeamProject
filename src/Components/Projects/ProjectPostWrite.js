@@ -42,7 +42,7 @@ const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
         <label htmlFor="createCategory">카테고리</label>
         <select id="createCategory" ref={createCategoryRef}>
           <option value="">----- 선택 -----</option>
-          {categories.categorieslist.map((category) => {
+          {categories.map((category) => {
             return (
               <option key={category.category} value={category.category}>
                 {category.category}

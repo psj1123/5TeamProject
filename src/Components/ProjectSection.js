@@ -9,6 +9,7 @@ import ProjectPostWrite from './Projects/ProjectPostWrite';
 const ProjectSection = ({
   state,
   posts,
+  isLoading,
   getposts,
   categories,
   projectInfo,
@@ -44,7 +45,7 @@ const ProjectSection = ({
   const postOpen = (e) => {
     axios
       .get(
-        `/project/${projectInfo.code}/${selectedCategory}/${e.target.id}/detail`,
+        `/project/${projectInfo.code}/${selectedCategory}/${e.target.id}`,
         {}
       )
       .then((res) => {
@@ -57,9 +58,9 @@ const ProjectSection = ({
             postNum: data[0].postnum,
             postTitle: data[0].posttitle,
             postContent: data[0].postcontent,
-            postWriter: data[0].postwriter,
+            postWriter: data[0].nickname,
             postedDate: data[0].postdate,
-            writerEmail: data[0].email,
+            writerEmail: data[0].powriteremail,
           });
 
           setIsPostOpened(true);
@@ -69,18 +70,15 @@ const ProjectSection = ({
 
   const postWrite = (postData) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${selectedCategory}/writepost/write`,
-        {
-          category: postData.category,
-          posttitle: postData.title,
-          postcontent: postData.content,
-          email: state.email,
-        }
-      )
+      .post(`/project/${projectInfo.code}/${selectedCategory}/writePost`, {
+        code: projectInfo.code,
+        category: postData.category,
+        posttitle: postData.title,
+        postcontent: postData.content,
+        email: state.email,
+      })
       .then((res) => {
         if (res.data === 1) {
-          alert('등록 완료');
           setIsPostWriting(false);
           getposts();
         }
@@ -95,7 +93,6 @@ const ProjectSection = ({
       )
       .then((res) => {
         if (res.data === 1) {
-          alert('삭제 성공');
           setIsPostOpened(false);
           getposts();
         }
@@ -107,6 +104,8 @@ const ProjectSection = ({
       .post(
         `/project/${projectInfo.code}/${selectedCategory}/${nowPost.postNum}/update`,
         {
+          code: projectInfo.code,
+          postnum: nowPost.postNum,
           category: postData.category,
           posttitle: postData.title,
           postcontent: postData.content,
@@ -114,7 +113,6 @@ const ProjectSection = ({
       )
       .then((res) => {
         if (res.data === 1) {
-          alert('수정 완료!');
           getposts();
           setIsPostUpdating(false);
           setIsPostOpened(false);
@@ -167,9 +165,11 @@ const ProjectSection = ({
       </div>
     );
   } else {
-    if (posts.postslist[0] === undefined) {
-      return (
-        <div>
+    if (isLoading) {
+      return <div className="projectSection"></div>;
+    } else {
+      if (posts[0] === undefined) {
+        return (
           <div className="projectSection">
             <div className="postBoard">
               <div className="noPosts">
@@ -177,46 +177,46 @@ const ProjectSection = ({
               </div>
             </div>
           </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="projectSection">
-          <div className="postsBoard">
-            <ul>
-              <li className="postList postList-firstLine">
-                <div className="postListLeftbox">
-                  <div>번호</div>
-                  <div className="postListTitle">제목</div>
-                </div>
-                <div className="postListRightbox">
-                  <div>작성일</div>
-                </div>
-              </li>
-              {posts.postslist.map((post) => {
-                return (
-                  <ProjectPostList
-                    key={post.postnum}
-                    post={post}
-                    postOpen={postOpen}
-                  />
-                );
-              })}
-            </ul>
-          </div>
+        );
+      } else {
+        return (
+          <div className="projectSection">
+            <div className="postsBoard">
+              <ul>
+                <li className="postList postList-firstLine">
+                  <div className="postListLeftbox">
+                    <div>번호</div>
+                    <div className="postListTitle">제목</div>
+                  </div>
+                  <div className="postListRightbox">
+                    <div>작성일</div>
+                  </div>
+                </li>
+                {posts.map((post) => {
+                  return (
+                    <ProjectPostList
+                      key={post.postnum}
+                      post={post}
+                      postOpen={postOpen}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
 
-          {/* <div>
-            <ul>
-              {postPageingList.map((Pages, i) => {
-                return (
-                  <li key={i}></li>
-                )
-              })}
-              <li></li>
-            </ul>
-          </div> */}
-        </div>
-      );
+            {/* <div>
+              <ul>
+                {postPageingList.map((Pages, i) => {
+                  return (
+                    <li key={i}></li>
+                  )
+                })}
+                <li></li>
+              </ul>
+            </div> */}
+          </div>
+        );
+      }
     }
   }
 };

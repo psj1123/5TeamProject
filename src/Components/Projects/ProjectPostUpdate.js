@@ -53,7 +53,7 @@ const ProjectPostUpdate = ({
           ref={updateCategoryRef}
         >
           <option value="">----- 선택 -----</option>
-          {categories.categorieslist.map((category) => {
+          {categories.map((category) => {
             return (
               <option key={category.category} value={category.category}>
                 {category.category}

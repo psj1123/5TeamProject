@@ -14,7 +14,7 @@ const ProjectPostList = ({ post, postOpen }) => {
         </div>
       </div>
       <div className="postListRightbox">
-        <div>{post.postdate}</div>
+        <div>{post.posteddate}</div>
       </div>
     </li>
   );
