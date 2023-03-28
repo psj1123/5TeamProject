@@ -48,7 +48,7 @@ function Listpage({ state }) {
   // 프로젝트 생성하기
   const createProject = (data) => {
     axios
-      .post(`/myprojectslist/${state.email}/createproject`, {
+      .post(`/myprojectslist/${state.email}/createPjProcess`, {
         title: data.title,
         description: data.description,
         creatoremail: state.email, // 로그인 중인 유저 이메일
@@ -69,7 +69,7 @@ function Listpage({ state }) {
   // 프로젝트 참여하기
   const joinProject = (data) => {
     axios
-      .post(`/myprojectslist/${state.email}/joinproject`, {
+      .post(`/myprojectslist/${state.email}/joinPjProcess`, {
         email: state.email,
         code: data,
       })
@@ -90,7 +90,7 @@ function Listpage({ state }) {
 
   const exitProject = (code) => {
     axios
-      .post(`/myprojectslist/${state.email}/exitproject`, {
+      .post(`/myprojectslist/${state.email}/exitPjProcess`, {
         email: state.email,
         code: code,
       })

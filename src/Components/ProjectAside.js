@@ -11,12 +11,11 @@ const ProjectAside = ({
   changeSelectedCategory,
   createCategory,
   deleteCategory,
-  isPostWriting,
   postWriteBtnClick,
 }) => {
   useEffect(() => {
     getCategories();
-  }, [categories]);
+  }, []);
 
   const createCategoryBtn = () => {
     const maxLength = 15;
@@ -74,7 +73,7 @@ const ProjectAside = ({
               >
                 <div>공지사항</div>
               </li>
-              {categories.categorieslist.map((category) => {
+              {categories.map((category) => {
                 if (
                   category.category === '★ 개요' ||
                   category.category === '공지사항'

@@ -6,6 +6,8 @@ import axios from 'axios';
 const ProjectModal = ({
   isOpen,
   modalClose,
+  userlist,
+  loadUserlist,
   reSettingProject,
   projectInfo,
   selectedCategory,
@@ -13,56 +15,45 @@ const ProjectModal = ({
   state,
   pageload,
 }) => {
-  const [userlist, setUserlist] = useState([]);
   const [isGeneralTabSelected, setIsGeneralTabSelected] = useState(true);
-  const forceUpdate = useRef(null);
 
   const settingTitleRef = useRef();
   const settingDescriptionRef = useRef();
   const settingDeadlineRef = useRef();
 
-  useEffect(() => {
-    loadUserlist();
-  }, [projectInfo]);
-
-  const loadUserlist = () => {
-    axios
-      .post(`/project/${projectInfo.code}/${selectedCategory}/userlist`, {})
-      .then((res) => {
-        const { data } = res;
-        setUserlist(data);
-      })
-      .finally(() => {
-        forceUpdate.current();
-      });
-  };
-
   const addUser = (targetEmail) => {
-    console.log(targetEmail);
     axios
-      .post(`/project/${projectInfo.code}/${selectedCategory}/adduser`, {
+      .post(`/project/${projectInfo.code}/${selectedCategory}/addUserProcess`, {
+        code: projectInfo.code,
         email: targetEmail,
       })
       .then((res) => {
-        if (res.data === 0) {
+        if (res.data === -1) {
           alert('존재하지 않는 유저입니다.');
-        } else if (res.data === 1) {
+        } else if (res.data === 0) {
           alert('이미 참여중인 유저입니다.');
-        } else if (res.data === 2) {
-          alert('멤버 추가 성공');
+        } else if (res.data === 1) {
         }
       })
-      .finally(loadUserlist());
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        loadUserlist();
+      });
   };
 
   const kickUser = (targetEmail) => {
     axios
-      .post(`/project/${projectInfo.code}/${selectedCategory}/kickuser`, {
-        email: targetEmail,
-      })
+      .post(
+        `/project/${projectInfo.code}/${selectedCategory}/kickUserProcess`,
+        {
+          code: projectInfo.code,
+          email: targetEmail,
+        }
+      )
       .then((res) => {
         if (res.data === 1) {
-          alert('멤버 추방 성공');
         }
       })
       .finally(loadUserlist());

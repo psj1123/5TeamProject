@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { UserDataConsumer } from '../Contexts/UserData';
 import Header from '../Components/Header.js';
@@ -8,14 +8,12 @@ import ProjectAside from '../Components/ProjectAside';
 import Modal from '../Components/Modals/ProjectModal';
 import axios from 'axios';
 
-/*!프로젝트 페이지 접근 시 D day 체크하고 오버된 페이지면 강제로 리스트페이지로 돌아가는 기능 추가하기 */
-
 const Project = () => {
-  const forceUpdate = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
   const code = location.state.code;
   const state = location.state.state;
+  const [isLoading, setIsLoading] = useState(false);
   const [projectInfo, setProjectInfo] = useState({
     code: '',
     title: '',
@@ -24,13 +22,14 @@ const Project = () => {
     email: '',
     deadline: '',
   });
-  const [categories, setCategories] = useState({ categorieslist: [] });
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('★ 개요');
-  const [posts, setPosts] = useState({ postslist: [] });
+  const [posts, setPosts] = useState([]);
   const [isPostOpened, setIsPostOpened] = useState(false);
   const [isPostUpdating, setIsPostUpdating] = useState(false);
   const [isPostWriting, setIsPostWriting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [userlist, setUserlist] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,14 +43,20 @@ const Project = () => {
     fetchData();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    loadUserlist();
+  }, []);
+
   const pageload = () => {
     axios
       .post(`/project/${code}/${selectedCategory}`, {
+        code: code,
         email: state.email,
       })
       .then((res) => {
-        if (res.data === 0 || res.data === 1) {
-          return;
+        if (res.data === -1 || res.data === 0) {
+          alert('접근할 수 없는 프로젝트입니다.');
+          navigate(`/myprojectslist/${state.email}`);
         } else {
           const { data } = res;
           setProjectInfo({
@@ -63,71 +68,92 @@ const Project = () => {
             deadline: data[0].deadline,
           });
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
-  const getposts = () => {
+  const loadUserlist = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}/loadpost`, {})
+      .get(`/project/${code}/${selectedCategory}/userList`, {})
+      .then((res) => {
+        const { data } = res;
+        setUserlist(data);
+      });
+  };
+
+  const getposts = async () => {
+    await setIsLoading(true);
+    await axios
+      .get(`/project/${code}/${selectedCategory}/loadPost`, {})
       .then((res) => {
         const { data } = res;
         if (data === 0) {
-          setPosts({
-            postslist: [],
-          });
+          setPosts([]);
         } else {
-          setPosts({
-            postslist: data,
-          });
+          setPosts(data);
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
+    await setIsLoading(false);
   };
 
   const getCategories = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}/loadcategories`, {})
+      .post(`/project/${code}/${selectedCategory}/loadCategories`, {
+        code: code,
+      })
       .then((res) => {
         const { data } = res;
-        setCategories({
-          categorieslist: data,
-        });
+        setCategories(data);
       })
-      .catch((e) => {
-        console.error(e);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
   const createCategories = (categoryName) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/createcategory`, {
+      .post(`/project/${code}/${selectedCategory}/createCategoryProcess`, {
+        code: code,
         category: categoryName,
       })
       .then((res) => {
         if (res.data === 0) {
           alert('이미 존재하는 카테고리입니다.');
         } else if (res.data === 1) {
-          alert('카테고리 추가 완료!');
+          getCategories();
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
   const deleteCategories = (categoryName) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/deletecategory`, {
+      .post(`/project/${code}/${selectedCategory}/deleteCategoryProcess`, {
+        code: code,
         category: categoryName,
       })
       .then((res) => {
         if (res.data === 0) {
           alert('카테고리 삭제 실패');
         } else if (res.data === 1) {
-          alert('카테고리 삭제 완료');
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
   const reSettingProject = (data) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/resetting`, {
+      .post(`/project/${code}/${selectedCategory}/resettingPjProcess`, {
+        code: code,
         title: data.title,
         description: data.description,
         deadline: data.deadline,
@@ -136,15 +162,15 @@ const Project = () => {
         alert('프로젝트 설정 저장 완료');
         pageload();
       })
-      .catch((e) => {
-        console.error(e);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
   async function changeSelectedCategory(e) {
     let selectedCategory;
-    const abc = e.target.innerHTML.substr(0, 2);
-    if (abc === '<d') {
+    const txt = e.target.innerHTML.substr(0, 2);
+    if (txt === '<d') {
       selectedCategory = e.target.lastChild.id;
     } else if (e.target.innerText === 'X') {
       return;
@@ -229,17 +255,19 @@ const Project = () => {
 
   const deleteProject = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}/deleteproject`, {
+      .post(`/project/${code}/${selectedCategory}/deletePjProcess`, {
+        code: code,
         email: state.email,
       })
       .then((res) => {
         if (res.data === 0) {
           alert('프로젝트 관리자만 삭제할 수 있습니다.');
         } else {
-          alert('프로젝트 삭제 완료');
           navigate(`/myprojectslist/${state.email}`);
-          forceUpdate.current();
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -287,6 +315,8 @@ const Project = () => {
               <Modal
                 isOpen={isOpen}
                 modalClose={modalClose}
+                userlist={userlist}
+                loadUserlist={loadUserlist}
                 reSettingProject={reSettingProject}
                 projectInfo={projectInfo}
                 selectedCategory={selectedCategory}
@@ -304,12 +334,12 @@ const Project = () => {
                 changeSelectedCategory={changeSelectedCategory}
                 createCategory={createCategories}
                 deleteCategory={deleteCategory}
-                isPostWriting={isPostWriting}
                 postWriteBtnClick={postWriteBtnClick}
               />
               <ProjectSection
                 state={state}
                 posts={posts}
+                isLoading={isLoading}
                 getposts={getposts}
                 categories={categories}
                 projectInfo={projectInfo}

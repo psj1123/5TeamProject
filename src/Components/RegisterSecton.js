@@ -17,7 +17,7 @@ const RegisterSection = () => {
   //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음.
   const handleFormSubmit = () => {
     axios
-      .post('/register/commit', {
+      .post('/register/regProcess', {
         email: emailRef.current.value,
         password: passwordRef.current.value,
         name: nameRef.current.value,

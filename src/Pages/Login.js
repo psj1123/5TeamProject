@@ -27,7 +27,7 @@ const Login = () => {
         // 로그인
         const loginProcess = () => {
           axios
-            .post('/login/commit', {
+            .post('/login/logProcess', {
               email: emailRef.current.value,
               password: passwordRef.current.value,
             })
