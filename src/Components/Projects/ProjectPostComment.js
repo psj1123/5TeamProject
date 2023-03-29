@@ -17,6 +17,8 @@ const ProjectPostComment = ({
   const commentUpdateRef = useRef();
   const repleWriteRef = useRef();
 
+  const updateCommentBtn_Bottom = comment.commentnum + 'Btn';
+
   useEffect(() => {
     loadReples();
   }, []);
@@ -134,6 +136,9 @@ const ProjectPostComment = ({
                 if (e.key === 'Enter') {
                   updateCommentBtn();
                   await setCommentUpdate(false);
+                  await (document.getElementById(
+                    updateCommentBtn_Bottom
+                  ).innerText = '수정');
                 }
               }}
               ref={commentUpdateRef}
@@ -144,6 +149,9 @@ const ProjectPostComment = ({
             onClick={async () => {
               updateCommentBtn();
               await setCommentUpdate(false);
+              await (document.getElementById(
+                updateCommentBtn_Bottom
+              ).innerText = '수정');
             }}
           >
             수정
@@ -169,6 +177,7 @@ const ProjectPostComment = ({
           {state.email === comment.cowriteremail ? (
             <>
               <div
+                id={updateCommentBtn_Bottom}
                 className="updateComment"
                 onClick={async (e) => {
                   commentUpdate

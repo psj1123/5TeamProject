@@ -24,7 +24,10 @@ const ProjectAside = ({
 
     while (true) {
       categoryName = prompt('추가할 카테고리 이름을 입력하세요. (최대 15글자)');
-      if (categoryName === '') {
+
+      if (categoryName === '★ 개요') {
+        alert('"★ 개요" 는 카테고리로 사용할 수 없습니다.\n다시 입력해주세요.');
+      } else if (categoryName === '') {
         alert('공백은 카테고리로 사용할 수 없습니다.\n다시 입력해주세요.');
         continue;
       } else if (categoryName.length > maxLength) {
@@ -77,10 +80,7 @@ const ProjectAside = ({
                 <div>공지사항</div>
               </li>
               {categories.map((category) => {
-                if (
-                  category.category === '★ 개요' ||
-                  category.category === '공지사항'
-                ) {
+                if (category.category === '공지사항') {
                   return;
                 } else {
                   return (

@@ -117,7 +117,6 @@ INSERT INTO joinedprojects VALUES('example01@example.com', 102354);
 INSERT INTO joinedprojects VALUES('example02@example.com', 102354);
 INSERT INTO joinedprojects VALUES('example04@example.com', 102354);
 
-INSERT INTO category VALUES(102354, '★ 개요');
 INSERT INTO category VALUES(102354, '공지사항');
 INSERT INTO category VALUES(102354, '작업 내역');
 INSERT INTO category VALUES(102354, '준비사항');

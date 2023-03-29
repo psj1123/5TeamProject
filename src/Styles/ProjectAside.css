@@ -66,17 +66,17 @@ aside > * {
     text-overflow: ellipsis;
   }
   .projectCategory ul li:hover {
-    background-color: #f3f3f3;
     box-shadow: 0px 0px 2px #444444;
     cursor: pointer;
   }
   .projectCategory ul li:active {
-    background-color: #a9a9a9;
-    color: #ffffff;
+    background-color: #f3f3f3;
+    font-weight: bold;
   }
   .categoryActive {
     background-color: #f9f9f9;
     box-shadow: 0px 0px 2px #444444;
+    font-weight: bold;
   }
   .projectCategory ul li div {
     float: left;

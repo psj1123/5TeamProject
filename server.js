@@ -153,8 +153,7 @@ app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
       ON UPDATE CASCADE
     );`;
 
-    const sqlQuery7 = 'INSERT INTO category VALUES(?, "★ 개요");';
-    const sqlQuery8 = 'INSERT INTO category VALUES(?, "공지사항");';
+    const sqlQuery7 = 'INSERT INTO category VALUES(?, "공지사항");';
 
     // code 생성 완료 후 프로젝트 생성 과정 진행
     db.query(
@@ -166,9 +165,7 @@ app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
             db.query(sqlQuery5, [], (err, result) => {
               db.query(sqlQuery6, [], (err, result) => {
                 db.query(sqlQuery7, [code], (err, result) => {
-                  db.query(sqlQuery8, [code], (err, result) => {
-                    res.send('1'); // 프로젝트 생성 완료
-                  });
+                  res.send('1'); // 프로젝트 생성 완료
                 });
               });
             });

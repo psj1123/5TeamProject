@@ -12,6 +12,8 @@ const ProjectPostReple = ({
 
   const repleUpdateRef = useRef();
 
+  const updateRepleBtn_Bottom = reple.replenum + 'Btn';
+
   const updateRepleBtn = () => {
     const value = repleUpdateRef.current.value;
     updateReple(reple.replenum, value);
@@ -40,6 +42,9 @@ const ProjectPostReple = ({
                 if (e.key === 'Enter') {
                   updateRepleBtn();
                   await setRepleUpdate(false);
+                  await (document.getElementById(
+                    updateRepleBtn_Bottom
+                  ).innerText = '수정');
                 }
               }}
               ref={repleUpdateRef}
@@ -50,6 +55,8 @@ const ProjectPostReple = ({
             onClick={async () => {
               updateRepleBtn();
               await setRepleUpdate(false);
+              await (document.getElementById(updateRepleBtn_Bottom).innerText =
+                '수정');
             }}
           >
             수정
@@ -63,6 +70,7 @@ const ProjectPostReple = ({
         <>
           <div className="repleDeleteAndUpdateBox">
             <div
+              id={updateRepleBtn_Bottom}
               className="updateReple"
               onClick={async (e) => {
                 repleUpdate ? setRepleUpdate(false) : setRepleUpdate(true);
