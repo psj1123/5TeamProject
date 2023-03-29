@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/ProjectSection.css';
+import '../Styles/ProjectSection_PostDetail.css';
 import axios from 'axios';
 import ProjectPostList from './Projects/ProjectPostList';
 import ProjectPostDetail from './Projects/ProjectPostDetail';
@@ -140,7 +141,7 @@ const ProjectSection = ({
               </tr>
               <tr>
                 <td className="overview_title">
-                  <p> 프로젝트 생성일 &nbsp;</p>
+                  <p> 프로젝트 마감일 &nbsp;</p>
                 </td>
                 <td>
                   <p>{projectInfo.deadline}</p>
@@ -155,7 +156,7 @@ const ProjectSection = ({
                     {result > 0
                       ? 'D - ' + result
                       : result === 0
-                      ? 'D-day'
+                      ? 'D - day'
                       : '종료'}
                   </p>
                 </td>
