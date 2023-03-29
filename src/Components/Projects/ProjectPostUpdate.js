@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import '../../Styles/ProjectPostUpdate.css';
 
 const ProjectPostUpdate = ({
   categories,
@@ -42,56 +43,69 @@ const ProjectPostUpdate = ({
   };
 
   return (
-    <div className="postBox">
-      <div className="updateCategoryBox">
-        <label htmlFor="updateCategory">카테고리</label>
-        <select
-          id="updateCategory"
-          defaultValue={nowPost.postCategory}
-          ref={updateCategoryRef}
-        >
-          <option value="">----- 선택 -----</option>
-          {categories.map((category) => {
-            return (
-              <option key={category.category} value={category.category}>
-                {category.category}
-              </option>
-            );
-          })}
-        </select>
+    <div className="pjSectionMainBox">
+      <div className="pjSectionMain">
+        <div className="updateCategoryBox">
+          <label htmlFor="updateCategory">카테고리</label>
+          <select
+            className="updateCategory"
+            id="updateCategory"
+            defaultValue={nowPost.postCategory}
+            ref={updateCategoryRef}
+          >
+            <option value="">----- 선택 -----</option>
+            {categories.map((category) => {
+              return (
+                <option key={category.category} value={category.category}>
+                  {category.category}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="updatePostTitleBox">
+          <label htmlFor="updateTitle">제목</label>
+          <input
+            className="updatePostTitle"
+            id="updateTitle"
+            maxLength="40"
+            type="text"
+            ref={updateTitleRef}
+            defaultValue={nowPost.postTitle}
+            placeholder="제목 입력..."
+          />
+        </div>
+        <div className="updatePostContentBox">
+          <label htmlFor="updateContent">내용</label>
+          <textarea
+            className="updatePostContent"
+            id="updateContent"
+            cols="30"
+            rows="10"
+            maxLength="5000"
+            ref={updateContentRef}
+            defaultValue={nowPost.postContent}
+            placeholder="내용 입력..."
+          ></textarea>
+        </div>
+        <div className="updatePostBtnBox">
+          <button
+            className="updatePostCancelBtn"
+            onClick={() => {
+              if (window.confirm('글 수정을 취소하겠습니까?')) {
+                setIsPostUpdating(false);
+              } else {
+                return;
+              }
+            }}
+          >
+            취소
+          </button>
+          <button className="updatePostBtn" onClick={updatePostBtn}>
+            수정 완료
+          </button>
+        </div>
       </div>
-      <div className="updateTitleBox">
-        <label htmlFor="updateTitle">제목</label>
-        <input
-          id="updateTitle"
-          maxLength="40"
-          type="text"
-          ref={updateTitleRef}
-          defaultValue={nowPost.postTitle}
-        />
-      </div>
-      <div maxLength="5000" className="updateContentBox">
-        <label htmlFor="updateContent">내용</label>
-        <textarea
-          id="updateContent"
-          cols="30"
-          rows="10"
-          ref={updateContentRef}
-          defaultValue={nowPost.postContent}
-        ></textarea>
-      </div>
-      <button
-        onClick={() => {
-          if (window.confirm('글 수정을 취소하겠습니까?')) {
-            setIsPostUpdating(false);
-          } else {
-            return;
-          }
-        }}
-      >
-        취소
-      </button>
-      <button onClick={updatePostBtn}>수정 완료</button>
     </div>
   );
 };

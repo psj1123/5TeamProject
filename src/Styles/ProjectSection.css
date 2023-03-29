@@ -1,5 +1,5 @@
 .projectSection {
-    background-color: #E2E2E2;
+    background-color: #e2e2e2;
     margin: 80px 0 0 250px;
     width: calc(100% - 250px);
     min-height: calc(100vh - 80px);
@@ -8,8 +8,32 @@
 .projectSection * {
     box-sizing: border-box;
 }
+.pjSectionMainBox {
+    background-color: #e2e2e2;
+    padding: 50px 0 0 0;
+    width: 100%;
+    height: auto;
+}
+.pjSectionMain {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    min-width: 500px;
+    height: 75vh;
+    min-height: 570px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.noPosts {
+    display: block;
+    margin: auto;
+}
+
 .postsBoard {
-    background-color: #fff;
+    background-color: #ffffff;
     margin: 20px auto;
     padding: 30px;
     width: 1200px;
@@ -93,7 +117,7 @@
 .overview_table td, th {
     text-align: left;
     padding: 8px;
-    color: rgb(99, 99, 99);
+    color: #636363;
     font-weight: bold;
 }
 

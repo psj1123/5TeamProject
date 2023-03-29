@@ -103,8 +103,8 @@ const ProjectPostDetail = ({
 
   return (
     <>
-      <div className="postVeiwBox">
-        <div className="postView">
+      <div className="pjSectionMainBox">
+        <div className="pjSectionMain">
           <div className="postTitleBox">
             <div>{nowPost.postTitle}</div>
           </div>

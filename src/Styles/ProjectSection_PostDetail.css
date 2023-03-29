@@ -1,24 +1,4 @@
 /* 글 상세보기 */
-.postVeiwBox {
-    background-color: #E2E2E2;
-    padding: 50px 0 0 0;
-    width: 100%;
-    height: auto;
-}
-
-.postView {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-    min-width: 500px;
-    height: 75vh;
-    min-height: 570px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-}
-
 .postTitleBox {
     padding: 5px 0;
     font-size: 1.8rem;

@@ -119,59 +119,61 @@ const ProjectSection = ({
 
   if (selectedCategory === '★ 개요') {
     return (
-      <div>
-        <div className="projectSection">
-          <div className="overview_container">
-            <table className="overview_table">
-              <tr>
-                <td className="overview_title">
-                  <p> 프로젝트 제목 &nbsp;</p>
-                </td>
-                <td>
-                  <p>{projectInfo.title}</p>
-                </td>
-              </tr>
-              <tr>
-                <td className="overview_title">
-                  <p> 프로젝트 설명 &nbsp;</p>
-                </td>
-                <td>
-                  <p>{projectInfo.description}</p>
-                </td>
-              </tr>
-              <tr>
-                <td className="overview_title">
-                  <p> 프로젝트 마감일 &nbsp;</p>
-                </td>
-                <td>
-                  <p>{projectInfo.deadline}</p>
-                </td>
-              </tr>
-              <tr>
-                <td className="overview_title">
-                  <p> 프로젝트 D-Day &nbsp;</p>
-                </td>
-                <td>
-                  <p>
-                    {result > 0
-                      ? 'D - ' + result
-                      : result === 0
-                      ? 'D - day'
-                      : '종료'}
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td className="overview_title">
-                  <p> 관리자 &nbsp;</p>
-                </td>
-                <td>
-                  <p>
-                    {projectInfo.nickname} ({projectInfo.email})
-                  </p>
-                </td>
-              </tr>
-            </table>
+      <div className="projectSection">
+        <div className="pjSectionMainBox">
+          <div className="pjSectionMain">
+            <div className="overview_container">
+              <table className="overview_table">
+                <tr>
+                  <td className="overview_title">
+                    <p> 프로젝트 제목 &nbsp;</p>
+                  </td>
+                  <td>
+                    <p>{projectInfo.title}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="overview_title">
+                    <p> 프로젝트 설명 &nbsp;</p>
+                  </td>
+                  <td>
+                    <p>{projectInfo.description}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="overview_title">
+                    <p> 프로젝트 마감일 &nbsp;</p>
+                  </td>
+                  <td>
+                    <p>{projectInfo.deadline}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="overview_title">
+                    <p> 프로젝트 D-Day &nbsp;</p>
+                  </td>
+                  <td>
+                    <p>
+                      {result > 0
+                        ? 'D - ' + result
+                        : result === 0
+                        ? 'D - day'
+                        : '종료'}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="overview_title">
+                    <p> 관리자 &nbsp;</p>
+                  </td>
+                  <td>
+                    <p>
+                      {projectInfo.nickname} ({projectInfo.email})
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -224,14 +226,20 @@ const ProjectSection = ({
     );
   } else {
     if (isLoading) {
-      return <div className="projectSection"></div>;
+      return (
+        <div className="projectSection">
+          <div className="pjSectionMainBox">
+            <div className="pjSectionMain"></div>
+          </div>
+        </div>
+      );
     } else {
       if (posts[0] === undefined) {
         return (
           <div className="projectSection">
-            <div className="postBoard">
-              <div className="noPosts">
-                <h3>작성된 글이 없습니다!</h3>
+            <div className="pjSectionMainBox">
+              <div className="pjSectionMain">
+                <h3 className="noPosts">작성된 글이 없습니다!</h3>
               </div>
             </div>
           </div>
@@ -239,27 +247,29 @@ const ProjectSection = ({
       } else {
         return (
           <div className="projectSection">
-            <div className="postsBoard">
-              <ul>
-                <li className="postList postList-firstLine">
-                  <div className="postListLeftbox">
-                    <div>번호</div>
-                    <div className="postListTitle">제목</div>
-                  </div>
-                  <div className="postListRightbox">
-                    <div>작성일</div>
-                  </div>
-                </li>
-                {posts.map((post) => {
-                  return (
-                    <ProjectPostList
-                      key={post.postnum}
-                      post={post}
-                      postOpen={postOpen}
-                    />
-                  );
-                })}
-              </ul>
+            <div className="pjSectionMainBox">
+              <div className="pjSectionMain">
+                <ul>
+                  <li className="postList postList-firstLine">
+                    <div className="postListLeftbox">
+                      <div>번호</div>
+                      <div className="postListTitle">제목</div>
+                    </div>
+                    <div className="postListRightbox">
+                      <div>작성일</div>
+                    </div>
+                  </li>
+                  {posts.map((post) => {
+                    return (
+                      <ProjectPostList
+                        key={post.postnum}
+                        post={post}
+                        postOpen={postOpen}
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
 
             {/* <div>
