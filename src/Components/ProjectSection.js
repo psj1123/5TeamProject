@@ -20,17 +20,6 @@ const ProjectSection = ({
   isPostWriting,
   setIsPostWriting,
 }) => {
-  // postPageingList = 글 페이지 수 저장용 변수. 10post 당 1
-  // postPageingList - 1 * 10 한 값 = offset
-  // SELECT * FROM post난수 ORDER BY postnum DESC LIMIT offset, 10; = 1페이지 당 10개의 글 출력 가능
-  // const [postPageingList, setPageingList] = useState();
-  // const [postPaging]
-
-  // useEffect(async () => {
-  //   setPageingList(Math.ceil(posts.postslist.length / 10));
-  //   await
-  // }, [posts]);
-
   const [nowPost, setNowPost] = useState({
     postCategory: '',
     postNum: '',
@@ -43,13 +32,13 @@ const ProjectSection = ({
 
   const postOpen = (e) => {
     axios
-      .get(
+      .post(
         `/project/${projectInfo.code}/${selectedCategory}/${e.target.id}/detail`,
         {}
       )
       .then((res) => {
         if (res.data === 0) {
-          alert('존재하지 않는 글입니다!');
+          alert('존재하지 않는 포스트입니다!');
         } else {
           const { data } = res;
           setNowPost({
@@ -121,6 +110,74 @@ const ProjectSection = ({
         }
       });
   };
+
+  const deadline = new Date(projectInfo.deadline);
+  const today = new Date();
+  const diffTime = deadline - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const result =
+    diffDays > 0 ? `D - ${diffDays}` : diffDays === 0 ? 'D-day' : '종료';
+
+  if (selectedCategory === '★ 개요') {
+    return (
+      <div>
+        <div className="projectSection">
+          <div className="overview_container">
+            <table className="overview_table">
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 제목 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.title}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 설명 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.description}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 생성일 &nbsp;</p>
+                </td>
+                <td>
+                  <p>{projectInfo.deadline}</p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 프로젝트 D-Day &nbsp;</p>
+                </td>
+                <td>
+                  <p>
+                    {result > 0
+                      ? 'D - ' + result
+                      : result === 0
+                      ? 'D-day'
+                      : '종료'}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td className="overview_title">
+                  <p> 관리자 &nbsp;</p>
+                </td>
+                <td>
+                  <p>
+                    {projectInfo.nickname} ({projectInfo.email})
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isPostOpened) {
     if (!isPostUpdating) {
@@ -204,17 +261,6 @@ const ProjectSection = ({
               })}
             </ul>
           </div>
-
-          {/* <div>
-            <ul>
-              {postPageingList.map((Pages, i) => {
-                return (
-                  <li key={i}></li>
-                )
-              })}
-              <li></li>
-            </ul>
-          </div> */}
         </div>
       );
     }

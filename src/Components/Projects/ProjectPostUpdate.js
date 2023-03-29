@@ -46,7 +46,7 @@ const ProjectPostUpdate = ({
   return (
     <div className="postBox">
       <div className="updateCategoryBox">
-        <label htmlFor="updateCategory">카테고리</label>
+        <label htmlFor="updateCategory">카테고리 : </label>
         <select
           id="updateCategory"
           defaultValue={nowPost.postCategory}
@@ -62,38 +62,46 @@ const ProjectPostUpdate = ({
           })}
         </select>
       </div>
-      <div className="updateTitleBox">
-        <label htmlFor="updateTitle">제목</label>
+      <div>
+        <label>제목 : </label>
         <input
+          className="writeTitle"
           id="updateTitle"
           maxLength="40"
           type="text"
+          size="88"
           ref={updateTitleRef}
           defaultValue={nowPost.postTitle}
         />
       </div>
-      <div maxLength="5000" className="updateContentBox">
-        <label htmlFor="updateContent">내용</label>
+      <div maxLength="5000">
+        <label htmlFor="updateContent"></label>
         <textarea
+          className="updateContentBox"
           id="updateContent"
-          cols="30"
-          rows="10"
+          cols="145"
+          rows="14"
           ref={updateContentRef}
           defaultValue={nowPost.postContent}
         ></textarea>
       </div>
-      <button
-        onClick={() => {
-          if (window.confirm('글 수정을 취소하겠습니까?')) {
-            setIsPostUpdating(false);
-          } else {
-            return;
-          }
-        }}
-      >
-        취소
-      </button>
-      <button onClick={updatePostBtn}>수정 완료</button>
+      <div className="updateButtonFix">
+        <button
+          className="updateButton"
+          onClick={() => {
+            if (window.confirm('글 수정을 취소하겠습니까?')) {
+              setIsPostUpdating(false);
+            } else {
+              return;
+            }
+          }}
+        >
+          취소
+        </button>
+        <button onClick={updatePostBtn} className="updateButton">
+          수정 완료
+        </button>
+      </div>
     </div>
   );
 };

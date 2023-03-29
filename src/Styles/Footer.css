@@ -21,7 +21,6 @@
     text-align: left;
 }
 
-
 .Left_icon_Contatiner {
     display: flex;
     align-items: center;
@@ -30,7 +29,7 @@
 .Left_icon_Contatiner .Left_icon {
     display: inline-block;
     margin: 0.5em;
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .Left_icon img {
@@ -54,7 +53,7 @@
     align-items: center;
 }
 
-.footerCenter_head > p {
+.footerCenter_head>p {
     display: block;
     font-weight: bold;
     font-size: 1.1em;
@@ -66,7 +65,6 @@
     align-content: stretch;
     justify-content: center;
 }
-
 
 .Center_Content1 {
     display: inline-block;
@@ -121,11 +119,13 @@
     height: auto;
     list-style: none;
 }
-.footerContainer ul > span {
+
+.footerContainer ul>span {
     display: block;
     font-weight: bold;
     font-size: 1.1em;
 }
+
 .footerContainer ul li span {
     display: block;
     margin-bottom: 7px;
@@ -135,9 +135,85 @@
 .footerContainer1 {
     flex: 1;
 }
+
 .footerContainer2 {
     flex: 3;
 }
+
 .footerContainer3 {
     flex: 1;
+}
+
+/* 모바일 */
+
+@media only screen and (max-width: 768px) {
+    .footerContainer {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 0;
+    }
+
+    .footerContainer>div {
+        flex: 1 1 auto;
+        margin: 0.3em;
+    }
+
+    .footerLeft_head h3 {
+        font-size: 1.2rem;
+    }
+
+    .LeftContainer,
+    .CenterContainer,
+    .RightContainer {
+        margin: 0;
+        padding: 0;
+    }
+
+    .Left_icon_Contatiner,
+    .Center_icon_Container,
+    .Right_icon_Container {
+        display: flex;
+        justify-content: center;
+        margin: 0.5em 0;
+    }
+
+    .Left_icon {
+        margin: 0.5em 1em;
+    }
+
+    .Left_icon img {
+        width: 20px;
+    }
+
+    .Center_Content1 {
+        margin: 0.5em 0;
+    }
+
+    .Center_icon {
+        margin-right: 5px;
+    }
+
+    .Center_icon img {
+        width: 15px;
+    }
+
+    .footerContainer1,
+    .footerContainer2,
+    .footerContainer3 {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footerContainer1 ul>span,
+    .footerContainer2 ul>span,
+    .footerContainer3 ul>span {
+        font-size: 1.2rem;
+    }
+
+    .footerContainer1 ul li span,
+    .footerContainer2 ul li span,
+    .footerContainer3 ul li span {
+        font-size: 0.9rem;
+    }
 }

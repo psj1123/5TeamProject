@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
   const createCategoryRef = useRef();
@@ -36,12 +36,28 @@ const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
     }
   };
 
+  // const textarea = useRef();
+
+  const handleResizeHeight = (e) => {
+    // 기능 미구현
+    createContentRef.current.style.height = 'auto'; //height 초기화
+    createContentRef.current.style.height =
+      createContentRef.current.scrollHeight + 'px';
+  };
+
   return (
     <div className="postBox">
       <div className="createCategoryBox">
-        <label htmlFor="createCategory">카테고리</label>
-        <select id="createCategory" ref={createCategoryRef}>
-          <option value="">----- 선택 -----</option>
+        <label htmlFor="createCategory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+        <select
+          className="selectCategory"
+          id="createCategory"
+          ref={createCategoryRef}
+          // style={{ color: '#909090' }}
+        >
+          <option value="">카테고리</option>
           {categories.categorieslist.map((category) => {
             return (
               <option key={category.category} value={category.category}>
@@ -52,35 +68,76 @@ const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
         </select>
       </div>
       <div className="createTitleBox">
-        <label htmlFor="createTitle">제목</label>
+        <label htmlFor="createTitle">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
         <input
+          className="writeTitle"
           id="createTitle"
           maxLength="40"
           type="text"
           ref={createTitleRef}
+          size="74"
+          placeholder="제목을 입력하세요."
         />
       </div>
       <div maxLength="5000" className="createContentBox">
-        <label htmlFor="createContent">내용</label>
+        <label htmlFor="createContent">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
         <textarea
+          className="writeContent"
           id="createContent"
-          cols="30"
-          rows="10"
+          cols="123"
+          rows="30"
           ref={createContentRef}
+          // onInput={handleResizeHeight}
+          placeholder="내용을 입력하세요."
         ></textarea>
       </div>
-      <button
-        onClick={() => {
-          if (window.confirm('글 작성을 취소하겠습니까?')) {
-            setIsPostWriting(false);
-          } else {
-            return;
-          }
-        }}
-      >
-        취소
-      </button>
-      <button onClick={createPostBtn}>작성 완료</button>
+      <div className="writeButtonFix">
+        <button
+          className="writeButton"
+          onClick={() => {
+            if (window.confirm('글 작성을 취소하겠습니까?')) {
+              setIsPostWriting(false);
+            } else {
+              return;
+            }
+          }}
+        >
+          취소
+        </button>
+        <button className="writeButton" onClick={createPostBtn}>
+          완료
+        </button>
+        {/* <Button variant="dark" onClick={createPostBtn}>
+        완료
+      </Button> */}
+      </div>
+      {/* ck에디터 실험 */}
+      {/* <div className="App">
+        <CKEditor
+          editor={ClassicEditor}
+          config={{
+            placeholder: '내용을 입력하세요.',
+          }}
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+            console.log('Editor is ready to use!', editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onBlur={(event, editor) => {
+            console.log('Blur.', editor);
+          }}
+          onFocus={(event, editor) => {
+            console.log('Focus.', editor);
+          }}
+        />
+      </div> */}
     </div>
   );
 };

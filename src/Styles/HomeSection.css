@@ -6,25 +6,19 @@ section {
     background-color: #E2E2E2;
 }
 
-.homeSectionContainer {
+.homeSectionHead_Container {
+    margin: 0 0 5em 0;
     display: flex;
-    flex-direction: column;
+    position: static;
+    width: 100%;
+    height: auto;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: auto;
-}
-
-.homeSectionHead_Container {
-    margin: 0 0 10em 0;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
+    text-align: center;
 }
 
 .homeSectionHead_image {
-    display: inline;
+    display: block;
     float: left;
     margin-right: 30px;
 }
@@ -34,16 +28,15 @@ section {
     width: 68vmin;
     z-index: 1;
     margin: 10px;
-    position: relative;
 }
 
 .homeSectionHeader {
-    display: inline;
-    margin: 150px 0 0 0;
+    display: block;
+    margin: 0;
     position: relative;
-    float: left;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .homeSectionHeader h2 {
     margin: 20px 0;
@@ -53,6 +46,7 @@ section {
 .homeSectionHeader h1 {
     margin: 20px 0;
     font-size: 5vmin;
+    font-weight: bold;    
 }
 
 .homeArticle {
@@ -79,9 +73,9 @@ section {
 
 .homeTitle {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -172,4 +166,133 @@ section {
 .login:hover {
     background-color: #a676a3;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+}
+
+@media only screen and (max-width: 768px) {
+
+    section {
+        margin-top: 3em;
+    }
+
+    .homeSectionHead_Container {
+        position: static;
+        display: block;
+        margin: 0 0 10px 0;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .homeSectionContainer,
+    .homeSectionHead_Container,
+    .homeSectionHead_image,
+    .homeSectionHeader,
+    .homeArticle,
+    .homeTextContainer,
+    .homeTitle,
+    .homeTitle span,
+    .homeTitle1,
+    .homeTitle1 span,
+    .homeTitle2,
+    .homeTitle2 span,
+    .homeTitle3,
+    .homeTitle3 span,
+    .homeContent1,
+    .homeContent1 span,
+    .homeContent2,
+    .homeContent2 span,
+    .login {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .homeImage {
+        margin: 0;
+    }
+
+    .homeArticle {
+    position: relative;
+    display: block;
+    margin: 0 0 10px 0;
+    justify-content: center;
+    width: 100%;
+    }
+
+    .homeArticle img {
+        width: 80%;
+    }
+    
+    .homeSectionHeader {
+        display: block;
+    }
+
+    .homeSectionHeader h2 {
+        font-size: 3vmin;
+    }
+
+    .homeSectionHeader h1 {
+        font-size: 5vmin;
+        float: center;
+    }
+
+    .homeTitle {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .homeTitle span {
+        font-size: 20px;
+    }
+
+    .homeTitle1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .homeTitle1 span {
+        font-size: 20px;
+    }
+
+    .homeTitle2 {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .homeTitle2 span {
+        font-size: 20px;
+    }
+
+    .homeTitle3 {
+        margin: 50px 0 0 0;
+        font-size: 20px;
+        justify-content: center;
+    }
+
+    .homeTitle3 span {
+        font-size: 20px;
+    }
+
+    .homeContent1,
+    .homeContent2 {
+        font-size: 15px;
+    }
+
+    .homeContent1 span {
+        margin: 20px 0 150px 0;
+    }
+
+    .homeContent2 span {
+        margin: 20px 0 0 0;
+    }
+
+    .login {
+        width: 70%;
+        height: 8vmin;
+        line-height: 6vmin;
+        font-size: 3vmin;
+        margin: 30px auto;
+    }
+
 }

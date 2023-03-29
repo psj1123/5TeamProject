@@ -6,6 +6,7 @@ header {
     width: 100%;
     height: auto;
 }
+
 a {
     text-decoration: none;
     color: #000000;
@@ -19,7 +20,7 @@ a {
     justify-content: space-between;
     width: 100%;
     height: 60px;
-    
+
     box-shadow: 0 4px 4px -4px #383838;
     /*border-bottom: 1px solid #000000;*/
 }
@@ -49,6 +50,7 @@ a {
     height: 40px;
     margin-right: 10px;
 }
+
 .headerCenter {
     width: auto;
     height: 60px;
@@ -57,6 +59,7 @@ a {
     font-size: 1.3rem;
     color: #000000;
 }
+
 .headerCenter span {
     display: block;
     width: auto;
@@ -70,6 +73,10 @@ a {
     float: right;
 }
 
+.headerRight>div:last-child {
+    cursor: pointer;
+}
+
 .rightLogin {
     display: block;
     width: auto;
@@ -80,12 +87,12 @@ a {
     font-size: 1.3rem;
     color: #000000;
     font-weight: bold;
-    transition: all .3s ease
+    transition: all 0.3s ease;
 }
 
 .rightLogin div :hover {
     color: #5e308c;
-    transition: all .3s ease
+    transition: all 0.3s ease;
 }
 
 .rightLogin div {
@@ -94,7 +101,7 @@ a {
     padding: 0 10px;
     border-radius: 10px;
     font-weight: bold;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
 }
 
@@ -103,7 +110,8 @@ a {
     content: '';
     display: flex;
     position: absolute;
-    bottom: 12px; /*밑줄효과 위로 이동*/
+    bottom: 12px;
+    /*밑줄효과 위로 이동*/
     left: 0;
     right: 0;
     transform: scaleX(0);
@@ -114,9 +122,6 @@ a {
     transform: scaleX(1);
 }
 
-
-
-
 .headerRight span {
     display: block;
     width: 20vmin;
@@ -126,4 +131,55 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.9rem;
+}
+
+/* 모바일 */
+
+@media only screen and (max-width: 768px) {
+    .headerContainer {
+        min-height: 3em;
+        height: 50px;
+    }
+
+    .headerLeft {
+        margin-left: 1em;
+        height: 50px;
+    }
+
+    .headerLeft div {
+        font-size: 1.8rem;
+    }
+
+    .headerLeft div img {
+        height: 30px;
+        margin-right: 5px;
+    }
+
+    .headerCenter {
+        font-size: 1.1rem;
+    }
+
+    .headerRight {
+        margin-right: 1em;
+        height: 50px;
+    }
+
+    .rightLogin {
+        height: 50px;
+        margin-right: 0.5em;
+        font-size: 1rem;
+        line-height: 50px;
+    }
+
+    .rightLogin div {
+        padding: 0 5px;
+        border-radius: 5px;
+    }
+
+    .headerRight span {
+        width: 50%;
+        height: auto;
+        line-height: 1.2;
+        font-size: 0.8rem;
+    }
 }
