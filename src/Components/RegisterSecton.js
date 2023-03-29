@@ -86,7 +86,6 @@ const RegisterSection = () => {
               <input
                 type="email"
                 id="email"
-                maxLength="40"
                 placeholder="이메일을 입력하세요"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -106,9 +105,7 @@ const RegisterSection = () => {
               <input
                 type="password"
                 id="password"
-                minLength="8"
-                maxLength="20"
-                placeholder="8~20자, 대/소문자+숫자 포함"
+                placeholder="비밀번호"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     confirmPasswordRef.current.focus();
@@ -127,8 +124,6 @@ const RegisterSection = () => {
               <input
                 type="password"
                 id="confirmPassword"
-                minLength="8"
-                maxLength="20"
                 placeholder="비밀번호 확인"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -148,7 +143,6 @@ const RegisterSection = () => {
               <input
                 type="text"
                 id="name"
-                maxLength="10"
                 placeholder="이름"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -168,8 +162,7 @@ const RegisterSection = () => {
               <input
                 type="text"
                 id="nickname"
-                maxLength="10"
-                placeholder="닉네임"
+                placeholder="활동할 닉네임"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     dateOfBirthRef.current.focus();

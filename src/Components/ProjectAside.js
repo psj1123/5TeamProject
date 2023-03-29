@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProjectAsideCategory from './Projects/ProjectAsideCategory';
 import '../Styles/ProjectAside.css';
 
@@ -17,6 +17,7 @@ const ProjectAside = ({
     getCategories();
   }, []);
 
+  const [showDialogBox, setShowDialogBox] = useState(false);
   const createCategoryBtn = () => {
     const maxLength = 15;
     let checkCancel;
@@ -51,10 +52,16 @@ const ProjectAside = ({
       <aside>
         <div className="asideTop">
           <div className="blockBox"></div>
-          <div className="projectCreator">
-            <p>관리자: {projectInfo.nickname}</p>
-            <p>({projectInfo.email})</p>
+          <div
+            className="projectTitleAndDescription"
+            onClick={() => setShowDialogBox(true)}
+          >
+            <div className="projectCreator">
+              <p>관리자: {projectInfo.nickname}</p>
+              <p>({projectInfo.email})</p>
+            </div>
           </div>
+
           <div className="projectCategory">
             <ul>
               <li
@@ -110,6 +117,13 @@ const ProjectAside = ({
             </div>
           </div>
         </div>
+        {/* {showDialogBox && (
+          <div className="dialogBox">
+            <h2>{projectInfo.title}</h2>
+            <p>{projectInfo.description}</p>
+            <button onClick={() => setShowDialogBox(false)}>Close</button>
+          </div>
+        )} */}
       </aside>
     </>
   );
