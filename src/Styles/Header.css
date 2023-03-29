@@ -21,7 +21,6 @@ a {
     height: 60px;
     
     box-shadow: 0 4px 4px -4px #383838;
-    /*border-bottom: 1px solid #000000;*/
 }
 
 .headerContainer div {
@@ -49,25 +48,20 @@ a {
     height: 40px;
     margin-right: 10px;
 }
-.headerCenter {
-    width: auto;
-    height: 60px;
-    line-height: 60px;
-    font-weight: bold;
-    font-size: 1.3rem;
-    color: #000000;
-}
-.headerCenter span {
-    display: block;
-    width: auto;
-    float: left;
-}
 
 .headerRight {
     width: auto;
     height: 60px;
     margin-right: 3em;
     float: right;
+}
+
+.headerRight > div {
+    cursor: default;
+}
+
+.headerRight > div:last-child {
+    cursor: pointer;
 }
 
 .rightLogin {
@@ -81,6 +75,9 @@ a {
     color: #000000;
     font-weight: bold;
     transition: all .3s ease
+}
+.rightLogin > a:hover {
+    color: #000000;
 }
 
 .rightLogin div :hover {
@@ -98,12 +95,12 @@ a {
     text-decoration: none;
 }
 
-.rightLogin div:after {
+.hoverLine:after {
     border-top: solid 3.5px #5e308c;
     content: '';
     display: flex;
     position: absolute;
-    bottom: 12px; /*밑줄효과 위로 이동*/
+    bottom: 12px; 
     left: 0;
     right: 0;
     transform: scaleX(0);
@@ -113,9 +110,6 @@ a {
 .rightLogin div:hover:after {
     transform: scaleX(1);
 }
-
-
-
 
 .headerRight span {
     display: block;
@@ -127,3 +121,258 @@ a {
     text-overflow: ellipsis;
     font-size: 0.9rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 모바일 - 손성준님 */
+
+@media only screen and (max-width: 789px) {
+    .headerContainer {
+      min-height: 3em;
+      height: 50px;
+    }
+  
+    .headerLeft {
+      margin-left: 1em;
+      height: 50px;
+    }
+  
+    .headerLeft div {
+      font-size: 1.8rem;
+    }
+  
+    .headerLeft div img {
+      height: 30px;
+      margin-right: 5px;
+    }
+  
+    .headerCenter {
+      font-size: 1.1rem;
+    }
+  
+    .headerRight {
+      margin-right: 1em;
+      height: 50px;
+    }
+  
+    .rightLogin {
+      height: 50px;
+      margin-right: 0.5em;
+      font-size: 1rem;
+      line-height: 50px;
+    }
+  
+    .rightLogin div {
+      padding: 0 5px;
+      border-radius: 5px;
+    }
+  
+    .headerRight span {
+      width: 50%;
+      height: auto;
+      line-height: 1.2;
+      font-size: 0.8rem;
+    }
+  }
+  
