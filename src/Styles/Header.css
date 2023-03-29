@@ -22,7 +22,6 @@ a {
     height: 60px;
 
     box-shadow: 0 4px 4px -4px #383838;
-    /*border-bottom: 1px solid #000000;*/
 }
 
 .headerContainer div {
@@ -51,26 +50,15 @@ a {
     margin-right: 10px;
 }
 
-.headerCenter {
-    width: auto;
-    height: 60px;
-    line-height: 60px;
-    font-weight: bold;
-    font-size: 1.3rem;
-    color: #000000;
-}
-
-.headerCenter span {
-    display: block;
-    width: auto;
-    float: left;
-}
-
 .headerRight {
     width: auto;
     height: 60px;
     margin-right: 3em;
     float: right;
+}
+
+.headerRight>div {
+    cursor: default;
 }
 
 .headerRight>div:last-child {
@@ -87,12 +75,16 @@ a {
     font-size: 1.3rem;
     color: #000000;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all .3s ease
+}
+
+.rightLogin>a:hover {
+    color: #000000;
 }
 
 .rightLogin div :hover {
     color: #5e308c;
-    transition: all 0.3s ease;
+    transition: all .3s ease
 }
 
 .rightLogin div {
@@ -101,17 +93,16 @@ a {
     padding: 0 10px;
     border-radius: 10px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
     text-decoration: none;
 }
 
-.rightLogin div:after {
+.hoverLine:after {
     border-top: solid 3.5px #5e308c;
     content: '';
     display: flex;
     position: absolute;
     bottom: 12px;
-    /*밑줄효과 위로 이동*/
     left: 0;
     right: 0;
     transform: scaleX(0);

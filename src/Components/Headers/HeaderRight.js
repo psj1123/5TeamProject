@@ -18,11 +18,17 @@ const HeaderRight = ({ page, state, actions }) => {
     // 로그인 한 상태에서, Home 페이지인 경우
     if (page === 'Home') {
       return (
-        <div className="rightLogin">
-          <Link to={myprojectslist}>
-            <div>나의 프로젝트 리스트</div>
-          </Link>
-          <div onClick={logoutClick}>로그아웃</div>
+        <div className="headerRight">
+          <div className="rightLogin">
+            <Link to={myprojectslist}>
+              <div className="hoverLine">나의 프로젝트 리스트</div>
+            </Link>
+          </div>
+          <div className="rightLogin">
+            <div className="hoverLine" onClick={logoutClick}>
+              로그아웃
+            </div>
+          </div>
         </div>
       );
     }
@@ -32,11 +38,13 @@ const HeaderRight = ({ page, state, actions }) => {
         <div className="headerRight">
           <div className="rightLogin">
             <Link to={myprojectslist} replace={true}>
-              <div>프로젝트 리스트</div>
+              <div className="hoverLine">나의 프로젝트 리스트</div>
             </Link>
           </div>
           <div className="rightLogin">
-            <div onClick={logoutClick}>로그아웃</div>
+            <div className="hoverLine" onClick={logoutClick}>
+              로그아웃
+            </div>
           </div>
         </div>
       );
@@ -46,12 +54,12 @@ const HeaderRight = ({ page, state, actions }) => {
       return (
         <div className="headerRight">
           <div className="rightLogin">
-            <div>
-              {state.nickname} {'(' + state.email + ')'}
-            </div>
+            <div>{state.nickname + '(' + state.email + ')'}</div>
           </div>
           <div className="rightLogin">
-            <div onClick={logoutClick}>로그아웃</div>
+            <div className="hoverLine" onClick={logoutClick}>
+              로그아웃
+            </div>
           </div>
         </div>
       );
@@ -63,12 +71,12 @@ const HeaderRight = ({ page, state, actions }) => {
       <div className="headerRight">
         <div className="rightLogin">
           <Link to="/login">
-            <div>로그인</div>
+            <div className="hoverLine">로그인</div>
           </Link>
         </div>
         <div className="rightLogin">
           <Link to="/register">
-            <div>회원가입</div>
+            <div className="hoverLine">회원가입</div>
           </Link>
         </div>
       </div>
