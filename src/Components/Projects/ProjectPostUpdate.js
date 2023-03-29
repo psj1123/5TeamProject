@@ -2,10 +2,8 @@ import React, { useRef } from 'react';
 
 const ProjectPostUpdate = ({
   categories,
-  projectInfo,
   nowPost,
   postUpdate,
-  setIsPostOpened,
   setIsPostUpdating,
 }) => {
   const updateCategoryRef = useRef();

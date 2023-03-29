@@ -14,7 +14,6 @@ const RegisterSection = () => {
   const nicknameRef = useRef();
   const dateOfBirthRef = useRef();
 
-  //여기에도 사용자가 양식을 제출할 때 등록 완료됨을 알림 수 있음.
   const handleFormSubmit = () => {
     axios
       .post('/register/regProcess', {
@@ -106,8 +105,9 @@ const RegisterSection = () => {
               <input
                 type="password"
                 id="password"
+                minLength="8"
                 maxLength="20"
-                placeholder="8자 이상, 대/소문자+숫자 필수"
+                placeholder="8~20자, 대/소문자+숫자 필수"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     confirmPasswordRef.current.focus();
@@ -126,6 +126,7 @@ const RegisterSection = () => {
               <input
                 type="password"
                 id="confirmPassword"
+                minLength="8"
                 maxLength="20"
                 placeholder="비밀번호 확인"
                 onKeyDown={(e) => {

@@ -14,7 +14,7 @@
     padding: 30px;
     width: 1200px;
     min-width: auto;
-    height: 600px;
+    /* height: 600px; */
     min-height: auto;
 }
 .postsBoard > ul {
@@ -34,14 +34,24 @@
     justify-content: space-between;
     border-bottom: 1px solid #eeeeee;
 }
+
+.postList:not(.postList-firstLine):hover {
+    background-color: #dddddd;
+    font-size: large;
+    font-weight: bold;
+}
+
 .postList-firstLine {
+    border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
+    font-size: large;
+    font-weight: bold;
 }
 .postListTitle {
     text-align: center;
 }
 .postListLeftbox {
-   width: 90%;
+   width: 100%;
 }
 .postListLeftbox > div {
     float: left;
@@ -58,11 +68,12 @@
     text-decoration: underline;
 }
 .postListRightbox {
-    width: 10%;
+    width: 15%;
 }
 .postListRightbox > div {
     text-align: center;
 }
+
 
 
 /* 개요 */

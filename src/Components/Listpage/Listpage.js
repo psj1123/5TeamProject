@@ -181,6 +181,7 @@ function Listpage({ state }) {
         <div className="Project_Container">
           <div className="Project_Name">
             <h4>참여중인 프로젝트로 가보아요</h4>
+            <h4>참여중인 프로젝트로 가보아요</h4>
           </div>
           {pjList ? (
             <div className="top_Project">
