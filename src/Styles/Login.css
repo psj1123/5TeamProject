@@ -6,7 +6,9 @@
   display: flex;
   position: static;
   width: 100%;
-  margin: auto;
+  height: 80%;
+  margin : 0;
+  height : auto;
   flex-direction: center;
   justify-content: center;
   align-items: center;
@@ -17,7 +19,7 @@
   margin-left: 80px;
   min-height: 32em;
   width: 400px;
-  margin: auto;
+  margin: 0;
   padding: 70px;
   border: none;
   background-color: #ffffff;
