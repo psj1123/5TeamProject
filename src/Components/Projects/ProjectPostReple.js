@@ -1,13 +1,8 @@
 import React, { useRef, useState } from 'react';
 
-const ProjectPostReple = ({
-  state,
-  projectInfo,
-  reple,
-  commentnum,
-  updateReple,
-  deleteReple,
-}) => {
+const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
+  const loginEmail = window.sessionStorage.getItem('email');
+
   const [repleUpdate, setRepleUpdate] = useState(false);
 
   const repleUpdateRef = useRef();
@@ -66,7 +61,7 @@ const ProjectPostReple = ({
         <div className="repleContent">{reple.replecontent}</div>
       )}
 
-      {state.email === reple.rewriteremail ? (
+      {loginEmail === reple.rewriteremail ? (
         <>
           <div className="repleDeleteAndUpdateBox">
             <div
@@ -86,7 +81,7 @@ const ProjectPostReple = ({
             </div>
           </div>
         </>
-      ) : state.email === projectInfo.email ? (
+      ) : loginEmail === projectInfo.email ? (
         <>
           <div className="repleDeleteAndUpdateBox">
             <div className="deleteReple" onClick={deleteRepleBtn}>

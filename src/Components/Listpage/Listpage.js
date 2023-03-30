@@ -9,12 +9,13 @@ import '../ListPageModals/ProjectListModal.css';
 import '../../Styles/Cards.css';
 import './list.css';
 
-function Listpage({ state }) {
+function Listpage() {
+  const loginEmail = window.sessionStorage.getItem('email');
+  const loginNickname = window.sessionStorage.getItem('nickname');
+
   const [modalIsOpen, setModalIsOpen] = useState(false); // 프로젝트 추가 모달 State
   const [modalIsOpen1, setModalIsOpen1] = useState(false); // 프로젝트 참여 모달 State
-  const [joinedProjectlist, setJoinedProjectlist] = useState({
-    joinedProjectlist: [], // 참여 중인 프로젝트 리스트
-  });
+  const [joinedProjectlist, setJoinedProjectlist] = useState([]); // 참여 중인 프로젝트 리스트
   const [pjList, setPjList] = useState(false); // 참여 중인 프로젝트가 없으면 false, 있으면 true
 
   // 최초 페이지 접근 시 참여중인 프로젝트 리스트 불러오기
@@ -25,7 +26,7 @@ function Listpage({ state }) {
   // 참여중인 프로젝트 리스트 불러오기
   const getJoinedlist = () => {
     axios
-      .get(`/myprojectslist/${state.email}`, {})
+      .get(`/myprojectslist/${loginEmail}`, {})
       .then((res) => {
         // 참여 중인 프로젝트가 없음
         if (res.data === 0) {
@@ -34,9 +35,7 @@ function Listpage({ state }) {
         } // 참여 중인 프로젝트가 있음
         else {
           const { data } = res;
-          setJoinedProjectlist({
-            joinedProjectlist: data,
-          });
+          setJoinedProjectlist(data);
           setPjList(true);
         }
       })
@@ -48,10 +47,10 @@ function Listpage({ state }) {
   // 프로젝트 생성하기
   const createProject = (data) => {
     axios
-      .post(`/myprojectslist/${state.email}/createPjProcess`, {
+      .post(`/createProjectProcess`, {
         title: data.title,
         description: data.description,
-        creatoremail: state.email, // 로그인 중인 유저 이메일
+        creatoremail: loginEmail, // 로그인 중인 유저 이메일
         deadline: data.deadline,
       })
       .then((res) => {
@@ -67,11 +66,11 @@ function Listpage({ state }) {
   };
 
   // 프로젝트 참여하기
-  const joinProject = (data) => {
+  const joinProject = (code) => {
     axios
-      .post(`/myprojectslist/${state.email}/joinPjProcess`, {
-        email: state.email,
-        code: data,
+      .post(`/joinProjectProcess`, {
+        code: code,
+        email: loginEmail,
       })
       .then((res) => {
         if (res.data === -1) {
@@ -88,11 +87,12 @@ function Listpage({ state }) {
       });
   };
 
+  // 프로젝트 탈퇴하기
   const exitProject = (code) => {
     axios
-      .post(`/myprojectslist/${state.email}/exitPjProcess`, {
-        email: state.email,
+      .post(`/exitProjectProcess`, {
         code: code,
+        email: loginEmail,
       })
       .then((res) => {
         if (res.data === 1) {
@@ -112,7 +112,7 @@ function Listpage({ state }) {
       <div className="Project_Container">
         <div className="Project_Name">
           <h4>
-            {state.nickname}님!
+            {loginNickname}님!
             <br />
             프로젝트를 생성하거나 참여해보세요
           </h4>
@@ -186,12 +186,11 @@ function Listpage({ state }) {
             <div className="top_Project">
               <Container className="listBorderBottom">
                 <Row>
-                  {joinedProjectlist.joinedProjectlist[0] !== undefined &&
-                    joinedProjectlist.joinedProjectlist.map((project) => {
+                  {joinedProjectlist[0] !== undefined &&
+                    joinedProjectlist.map((project) => {
                       return (
                         <Managedlist
                           key={project.code}
-                          state={state}
                           project={project}
                           exitProject={exitProject}
                         />

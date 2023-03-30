@@ -1,20 +1,23 @@
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const HeaderRight = ({ page, state, actions }) => {
+const HeaderRight = ({ page }) => {
+  const navigate = useNavigate();
+
+  const loginEmail = window.sessionStorage.getItem('email');
+  const loginNickname = window.sessionStorage.getItem('nickname');
+
   // 로그아웃 이벤트
   const logoutClick = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      actions.setIsLoggedIn(false);
-      actions.setEmail('');
-      actions.setNickname('');
-      return <Navigate to="/login" />;
+      window.sessionStorage.clear();
+      return navigate('/login');
     } else {
-      return;
+      return false;
     }
   };
 
-  if (state.isLoggedIn) {
-    const myprojectslist = '/myprojectslist/' + state.email;
+  if (loginEmail !== null) {
+    const myprojectslist = '/myprojectslist?email=' + loginEmail;
     // 로그인 한 상태에서, Home 페이지인 경우
     if (page === 'Home') {
       return (
@@ -54,7 +57,7 @@ const HeaderRight = ({ page, state, actions }) => {
       return (
         <div className="headerRight">
           <div className="rightLogin">
-            <div>{state.nickname + '(' + state.email + ')'}</div>
+            <div>{loginNickname + '(' + loginEmail + ')'}</div>
           </div>
           <div className="rightLogin">
             <div className="hoverLine" onClick={logoutClick}>

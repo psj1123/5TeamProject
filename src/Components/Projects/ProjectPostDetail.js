@@ -3,13 +3,14 @@ import axios from 'axios';
 import ProjectPostComment from './ProjectPostComment';
 
 const ProjectPostDetail = ({
-  state,
   projectInfo,
   nowPost,
   setIsPostOpened,
   setIsPostUpdating,
   postDelete,
 }) => {
+  const loginEmail = window.sessionStorage.getItem('email');
+
   const [commentOpen, setCommentOpen] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -21,10 +22,10 @@ const ProjectPostDetail = ({
 
   const loadComments = () => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/loadComments`,
-        {}
-      )
+      .post(`/loadComments`, {
+        code: projectInfo.code,
+        postnum: nowPost.postNum,
+      })
       .then((res) => {
         const { data } = res;
         if (data === 0) {
@@ -38,17 +39,14 @@ const ProjectPostDetail = ({
       });
   };
 
-  const addComment = () => {
+  const writeComment = () => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/addComment`,
-        {
-          code: projectInfo.code,
-          postnum: nowPost.postNum,
-          commentcontent: commentWriteRef.current.value,
-          cowriteremail: state.email,
-        }
-      )
+      .post(`/writeComment`, {
+        code: projectInfo.code,
+        postnum: nowPost.postNum,
+        commentcontent: commentWriteRef.current.value,
+        cowriteremail: loginEmail,
+      })
       .then((res) => {
         if (res.data === 0) {
           alert('댓글 작성에 실패했습니다');
@@ -64,14 +62,11 @@ const ProjectPostDetail = ({
 
   const updateComment = (num, value) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/updateComment`,
-        {
-          code: projectInfo.code,
-          commentnum: num,
-          content: value,
-        }
-      )
+      .post(`/updateComment`, {
+        code: projectInfo.code,
+        commentnum: num,
+        content: value,
+      })
       .then((res) => {
         loadComments();
       })
@@ -82,13 +77,10 @@ const ProjectPostDetail = ({
 
   const deleteComment = (num) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/deleteComment`,
-        {
-          code: projectInfo.code,
-          commentnum: num,
-        }
-      )
+      .post(`/deleteComment`, {
+        code: projectInfo.code,
+        commentnum: num,
+      })
       .then((res) => {
         if (res.data === 0) {
           alert('댓글 삭제 실패');
@@ -147,7 +139,7 @@ const ProjectPostDetail = ({
             </div>
 
             <div className="deleteAndUpdateBox">
-              {nowPost.writerEmail === state.email ? (
+              {nowPost.writerEmail === loginEmail ? (
                 <>
                   <div
                     className="deletePost"
@@ -171,7 +163,7 @@ const ProjectPostDetail = ({
                     수정
                   </div>
                 </>
-              ) : projectInfo.email === state.email ? (
+              ) : projectInfo.email === loginEmail ? (
                 <>
                   <div
                     className="deletePost"
@@ -203,7 +195,6 @@ const ProjectPostDetail = ({
                 return (
                   <ProjectPostComment
                     key={comment.commentnum}
-                    state={state}
                     projectInfo={projectInfo}
                     nowPost={nowPost}
                     comment={comment}
@@ -220,13 +211,13 @@ const ProjectPostDetail = ({
                   maxLength="200"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      addComment();
+                      writeComment();
                     }
                   }}
                   ref={commentWriteRef}
                 />
               </div>
-              <div className="commentWriteBtn" onClick={addComment}>
+              <div className="commentWriteBtn" onClick={writeComment}>
                 댓글 작성
               </div>
             </div>

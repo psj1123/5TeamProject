@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import './list.css';
 import '../../Styles/Cards.css';
 
-function Managedlist({ state, exitProject, project }) {
+function Managedlist({ exitProject, project }) {
+  const loginEmail = window.sessionStorage.getItem('email');
+
   const navigate = useNavigate();
 
   const gotoProject = () => {
-    navigate(`/project/${project.code}/★ 개요`, {
-      state: { code: project.code, state: state },
-    });
+    navigate(`/project/${project.code}/★ 개요`);
   };
 
   const exitProjectBtn = () => {
@@ -114,9 +114,7 @@ function Managedlist({ state, exitProject, project }) {
             </div>
           </OverlayTrigger>
         </Card>
-        {project.creatoremail === state.email ? (
-          <></>
-        ) : (
+        {project.creatoremail !== loginEmail && (
           <div className="exitProjectBtn" onClick={exitProjectBtn}>
             탈퇴
           </div>
