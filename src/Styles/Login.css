@@ -1,5 +1,14 @@
+.All_LoginContainer {
+  display: flex;
+
+}
+
+
 .login-container {
   display: flex;
+  position: static;
+  width: 100%;
+  margin: auto;
   flex-direction: center;
   justify-content: center;
   align-items: center;
@@ -10,12 +19,11 @@
   margin-left: 80px;
   min-height: 32em;
   width: 400px;
-  margin: 30px 20px 60px 70px;
-  padding: 90px;
+  margin: auto;
+  padding: 70px;
   border: none;
   background-color: #ffffff;
   border-radius: 15px;
-  align-items: center;
 }
 
 .login-form h2 {
@@ -120,4 +128,40 @@
   height: 580px;
   object-fit: cover;
   border: none;
+}
+
+@media screen and (max-width: 900px) {
+  .login-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .login-form {
+    flex: 1 1 100%;
+    margin: 30px 0px 60px 0px;
+    padding: 30px;
+    max-width: 500px;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    display: block;
+  }
+
+  .login-form {
+    margin: 30px 0px 60px 0px;
+    padding: 30px;
+    width: 80%;
+  }
+
+  .login-form-input input {
+    width: 100%;
+  }
+
+  .login-image img {
+    width: 100%;
+    height: auto;
+  }
 }

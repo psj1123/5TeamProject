@@ -53,55 +53,57 @@ const Login = () => {
             <>
               <Header page={'Login'} />
               <section>
-                <div className="login-container">
-                  <div className="login-image">
-                    <img src="img/LoginImage.png" alt="login" />
-                  </div>
-
-                  <div className="login-form">
-                    <h2>Jellabo</h2>
-
-                    <br />
-
-                    <div className="login-form-input">
-                      <input
-                        type="email"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            passwordRef.current.focus();
-                          }
-                        }}
-                        placeholder=" 이메일"
-                        ref={emailRef}
-                      />
+                <div className="All_LoginContainer">
+                  <div className="login-container">
+                    <div className="login-image">
+                      <img src="img/LoginImage.png" alt="login" />
                     </div>
 
-                    <div className="login-form-input">
-                      <input
-                        type="password"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            loginClick();
-                          }
-                        }}
-                        placeholder=" 비밀번호"
-                        ref={passwordRef}
-                      />
-                    </div>
+                    <div className="login-form">
+                      <h2>Jellabo</h2>
 
-                    <div className="login-form-button">
-                      <button onClick={loginClick}>로그인</button>
-                    </div>
+                      <br />
 
-                    <div className="signup">
-                      <p>계정이 아직 없으신가요?</p>
-                    </div>
+                      <div className="login-form-input">
+                        <input
+                          type="email"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              passwordRef.current.focus();
+                            }
+                          }}
+                          placeholder=" 이메일"
+                          ref={emailRef}
+                        />
+                      </div>
 
-                    <div className="signup-link">
-                      <div>
-                        <Link to="/register">
-                          <p>회원가입</p>
-                        </Link>
+                      <div className="login-form-input">
+                        <input
+                          type="password"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              loginClick();
+                            }
+                          }}
+                          placeholder=" 비밀번호"
+                          ref={passwordRef}
+                        />
+                      </div>
+
+                      <div className="login-form-button">
+                        <button onClick={loginClick}>로그인</button>
+                      </div>
+
+                      <div className="signup">
+                        <p>계정이 아직 없으신가요?</p>
+                      </div>
+
+                      <div className="signup-link">
+                        <div>
+                          <Link to="/register">
+                            <p>회원가입</p>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
