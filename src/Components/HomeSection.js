@@ -62,9 +62,9 @@ const HomeSection = () => {
               <br />
               성공적인 협업을 위한 Jellabo
             </h2>
-            <Link to="/login">
-              <div className="login">무료로 시작하기</div>
-            </Link>
+            <div className="login">
+              <Link to="/login">무료로 시작하기</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -120,15 +120,18 @@ const HomeSection = () => {
           <div className="homeTitle3">
             <span>지금 바로 시작해보세요!</span>
           </div>
-          <Link to="/login">
-            <div className="login">무료로 시작하기</div>
-          </Link>
+
+          <div className="login">
+            <Link to="/login">무료로 시작하기</Link>
+          </div>
 
           <div className="homeImage">
             <img src="./img/HomeImage04.jpg" alt="사진4" />
           </div>
         </div>
       </div>
+      <br />
+      <br />
     </section>
   );
 };

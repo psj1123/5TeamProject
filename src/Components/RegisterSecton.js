@@ -191,7 +191,7 @@ const RegisterSection = () => {
 
           <div className="inputContainer">
             <button className="registerSubmit" onClick={handleButtonClick}>
-              회원가입
+              <label>회원가입</label>
             </button>
           </div>
         </div>

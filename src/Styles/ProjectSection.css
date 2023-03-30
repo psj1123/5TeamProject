@@ -1,8 +1,20 @@
+@media only screen and (max-width: 789px) {
+    .projectSection {
+        margin: 50px 0 0 250px;
+        min-height: calc(100vh - 50px);
+    }
+}
+
+@media only screen and (min-width: 790px) {
+    .projectSection {
+        margin: 64px 0 0 250px;
+        min-height: calc(100vh - 64px);
+    }
+}
+
 .projectSection {
     background-color: #e2e2e2;
-    margin: 80px 0 0 250px;
     width: calc(100% - 250px);
-    min-height: calc(100vh - 80px);
     height: auto;
 }
 .projectSection * {

@@ -103,6 +103,9 @@ const Login = () => {
               <div className="signup">
                 <p>계정이 아직 없으신가요?</p>
               </div>
+              <div className="signup">
+                <p>계정이 아직 없으신가요?</p>
+              </div>
 
               <div className="signup-link">
                 <div>

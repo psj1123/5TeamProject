@@ -1,9 +1,10 @@
 section {
-    margin-top: 5em;
+    margin-top: 4em;
     width: 100%;
     height: auto;
     min-height: 59em;
     background-color: #E2E2E2;
+    overflow: hidden;
 }
 
 .homeSectionHead_Container {
@@ -91,7 +92,7 @@ section {
     text-align: right;
 }
 .homeTitle1 span {
-    font-size: 3rem;
+    font-size: 2.3rem;
     text-align: right;
 }
 
@@ -104,21 +105,25 @@ section {
 }
 
 .homeTitle2 span {
-    font-size: 3rem;
+    font-size: 2.3rem;
     text-align: left;
 }
 
 .homeTitle3 {
+    text-align: center;
     display: flex;
-    margin: 100px 0 0 0;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
     font-weight: bold;
     font-size: 2.5rem;
 }
 
 .homeTitle3 span {
-    font-size: 3rem;
+    font-size: 2.3rem;
     text-align: center;
     vertical-align: middle;
+    justify-content: center;
 }
 
 .homeContent1 {
@@ -148,8 +153,8 @@ section {
 .login {
     background-color: #5e308c;
     margin: 30px auto;
-    width: 20vmin;
-    height: 5.5vmin;
+    width: 23vmin;
+    height: 6vmin;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     line-height: 3.5vmin;
@@ -166,9 +171,18 @@ section {
 .login:hover {
     background-color: #a676a3;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+    color: #ffffff;
 }
 
-@media only screen and (max-width: 768px) {
+.login * {
+    color: #ffffff;
+}
+
+.login *:hover {
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 768px) and (max-width: 768px) {
 
     section {
         margin-top: 3em;
@@ -265,13 +279,17 @@ section {
     }
 
     .homeTitle3 {
+        display: block;
         margin: 50px 0 0 0;
         font-size: 20px;
         justify-content: center;
+        text-align: center;
+        float: center;
     }
 
     .homeTitle3 span {
         font-size: 20px;
+        
     }
 
     .homeContent1,
@@ -288,7 +306,7 @@ section {
     }
 
     .login {
-        width: 70%;
+        width: 50%;
         height: 8vmin;
         line-height: 6vmin;
         font-size: 3vmin;
