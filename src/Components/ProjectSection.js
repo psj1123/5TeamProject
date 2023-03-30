@@ -108,12 +108,10 @@ const ProjectSection = ({
       });
   };
 
-  const deadline = new Date(projectInfo.deadline);
   const today = new Date();
-  const diffTime = deadline - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const result =
-    diffDays > 0 ? `D - ${diffDays}` : diffDays === 0 ? 'D-day' : '종료';
+  const dday = new Date(projectInfo.deadline).getTime();
+  const gap = dday - today;
+  const result = Math.floor(gap / (1000 * 60 * 60 * 24)) + 1;
 
   if (selectedCategory === '★ 개요') {
     return (
