@@ -1,0 +1,143 @@
+@media only screen and (max-width: 789px) {
+    .projectSection {
+        margin: 50px 0 0 250px;
+        min-height: calc(100vh - 50px);
+    }
+}
+
+@media only screen and (min-width: 790px) {
+    .projectSection {
+        margin: 64px 0 0 250px;
+        min-height: calc(100vh - 64px);
+    }
+}
+
+.projectSection {
+    background-color: #e2e2e2;
+    width: calc(100% - 250px);
+    height: auto;
+}
+.projectSection * {
+    box-sizing: border-box;
+}
+.pjSectionMainBox {
+    background-color: #e2e2e2;
+    padding: 50px 0 0 0;
+    width: 100%;
+    height: auto;
+}
+.pjSectionMain {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    min-width: 500px;
+    height: 75vh;
+    min-height: 570px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.noPosts {
+    display: block;
+    margin: auto;
+}
+
+.postsBoard {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 30px;
+    width: 1200px;
+    min-width: auto;
+    /* height: 600px; */
+    min-height: auto;
+}
+.postsBoard > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.postList {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 0 0 5px 0;
+    width: 80%;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.postList:not(.postList-firstLine):hover {
+    background-color: #dddddd;
+    font-size: large;
+    font-weight: bold;
+}
+
+.postList-firstLine {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    font-size: large;
+    font-weight: bold;
+}
+.postListTitle {
+    text-align: center;
+}
+.postListLeftbox {
+   width: 100%;
+}
+.postListLeftbox > div {
+    float: left;
+}
+.postListLeftbox > div:first-of-type {
+    width: 10%;
+    text-align: center;
+}
+.postListLeftbox > div:last-of-type {
+    width: 90%;
+}
+.postListLeftbox > div:last-of-type:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.postListRightbox {
+    width: 15%;
+}
+.postListRightbox > div {
+    text-align: center;
+}
+
+
+
+/* 개요 */
+.projectSection .overview_container {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center
+}
+
+.overview_table {
+    display: inline-block;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+.overview_table td, th {
+    text-align: left;
+    padding: 8px;
+    color: #636363;
+    font-weight: bold;
+}
+
+.overview_table .overview_title {
+    font-weight: bold;
+    color: #5e308c;
+}
+
+.overview_table p {
+    text-align: left;
+}

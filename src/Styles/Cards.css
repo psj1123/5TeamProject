@@ -1,0 +1,72 @@
+.mb-2 {
+    background: light;
+    width: 11rem;
+    box-shadow: 1px 1px 10px -5px gray inset;
+    min-height: '160px';
+    cursor: default;
+}
+
+.header {
+    background-color: #5e308c;
+    color: white;
+}
+
+.listCard {
+    min-height: 160px;
+}
+
+.addCard{
+    height: 191px;
+}
+
+.btn_add {
+    background-color: #a676a3;
+    border-color: #a676a3;
+    color: white;
+    font-size: medium;
+    width:150px;
+    margin-top: -10px;
+    margin-left: -4px;
+    min-width: 100px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.btn_join {
+    background-color: #a676a3;
+    border-color: #a676a3;
+    color: white;
+    font-size: medium;
+    width:150px;
+    margin-top: -50px;
+    margin-left: -4px;
+    min-width: 100px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+hr {
+    border: 1px black solid;
+    width: 95%;
+    margin-left: 40px;
+    /* text-shadow: 10px 100px; */
+}
+
+.exitProjectBtn {
+    position: absolute;
+    background-color: #ec3f18;
+    color: #ffffff;
+    border-radius: 3px;
+    right: 16px;
+    bottom: 12px;
+    padding: 1px 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+.exitProjectBtn:hover {
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #f16d4f;
+}
+.exitProjectBtn:active {
+    border: 1px solid #000000;
+}

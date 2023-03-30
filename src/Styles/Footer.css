@@ -1,18 +1,138 @@
-footer {
-    margin-top: 50px;
+.footerLeft_head {
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
+
+.footerLeft_head img {
+    height: 25px;
+}
+
+.footerLeft_head p {
+    font-size: 1.2em;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.footerLeft_head p:hover {
+    color: #5e308c;
+}
+
+.footerLeft_icon {
+    display: inline;
+    align-items: center;
+}
+
+.footerLeft_icon * {
+    display: inline;
+    align-items: center;
+    
+}
+
+.LeftContent {
+    color: #808080;
+}
+
+.LeftContainer li span {
+    text-align: left;
+}
+
+
+.Left_icon_Contatiner {
+    display: flex;
+    align-items: center;
+}
+
+.Left_icon_Contatiner .Left_icon {
+    display: inline-block;
+    margin: 0.5em;
+    border-radius: 50%
+}
+
+.Left_icon img {
+    display: flex;
+    width: 25px;
+}
+
+.Left_icon:hover {
+    box-shadow: 1px 1px 5px #000000;
+}
+
+/*---------------------------------------------------*/
+
+.CenterContent {
+    color: #808080;
+}
+
+.footerCenter_head {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.footerCenter_head > p {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.CenterContainer {
+    display: block;
+    text-align: center;
+    align-content: stretch;
+    justify-content: center;
+}
+
+
+.Center_Content1 {
+    display: inline-block;
+    font-weight: bold;
+    color: #4d4d4d;
+    font-size: 1em;
+    text-align: right;
+    margin: 0.5em;
+}
+
+.Center_icon {
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+.Center_icon img {
+    display: flex;
+    width: 17px;
+}
+
+.Center_icon:hover {
+    box-shadow: 1px 1px 5px #000000;
+}
+
+/*---------------------------------------------------*/
+
+.footerRight_head {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.RightContent {
+    color: #808080;
+}
+
+/*---------------------------------------------------*/
+
 .footerContainer {
-    background-color: #f2c49b;
+    background-color: #ffffff;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 20px 0;
     width: 100%;
     height: auto;
-    border-top: 2px solid #d9ab9a;
+    box-shadow: 0 4px 4px -4px #383838;
 }
-.footerContainer > div {
-    width: 300px;
-}
+
 .footerContainer ul {
     margin: 0;
     height: auto;
@@ -20,12 +140,103 @@ footer {
 }
 .footerContainer ul > span {
     display: block;
-    margin-bottom: 10px;
     font-weight: bold;
     font-size: 1.1em;
 }
 .footerContainer ul li span {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     font-size: 0.85em;
 }
+
+.footerContainer1 {
+    flex: 1;
+}
+.footerContainer2 {
+    flex: 3;
+}
+.footerContainer3 {
+    flex: 1;
+}
+
+.footerContainer ul {
+    padding: 0;
+}
+
+
+
+/* 모바일 - 손성준님 */
+
+@media only screen and (max-width: 768px) {
+    .footerContainer {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      padding: 0;
+    }
+  
+    .footerContainer > div {
+      flex: 1 1 auto;
+      margin: 0.3em;
+    }
+  
+    .footerLeft_head h3 {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  
+    .LeftContainer,
+    .CenterContainer,
+    .RightContainer {
+      margin: 0;
+      padding: 0;
+    }
+  
+    .Left_icon_Contatiner,
+    .Center_icon_Container,
+    .Right_icon_Container {
+      display: flex;
+      justify-content: center;
+      margin: 0.5em 0;
+    }
+  
+    .Left_icon {
+      margin: 0.5em 1em;
+    }
+  
+    .Left_icon img {
+      width: 20px;
+    }
+  
+    .Center_Content1 {
+      margin: 0.5em 0;
+    }
+  
+    .Center_icon {
+      margin-right: 5px;
+    }
+  
+    .Center_icon img {
+      width: 15px;
+    }
+  
+    .footerContainer1,
+    .footerContainer2,
+    .footerContainer3 {
+      flex: 1 1 100%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    .footerContainer1 ul > span,
+    .footerContainer2 ul > span,
+    .footerContainer3 ul > span {
+      font-size: 1.2rem;
+    }
+  
+    .footerContainer1 ul li span,
+    .footerContainer2 ul li span,
+    .footerContainer3 ul li span {
+      font-size: 0.9rem;
+    }
+  }
+  

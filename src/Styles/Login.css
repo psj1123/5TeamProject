@@ -1,0 +1,146 @@
+.All_LoginContainer {
+  display: flex;
+}
+
+.login-container {
+  display: flex;
+  position: static;
+  width: 100%;
+  height: 80%;
+  margin : 0;
+  height : auto;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: block;
+  margin-left: 80px;
+  min-height: 32em;
+  width: 400px;
+  margin: 0;
+  padding: 70px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.login-form h2 {
+  margin-bottom: 10px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  color: #51148d;
+}
+
+.login-form-input {
+  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #51148d;
+}
+
+.login-form-input input {
+  font-size: 17px;
+  width: 244px;
+  height: 40px;
+  border: 1px solid #ebe8e8;
+  border-radius: 4px;
+}
+
+.login-form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-button button {
+  font-size: 17px;
+  width: 250px;
+  height: 50px;
+  margin-top: 30px;
+  background-color: #5e308c;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.signup {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.signup-link {
+  display: block;
+  text-align: center;
+
+}
+
+.signup-link div {
+  display: inline-block;
+  justify-content: center;
+  height: 20px;
+  margin: -30px 0 0 0;
+}
+
+.signup-link p {
+  color: #5e308c;
+}
+
+.signup-link p:hover {
+  transition: all .3s ease
+}
+
+.signup-link p:after {
+  border-top: solid 2px #5e308c;
+  content: '';
+  display: flex;
+  left: 0;
+  right: 0;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+.signup-link p:hover:after {
+  transform: scaleX(1);
+}
+
+
+.signup-link button {
+  background-color: #ffffff;
+  color: #5e308c;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 3px;
+}
+
+.login-image {
+  margin: 0;
+}
+
+.login-image img {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  height: 580px;
+  object-fit: cover;
+  border: none;
+}
+
+@media screen and (max-width: 900px) {
+  .login-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .login-form {
+    flex: 1 1 100%;
+    margin: 30px 0px 60px 0px;
+    padding: 30px;
+    max-width: 500px;
+    box-sizing: border-box;
+  }
+}

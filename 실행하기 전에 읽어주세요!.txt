@@ -1,0 +1,123 @@
+설치한 라이브러리 목록
+react-bootstrap bootstrap@5.1.3
+react-router-dom
+axios
+react-modal
+express
+body-parser
+mysql
+cors
+nodemon
+
+설치한 라이브러리 목록
+react-bootstrap bootstrap@5.1.3 react-router-dom axios express body-parser mysql cors nodemon react-modal
+
+
+
+테스트 시 MySQL에서 아래와 같은 쿼리문 실행이 요구됩니다.
+
+-- 데이터베이스 생성
+CREATE DATABASE 5teams;
+USE 5teams;
+
+-- 유저 테이블 생성 (사이트 전반에서 사용)
+CREATE TABLE users (
+	email		VARCHAR(40) NOT NULL PRIMARY KEY,
+    password	VARCHAR(20) NOT NULL,
+    name		VARCHAR(10) NOT NULL,
+    nickname	VARCHAR(10) NOT NULL,
+    birthday	DATE NOT NULL
+);
+
+-- 프로젝트 테이블 생성 (프로젝트 생성 및 관리에 사용)
+CREATE TABLE projects (
+	code			INT NOT NULL PRIMARY KEY,
+    title			VARCHAR(40) NOT NULL,
+    description		VARCHAR(200) NOT NULL,
+    creatoremail	VARCHAR(40) NOT NULL,
+    deadline		DATE NOT NULL,
+    FOREIGN KEY(creatoremail) REFERENCES users(email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- 현재 참여중인 프로젝트 리스트 테이블 생성 (프로젝트 리스트 페이지에서 사용)
+CREATE TABLE joinedprojects (
+	email	VARCHAR(40) NOT NULL,
+    code	INT NOT NULL,
+    FOREIGN KEY(email) REFERENCES users(email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY(code) REFERENCES projects(code)
+    ON DELETE CASCADE
+);
+
+-- 프로젝트 내 카테고리 테이블 생성 (각 프로젝트 페이지 내에서 사용)
+CREATE TABLE category (
+	code		INT NOT NULL,
+    category	VARCHAR(15) NOT NULL,
+    FOREIGN KEY(code) REFERENCES projects(code)
+    ON DELETE CASCADE
+);
+
+-- 프로젝트 내 게시글 테이블 생성 (프로젝트 생성 시, 해당 테이블도 함께 생성. 각 프로젝트 페이지 내에서 사용)
+-- 102354는 테스트용 코드입니다.
+CREATE TABLE posts102354 (
+	postnum			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	category		VARCHAR(15) NOT NULL,
+    posttitle		VARCHAR(40) NOT NULL,
+    postcontent		VARCHAR(5000) NOT NULL,
+    powriteremail	VARCHAR(40) NOT NULL,
+    posteddate		DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(powriteremail) REFERENCES users(email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- 프로젝트 내 댓글 테이블 생성 (프로젝트 생성 시, 해당 테이블도 함께 생성. 각 프로젝트 페이지 내에서 사용)
+-- 102354는 테스트용 코드입니다.
+CREATE TABLE comments102354 (
+	commentnum		INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    postnum			INT NOT NULL,
+    commentcontent	VARCHAR(200) NOT NULL,
+    cowriteremail	VARCHAR(40) NOT NULL,
+	FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+    ON DELETE CASCADE,
+    FOREIGN KEY(cowriteremail) REFERENCES users(email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- 프로젝트 내 답글(대댓글) 테이블 생성 (프로젝트 생성 시, 해당 테이블도 함께 생성. 각 프로젝트 페이지 내에서 사용)
+-- 102354는 테스트용 코드입니다.
+CREATE TABLE reples102354 (
+	replenum		INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    postnum			INT NOT NULL,
+    commentnum		INT NOT NULL,
+    replecontent	VARCHAR(200) NOT NULL,
+    rewriteremail	VARCHAR(40) NOT NULL,
+    FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+    ON DELETE CASCADE,
+    FOREIGN KEY(commentnum) REFERENCES comments102354(commentnum)
+    ON DELETE CASCADE,
+    FOREIGN KEY(rewriteremail) REFERENCES users(email)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+-- 테스트용 더미 데이터
+INSERT INTO users VALUES('example01@example.com','Password01','이기자','1번 닉네임','2000-01-01');
+INSERT INTO users VALUES('example02@example.com','Password02','김기자','2번 닉네임','1850-01-01');
+INSERT INTO users VALUES('example03@example.com','Password03','Doe John','3번 닉네임','1980-01-01');
+INSERT INTO users VALUES('example04@example.com','Password04','김철수','4번 닉네임','1970-01-01');
+
+INSERT INTO projects VALUES(102354, '멀티잇 5조 미니 프로젝트 1차', '미니프로젝트', 'example01@example.com', '2023-03-10');
+
+INSERT INTO joinedprojects VALUES('example01@example.com', 102354);
+INSERT INTO joinedprojects VALUES('example02@example.com', 102354);
+INSERT INTO joinedprojects VALUES('example04@example.com', 102354);
+
+INSERT INTO category VALUES(102354, '공지사항');
+INSERT INTO category VALUES(102354, '작업 내역');
+INSERT INTO category VALUES(102354, '준비사항');
+INSERT INTO category VALUES(102354, '회의록');

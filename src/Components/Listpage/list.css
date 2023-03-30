@@ -1,0 +1,161 @@
+.listSection {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 40em;
+  background-color: #E2E2E2;
+}
+
+.listBorderTop.container {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.listBorderTop {
+  display: flex;
+  padding: auto;
+  border: none;
+  justify-content: center;
+}
+
+.listBorderBottom {
+  display: flex;
+  padding: auto;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px #808080;
+  justify-content: center;
+}
+
+.listHeadEllipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ellipsismany {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+}
+
+.listCard:hover {
+  opacity: 0.5;
+}
+
+.ProjectContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.addModalh {
+  margin: 3px;
+}
+
+.addModalh1 {
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.addbtn {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
+
+.colortest {
+  border: 1px solid rgb(179, 9, 182);
+}
+
+.dayred {
+  color: rgb(179, 9, 182);
+}
+
+.Project_Container {
+  display: inline-block;
+  margin-top: 3em;
+  width: auto;
+  max-width: 70%;
+  min-height: 17em;
+  align-items: center;
+}
+
+.Project_Name {
+  margin: 1.2em 0;
+}
+
+.Project_Container div h4 {
+  font-size: 3vmin;
+  text-align: center;
+  margin: 0.3em;
+}
+
+.addModalh button {
+  display: inline;
+  text-align: center;
+  padding: 1px;
+}
+
+.addModalh1 button {
+  display: inline;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  padding: 1em;
+  min-width: 150px;
+  width: auto;
+}
+
+.col-sm-2 {
+  display: block;
+  position: relative;
+  margin: 3px;
+  min-width: 200px;
+  width: auto;
+  margin: 3px 10px;
+}
+
+.ProjectContent.col-sm-2 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-height: 70px;
+}
+
+.mb-2.addCard.card.bg-light {
+  display: flex;
+  text-align: center;
+  margin: 3px;
+  padding: 0;
+}
+
+.projectButton {
+  display: block;
+  min-height: 70px;
+}
+
+.addModalh {
+  display: block;
+}
+
+.addModalh1 {
+  display: block;
+}
+
+.addModalh button {
+  min-width: 40px;
+
+}
+
+.addModalh1 button {
+  min-width: 40px;
+}
