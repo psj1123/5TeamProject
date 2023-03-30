@@ -4,15 +4,21 @@ import { Link } from 'react-router-dom';
 const FooterLeft = () => {
   return (
     <div className="LeftContainer">
-      <ul>
-        <span>
-          <Link to="/">
-            <div className="footerLeft_head">
+      <span>
+        <div className="footerLeft_head">
+          <div className="footerLeft_icon">
+            <Link to="/">
               <img src="/favicon.ico" alt="Jellabo favicon" />
-              <h3>Jellabo</h3>
-            </div>
-          </Link>
-        </span>
+            </Link>
+          </div>
+          <div className="footerLeft_icon">
+            <Link to="/">
+              <p>Jellabo</p>
+            </Link>
+          </div>
+        </div>
+      </span>
+      <ul>
         <div className="Left_icon_Contatiner">
           <div className="Left_icon">
             <a

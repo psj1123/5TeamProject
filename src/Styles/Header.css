@@ -31,22 +31,38 @@ a {
 .headerLeft {
     margin-left: 7em;
     height: 60px;
+    display: flex;
+    text-align: center;
+    align-content: stretch;
+    justify-content: center;
+}
+
+.headerLeft :hover {
+  color: #5e308c;
+}
+
+.headerLeft_icon {
+  display: inline;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.headerLeft_icon * {
+  display: inline;
+  align-items: center;
+}
+
+.headerLeft_icon img {
     display: block;
-    align-items: center;
-}
-
-.headerLeft div {
-    display: flex;
-    align-items: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.headerLeft div img {
-    display: flex;
     align-items: center;
     height: 40px;
     margin-right: 10px;
+}
+
+.headerLeft_icon p {
+  display: inline;
+  align-items: center;
 }
 
 .headerRight {
@@ -121,209 +137,6 @@ a {
     text-overflow: ellipsis;
     font-size: 0.9rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 모바일 - 손성준님 */
 

@@ -7,12 +7,16 @@ const HeaderLeft = ({ page, state }) => {
   if (page === 'Project') {
     return (
       <div className="headerLeft">
-        <Link to={myprojectslist}>
-          <div>
+        <div className="headerLeft_icon">
+          <Link to={myprojectslist}>
             <img src="/favicon.ico" alt="Jellabo favicon" />
-            Jellabo
-          </div>
-        </Link>
+          </Link>
+        </div>
+        <div className="headerLeft_icon">
+          <Link to={myprojectslist}>
+            <p>Jellabo</p>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -20,12 +24,16 @@ const HeaderLeft = ({ page, state }) => {
   else if (page === 'NotFound') {
     return (
       <div className="headerLeft">
-        <Link to="/" replace={true}>
-          <div>
+        <div className="headerLeft_icon">
+          <Link to="/" replace={true}>
             <img src="/favicon.ico" alt="Jellabo favicon" />
-            Jellabo
-          </div>
-        </Link>
+          </Link>
+        </div>
+        <div className="headerLeft_icon">
+          <Link to="/" replace={true}>
+            <p>Jellabo</p>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -33,12 +41,16 @@ const HeaderLeft = ({ page, state }) => {
   else {
     return (
       <div className="headerLeft">
-        <Link to="/">
-          <div>
+        <div className="headerLeft_icon">
+          <Link to="/">
             <img src="/favicon.ico" alt="Jellabo favicon" />
-            Jellabo
-          </div>
-        </Link>
+          </Link>
+        </div>
+        <div className="headerLeft_icon">
+          <Link to="/">
+            <p>Jellabo</p>
+          </Link>
+        </div>
       </div>
     );
   }

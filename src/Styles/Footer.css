@@ -8,9 +8,25 @@
     height: 25px;
 }
 
-.footerLeft_head h3 {
-    font-size: 1.5rem;
+.footerLeft_head p {
+    font-size: 1.2em;
     margin-left: 10px;
+    font-weight: bold;
+}
+
+.footerLeft_head p:hover {
+    color: #5e308c;
+}
+
+.footerLeft_icon {
+    display: inline;
+    align-items: center;
+}
+
+.footerLeft_icon * {
+    display: inline;
+    align-items: center;
+    
 }
 
 .LeftContent {
@@ -110,6 +126,7 @@
     background-color: #ffffff;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 20px 0;
     width: 100%;
     height: auto;
@@ -148,169 +165,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 모바일 - 손성준님 */
 
 @media only screen and (max-width: 768px) {
@@ -326,7 +180,8 @@
     }
   
     .footerLeft_head h3 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
     }
   
     .LeftContainer,
