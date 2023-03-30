@@ -65,7 +65,7 @@ const ProjectPostDetail = ({
       .post(`/updateComment`, {
         code: projectInfo.code,
         commentnum: num,
-        content: value,
+        commentcontent: value,
       })
       .then((res) => {
         loadComments();

@@ -319,7 +319,7 @@ app.post('/loadUserList', (req, res) => {
   const { code } = req.body;
 
   const sqlQuery1 =
-    'SELECT p.code, j.email, u.name, u.nickname FROM projects p INNER JOIN joinedprojects j ON p.code = j.code INNER JOIN users u ON j.email = u.email WHERE p.code = ?;';
+    'SELECT j.email, u.name, u.nickname FROM projects p INNER JOIN joinedprojects j ON p.code = j.code INNER JOIN users u ON j.email = u.email WHERE p.code = ?;';
   db.query(sqlQuery1, [code], (err, result) => {
     res.send(result); // 참여자 목록 불러오기 성공
   });
@@ -409,12 +409,12 @@ app.post('/deleteProjectProcess', (req, res) => {
 
 // 글 작성하기
 app.post('/writePost', (req, res) => {
-  const { code, category, posttitle, postcontent, email } = req.body;
+  const { code, category, posttitle, postcontent, powriteremail } = req.body;
 
   const sqlQuery1 = `INSERT INTO posts${code} (category, posttitle, postcontent, powriteremail) VALUES(?, ?, ?, ?);`;
   db.query(
     sqlQuery1,
-    [category, posttitle, postcontent, email],
+    [category, posttitle, postcontent, powriteremail],
     (err, result) => {
       res.send('1'); // 글 작성 성공
     }
@@ -425,10 +425,8 @@ app.post('/writePost', (req, res) => {
 app.get('/project/:code/:category/:postnum', (req, res) => {
   const { code, postnum } = req.params;
 
-  console.log(code, postnum);
-
   const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE postnum = ?;`;
-  const sqlQuery2 = `SELECT po.category, po.postnum, po.posttitle, po.postcontent, u.nickname, po.powriteremail, DATE_FORMAT(po.posteddate, '%m-%d-%y') AS postdate FROM posts${code} po INNER JOIN users u ON po.powriteremail = u.email WHERE postnum = ?;`;
+  const sqlQuery2 = `SELECT po.category, po.postnum, po.posttitle, po.postcontent, u.nickname, po.powriteremail, DATE_FORMAT(po.posteddate, '%m-%d-%y') AS posteddate FROM posts${code} po INNER JOIN users u ON po.powriteremail = u.email WHERE postnum = ?;`;
 
   db.query(sqlQuery1, [postnum], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {
@@ -502,11 +500,11 @@ app.post('/writeComment', (req, res) => {
 
 // 댓글 수정하기
 app.post('/updateComment', (req, res) => {
-  const { code, commentnum, content } = req.body;
+  const { code, commentnum, commentcontent } = req.body;
 
   const sqlQuery1 = `UPDATE comments${code} SET commentcontent = ? WHERE commentnum = ?;`;
 
-  db.query(sqlQuery1, [content, commentnum], (err, result) => {
+  db.query(sqlQuery1, [commentcontent, commentnum], (err, result) => {
     res.send('1');
   });
 });

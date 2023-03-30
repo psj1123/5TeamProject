@@ -50,7 +50,7 @@ const ProjectSection = ({
             postTitle: data[0].posttitle,
             postContent: data[0].postcontent,
             postWriter: data[0].nickname,
-            postedDate: data[0].postdate,
+            postedDate: data[0].posteddate,
             writerEmail: data[0].powriteremail,
           });
 
@@ -66,7 +66,7 @@ const ProjectSection = ({
         category: postData.category,
         posttitle: postData.title,
         postcontent: postData.content,
-        email: loginEmail,
+        powriteremail: loginEmail,
       })
       .then((res) => {
         if (res.data === 1) {
