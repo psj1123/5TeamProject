@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { UserDataConsumer } from '../Contexts/UserData';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header.js';
 import ReturnTop from '../Components/ReturnTop.js';
 import ProjectSection from '../Components/ProjectSection';
@@ -9,10 +8,10 @@ import Modal from '../Components/Modals/ProjectModal';
 import axios from 'axios';
 
 const Project = () => {
+  const loginEmail = window.sessionStorage.getItem('email');
+
   const navigate = useNavigate();
-  const location = useLocation();
-  const code = location.state.code;
-  const state = location.state.state;
+  const code = window.location.href.split('/')[4];
   const [isLoading, setIsLoading] = useState(false);
   const [projectInfo, setProjectInfo] = useState({
     code: '',
@@ -33,30 +32,31 @@ const Project = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        pageload();
-        await getposts();
-      } catch (e) {
-        console.error(e);
+      if (loginEmail === null) {
+        alert('접근할 수 없는 프로젝트입니다.');
+        navigate('/login');
+      } else {
+        await loadProjectInfo();
+        await loadUserList();
       }
     };
     fetchData();
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    loadUserlist();
   }, []);
 
-  const pageload = () => {
+  useEffect(() => {
+    getposts();
+  }, [selectedCategory]);
+
+  const loadProjectInfo = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}`, {
+      .post(`/loadProjectInfo`, {
         code: code,
-        email: state.email,
+        email: loginEmail,
       })
       .then((res) => {
         if (res.data === -1 || res.data === 0) {
           alert('접근할 수 없는 프로젝트입니다.');
-          navigate(`/myprojectslist/${state.email}`);
+          navigate(`/myprojectslist?email=${loginEmail}`);
         } else {
           const { data } = res;
           setProjectInfo({
@@ -74,9 +74,11 @@ const Project = () => {
       });
   };
 
-  const loadUserlist = () => {
+  const loadUserList = () => {
     axios
-      .get(`/project/${code}/${selectedCategory}/userList`, {})
+      .post('/loadUserList', {
+        code: code,
+      })
       .then((res) => {
         const { data } = res;
         setUserlist(data);
@@ -103,7 +105,7 @@ const Project = () => {
 
   const getCategories = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}/loadCategories`, {
+      .post('/loadCategories', {
         code: code,
       })
       .then((res) => {
@@ -117,7 +119,7 @@ const Project = () => {
 
   const createCategories = (categoryName) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/createCategoryProcess`, {
+      .post('/createCategoryProcess', {
         code: code,
         category: categoryName,
       })
@@ -135,7 +137,7 @@ const Project = () => {
 
   const deleteCategories = (categoryName) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/deleteCategoryProcess`, {
+      .post('/deleteCategoryProcess', {
         code: code,
         category: categoryName,
       })
@@ -152,15 +154,14 @@ const Project = () => {
 
   const reSettingProject = (data) => {
     axios
-      .post(`/project/${code}/${selectedCategory}/resettingPjProcess`, {
+      .post('/resettingProjectProcess', {
         code: code,
         title: data.title,
         description: data.description,
         deadline: data.deadline,
       })
       .then((res) => {
-        alert('프로젝트 설정 저장 완료');
-        pageload();
+        loadProjectInfo();
       })
       .catch((err) => {
         console.error(err);
@@ -204,9 +205,7 @@ const Project = () => {
       setIsPostOpened(false);
     }
 
-    await navigate(`/project/${code}/${selectedCategory}`, {
-      state: { code, state },
-    });
+    await navigate(`/project/${code}/${selectedCategory}`);
     await setSelectedCategory(selectedCategory);
     await getCategories();
   }
@@ -214,6 +213,7 @@ const Project = () => {
   async function deleteCategory(e) {
     let nowChangeCategory;
     const targetCategory = e.target.id;
+
     if (targetCategory === selectedCategory) {
       if (isPostUpdating && isPostOpened) {
         if (
@@ -247,23 +247,21 @@ const Project = () => {
     await deleteCategories(targetCategory);
     await setSelectedCategory(nowChangeCategory);
     await getCategories();
-    await navigate(`/project/${code}/${selectedCategory}`, {
-      state: { code, state },
-    });
+    await navigate(`/project/${code}/${selectedCategory}`);
     await getposts();
   }
 
   const deleteProject = () => {
     axios
-      .post(`/project/${code}/${selectedCategory}/deletePjProcess`, {
+      .post('/deleteProjectProcess', {
         code: code,
-        email: state.email,
+        email: loginEmail,
       })
       .then((res) => {
         if (res.data === 0) {
           alert('프로젝트 관리자만 삭제할 수 있습니다.');
         } else {
-          navigate(`/myprojectslist/${state.email}`);
+          navigate(`/myprojectslist?email=${loginEmail}`);
         }
       })
       .catch((err) => {
@@ -302,62 +300,53 @@ const Project = () => {
     setIsOpen(false);
   };
 
-  return (
-    <UserDataConsumer>
-      {({ state }) => {
-        // 로그인 여부를 판단, 로그인되지 않은 상태라면 로그인 페이지로 강제 이동
-        if (!state.isLoggedIn) {
-          return <Navigate to="/login" replace={true} />;
-        } else {
-          // 정상적인 경우에 아래의 리턴문이 컴포넌트 결과로 출력됩니다.
-          return (
-            <div>
-              <Modal
-                isOpen={isOpen}
-                modalClose={modalClose}
-                userlist={userlist}
-                loadUserlist={loadUserlist}
-                reSettingProject={reSettingProject}
-                projectInfo={projectInfo}
-                selectedCategory={selectedCategory}
-                deleteProject={deleteProject}
-                state={state}
-                pageload={pageload}
-              />
-              <Header page={'Project'} />
-              <ProjectAside
-                modalOpen={modalOpen}
-                projectInfo={projectInfo}
-                categories={categories}
-                getCategories={getCategories}
-                selectedCategory={selectedCategory}
-                changeSelectedCategory={changeSelectedCategory}
-                createCategory={createCategories}
-                deleteCategory={deleteCategory}
-                postWriteBtnClick={postWriteBtnClick}
-              />
-              <ProjectSection
-                state={state}
-                posts={posts}
-                isLoading={isLoading}
-                getposts={getposts}
-                categories={categories}
-                projectInfo={projectInfo}
-                selectedCategory={selectedCategory}
-                isPostOpened={isPostOpened}
-                setIsPostOpened={setIsPostOpened}
-                isPostUpdating={isPostUpdating}
-                setIsPostUpdating={setIsPostUpdating}
-                isPostWriting={isPostWriting}
-                setIsPostWriting={setIsPostWriting}
-              />
-              <ReturnTop />
-            </div>
-          );
-        }
-      }}
-    </UserDataConsumer>
-  );
+  // 로그인 여부를 판단, 로그인되지 않은 상태라면 로그인 페이지로 강제 이동
+  if (loginEmail === null) {
+    return <Navigate to="/login" replace={true} />;
+  } else {
+    // 정상적인 경우에 아래의 리턴문이 컴포넌트 결과로 출력됩니다.
+    return (
+      <div>
+        <Modal
+          isOpen={isOpen}
+          modalClose={modalClose}
+          userlist={userlist}
+          loadUserList={loadUserList}
+          reSettingProject={reSettingProject}
+          projectInfo={projectInfo}
+          selectedCategory={selectedCategory}
+          deleteProject={deleteProject}
+        />
+        <Header page={'Project'} />
+        <ProjectAside
+          modalOpen={modalOpen}
+          projectInfo={projectInfo}
+          categories={categories}
+          getCategories={getCategories}
+          selectedCategory={selectedCategory}
+          changeSelectedCategory={changeSelectedCategory}
+          createCategory={createCategories}
+          deleteCategory={deleteCategory}
+          postWriteBtnClick={postWriteBtnClick}
+        />
+        <ProjectSection
+          posts={posts}
+          isLoading={isLoading}
+          getposts={getposts}
+          categories={categories}
+          projectInfo={projectInfo}
+          selectedCategory={selectedCategory}
+          isPostOpened={isPostOpened}
+          setIsPostOpened={setIsPostOpened}
+          isPostUpdating={isPostUpdating}
+          setIsPostUpdating={setIsPostUpdating}
+          isPostWriting={isPostWriting}
+          setIsPostWriting={setIsPostWriting}
+        />
+        <ReturnTop />
+      </div>
+    );
+  }
 };
 
 export default Project;

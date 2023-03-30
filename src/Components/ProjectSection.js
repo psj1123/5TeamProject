@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../Styles/ProjectSection.css';
 import '../Styles/ProjectSection_PostDetail.css';
 import axios from 'axios';
@@ -8,7 +8,6 @@ import ProjectPostUpdate from './Projects/ProjectPostUpdate';
 import ProjectPostWrite from './Projects/ProjectPostWrite';
 
 const ProjectSection = ({
-  state,
   posts,
   isLoading,
   getposts,
@@ -22,6 +21,8 @@ const ProjectSection = ({
   isPostWriting,
   setIsPostWriting,
 }) => {
+  const loginEmail = localStorage.getItem('loginEmail');
+
   const [nowPost, setNowPost] = useState({
     postCategory: '',
     postNum: '',
@@ -60,12 +61,12 @@ const ProjectSection = ({
 
   const postWrite = (postData) => {
     axios
-      .post(`/project/${projectInfo.code}/${selectedCategory}/writePost`, {
+      .post(`/writePost`, {
         code: projectInfo.code,
         category: postData.category,
         posttitle: postData.title,
         postcontent: postData.content,
-        email: state.email,
+        email: loginEmail,
       })
       .then((res) => {
         if (res.data === 1) {
@@ -77,10 +78,10 @@ const ProjectSection = ({
 
   const postDelete = () => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${selectedCategory}/${nowPost.postNum}/delete`,
-        {}
-      )
+      .post(`/deletePost`, {
+        code: projectInfo.code,
+        postnum: nowPost.postNum,
+      })
       .then((res) => {
         if (res.data === 1) {
           setIsPostOpened(false);
@@ -91,16 +92,13 @@ const ProjectSection = ({
 
   const postUpdate = (postData) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${selectedCategory}/${nowPost.postNum}/update`,
-        {
-          code: projectInfo.code,
-          postnum: nowPost.postNum,
-          category: postData.category,
-          posttitle: postData.title,
-          postcontent: postData.content,
-        }
-      )
+      .post(`/updatePost`, {
+        code: projectInfo.code,
+        postnum: nowPost.postNum,
+        category: postData.category,
+        posttitle: postData.title,
+        postcontent: postData.content,
+      })
       .then((res) => {
         if (res.data === 1) {
           getposts();
@@ -186,7 +184,6 @@ const ProjectSection = ({
         <div>
           <div className="projectSection">
             <ProjectPostDetail
-              state={state}
               projectInfo={projectInfo}
               nowPost={nowPost}
               setIsPostOpened={setIsPostOpened}

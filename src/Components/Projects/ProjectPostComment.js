@@ -3,13 +3,14 @@ import axios from 'axios';
 import ProjectPostReple from './ProjectPostReple';
 
 const ProjectPostComment = ({
-  state,
   projectInfo,
   nowPost,
   comment,
   updateComment,
   deleteComment,
 }) => {
+  const loginEmail = window.sessionStorage.getItem('email');
+
   const [commentUpdate, setCommentUpdate] = useState(false);
   const [repleOpen, setRepleOpen] = useState(false);
   const [reples, setReples] = useState([]);
@@ -38,13 +39,10 @@ const ProjectPostComment = ({
 
   const loadReples = () => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/loadReples`,
-        {
-          code: projectInfo.code,
-          commentnum: comment.commentnum,
-        }
-      )
+      .post('/loadReples', {
+        code: projectInfo.code,
+        commentnum: comment.commentnum,
+      })
       .then((res) => {
         setReples(res.data);
       })
@@ -53,18 +51,15 @@ const ProjectPostComment = ({
       });
   };
 
-  const addReple = () => {
+  const writeReple = () => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/addReple`,
-        {
-          code: projectInfo.code,
-          postnum: nowPost.postNum,
-          commentnum: comment.commentnum,
-          replecontent: repleWriteRef.current.value,
-          rewriteremail: state.email,
-        }
-      )
+      .post('/writeReple', {
+        code: projectInfo.code,
+        postnum: nowPost.postNum,
+        commentnum: comment.commentnum,
+        replecontent: repleWriteRef.current.value,
+        rewriteremail: loginEmail,
+      })
       .then((res) => {
         if (res.data !== 1) {
           alert('답글 작성에 실패했습니다');
@@ -80,14 +75,11 @@ const ProjectPostComment = ({
 
   const updateReple = (num, value) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/updateReple`,
-        {
-          code: projectInfo.code,
-          replenum: num,
-          replecontent: value,
-        }
-      )
+      .post('/updateReple', {
+        code: projectInfo.code,
+        replenum: num,
+        replecontent: value,
+      })
       .then((res) => {
         if (res.data !== 1) {
           alert('답글 수정에 실패했습니다');
@@ -102,13 +94,10 @@ const ProjectPostComment = ({
 
   const deleteReple = (num) => {
     axios
-      .post(
-        `/project/${projectInfo.code}/${nowPost.postCategory}/${nowPost.postNum}/deleteReple`,
-        {
-          code: projectInfo.code,
-          replenum: num,
-        }
-      )
+      .post('/deleteReple', {
+        code: projectInfo.code,
+        replenum: num,
+      })
       .then((res) => {
         if (res.data !== 1) {
           alert('답글 삭제에 실패했습니다');
@@ -174,7 +163,7 @@ const ProjectPostComment = ({
           답글 ▼
         </div>
         <div className="OthersBox">
-          {state.email === comment.cowriteremail ? (
+          {loginEmail === comment.cowriteremail ? (
             <>
               <div
                 id={updateCommentBtn_Bottom}
@@ -194,7 +183,7 @@ const ProjectPostComment = ({
                 삭제
               </div>
             </>
-          ) : state.email === projectInfo.email ? (
+          ) : loginEmail === projectInfo.email ? (
             <>
               <div className="deleteComment" onClick={deleteCommentBtn}>
                 삭제
@@ -214,10 +203,8 @@ const ProjectPostComment = ({
               return (
                 <ProjectPostReple
                   key={reple.replenum}
-                  state={state}
                   projectInfo={projectInfo}
                   reple={reple}
-                  commentnum={comment.commentnum}
                   updateReple={updateReple}
                   deleteReple={deleteReple}
                 />
@@ -232,13 +219,13 @@ const ProjectPostComment = ({
                 maxLength="200"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    addReple();
+                    writeReple();
                   }
                 }}
                 ref={repleWriteRef}
               />
             </div>
-            <div className="repleWriteBtn" onClick={addReple}>
+            <div className="repleWriteBtn" onClick={writeReple}>
               답글 작성
             </div>
           </div>

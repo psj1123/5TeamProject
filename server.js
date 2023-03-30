@@ -23,7 +23,7 @@ const db = mysql.createPool({
 });
 
 // 회원가입 요청
-app.post('/register/regProcess', (req, res) => {
+app.post('/registerProcess', (req, res) => {
   const { email, password, name, nickname, birthday } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM users WHERE email = ?;';
@@ -45,7 +45,7 @@ app.post('/register/regProcess', (req, res) => {
 });
 
 // 로그인 요청
-app.post('/login/logProcess', (req, res) => {
+app.post('/loginProcess', (req, res) => {
   const { email, password } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM users WHERE email = ?;';
@@ -90,7 +90,7 @@ app.get('/myprojectslist/:email', (req, res) => {
 });
 
 // 프로젝트 생성하기
-app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
+app.post('/createProjectProcess', (req, res) => {
   const { title, description, creatoremail, deadline } = req.body;
   let code;
 
@@ -131,7 +131,7 @@ app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
       postnum			    INT NOT NULL,
       commentcontent	VARCHAR(200) NOT NULL,
       cowriteremail	  VARCHAR(40) NOT NULL,
-      FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+      FOREIGN KEY(postnum) REFERENCES posts${code}(postnum)
       ON DELETE CASCADE,
       FOREIGN KEY(cowriteremail) REFERENCES users(email)
       ON DELETE CASCADE
@@ -145,9 +145,9 @@ app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
       commentnum		  INT NOT NULL,
       replecontent	  VARCHAR(200) NOT NULL,
       rewriteremail	  VARCHAR(40) NOT NULL,
-      FOREIGN KEY(postnum) REFERENCES posts102354(postnum)
+      FOREIGN KEY(postnum) REFERENCES posts${code}(postnum)
       ON DELETE CASCADE,
-      FOREIGN KEY(commentnum) REFERENCES comments102354(commentnum),
+      FOREIGN KEY(commentnum) REFERENCES comments${code}(commentnum),
       FOREIGN KEY(rewriteremail) REFERENCES users(email)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -177,7 +177,7 @@ app.post('/myprojectslist/:email/createPjProcess', (req, res) => {
 });
 
 // 프로젝트 참여하기
-app.post('/myprojectslist/:email/joinPjProcess', (req, res) => {
+app.post('/joinProjectProcess', (req, res) => {
   const { email, code } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
@@ -203,7 +203,7 @@ app.post('/myprojectslist/:email/joinPjProcess', (req, res) => {
 });
 
 // 프로젝트 탈퇴하기
-app.post('/myprojectslist/:email/exitPjProcess', (req, res) => {
+app.post('/exitProjectProcess', (req, res) => {
   const { email, code } = req.body;
 
   const sqlQuery1 =
@@ -223,7 +223,7 @@ app.post('/myprojectslist/:email/exitPjProcess', (req, res) => {
 
 // 프로젝트 페이지 내부
 // 프로젝트 정보 불러오기
-app.post('/project/:code/:category', (req, res) => {
+app.post('/loadProjectInfo', (req, res) => {
   const { code, email } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM projects WHERE code = ?;';
@@ -250,7 +250,7 @@ app.post('/project/:code/:category', (req, res) => {
 });
 
 // 카테고리 불러오기
-app.post('/project/:code/:category/loadCategories', (req, res) => {
+app.post('/loadCategories', (req, res) => {
   const { code } = req.body;
 
   const sqlQuery1 = 'SELECT category FROM category WHERE code = ?;';
@@ -278,7 +278,7 @@ app.get('/project/:code/:category/loadPost', (req, res) => {
 });
 
 // 카테고리 추가하기
-app.post('/project/:code/:category/createCategoryProcess', (req, res) => {
+app.post('/createCategoryProcess', (req, res) => {
   const { code, category } = req.body;
 
   const sqlQuery1 =
@@ -297,7 +297,7 @@ app.post('/project/:code/:category/createCategoryProcess', (req, res) => {
 });
 
 // 카테고리 삭제하기
-app.post('/project/:code/:category/deleteCategoryProcess', (req, res) => {
+app.post('/deleteCategoryProcess', (req, res) => {
   const { code, category } = req.body;
 
   if (category === '★ 개요' || category === '공지사항') {
@@ -315,8 +315,8 @@ app.post('/project/:code/:category/deleteCategoryProcess', (req, res) => {
 });
 
 // 참여자 목록 불러오기
-app.get('/project/:code/:category/userList', (req, res) => {
-  const { code } = req.params;
+app.post('/loadUserList', (req, res) => {
+  const { code } = req.body;
 
   const sqlQuery1 =
     'SELECT p.code, j.email, u.name, u.nickname FROM projects p INNER JOIN joinedprojects j ON p.code = j.code INNER JOIN users u ON j.email = u.email WHERE p.code = ?;';
@@ -326,7 +326,7 @@ app.get('/project/:code/:category/userList', (req, res) => {
 });
 
 // 프로젝트 제목, 내용, 데드라인 재설정하기
-app.post('/project/:code/:category/resettingPjProcess', (req, res) => {
+app.post('/resettingProjectProcess', (req, res) => {
   const { code, title, description, deadline } = req.body;
 
   const sqlQuery1 =
@@ -338,7 +338,7 @@ app.post('/project/:code/:category/resettingPjProcess', (req, res) => {
 });
 
 // 멤버 추가하기
-app.post('/project/:code/:category/addUserProcess', (req, res) => {
+app.post('/addUserProcess', (req, res) => {
   const { code, email } = req.body;
 
   const sqlQuery1 = 'SELECT COUNT(*) FROM users WHERE email = ?;';
@@ -364,7 +364,7 @@ app.post('/project/:code/:category/addUserProcess', (req, res) => {
 });
 
 // 멤버 삭제하기
-app.post('/project/:code/:category/kickUserProcess', (req, res) => {
+app.post('/kickUserProcess', (req, res) => {
   const { code, email } = req.body;
 
   const sqlQuery1 = 'DELETE FROM joinedprojects WHERE email = ? AND code = ?;';
@@ -374,25 +374,31 @@ app.post('/project/:code/:category/kickUserProcess', (req, res) => {
 });
 
 // 프로젝트 삭제하기
-app.post('/project/:code/:category/deletePjProcess', (req, res) => {
+app.post('/deleteProjectProcess', (req, res) => {
   const { code, email } = req.body;
 
   const sqlQuery1 =
     'SELECT COUNT(*) FROM projects WHERE code = ? AND creatoremail = ?;';
-  const sqlQuery2 = 'DELETE FROM category WHERE code = ?;';
-  const sqlQuery3 = `DROP TABLE posts${code};`;
-  const sqlQuery4 = 'DELETE FROM joinedprojects WHERE code = ?;';
-  const sqlQuery5 = 'DELETE FROM projects WHERE code = ?;';
+  const sqlQuery2 = `DROP TABLE reples${code};`;
+  const sqlQuery3 = `DROP TABLE comments${code};`;
+  const sqlQuery4 = `DROP TABLE posts${code};`;
+  const sqlQuery5 = 'DELETE FROM category WHERE code = ?;';
+  const sqlQuery6 = 'DELETE FROM joinedprojects WHERE code = ?;';
+  const sqlQuery7 = 'DELETE FROM projects WHERE code = ?;';
 
   db.query(sqlQuery1, [code, email], (err, result) => {
     if (result[0]['COUNT(*)'] === 0) {
       res.send('0'); // 프로젝트 관리자만 삭제 가능 (삭제 실패)
     } else {
-      db.query(sqlQuery2, [code], (err, result) => {
+      db.query(sqlQuery2, [], (err, result) => {
         db.query(sqlQuery3, [], (err, result) => {
-          db.query(sqlQuery4, [code], (err, result) => {
+          db.query(sqlQuery4, [], (err, result) => {
             db.query(sqlQuery5, [code], (err, result) => {
-              res.send('1'); // 삭제 성공
+              db.query(sqlQuery6, [code], (err, result) => {
+                db.query(sqlQuery7, [code], (err, result) => {
+                  res.send('1'); // 프로젝트 삭제 완료
+                });
+              });
             });
           });
         });
@@ -402,7 +408,7 @@ app.post('/project/:code/:category/deletePjProcess', (req, res) => {
 });
 
 // 글 작성하기
-app.post('/project/:code/:category/writePost', (req, res) => {
+app.post('/writePost', (req, res) => {
   const { code, category, posttitle, postcontent, email } = req.body;
 
   const sqlQuery1 = `INSERT INTO posts${code} (category, posttitle, postcontent, powriteremail) VALUES(?, ?, ?, ?);`;
@@ -419,6 +425,8 @@ app.post('/project/:code/:category/writePost', (req, res) => {
 app.get('/project/:code/:category/:postnum', (req, res) => {
   const { code, postnum } = req.params;
 
+  console.log(code, postnum);
+
   const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE postnum = ?;`;
   const sqlQuery2 = `SELECT po.category, po.postnum, po.posttitle, po.postcontent, u.nickname, po.powriteremail, DATE_FORMAT(po.posteddate, '%m-%d-%y') AS postdate FROM posts${code} po INNER JOIN users u ON po.powriteremail = u.email WHERE postnum = ?;`;
 
@@ -434,7 +442,7 @@ app.get('/project/:code/:category/:postnum', (req, res) => {
 });
 
 // 글 수정하기
-app.post('/project/:code/:category/:postnum/update', (req, res) => {
+app.post('/updatePost', (req, res) => {
   const { code, postnum, category, posttitle, postcontent } = req.body;
 
   const sqlQuery1 = `UPDATE posts${code} SET category = ?, posttitle = ?, postcontent = ? WHERE postnum = ?;`;
@@ -449,8 +457,8 @@ app.post('/project/:code/:category/:postnum/update', (req, res) => {
 });
 
 // 글 삭제하기
-app.post('/project/:code/:category/:postnum/delete', (req, res) => {
-  const { code, postnum } = req.params;
+app.post('/deletePost', (req, res) => {
+  const { code, postnum } = req.body;
 
   const sqlQuery1 = `DELETE FROM posts${code} WHERE postnum = ?;`;
 
@@ -460,8 +468,8 @@ app.post('/project/:code/:category/:postnum/delete', (req, res) => {
 });
 
 // 댓글 불러오기
-app.post('/project/:code/:category/:postnum/loadComments', (req, res) => {
-  const { code, postnum } = req.params;
+app.post('/loadComments', (req, res) => {
+  const { code, postnum } = req.body;
 
   const sqlQuery1 = `SELECT COUNT(*) FROM comments${code} WHERE postnum = ?;`;
   const sqlQuery2 = `SELECT co.commentnum, co.commentcontent, co.cowriteremail, u.nickname  FROM comments${code} co INNER JOIN users u ON co.cowriteremail = u.email WHERE co.postnum = ? ORDER BY co.commentnum ASC;`;
@@ -478,7 +486,7 @@ app.post('/project/:code/:category/:postnum/loadComments', (req, res) => {
 });
 
 // 댓글 작성하기
-app.post('/project/:code/:category/:postnum/addComment', (req, res) => {
+app.post('/writeComment', (req, res) => {
   const { code, postnum, commentcontent, cowriteremail } = req.body;
 
   const sqlQuery1 = `INSERT INTO comments${code} (postnum, commentcontent, cowriteremail) VALUES(?, ?, ?)`;
@@ -493,7 +501,7 @@ app.post('/project/:code/:category/:postnum/addComment', (req, res) => {
 });
 
 // 댓글 수정하기
-app.post('/project/:code/:category/:postnum/updateComment', (req, res) => {
+app.post('/updateComment', (req, res) => {
   const { code, commentnum, content } = req.body;
 
   const sqlQuery1 = `UPDATE comments${code} SET commentcontent = ? WHERE commentnum = ?;`;
@@ -504,7 +512,7 @@ app.post('/project/:code/:category/:postnum/updateComment', (req, res) => {
 });
 
 // 댓글 삭제하기
-app.post('/project/:code/:category/:postnum/deleteComment', (req, res) => {
+app.post('/deleteComment', (req, res) => {
   const { code, commentnum } = req.body;
 
   const sqlQuery1 = `DELETE FROM comments${code} WHERE commentnum = ?;`;
@@ -515,7 +523,7 @@ app.post('/project/:code/:category/:postnum/deleteComment', (req, res) => {
 });
 
 // 대댓글 불러오기
-app.post('/project/:code/:category/:postnum/loadReples', (req, res) => {
+app.post('/loadReples', (req, res) => {
   const { code, commentnum } = req.body;
 
   const sqlQuery1 = `SELECT COUNT(*) FROM reples${code} WHERE commentnum = ?;`;
@@ -533,7 +541,7 @@ app.post('/project/:code/:category/:postnum/loadReples', (req, res) => {
 });
 
 // 대댓글 작성하기
-app.post('/project/:code/:category/:postnum/addReple', (req, res) => {
+app.post('/writeReple', (req, res) => {
   const { code, postnum, commentnum, replecontent, rewriteremail } = req.body;
 
   const sqlQuery1 = `INSERT INTO reples${code} (postnum, commentnum, replecontent, rewriteremail) VALUES(?, ?, ?, ?);`;
@@ -548,7 +556,7 @@ app.post('/project/:code/:category/:postnum/addReple', (req, res) => {
 });
 
 // 대댓글 수정하기
-app.post('/project/:code/:category/:postnum/updateReple', (req, res) => {
+app.post('/updateReple', (req, res) => {
   const { code, replenum, replecontent } = req.body;
 
   const sqlQuery1 = `UPDATE reples${code} SET replecontent = ? WHERE replenum = ?;`;
@@ -559,7 +567,7 @@ app.post('/project/:code/:category/:postnum/updateReple', (req, res) => {
 });
 
 // 대댓글 삭제하기
-app.post('/project/:code/:category/:postnum/deleteReple', (req, res) => {
+app.post('/deleteReple', (req, res) => {
   const { code, replenum } = req.body;
 
   const sqlQuery1 = `DELETE FROM reples${code} WHERE replenum = ?;`;

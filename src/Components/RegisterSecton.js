@@ -16,7 +16,7 @@ const RegisterSection = () => {
 
   const handleFormSubmit = () => {
     axios
-      .post('/register/regProcess', {
+      .post('/registerProcess', {
         email: emailRef.current.value,
         password: passwordRef.current.value,
         name: nameRef.current.value,
