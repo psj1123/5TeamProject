@@ -93,7 +93,7 @@ const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
           >
             취소
           </button>
-          <button className="createPostBtn" nClick={createPostBtn}>
+          <button className="createPostBtn" onClick={createPostBtn}>
             작성 완료
           </button>
         </div>
