@@ -29,7 +29,7 @@ a {
 }
 
 .headerLeft {
-    margin-left: 7em;
+    margin-left: 60px;
     height: 60px;
     display: flex;
     text-align: center;
@@ -68,7 +68,7 @@ a {
 .headerRight {
     width: auto;
     height: 60px;
-    margin-right: 3em;
+    margin-right: 60px;
     float: right;
 }
 
@@ -84,13 +84,18 @@ a {
     display: block;
     width: auto;
     height: 60px;
-    margin-right: 2em;
+    margin-right: 40px;
     float: right;
     line-height: 60px;
     font-size: 1.3rem;
     color: #000000;
     font-weight: bold;
-    transition: all .3s ease
+    transition: all .3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.rightLogin:last-of-type {
+  margin-right: 0;
 }
 .rightLogin > a:hover {
     color: #000000;
@@ -140,7 +145,7 @@ a {
 
 /* 모바일 - 손성준님 */
 
-@media only screen and (max-width: 789px) {
+@media only screen and (max-width: 768px) {
     .headerContainer {
       min-height: 3em;
       height: 50px;
