@@ -60,9 +60,6 @@ const ProjectSection = ({
   };
 
   const postWrite = (postData) => {
-    console.log(postData);
-    console.log(projectInfo.code);
-    console.log(loginEmail);
     axios
       .post(`/writePost`, {
         code: projectInfo.code,

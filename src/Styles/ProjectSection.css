@@ -26,6 +26,10 @@
     width: 100%;
     height: auto;
 }
+.postListMainBox {
+    padding: 50px 0 50px 0;
+}
+
 .pjSectionMain {
     background-color: #ffffff;
     display: flex;
@@ -44,31 +48,56 @@
     margin: auto;
 }
 
-.postsBoard {
-    background-color: #ffffff;
-    margin: 20px auto;
-    padding: 30px;
-    width: 1200px;
-    min-width: auto;
-    /* height: 600px; */
-    min-height: auto;
-}
-.postsBoard > ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.postListHeader {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 10px auto;
+    padding: 5px 0;
+    width: 90%;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    font-weight: bold;
+    cursor: default;
+    user-select: none;
 }
+.postListHeaderLeft,
+.postListLeft {
+    width: 10%;
+    min-width: 50px;
+    text-align: center;
+}
+.postListHeaderCenter {
+    width: 75%;
+    text-align: center;
+}
+.postListCenter {
+    width: 70%;
+}
+.postListHeaderRight,
+.postListRight {
+    width: 15%;
+    min-width: 70px;
+    text-align: center;
+}
+.postListLeft > div,
+.postListCenter > div,
+.postListRight > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .postList {
     display: flex;
-    margin-bottom: 10px;
-    padding: 0 0 5px 0;
-    width: 80%;
     justify-content: space-between;
-    border-bottom: 1px solid #eeeeee;
+    margin: 0 auto 5px auto;
+    padding: 5px 0;
+    border-bottom: 1px solid #dddddd;
+    width: 90%;
+}
+
+.firstPostList {
+    border-top: 1px solid #dddddd;
 }
 
 .postList:not(.postList-firstLine):hover {

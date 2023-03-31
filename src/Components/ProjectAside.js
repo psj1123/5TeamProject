@@ -14,8 +14,9 @@ const ProjectAside = ({
   postWriteBtnClick,
 }) => {
   useEffect(() => {
+    console.log('render');
     getCategories();
-  }, []);
+  }, [selectedCategory]);
 
   const createCategoryBtn = () => {
     const maxLength = 15;
@@ -81,7 +82,7 @@ const ProjectAside = ({
               </li>
               {categories.map((category) => {
                 if (category.category === '공지사항') {
-                  return;
+                  return <></>;
                 } else {
                   return (
                     <ProjectAsideCategory

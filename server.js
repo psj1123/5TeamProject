@@ -260,7 +260,7 @@ app.post('/loadCategories', (req, res) => {
 });
 
 // 카테고리 별 게시글 불러오기
-app.get('/project/:code/:category/loadPost', (req, res) => {
+app.get('/project/:code/:category', (req, res) => {
   const { code, category } = req.params;
 
   const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE category = ?;`;

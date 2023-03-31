@@ -1,22 +1,26 @@
 import React from 'react';
 
-const ProjectPostList = ({ post, postOpen }) => {
+const ProjectPostList = ({ idx, post, postOpen }) => {
   const openThisPost = (e) => {
     postOpen(e);
   };
 
   return (
-    <li className="postList">
-      <div className="postListLeftbox">
+    <div className={idx === 0 ? 'postList firstPostList' : 'postList'}>
+      <div className="postListLeft">
         <div>{post.postnum}</div>
+      </div>
+
+      <div className="postListCenter">
         <div id={post.postnum} onClick={openThisPost}>
           {post.posttitle}
         </div>
       </div>
-      <div className="postListRightbox">
+
+      <div className="postListRight">
         <div>{post.posteddate}</div>
       </div>
-    </li>
+    </div>
   );
 };
 

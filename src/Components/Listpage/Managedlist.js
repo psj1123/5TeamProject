@@ -10,7 +10,7 @@ function Managedlist({ exitProject, project }) {
   const navigate = useNavigate();
 
   const gotoProject = () => {
-    navigate(`/project/${project.code}/★ 개요`);
+    navigate(`/project/${project.code}`);
   };
 
   const exitProjectBtn = () => {

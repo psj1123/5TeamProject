@@ -44,7 +44,12 @@ const Project = () => {
   }, []);
 
   useEffect(() => {
-    getposts();
+    const fetchData = async () => {
+      await setIsLoading(true);
+      await getposts();
+      await setIsLoading(false);
+    };
+    fetchData();
   }, [selectedCategory]);
 
   const loadProjectInfo = () => {
@@ -86,9 +91,8 @@ const Project = () => {
   };
 
   const getposts = async () => {
-    await setIsLoading(true);
     await axios
-      .get(`/project/${code}/${selectedCategory}/loadPost`, {})
+      .get(`/project/${code}/${selectedCategory}`, {})
       .then((res) => {
         const { data } = res;
         if (data === 0) {
@@ -100,7 +104,6 @@ const Project = () => {
       .catch((err) => {
         console.error(err);
       });
-    await setIsLoading(false);
   };
 
   const getCategories = () => {
@@ -168,10 +171,12 @@ const Project = () => {
       });
   };
 
-  async function changeSelectedCategory(e) {
+  const changeSelectedCategory = async (e) => {
     let selectedCategory;
     if (e.target.innerText === 'X') {
       return;
+    } else if (e.target.lastChild.innerText === 'X') {
+      selectedCategory = e.target.lastChild.id;
     } else {
       selectedCategory = e.target.innerText;
     }
@@ -201,13 +206,11 @@ const Project = () => {
     } else if (!isPostUpdating && isPostOpened) {
       setIsPostOpened(false);
     }
-
-    await navigate(`/project/${code}/${selectedCategory}`);
     await setSelectedCategory(selectedCategory);
-    await getCategories();
-  }
+    // await getCategories();
+  };
 
-  async function deleteCategory(e) {
+  const deleteCategory = async (e) => {
     let nowChangeCategory;
     const targetCategory = e.target.id;
 
@@ -235,18 +238,18 @@ const Project = () => {
           return;
         }
       } else if (!isPostUpdating && isPostOpened) {
-        return;
       }
       nowChangeCategory = '★ 개요';
     } else {
       nowChangeCategory = selectedCategory;
     }
     await deleteCategories(targetCategory);
+    // await getCategories();
     await setSelectedCategory(nowChangeCategory);
-    await getCategories();
-    await navigate(`/project/${code}/${selectedCategory}`);
-    await getposts();
-  }
+    // await setIsLoading(true);
+    // await getposts();
+    // await setIsLoading(false);
+  };
 
   const deleteProject = () => {
     axios
