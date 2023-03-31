@@ -255,7 +255,7 @@ const Project = () => {
     axios
       .post('/deleteProjectProcess', {
         code: code,
-        email: loginEmail,
+        creatoremail: loginEmail,
       })
       .then((res) => {
         if (res.data === 0) {
