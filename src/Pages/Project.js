@@ -170,10 +170,7 @@ const Project = () => {
 
   async function changeSelectedCategory(e) {
     let selectedCategory;
-    const txt = e.target.innerHTML.substr(0, 2);
-    if (txt === '<d') {
-      selectedCategory = e.target.lastChild.id;
-    } else if (e.target.innerText === 'X') {
+    if (e.target.innerText === 'X') {
       return;
     } else {
       selectedCategory = e.target.innerText;
