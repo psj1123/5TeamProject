@@ -6,8 +6,6 @@ const HeaderRight = ({ page }) => {
   const loginEmail = window.sessionStorage.getItem('email');
   const loginNickname = window.sessionStorage.getItem('nickname');
 
-  const email = loginEmail.split('@');
-
   // 로그아웃 이벤트
   const logoutClick = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
