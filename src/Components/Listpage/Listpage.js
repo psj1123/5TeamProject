@@ -26,21 +26,21 @@ function Listpage() {
   // 참여중인 프로젝트 리스트 불러오기
   const getJoinedlist = () => {
     axios
-      .get(`/myprojectslist/${loginEmail}`, {})
+      .get(`/myprojectslist?email=${loginEmail}`, {})
       .then((res) => {
+        const { data } = res;
         // 참여 중인 프로젝트가 없음
-        if (res.data === 0) {
+        if (data === '') {
           setPjList(false);
           return;
         } // 참여 중인 프로젝트가 있음
         else {
-          const { data } = res;
           setJoinedProjectlist(data);
           setPjList(true);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -54,14 +54,15 @@ function Listpage() {
         deadline: data.deadline,
       })
       .then((res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
           getJoinedlist();
         } else {
-          alert('예기치 않은 오류로 프로젝트 생성에 실패했습니다.');
+          alert('예기치 않은 오류가 발생했습니다.');
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -73,17 +74,18 @@ function Listpage() {
         email: loginEmail,
       })
       .then((res) => {
-        if (res.data === -1) {
+        const { data } = res;
+        if (data === -1) {
           alert('존재하지 않는 프로젝트 코드입니다.');
-        } else if (res.data === 0) {
+        } else if (data === 0) {
           alert('이미 참여 중인 프로젝트입니다.');
-        } else if (res.data === 1) {
+        } else if (data === 1) {
           setModalIsOpen1(false);
           getJoinedlist();
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -95,14 +97,15 @@ function Listpage() {
         email: loginEmail,
       })
       .then((res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
           getJoinedlist();
         } else {
           alert('본인이 생성한 프로젝트는 탈퇴할 수 없습니다.');
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -179,26 +182,28 @@ function Listpage() {
       {/* --------- 참여중인 프로젝트 --------- */}
       <div className="listSection" align="center">
         <div className="Project_Container">
-          <div className="Project_Name">
-            <h4>참여중인 프로젝트로 가보아요</h4>
-          </div>
           {pjList ? (
-            <div className="top_Project">
-              <Container className="listBorderBottom">
-                <Row>
-                  {joinedProjectlist[0] !== undefined &&
-                    joinedProjectlist.map((project) => {
-                      return (
-                        <Managedlist
-                          key={project.code}
-                          project={project}
-                          exitProject={exitProject}
-                        />
-                      );
-                    })}
-                </Row>
-              </Container>
-            </div>
+            <>
+              <div className="Project_Name">
+                <h4>참여중인 프로젝트로 가보아요</h4>
+              </div>
+              <div className="top_Project">
+                <Container className="listBorderBottom">
+                  <Row>
+                    {joinedProjectlist[0] !== undefined &&
+                      joinedProjectlist.map((project) => {
+                        return (
+                          <Managedlist
+                            key={project.code}
+                            project={project}
+                            exitProject={exitProject}
+                          />
+                        );
+                      })}
+                  </Row>
+                </Container>
+              </div>
+            </>
           ) : (
             <></>
           )}

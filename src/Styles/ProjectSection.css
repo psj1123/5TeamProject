@@ -68,20 +68,20 @@
 }
 .postListHeaderLeft,
 .postListLeft {
-    width: 10%;
+    width: 50px;
     min-width: 50px;
     text-align: center;
 }
 .postListHeaderCenter {
-    width: 75%;
+    width: calc(100% - 140px);
     text-align: center;
 }
 .postListCenter {
-    width: 70%;
+    width: calc(95% - 140px);
 }
 .postListHeaderRight,
 .postListRight {
-    width: 15%;
+    width: 90px;
     min-width: 70px;
     text-align: center;
 }
@@ -128,6 +128,7 @@
     width: 95%;
     min-height: calc(75vh - 40px);
 }
+.ovCodeBox,
 .ovTitleBox,
 .ovDescriptionBox,
 .ovDeadlineBox,
@@ -137,6 +138,7 @@
     margin-bottom: 20px;
     vertical-align: middle;
 }
+.ovCodeLabel,
 .ovTitleLabel,
 .ovDescriptionLabel,
 .ovDeadlineLabel,
@@ -146,6 +148,7 @@
     font-weight: bold;
     color: #5e308c;
 }
+.ovCode,
 .ovTitle,
 .ovDescription,
 .ovDeadline,

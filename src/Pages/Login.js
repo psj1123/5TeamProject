@@ -32,22 +32,23 @@ const Login = () => {
         password: passwordRef.current.value,
       })
       .then((res) => {
-        if (res.data === -1) {
+        const { data } = res;
+        if (data.email === 'NoEmail') {
           emailRef.current.value = '';
           emailRef.current.focus();
           alert('존재하지 않는 이메일입니다.');
-        } else if (res.data === 0) {
+        } else if (data.email === 'NoPassword') {
           passwordRef.current.value = '';
           passwordRef.current.focus();
           alert('비밀번호가 올바르지 않습니다.');
         } else {
-          window.sessionStorage.setItem('email', res.data[0].email);
-          window.sessionStorage.setItem('nickname', res.data[0].nickname);
-          navigate('/myprojectslist?email=' + res.data[0].email);
+          window.sessionStorage.setItem('email', data.email);
+          window.sessionStorage.setItem('nickname', data.nickname);
+          navigate('/myprojectslist?email=' + data.email);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 

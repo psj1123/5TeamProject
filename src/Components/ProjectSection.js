@@ -40,22 +40,26 @@ const ProjectSection = ({
         {}
       )
       .then((res) => {
-        if (res.data === 0) {
+        const { data } = res;
+        if (data === '') {
           alert('존재하지 않는 글입니다!');
         } else {
           const { data } = res;
           setNowPost({
-            postCategory: data[0].category,
-            postNum: data[0].postnum,
-            postTitle: data[0].posttitle,
-            postContent: data[0].postcontent,
-            postWriter: data[0].nickname,
-            postedDate: data[0].posteddate,
-            writerEmail: data[0].powriteremail,
+            postCategory: data.category,
+            postNum: data.postnum,
+            postTitle: data.posttitle,
+            postContent: data.postcontent,
+            postWriter: data.nickname,
+            postedDate: data.posteddate,
+            writerEmail: data.powriteremail,
           });
 
           setIsPostOpened(true);
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -69,10 +73,16 @@ const ProjectSection = ({
         powriteremail: loginEmail,
       })
       .then((res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
           setIsPostWriting(false);
           getposts();
+        } else {
+          alert('예상치 못한 문제가 발생했습니다.');
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -83,10 +93,16 @@ const ProjectSection = ({
         postnum: nowPost.postNum,
       })
       .then((res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
           setIsPostOpened(false);
           getposts();
+        } else {
+          alert('예상치 못한 문제가 발생했습니다.');
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -100,11 +116,17 @@ const ProjectSection = ({
         postcontent: postData.content,
       })
       .then(async (res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
           await getposts();
           await postOpen({ target: { id: nowPost.postNum } });
           await setIsPostUpdating(false);
+        } else {
+          alert('예상치 못한 문제가 발생했습니다.');
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -133,11 +155,11 @@ const ProjectSection = ({
         <div>
           <div className="projectSection">
             <ProjectPostUpdate
+              loginEmail={loginEmail}
               categories={categories}
               projectInfo={projectInfo}
               nowPost={nowPost}
               postUpdate={postUpdate}
-              setIsPostOpened={setIsPostOpened}
               setIsPostUpdating={setIsPostUpdating}
             />
           </div>
@@ -149,6 +171,8 @@ const ProjectSection = ({
       <div>
         <div className="projectSection">
           <ProjectPostWrite
+            projectInfo={projectInfo}
+            loginEmail={loginEmail}
             categories={categories}
             postWrite={postWrite}
             setIsPostWriting={setIsPostWriting}
@@ -176,6 +200,10 @@ const ProjectSection = ({
                 <div className="pjSectionInnerBox">
                   <div className="overview_container">
                     <div>
+                      <div className="ovCodeBox">
+                        <div className="ovCodeLabel">프로젝트 코드</div>
+                        <div className="ovCode">{projectInfo.code}</div>
+                      </div>
                       <div className="ovTitleBox">
                         <div className="ovTitleLabel">프로젝트 제목</div>
                         <div className="ovTitle">{projectInfo.title}</div>

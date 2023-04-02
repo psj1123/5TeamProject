@@ -1,7 +1,13 @@
 import React, { useRef } from 'react';
 import '../../Styles/ProjectPostWrite.css';
 
-const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
+const ProjectPostWrite = ({
+  projectInfo,
+  loginEmail,
+  categories,
+  postWrite,
+  setIsPostWriting,
+}) => {
   const createCategoryRef = useRef();
   const createTitleRef = useRef();
   const createContentRef = useRef();
@@ -50,11 +56,27 @@ const ProjectPostWrite = ({ categories, postWrite, setIsPostWriting }) => {
             >
               <option value="">----- 선택 -----</option>
               {categories.map((category) => {
-                return (
-                  <option key={category.category} value={category.category}>
-                    {category.category}
-                  </option>
-                );
+                if (
+                  category === '공지사항' &&
+                  loginEmail === projectInfo.email
+                ) {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                } else if (
+                  category === '공지사항' &&
+                  loginEmail !== projectInfo.email
+                ) {
+                  return <></>;
+                } else {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                }
               })}
             </select>
           </div>

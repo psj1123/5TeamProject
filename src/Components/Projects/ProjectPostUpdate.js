@@ -2,7 +2,9 @@ import React, { useRef } from 'react';
 import '../../Styles/ProjectPostUpdate.css';
 
 const ProjectPostUpdate = ({
+  loginEmail,
   categories,
+  projectInfo,
   nowPost,
   postUpdate,
   setIsPostUpdating,
@@ -56,11 +58,27 @@ const ProjectPostUpdate = ({
             >
               <option value="">----- 선택 -----</option>
               {categories.map((category) => {
-                return (
-                  <option key={category.category} value={category.category}>
-                    {category.category}
-                  </option>
-                );
+                if (
+                  category === '공지사항' &&
+                  loginEmail === projectInfo.email
+                ) {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                } else if (
+                  category === '공지사항' &&
+                  loginEmail !== projectInfo.email
+                ) {
+                  return <></>;
+                } else {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                }
               })}
             </select>
           </div>

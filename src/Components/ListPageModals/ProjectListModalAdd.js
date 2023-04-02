@@ -76,7 +76,8 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
           name="project"
           ref={input_name}
           autoFocus
-          placeholder="프로젝트 명"
+          maxLength="40"
+          placeholder="프로젝트 명 (최대 40자)"
         />
         <Form.Text className="text-muted">
           생성하려는 프로젝트 명을 적어주세요.
@@ -90,7 +91,8 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
           onKeyDown={handleKeyPress}
           name="contents"
           ref={input_contents}
-          placeholder="프로젝트 설명"
+          maxLength="200"
+          placeholder="프로젝트 설명 (최대 200자)"
         />
         <Form.Text className="text-muted">
           프로젝트 설명을 간단히 적어주세요.

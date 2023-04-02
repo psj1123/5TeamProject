@@ -88,12 +88,12 @@ const ProjectAside = ({
                 <div className="category">공지사항</div>
               </li>
               {categories.map((category) => {
-                if (category.category === '공지사항') {
+                if (category === '공지사항') {
                   return null;
                 } else {
                   return (
                     <ProjectAsideCategory
-                      key={category.category}
+                      key={category}
                       projectInfo={projectInfo}
                       loginEmail={loginEmail}
                       category={category}

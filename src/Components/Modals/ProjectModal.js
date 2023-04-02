@@ -25,18 +25,17 @@ const ProjectModal = ({
         email: targetEmail,
       })
       .then((res) => {
-        if (res.data === -1) {
+        const { data } = res;
+        if (data === -1) {
           alert('존재하지 않는 유저입니다.');
-        } else if (res.data === 0) {
+        } else if (data === 0) {
           alert('이미 참여중인 유저입니다.');
-        } else if (res.data === 1) {
+        } else if (data === 1) {
+          loadUserList();
         }
       })
       .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        loadUserList();
+        console.error(err);
       });
   };
 
@@ -47,10 +46,16 @@ const ProjectModal = ({
         email: targetEmail,
       })
       .then((res) => {
-        if (res.data === 1) {
+        const { data } = res;
+        if (data === 1) {
+          loadUserList();
+        } else {
+          alert('예기치 않은 오류가 발생했습니다.');
         }
       })
-      .finally(loadUserList());
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const projectResetting = () => {
@@ -157,12 +162,18 @@ const ProjectModal = ({
               <h2>프로젝트 설정</h2>
               <div className="inputGroup">
                 <label htmlFor="project-title">프로젝트 제목</label>
-                <input id="project-title" type="text" ref={settingTitleRef} />
+                <input
+                  id="project-title"
+                  type="text"
+                  defaultValue={projectInfo.title}
+                  ref={settingTitleRef}
+                />
               </div>
               <div className="inputGroup">
                 <label htmlFor="project-description">프로젝트 설명</label>
                 <textarea
                   id="project-description"
+                  defaultValue={projectInfo.description}
                   ref={settingDescriptionRef}
                 />
               </div>
@@ -171,11 +182,19 @@ const ProjectModal = ({
                 <input
                   id="project-deadline"
                   type="date"
+                  defaultValue={projectInfo.deadline}
                   ref={settingDeadlineRef}
                 />
               </div>
               <div className="saveCloseContainer">
-                <button className="saveClose" onClick={projectResetting}>
+                <button
+                  className="saveClose"
+                  onClick={() => {
+                    projectResetting();
+                    setIsGeneralTabSelected(true);
+                    modalClose();
+                  }}
+                >
                   저장
                 </button>
               </div>

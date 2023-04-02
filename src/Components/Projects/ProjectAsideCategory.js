@@ -8,8 +8,7 @@ const AsideCategory = ({
   changeSelectedCategory,
   deleteCategory,
 }) => {
-  const categoryArticle = category.category;
-  const selected = selectedCategory === categoryArticle;
+  const selected = selectedCategory === category;
   const deleteClick = (e) => {
     if (window.confirm('이 카테고리를 삭제하시겠습니까?\n' + e.target.id)) {
       deleteCategory(e);
@@ -17,28 +16,24 @@ const AsideCategory = ({
       return;
     }
   };
-  // selected ? 'categoryBox categoryActive' : 'categoryBox'
+
   return (
     <li
       className={selected ? 'categoryBox categoryActive' : 'categoryBox'}
       onClick={changeSelectedCategory}
     >
       <div
-        title={categoryArticle}
+        title={category}
         className={
           projectInfo.email === loginEmail
             ? 'category category_manager'
             : 'category category_user'
         }
       >
-        {categoryArticle}
+        {category}
       </div>
       {projectInfo.email === loginEmail ? (
-        <button
-          id={categoryArticle}
-          className="deleteCategory"
-          onClick={deleteClick}
-        >
+        <button id={category} className="deleteCategory" onClick={deleteClick}>
           X
         </button>
       ) : (

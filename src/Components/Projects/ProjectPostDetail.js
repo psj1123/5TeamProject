@@ -58,11 +58,12 @@ const ProjectPostDetail = ({
         cowriteremail: loginEmail,
       })
       .then((res) => {
-        if (res.data === 0) {
-          alert('댓글 작성에 실패했습니다');
-        } else {
+        const { data } = res;
+        if (data === 1) {
           commentWriteRef.current.value = '';
           loadComments();
+        } else {
+          alert('댓글 작성에 실패했습니다');
         }
       })
       .catch((err) => {
@@ -208,7 +209,7 @@ const ProjectPostDetail = ({
         <div className="commentViewBox">
           <div className="commentView">
             {comments[0] === undefined ? (
-              <div>첫 댓글을 작성해보세요</div>
+              <div className="noComment">첫 댓글을 작성해보세요</div>
             ) : (
               comments.map((comment) => {
                 return (
@@ -233,6 +234,7 @@ const ProjectPostDetail = ({
                       writeCommentBtn();
                     }
                   }}
+                  placeholder="댓글 입력... (최대 200자)"
                   ref={commentWriteRef}
                 />
               </div>

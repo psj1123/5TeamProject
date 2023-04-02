@@ -52,7 +52,8 @@ const ProjectPostComment = ({
         commentnum: comment.commentnum,
       })
       .then((res) => {
-        setReples(res.data);
+        const { data } = res;
+        setReples(data);
       })
       .catch((err) => {
         console.log(err);
@@ -213,7 +214,7 @@ const ProjectPostComment = ({
       {repleOpen ? (
         <div className="repleViewBox">
           {reples[0] === undefined ? (
-            <div>답글이 없습니다</div>
+            <div className="noReple">답글이 없습니다</div>
           ) : (
             reples.map((reple) => {
               return (
@@ -238,6 +239,7 @@ const ProjectPostComment = ({
                     writeRepleBtn();
                   }
                 }}
+                placeholder="답글 입력... (최대 200자)"
                 ref={repleWriteRef}
               />
             </div>

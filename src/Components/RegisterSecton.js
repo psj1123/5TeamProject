@@ -24,8 +24,9 @@ const RegisterSection = () => {
         birthday: dateOfBirthRef.current.value,
       })
       .then((res) => {
-        if (res.data === 0) {
-          alert('이미 등록된 이메일입니다.');
+        const { data } = res;
+        if (data === 0) {
+          alert('이미 사용 중인 이메일입니다.');
           emailRef.current.value = '';
           emailRef.current.focus();
         } else {
@@ -34,7 +35,7 @@ const RegisterSection = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 

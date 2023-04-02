@@ -33,7 +33,6 @@ const Project = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (loginEmail === null) {
-        alert('접근할 수 없는 프로젝트입니다.');
         navigate('/login');
       } else {
         await loadProjectInfo();
@@ -57,18 +56,21 @@ const Project = () => {
         email: loginEmail,
       })
       .then((res) => {
-        if (res.data === -1 || res.data === 0) {
+        const { data } = res;
+        if (data.code === -1) {
+          alert('존재하지 않는 프로젝트입니다.');
+          navigate(`/myprojectslist?email=${loginEmail}`);
+        } else if (data.code === 0) {
           alert('접근할 수 없는 프로젝트입니다.');
           navigate(`/myprojectslist?email=${loginEmail}`);
         } else {
-          const { data } = res;
           setProjectInfo({
-            code: data[0].code,
-            title: data[0].title,
-            description: data[0].description,
-            nickname: data[0].nickname,
-            email: data[0].creatoremail,
-            deadline: data[0].deadline,
+            code: data.code,
+            title: data.title,
+            description: data.description,
+            nickname: data.nickname,
+            email: data.creatoremail,
+            deadline: data.deadline,
           });
         }
       })
@@ -85,6 +87,9 @@ const Project = () => {
       .then((res) => {
         const { data } = res;
         setUserlist(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -129,9 +134,10 @@ const Project = () => {
         category: categoryName,
       })
       .then((res) => {
-        if (res.data === 0) {
+        const { data } = res;
+        if (data === 0) {
           alert('이미 존재하는 카테고리입니다.');
-        } else if (res.data === 1) {
+        } else if (data === 1) {
           getCategories();
         }
       })
@@ -147,9 +153,10 @@ const Project = () => {
         category: categoryName,
       })
       .then((res) => {
-        if (res.data === 0) {
+        const { data } = res;
+        if (data === 0) {
           alert('카테고리 삭제 실패');
-        } else if (res.data === 1) {
+        } else if (data === 1) {
           getCategories();
         }
       })
@@ -167,7 +174,12 @@ const Project = () => {
         deadline: data.deadline,
       })
       .then((res) => {
-        loadProjectInfo();
+        const { data } = res;
+        if (data === 0) {
+          alert('예기지 않은 오류가 발생했습니다.');
+        } else if (data === 1) {
+          loadProjectInfo();
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -210,7 +222,10 @@ const Project = () => {
       setIsPostOpened(false);
     }
     await setSelectedCategory(selectedCategory);
-    await toggleAside();
+
+    if (document.querySelector('.aside').className === 'aside asideToggle') {
+      toggleAside();
+    }
   };
 
   const deleteCategory = async (e) => {
@@ -258,7 +273,8 @@ const Project = () => {
         creatoremail: loginEmail,
       })
       .then((res) => {
-        if (res.data === 0) {
+        const { data } = res;
+        if (data === 0) {
           alert('프로젝트 관리자만 삭제할 수 있습니다.');
         } else {
           navigate(`/myprojectslist?email=${loginEmail}`);
@@ -287,7 +303,10 @@ const Project = () => {
       setIsPostOpened(false);
     }
     setIsPostWriting(true);
-    toggleAside();
+
+    if (document.querySelector('.aside').className === 'aside asideToggle') {
+      toggleAside();
+    }
   };
 
   const toggleAside = () => {
