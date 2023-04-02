@@ -37,6 +37,14 @@ const ProjectPostComment = ({
     }
   };
 
+  const writeRepleBtn = () => {
+    if (repleWriteRef.current.value === '') {
+      return false;
+    } else {
+      writeReple();
+    }
+  };
+
   const loadReples = () => {
     axios
       .post('/loadReples', {
@@ -123,11 +131,15 @@ const ProjectPostComment = ({
               defaultValue={comment.commentcontent}
               onKeyDown={async (e) => {
                 if (e.key === 'Enter') {
-                  updateCommentBtn();
-                  await setCommentUpdate(false);
-                  await (document.getElementById(
-                    updateCommentBtn_Bottom
-                  ).innerText = '수정');
+                  if (commentUpdateRef.current.value === '') {
+                    return false;
+                  } else {
+                    await updateCommentBtn();
+                    await setCommentUpdate(false);
+                    await (document.getElementById(
+                      updateCommentBtn_Bottom
+                    ).innerText = '수정');
+                  }
                 }
               }}
               ref={commentUpdateRef}
@@ -136,11 +148,15 @@ const ProjectPostComment = ({
           <div
             className="commentUpdateBtn"
             onClick={async () => {
-              updateCommentBtn();
-              await setCommentUpdate(false);
-              await (document.getElementById(
-                updateCommentBtn_Bottom
-              ).innerText = '수정');
+              if (commentUpdateRef.current.value === '') {
+                return false;
+              } else {
+                await updateCommentBtn();
+                await setCommentUpdate(false);
+                await (document.getElementById(
+                  updateCommentBtn_Bottom
+                ).innerText = '수정');
+              }
             }}
           >
             수정
@@ -219,13 +235,13 @@ const ProjectPostComment = ({
                 maxLength="200"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                    writeReple();
+                    writeRepleBtn();
                   }
                 }}
                 ref={repleWriteRef}
               />
             </div>
-            <div className="repleWriteBtn" onClick={writeReple}>
+            <div className="repleWriteBtn" onClick={writeRepleBtn}>
               답글 작성
             </div>
           </div>

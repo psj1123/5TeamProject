@@ -99,11 +99,11 @@ const ProjectSection = ({
         posttitle: postData.title,
         postcontent: postData.content,
       })
-      .then((res) => {
+      .then(async (res) => {
         if (res.data === 1) {
-          getposts();
-          setIsPostUpdating(false);
-          setIsPostOpened(false);
+          await getposts();
+          await postOpen({ target: { id: nowPost.postNum } });
+          await setIsPostUpdating(false);
         }
       });
   };
@@ -161,7 +161,9 @@ const ProjectSection = ({
       return (
         <div className="projectSection">
           <div className="pjSectionMainBox">
-            <div className="pjSectionMain"></div>
+            <div className="pjSectionMain">
+              <div className="pjSectionInnerBox"></div>
+            </div>
           </div>
         </div>
       );
@@ -171,57 +173,59 @@ const ProjectSection = ({
           <div className="projectSection">
             <div className="pjSectionMainBox">
               <div className="pjSectionMain">
-                <div className="overview_container">
-                  <table className="overview_table">
-                    <tr>
-                      <td className="overview_title">
-                        <p> 프로젝트 제목 &nbsp;</p>
-                      </td>
-                      <td>
-                        <p>{projectInfo.title}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="overview_title">
-                        <p> 프로젝트 설명 &nbsp;</p>
-                      </td>
-                      <td>
-                        <p>{projectInfo.description}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="overview_title">
-                        <p> 프로젝트 마감일 &nbsp;</p>
-                      </td>
-                      <td>
-                        <p>{projectInfo.deadline}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="overview_title">
-                        <p> 프로젝트 D-Day &nbsp;</p>
-                      </td>
-                      <td>
-                        <p>
-                          {result > 0
-                            ? 'D - ' + result
-                            : result === 0
-                            ? 'D - day'
-                            : '종료'}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="overview_title">
-                        <p> 관리자 &nbsp;</p>
-                      </td>
-                      <td>
-                        <p>
-                          {projectInfo.nickname} ({projectInfo.email})
-                        </p>
-                      </td>
-                    </tr>
-                  </table>
+                <div className="pjSectionInnerBox">
+                  <div className="overview_container">
+                    <table className="overview_table">
+                      <tr>
+                        <td className="overview_title">
+                          <p> 프로젝트 제목 &nbsp;</p>
+                        </td>
+                        <td>
+                          <p>{projectInfo.title}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="overview_title">
+                          <p> 프로젝트 설명 &nbsp;</p>
+                        </td>
+                        <td>
+                          <p>{projectInfo.description}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="overview_title">
+                          <p> 프로젝트 마감일 &nbsp;</p>
+                        </td>
+                        <td>
+                          <p>{projectInfo.deadline}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="overview_title">
+                          <p> 프로젝트 D-Day &nbsp;</p>
+                        </td>
+                        <td>
+                          <p>
+                            {result > 0
+                              ? 'D - ' + result
+                              : result === 0
+                              ? 'D - day'
+                              : '종료'}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="overview_title">
+                          <p> 관리자 &nbsp;</p>
+                        </td>
+                        <td>
+                          <p>
+                            {projectInfo.nickname} ({projectInfo.email})
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -232,7 +236,9 @@ const ProjectSection = ({
           <div className="projectSection">
             <div className="pjSectionMainBox">
               <div className="pjSectionMain">
-                <h3 className="noPosts">작성된 글이 없습니다!</h3>
+                <div className="pjSectionInnerBox">
+                  <h3 className="noPosts">작성된 글이 없습니다!</h3>
+                </div>
               </div>
             </div>
           </div>
@@ -240,31 +246,33 @@ const ProjectSection = ({
       } else {
         return (
           <div className="projectSection">
-            <div className="pjSectionMainBox postListMainBox">
+            <div className="pjSectionMainBox">
               <div className="pjSectionMain">
-                <div className="postListHeader">
-                  <div className="postListHeaderLeft">
-                    <div>번호</div>
-                  </div>
+                <div className="pjSectionInnerBox">
+                  <div className="postListHeader">
+                    <div className="postListHeaderLeft">
+                      <div>번호</div>
+                    </div>
 
-                  <div className="postListHeaderCenter">
-                    <div>제목</div>
-                  </div>
+                    <div className="postListHeaderCenter">
+                      <div>제목</div>
+                    </div>
 
-                  <div className="postListHeaderRight">
-                    <div>작성일</div>
+                    <div className="postListHeaderRight">
+                      <div>작성일</div>
+                    </div>
                   </div>
+                  {posts.map((post, idx) => {
+                    return (
+                      <ProjectPostList
+                        key={post.postnum}
+                        idx={idx}
+                        post={post}
+                        postOpen={postOpen}
+                      />
+                    );
+                  })}
                 </div>
-                {posts.map((post, idx) => {
-                  return (
-                    <ProjectPostList
-                      key={post.postnum}
-                      idx={idx}
-                      post={post}
-                      postOpen={postOpen}
-                    />
-                  );
-                })}
               </div>
             </div>
 

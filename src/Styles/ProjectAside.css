@@ -1,62 +1,161 @@
-aside > * {
-    box-sizing: border-box;
-    width: 250px;
-    user-select: none;
+/* 화면 작을 때 */
+@media only screen and (max-width: 789px) {
+  .aside {
+    display: none;
+    width: 100%;
   }
-  aside {
+  .asideBtn {
+    display: block;
+  }
+  .asideToggle {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
+  }
+  .category_manager {
+    width: calc(100% - 41px);
+  }
+}
+
+/* 평상시 */
+@media only screen and (min-width: 789px) {
+  .aside {
+    display: flex;
     width: 250px;
-    height: 100%;
-    z-index: 50;
-    background-color: #eeeeee;
-    box-shadow: 0px 0px 2px #808080;
-    box-sizing: border-box;
   }
-  .asideTop {
-    margin: 0;
-    padding: 0;
-    width: auto;
-    min-height: calc(100% - 250px);
+  .asideBtn {
+    display: none;
   }
-  .blockBox {
-    height: 62px;
-    margin: 20px;
+  .category_manager {
+    width: 169px;
   }
-  .projectCreator {
-    width: 220px;
-    height: auto;
-    margin: 20px auto;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #000000;
-    cursor: default;
-  }
-  .projectCreator p {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
+}
+
+.asideBtn {
+  background-color: #e3d4f5;
+  position: fixed;
+  padding: 5px;
+  top: 61px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10000;
+}
+.asideBtn:hover {
+  background-color: #dfcbf7;
+  box-shadow: 0px 0px 2px #808080;
+}
+.asideBtn > div {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../public/img/asideBtn.png");
+  background-size: cover;
+}
+
+.aside {
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 50;
+  background-color: #eeeeee;
+  box-shadow: 0px 0px 2px #808080;
+  box-sizing: border-box;
+}
+.aside > * {
+  box-sizing: border-box;
+  width: 250px;
+  user-select: none;
+}
+.asideTop {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  min-height: calc(100% - 120px);
+}
+.blockBox {
+  height: 64px;
+  margin: 0 0 20px 0;
+}
+.projectCreator {
+  width: calc(100% - 40px);
+  height: auto;
+  margin: 10px auto;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #000000;
+  cursor: default;
+}
+.projectCreator p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.projectCreator p:last-of-type {
+  font-size: 1rem;
+}
+.projectCategory {
+  height: calc(100% - 120px);
+  overflow-y: auto;
+}
+.projectCategory ul {
+  margin: 10px 20px;
+  padding: 0;
+  list-style: none;
+}
+
+/* 카테고리 박스 */
+.categoryBox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 0 10px;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.categoryBox:hover {
+  box-shadow: 0px 0px 2px #444444;
+  cursor: pointer;
+}
+.categoryBox:active {
+  background-color: #f3f3f3;
+  font-weight: bold;
+}
+.categoryActive {
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 2px #444444;
+  font-weight: bold;
+}
+
+/* 실제 카테고리 문자 박스 */
+.category {
+  float: left;
+  height: 31px;
+  line-height: 31px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.category_user {
+  width: 100%;
+}
+
+/* 카테고리 추가 버튼 */
+.addCategoryBox {
+    background-color: #dddddd;
+    margin-top: 10px;
+    color: #777777;
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .projectCreator p:last-of-type {
-    font-size: 1rem;
-  }
-  .projectCategory {
-    height: calc(100% - 165px);
-    overflow-y: auto;
-  }
-  .projectCategory ul {
-    margin: 10px 20px;
-    padding: 0;
-    list-style: none;
-  }
-  .projectCategory ul li {
+
     border-radius: 10px;
     margin: 10px 0;
     padding: 0 10px;
@@ -64,109 +163,84 @@ aside > * {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-  .projectCategory ul li:hover {
-    box-shadow: 0px 0px 2px #444444;
+}
+.addCategoryBox div {
+  width: 100%;
+}
+.addCategoryBox:hover {
+  box-shadow: 0px 0px 2px #444444;
+  color: #000000;
     cursor: pointer;
-  }
-  .projectCategory ul li:active {
-    background-color: #f3f3f3;
-    font-weight: bold;
-  }
-  .categoryActive {
-    background-color: #f9f9f9;
-    box-shadow: 0px 0px 2px #444444;
-    font-weight: bold;
-  }
-  .projectCategory ul li div {
-    float: left;
-    width: 150px;
-    height: 31px;
-    line-height: 31px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+}
+.addCategoryBox:active {
+  background-color: #f3f3f3;
+  font-weight: bold;
+  border: 1px solid #000000;
+}
 
-  .projectCategory ul li:last-of-type {
-      background-color: #dddddd;
-      margin-top: 10px;
-      color: #777777;
-      text-align: center;
-  }
-  .projectCategory ul li:last-of-type div {
-    width: 100%;
-  }
-  .projectCategory ul li:last-of-type:hover {
-      color: #000000;
-  }
-  .projectCategory ul li:last-of-type:active {
-      border: 1px solid #000000;
-  }
- 
-  .deleteCategory {
-    display: block;
-    background-color: #ffffff00;
-    width: 21px;
-    height: 21px;
-    margin: 5px 0;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    float: right;
-    line-height: 21px;
-    font-size: 0.4rem;
-  }
-  .deleteCategory:hover {
-    background-color: #5e308c;
-    color: #ffffff;
-    cursor: pointer;
-  }
-  .deleteCategory:active {
-    background-color: #a676a3;
-    color: #ffffff;
-  }
+/* 카테고리 삭제 버튼 */
+.deleteCategory {
+  display: block;
+  background-color: #ffffff00;
+  width: 21px;
+  height: 21px;
+  margin: 5px 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  float: right;
+  line-height: 21px;
+  font-size: 0.4rem;
+}
+.deleteCategory:hover {
+  background-color: #5e308c;
+  color: #ffffff;
+  cursor: pointer;
+}
+.deleteCategory:active {
+  background-color: #a676a3;
+  color: #ffffff;
+}
 
-  .asideBottom {
-    background-color: #eeeeee;
-    height: 120px;
-  }
-  .writeAndUserListAndSettings {
-    width: 100%;
-    height: 100%;
-  }
-  .writeAndUserListAndSettings > div {
-    margin: 0 20px;
-    padding: 0;
-  }
-  
-  .writeAndUserListAndSettings > div div {
-    background-color: #5e308c;
-    border-radius: 10px;
-    margin: 10px auto;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: #ffffff;
-  }
-  .writeBtn {
-    width: 80%;
-    min-height: 30px;
-    font-size: 1.1rem;
-  }
-  
-  .settingsBtn {
-    width: 80%;
-    min-height: 30px;
-  }
-  .writeAndUserListAndSettings > div div:hover {
-    background-color: #845f99;
-    cursor: pointer;
-    box-shadow: 0px 0px 3px #444444;
-  }
-  .writeAndUserListAndSettings > div div:active {
-    background-color: #a676a3;
-    color: #000000;
-  }
+/* 사이드바 아래쪽 */
+.asideBottom {
+  background-color: #eeeeee;
+  width: auto;
+  height: auto;
+}
+.writeAndUserListAndSettings {
+  display: flex;
+  flex-direction: column-reverse;
+  width: auto;
+  height: 100%;
+}
+
+.writeAndUserListAndSettings div {
+  background-color: #5e308c;
+  border-radius: 10px;
+  margin: 10px auto;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+.writeBtn {
+  width: 200px;
+  min-height: 30px;
+  font-size: 1.1rem;
+}
+.settingsBtn {
+  width: 200px;
+  min-height: 30px;
+}
+.writeAndUserListAndSettings  div:hover {
+  background-color: #845f99;
+  cursor: pointer;
+  box-shadow: 0px 0px 3px #444444;
+}
+.writeAndUserListAndSettings div:active {
+  background-color: #a676a3;
+  color: #000000;
+}

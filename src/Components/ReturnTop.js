@@ -7,7 +7,7 @@ const ReturnTop = () => {
 
   const handleScrollY = () => {
     setScrollY(window.scrollY);
-    if (ScrollY > 100) {
+    if (ScrollY > 10) {
       setIsTop(false);
     } else {
       setIsTop(true);

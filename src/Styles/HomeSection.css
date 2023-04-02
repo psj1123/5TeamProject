@@ -5,6 +5,7 @@ section {
     min-height: 47em;
     background-color: #E2E2E2;
     overflow: hidden;
+    user-select: none;
 }
 
 .homeSectionHead_Container {
@@ -182,7 +183,7 @@ section {
     color: #ffffff;
 }
 
-@media only screen and (max-width: 768px) and (max-width: 768px) {
+@media only screen and (max-width: 789px) {
 
     section {
         margin-top: 3em;

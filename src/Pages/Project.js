@@ -45,9 +45,7 @@ const Project = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await setIsLoading(true);
       await getposts();
-      await setIsLoading(false);
     };
     fetchData();
   }, [selectedCategory]);
@@ -91,6 +89,7 @@ const Project = () => {
   };
 
   const getposts = async () => {
+    await setIsLoading(true);
     await axios
       .get(`/project/${code}/${selectedCategory}`, {})
       .then((res) => {
@@ -103,6 +102,9 @@ const Project = () => {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -148,6 +150,7 @@ const Project = () => {
         if (res.data === 0) {
           alert('카테고리 삭제 실패');
         } else if (res.data === 1) {
+          getCategories();
         }
       })
       .catch((err) => {
@@ -207,7 +210,7 @@ const Project = () => {
       setIsPostOpened(false);
     }
     await setSelectedCategory(selectedCategory);
-    // await getCategories();
+    await toggleAside();
   };
 
   const deleteCategory = async (e) => {
@@ -238,17 +241,14 @@ const Project = () => {
           return;
         }
       } else if (!isPostUpdating && isPostOpened) {
+        setIsPostOpened(false);
       }
       nowChangeCategory = '★ 개요';
     } else {
       nowChangeCategory = selectedCategory;
     }
     await deleteCategories(targetCategory);
-    // await getCategories();
     await setSelectedCategory(nowChangeCategory);
-    // await setIsLoading(true);
-    // await getposts();
-    // await setIsLoading(false);
   };
 
   const deleteProject = () => {
@@ -278,7 +278,6 @@ const Project = () => {
       ) {
         setIsPostOpened(false);
         setIsPostUpdating(false);
-        setIsPostWriting(true);
       } else {
         return;
       }
@@ -286,10 +285,14 @@ const Project = () => {
       return;
     } else if (!isPostUpdating && isPostOpened) {
       setIsPostOpened(false);
-      setIsPostWriting(true);
-    } else {
-      setIsPostWriting(true);
     }
+    setIsPostWriting(true);
+    toggleAside();
+  };
+
+  const toggleAside = () => {
+    const aside = document.querySelector('.aside');
+    aside.classList.toggle('asideToggle');
   };
 
   const modalOpen = () => {
@@ -343,6 +346,9 @@ const Project = () => {
           isPostWriting={isPostWriting}
           setIsPostWriting={setIsPostWriting}
         />
+        <div className="asideBtn" onClick={toggleAside}>
+          <div></div>
+        </div>
         <ReturnTop />
       </div>
     );

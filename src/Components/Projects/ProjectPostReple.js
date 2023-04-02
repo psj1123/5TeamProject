@@ -7,7 +7,7 @@ const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
 
   const repleUpdateRef = useRef();
 
-  const updateRepleBtn_Bottom = reple.replenum + 'Btn';
+  const updateRepleBtn_Bottom = reple.replenum + 'repleBtn';
 
   const updateRepleBtn = () => {
     const value = repleUpdateRef.current.value;
@@ -35,11 +35,15 @@ const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
               defaultValue={reple.replecontent}
               onKeyDown={async (e) => {
                 if (e.key === 'Enter') {
-                  updateRepleBtn();
-                  await setRepleUpdate(false);
-                  await (document.getElementById(
-                    updateRepleBtn_Bottom
-                  ).innerText = '수정');
+                  if (repleUpdateRef.current.value === '') {
+                    return false;
+                  } else {
+                    updateRepleBtn();
+                    await setRepleUpdate(false);
+                    await (document.getElementById(
+                      updateRepleBtn_Bottom
+                    ).innerText = '수정');
+                  }
                 }
               }}
               ref={repleUpdateRef}
@@ -48,10 +52,15 @@ const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
           <div
             className="repleUpdateBtn"
             onClick={async () => {
-              updateRepleBtn();
-              await setRepleUpdate(false);
-              await (document.getElementById(updateRepleBtn_Bottom).innerText =
-                '수정');
+              if (repleUpdateRef.current.value === '') {
+                return false;
+              } else {
+                updateRepleBtn();
+                await setRepleUpdate(false);
+                await (document.getElementById(
+                  updateRepleBtn_Bottom
+                ).innerText = '수정');
+              }
             }}
           >
             수정

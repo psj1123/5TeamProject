@@ -1,58 +1,107 @@
-.createCategoryBox {}
+.createCategoryBox {
+    min-height: 7.7vh;
+}
 
+/* 카테고리 label */
+.createCategoryBox label:first-of-type {
+    margin: 0;
+}
+
+/* 카테고리 input */
 .createCategory{
-    width:140px;
-    border:1px solid #e9e9e9;
-    color: #909090;
+    background-color: #f3f3f3;
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+.createCategory:focus {
+    background-color: #e7e7e7;
+    outline: 1px solid #000000;
 }
 
-.createPostTitleBox {}
+.createPostTitleBox {
+    width: 100%;
+    min-height: 13vh;
+}
 
+/* 제목 input */
 .createPostTitle {
-    height: 50px;
-    font-size: 25px;
+    background-color: #f3f3f3;
+    margin: 5px auto 0 auto;
+    padding: 0 10px;
+    width: 100%;
+    height: 40px;
+    font-size: 1.25rem;
     border: none;
-    padding-top: 26px;
-    padding-bottom: 26px;
-    border-bottom: 2px solid #0000001a;
+    border-radius: 5px;
 }
-
 .createPostTitle:focus {
-    outline: none;
+    background-color: #e7e7e7;
+    outline: 1px solid #000000;
 }
 
-.createPostContentBox {}
+.createPostContentBox {
+    width: 100%;
+    min-height: calc(75vh - 13vh - 7.7vh);
+}
 
-.createPostContent {
-    /* overflow: hidden; */
+/* 내용 input */
+.createPostContent {background-color: #f3f3f3;
+    margin: 5px auto 0 auto;
+    padding: 8px 10px;
+    width: 100%;
+    min-height: calc(75vh - 13vh - 7.7vh - 51.6px - 3vh);
+    font-size: 1.1rem;
     border: none;
+    border-radius: 5px;
     resize: none;
-    padding-top: 16px;
 }
-
 .createPostContent:focus {
-    outline: none;
+    background-color: #e7e7e7;
+    outline: 1px solid #000000;
 }
 
-.createPostBtnBox{
-    position: fixed;
-    right:200px;
-    bottom: 20px;
+/* 작성 / 취소 버튼 박스 */
+.createPostBtnBox {
+    width: 100%;
+    min-height: 3vh;
+    float: right;
+    text-align: right;
 }
 
 .createPostBtn,
 .createPostCancelBtn {
-    width:80px;
-    height:40px;
-    border:none;
-    border-radius: 20px;
-    background-color: #000000;
-    color: #ffffff;
-    margin: 10px;
+    width: 100px;
+    padding: 5px 0;
+    border: none;
+    border-radius: 5px;
+}
+.createPostBtn:active,
+.createPostCancelBtn:active {
+    border: 1px solid #000000;
 }
 
-.createPostBtn:hover,
+.createPostBtn {
+    background-color: #9747ff;
+    color: #ffffff;
+    margin: 0 0 0 15px;
+}
+.createPostBtn:hover {
+    background-color: #b985fd;
+    box-shadow: 0px 0px 2px #808080;
+}
+
+.createPostCancelBtn {
+    background-color: #dfdfdf;
+    color: #000000;
+    margin: 0 0 0 15px;
+}
 .createPostCancelBtn:hover {
-    opacity: 0.8;
-    background-color: #ff5544;
+    box-shadow: 0px 0px 2px #808080;
+    background-color: #cfcfcf;
 }

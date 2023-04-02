@@ -263,18 +263,22 @@ app.post('/loadCategories', (req, res) => {
 app.get('/project/:code/:category', (req, res) => {
   const { code, category } = req.params;
 
-  const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE category = ?;`;
-  const sqlQuery2 = `SELECT postnum, posttitle, DATE_FORMAT(posteddate, '%m-%d-%y') AS posteddate FROM posts${code} WHERE category = ? ORDER BY postnum DESC;`;
+  if (category === '★ 개요') {
+    res.send('-1');
+  } else {
+    const sqlQuery1 = `SELECT COUNT(*) FROM posts${code} WHERE category = ?;`;
+    const sqlQuery2 = `SELECT postnum, posttitle, DATE_FORMAT(posteddate, '%m-%d-%y') AS posteddate FROM posts${code} WHERE category = ? ORDER BY postnum DESC;`;
 
-  db.query(sqlQuery1, [category], (err, result) => {
-    if (result[0]['COUNT(*)'] === 0) {
-      res.send('0'); // 해당 카테고리에 글이 존재하지 않음(따로 처리할 것)
-    } else {
-      db.query(sqlQuery2, [category], (err, result) => {
-        res.send(result); // 게시글 불러오기 성공
-      });
-    }
-  });
+    db.query(sqlQuery1, [category], (err, result) => {
+      if (result[0]['COUNT(*)'] === 0) {
+        res.send('0'); // 해당 카테고리에 글이 존재하지 않음(따로 처리할 것)
+      } else {
+        db.query(sqlQuery2, [category], (err, result) => {
+          res.send(result); // 게시글 불러오기 성공
+        });
+      }
+    });
+  }
 });
 
 // 카테고리 추가하기

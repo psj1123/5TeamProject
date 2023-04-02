@@ -11,6 +11,7 @@ const ProjectPostDetail = ({
 }) => {
   const loginEmail = window.sessionStorage.getItem('email');
 
+  const [sectionBottomPadding, setSectionBottomPadding] = useState(true);
   const [commentOpen, setCommentOpen] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -37,6 +38,15 @@ const ProjectPostDetail = ({
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const writeCommentBtn = () => {
+    const value = commentWriteRef.current.value;
+    if (value === '') {
+      return false;
+    } else {
+      writeComment();
+    }
   };
 
   const writeComment = () => {
@@ -95,92 +105,101 @@ const ProjectPostDetail = ({
 
   return (
     <>
-      <div className="pjSectionMainBox">
+      <div
+        className={
+          sectionBottomPadding ? 'pjSectionMainBox' : 'pjSectionMainBox_Detail'
+        }
+      >
         <div className="pjSectionMain">
-          <div className="postTitleBox">
-            <div>{nowPost.postTitle}</div>
-          </div>
-
-          <div className="postWirterAndDateBox">
-            <div className="postWriterBox">
-              <div>{nowPost.postWriter}</div>
+          <div className="pjSectionInnerBox">
+            <div className="postTitleBox">
+              <div>{nowPost.postTitle}</div>
             </div>
-            <div className="postedDateBox">
-              <div>{nowPost.postedDate}</div>
-            </div>
-          </div>
 
-          <div className="postContentBox">
-            <div>{nowPost.postContent}</div>
-          </div>
-
-          <div className="buttons">
-            <div className="commentAndBackToListBox">
-              <div
-                className="commentBtn"
-                onClick={async () => {
-                  loadComments();
-                  (await commentOpen)
-                    ? setCommentOpen(false)
-                    : setCommentOpen(true);
-                }}
-              >
-                댓글
+            <div className="postWirterAndDateBox">
+              <div className="postWriterBox">
+                <div>{nowPost.postWriter}</div>
               </div>
-
-              <div
-                className="backToList"
-                onClick={() => {
-                  setIsPostOpened(false);
-                }}
-              >
-                목록으로 돌아가기
+              <div className="postedDateBox">
+                <div>{nowPost.postedDate}</div>
               </div>
             </div>
 
-            <div className="deleteAndUpdateBox">
-              {nowPost.writerEmail === loginEmail ? (
-                <>
-                  <div
-                    className="deletePost"
-                    onClick={() => {
-                      if (window.confirm('정말 삭제하시겠습니까?')) {
-                        postDelete();
-                      } else {
-                        return;
-                      }
-                    }}
-                  >
-                    삭제
-                  </div>
+            <div className="postContentBox">
+              <div>{nowPost.postContent}</div>
+            </div>
 
-                  <div
-                    className="updatePost"
-                    onClick={() => {
-                      setIsPostUpdating(true);
-                    }}
-                  >
-                    수정
-                  </div>
-                </>
-              ) : projectInfo.email === loginEmail ? (
-                <>
-                  <div
-                    className="deletePost"
-                    onClick={() => {
-                      if (window.confirm('정말 삭제하시겠습니까?')) {
-                        postDelete();
-                      } else {
-                        return;
-                      }
-                    }}
-                  >
-                    삭제
-                  </div>
-                </>
-              ) : (
-                <></>
-              )}
+            <div className="buttons">
+              <div className="commentAndBackToListBox">
+                <div
+                  className="commentBtn"
+                  onClick={async () => {
+                    loadComments();
+                    (await commentOpen)
+                      ? setCommentOpen(false)
+                      : setCommentOpen(true);
+                    (await sectionBottomPadding)
+                      ? setSectionBottomPadding(false)
+                      : setSectionBottomPadding(true);
+                  }}
+                >
+                  댓글
+                </div>
+
+                <div
+                  className="backToList"
+                  onClick={() => {
+                    setIsPostOpened(false);
+                  }}
+                >
+                  목록으로 돌아가기
+                </div>
+              </div>
+
+              <div className="deleteAndUpdateBox">
+                {nowPost.writerEmail === loginEmail ? (
+                  <>
+                    <div
+                      className="deletePost"
+                      onClick={() => {
+                        if (window.confirm('정말 삭제하시겠습니까?')) {
+                          postDelete();
+                        } else {
+                          return;
+                        }
+                      }}
+                    >
+                      삭제
+                    </div>
+
+                    <div
+                      className="updatePost"
+                      onClick={() => {
+                        setIsPostUpdating(true);
+                      }}
+                    >
+                      수정
+                    </div>
+                  </>
+                ) : projectInfo.email === loginEmail ? (
+                  <>
+                    <div
+                      className="deletePost"
+                      onClick={() => {
+                        if (window.confirm('정말 삭제하시겠습니까?')) {
+                          postDelete();
+                        } else {
+                          return;
+                        }
+                      }}
+                    >
+                      삭제
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -211,13 +230,13 @@ const ProjectPostDetail = ({
                   maxLength="200"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      writeComment();
+                      writeCommentBtn();
                     }
                   }}
                   ref={commentWriteRef}
                 />
               </div>
-              <div className="commentWriteBtn" onClick={writeComment}>
+              <div className="commentWriteBtn" onClick={writeCommentBtn}>
                 댓글 작성
               </div>
             </div>

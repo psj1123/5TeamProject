@@ -1,6 +1,8 @@
 import React from 'react';
 
 const AsideCategory = ({
+  projectInfo,
+  loginEmail,
   category,
   selectedCategory,
   changeSelectedCategory,
@@ -15,21 +17,33 @@ const AsideCategory = ({
       return;
     }
   };
-
+  // selected ? 'categoryBox categoryActive' : 'categoryBox'
   return (
     <li
-      className={selected ? 'categoryActive' : ''}
+      className={selected ? 'categoryBox categoryActive' : 'categoryBox'}
       onClick={changeSelectedCategory}
     >
-      <div>{categoryArticle}</div>
-
-      <button
-        id={categoryArticle}
-        className="deleteCategory"
-        onClick={deleteClick}
+      <div
+        title={categoryArticle}
+        className={
+          projectInfo.email === loginEmail
+            ? 'category category_manager'
+            : 'category category_user'
+        }
       >
-        X
-      </button>
+        {categoryArticle}
+      </div>
+      {projectInfo.email === loginEmail ? (
+        <button
+          id={categoryArticle}
+          className="deleteCategory"
+          onClick={deleteClick}
+        >
+          X
+        </button>
+      ) : (
+        <></>
+      )}
     </li>
   );
 };

@@ -1,33 +1,33 @@
+/* 좁은 화면 */
 @media only screen and (max-width: 789px) {
     .projectSection {
-        margin: 50px 0 0 250px;
+        margin: 50px 0 0 0;
+        width: 100%;
         min-height: calc(100vh - 50px);
     }
 }
 
-@media only screen and (min-width: 790px) {
+/* 평상시 */
+@media only screen and (min-width: 789px) {
     .projectSection {
         margin: 64px 0 0 250px;
+        width: calc(100% - 250px);
         min-height: calc(100vh - 64px);
     }
 }
 
 .projectSection {
     background-color: #e2e2e2;
-    width: calc(100% - 250px);
-    height: auto;
+    height: 100%;
 }
 .projectSection * {
     box-sizing: border-box;
 }
 .pjSectionMainBox {
     background-color: #e2e2e2;
-    padding: 50px 0 0 0;
     width: 100%;
+    padding: 50px 0;
     height: auto;
-}
-.postListMainBox {
-    padding: 50px 0 50px 0;
 }
 
 .pjSectionMain {
@@ -36,11 +36,16 @@
     flex-direction: column;
     width: 50vw;
     min-width: 500px;
-    height: 75vh;
-    min-height: 570px;
+    height: auto;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
+}
+
+.pjSectionInnerBox {
+    display: flex;
+    flex-direction: column;
+    min-height: 75vh;
 }
 
 .noPosts {
@@ -48,10 +53,11 @@
     margin: auto;
 }
 
+/* 게시글 목록 기초 틀 */
 .postListHeader {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto 10px auto;
+    margin: 0 auto;
     padding: 5px 0;
     width: 90%;
     border-top: 1px solid #000000;
@@ -87,59 +93,31 @@
     text-overflow: ellipsis;
 }
 
+/* 실제 게시글 목록 */
 .postList {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto 5px auto;
-    padding: 5px 0;
+    margin: 0 auto;
+    padding: 7px 0;
     border-bottom: 1px solid #dddddd;
     width: 90%;
 }
-
-.firstPostList {
-    border-top: 1px solid #dddddd;
+.postList:hover {
+    background-color: #f3f3f3;
 }
-
-.postList:not(.postList-firstLine):hover {
-    background-color: #dddddd;
-    font-size: large;
-    font-weight: bold;
+.postListLeft,
+.postListRight {
+    cursor: default;
+    user-select: none;
 }
-
-.postList-firstLine {
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-    font-size: large;
-    font-weight: bold;
-}
-.postListTitle {
-    text-align: center;
-}
-.postListLeftbox {
-   width: 100%;
-}
-.postListLeftbox > div {
-    float: left;
-}
-.postListLeftbox > div:first-of-type {
-    width: 10%;
-    text-align: center;
-}
-.postListLeftbox > div:last-of-type {
-    width: 90%;
-}
-.postListLeftbox > div:last-of-type:hover {
+.postListCenter {
     cursor: pointer;
+}
+.postListCenter:hover {
     text-decoration: underline;
+    font-weight: bold;
+    color: #5e308c;
 }
-.postListRightbox {
-    width: 15%;
-}
-.postListRightbox > div {
-    text-align: center;
-}
-
-
 
 /* 개요 */
 .projectSection .overview_container {
@@ -169,4 +147,14 @@
 
 .overview_table p {
     text-align: left;
+}
+
+
+/* 글 작성,수정 창 전체 label */
+.pjSectionInnerBox label {
+    display: block;
+    margin: 30px 0 0 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #444444;
 }

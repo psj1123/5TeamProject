@@ -1,10 +1,18 @@
 /* 글 상세보기 */
+.pjSectionMainBox_Detail {
+    background-color: #e2e2e2;
+    width: 100%;
+    padding: 50px 0 0 0;
+    height: auto;
+}
 .postTitleBox {
+    height: auto;
     padding: 5px 0;
     font-size: 1.8rem;
     font-weight: bold;
 }
 .postWirterAndDateBox {
+    height: auto;
     padding: 5px 0;
     border-bottom: 2px solid #dddddd;
 }
@@ -21,7 +29,7 @@
 .postContentBox {
     margin: 11px 0;
     padding: 0 10px;
-    height: 82.5%;
+    height: 60vh;
     overflow-y: auto;
     text-align: justify;
     font-size: 1.05rem;
@@ -29,6 +37,7 @@
 
 /* 댓글, 목록으로 돌아가기, 삭제, 수정 버튼 */
 .buttons {
+    height: auto;
     padding: 20px 0 0 0;
     border-top: 2px solid #dddddd;
 }
@@ -80,7 +89,7 @@
 }
 .backToList:hover {
     box-shadow: 0px 0px 2px #808080;
-    background-color: #bbbbbb;
+    background-color: #cfcfcf;
 }
 .backToList:active {
     border: 1px solid #000000;

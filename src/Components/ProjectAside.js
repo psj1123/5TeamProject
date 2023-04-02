@@ -13,8 +13,9 @@ const ProjectAside = ({
   deleteCategory,
   postWriteBtnClick,
 }) => {
+  const loginEmail = sessionStorage.getItem('email');
+
   useEffect(() => {
-    console.log('render');
     getCategories();
   }, [selectedCategory]);
 
@@ -52,7 +53,7 @@ const ProjectAside = ({
 
   return (
     <>
-      <aside>
+      <aside className="aside">
         <div className="asideTop">
           <div className="blockBox"></div>
           <div className="projectTitleAndDescription">
@@ -65,28 +66,36 @@ const ProjectAside = ({
           <div className="projectCategory">
             <ul>
               <li
+                title="★ 개요"
                 className={
-                  selectedCategory === '★ 개요' ? 'categoryActive' : ''
+                  selectedCategory === '★ 개요'
+                    ? 'categoryBox categoryActive'
+                    : 'categoryBox'
                 }
                 onClick={changeSelectedCategory}
               >
-                <div>★ 개요</div>
+                <div className="category">★ 개요</div>
               </li>
               <li
+                title="공지사항"
                 className={
-                  selectedCategory === '공지사항' ? 'categoryActive' : ''
+                  selectedCategory === '공지사항'
+                    ? 'categoryBox categoryActive'
+                    : 'categoryBox'
                 }
                 onClick={changeSelectedCategory}
               >
-                <div>공지사항</div>
+                <div className="category">공지사항</div>
               </li>
               {categories.map((category) => {
                 if (category.category === '공지사항') {
-                  return <></>;
+                  return null;
                 } else {
                   return (
                     <ProjectAsideCategory
                       key={category.category}
+                      projectInfo={projectInfo}
+                      loginEmail={loginEmail}
                       category={category}
                       selectedCategory={selectedCategory}
                       changeSelectedCategory={changeSelectedCategory}
@@ -95,23 +104,29 @@ const ProjectAside = ({
                   );
                 }
               })}
-              <li onClick={createCategoryBtn}>
-                <div>카테고리 추가</div>
-              </li>
+              {projectInfo.email === loginEmail ? (
+                <li className="addCategoryBox" onClick={createCategoryBtn}>
+                  <div className="category">카테고리 추가</div>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
         </div>
 
         <div className="asideBottom">
           <div className="writeAndUserListAndSettings">
-            <div>
-              <div className="writeBtn" onClick={postWriteBtnClick}>
-                글 작성
-              </div>
+            <div className="writeBtn" onClick={postWriteBtnClick}>
+              글 작성
+            </div>
+            {projectInfo.email === loginEmail ? (
               <div className="settingsBtn" onClick={modalOpen}>
                 설정
               </div>
-            </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </aside>

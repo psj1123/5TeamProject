@@ -35,6 +35,7 @@ a {
     text-align: center;
     align-content: stretch;
     justify-content: center;
+    user-select: none;
 }
 
 .headerLeft :hover {
@@ -70,6 +71,7 @@ a {
     height: 60px;
     margin-right: 60px;
     float: right;
+    user-select: none;
 }
 
 .headerRight > div {
@@ -103,7 +105,7 @@ a {
 
 .rightLogin div :hover {
     color: #5e308c;
-    transition: all .3s ease
+    transition: .1s;
 }
 
 .rightLogin div {
@@ -145,7 +147,7 @@ a {
 
 /* 모바일 - 손성준님 */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 789px) {
     .headerContainer {
       min-height: 3em;
       height: 50px;
