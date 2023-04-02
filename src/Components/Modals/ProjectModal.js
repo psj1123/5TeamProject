@@ -147,7 +147,7 @@ const ProjectModal = ({
               className={!isGeneralTabSelected ? 'active' : ''}
               onClick={handleTabClick}
             >
-              멤버 관리 설정
+              멤버 관리
             </li>
           </ul>
         </div>
@@ -186,7 +186,7 @@ const ProjectModal = ({
           )}
           {!isGeneralTabSelected && (
             <div className="memberManagement">
-              <h2>멤버 관리 설정</h2>
+              <h2>멤버 관리</h2>
               <ul>
                 {userlist.map((user) => {
                   return (
@@ -195,18 +195,16 @@ const ProjectModal = ({
                         {user.nickname}({user.name})
                       </div>
                       {user.email !== projectInfo.email && (
-                        <div id={user.email} onClick={kickUserBtn}>
+                        <div
+                          id={user.email}
+                          className="kickUserBtn"
+                          onClick={kickUserBtn}
+                        >
                           추방
                         </div>
                       )}
                       {user.email === projectInfo.email && (
-                        <div
-                          id={user.email}
-                          style={{
-                            width: '47px',
-                            cursor: 'default',
-                          }}
-                        >
+                        <div id={user.email} className="manager">
                           관리자
                         </div>
                       )}

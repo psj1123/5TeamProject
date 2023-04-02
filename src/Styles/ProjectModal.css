@@ -1,4 +1,4 @@
-.ReactModal__Body--open {
+  .ReactModal__Body--open {
     overflow: hidden;
   }
   .projectModalOverlay {
@@ -13,21 +13,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-  }
-  .projectModal {
-    background-color: #ffffff;
-    position: relative;
-    box-sizing: border-box;
-    width: auto;
-    max-width: calc(100% - 450px);
-    min-width: 800px;
-    height: auto;
-    max-height: calc(100% - 100px);
-    min-height: 500px;
-    overflow: hidden;
-    padding: 20px 70px 20px 20px;
-    border: 2px solid #000000;
-    border-radius: 10px;
   }
   .closeModal {
     position: absolute;
@@ -44,15 +29,12 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
-  
   .closeModal:hover {
     background-color: #f2f2f2;
   }
-  
   .closeModal:focus {
     outline: none;
   }
-  
   .closeModal::before,
   .closeModal::after {
     content: '';
@@ -61,57 +43,152 @@
     height: 3px;
     background-color: #333;
   }
-  
   .closeModal::before {
     transform: rotate(45deg);
   }
-  
   .closeModal::after {
     transform: rotate(-45deg);
   }
-  
   /* 설정 modal */
   
-  .settingModalContainer {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    border: none;
-  }
-  
-  .settingModalSidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    width: 30%;
-    height: 100%;
-    padding-right: 20px;
-  }
-  
-  .settingModalSidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .settingModalSidebar li {
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e5e5;
-    color: #555555;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .settingModalSidebar li.active {
-    color: #000000;
-    border-right: 3px solid #000000;
-    background-color: #f5f5f5;
+  /* 작은 화면 */
+  @media only screen and (max-width: 789px) {
+    .projectModal {
+      background-color: #ffffff;
+      position: relative;
+      box-sizing: border-box;
+      width: auto;
+      max-width: calc(100% - 450px);
+      min-width: 450px;
+      height: auto;
+      max-height: calc(100% - 100px);
+      min-height: 500px;
+      overflow: auto;
+      scrollbar-width: none;
+      padding: 20px 50px 20px 20px;
+      border: 2px solid #000000;
+      border-radius: 10px;
+    }
+    .projectModal::-webkit-scrollbar {
+      display: none;
+    }
+    .settingModalContainer {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      border: none;
+    }
+    .settingModalSidebar {
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    .settingModalSidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .settingModalSidebar li {
+      width: 170px;
+      padding: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      color: #555555;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      float: left;
+      text-align: center;
+    }
+    .settingModalSidebar li.active {
+      color: #000000;
+      border-bottom: 3px solid #000000;
+      background-color: #f5f5f5;
+    }
+    .settingModalMain {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .delProject {
+    right: -35px;
+    bottom: -5px;
+    }
+    .addUserBtnContainer button {
+      width: 40%;
+    }
   }
 
-  .settingModalMain {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
+  /* 큰 화면 */
+  @media only screen and (min-width: 789px) {
+    .projectModal {
+      background-color: #ffffff;
+      position: relative;
+      box-sizing: border-box;
+      width: auto;
+      max-width: calc(100% - 450px);
+      min-width: 800px;
+      height: auto;
+      max-height: calc(100% - 100px);
+      min-height: 500px;
+      overflow: hidden;
+      padding: 20px 70px 20px 20px;
+      border: 2px solid #000000;
+      border-radius: 10px;
+    }
+    .settingModalContainer {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      box-sizing: border-box;
+      border: none;
+    }
+    .settingModalSidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      width: 30%;
+      height: 100%;
+      padding-right: 20px;
+    }
+    .settingModalSidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .settingModalSidebar li {
+      padding: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      color: #555555;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+    .settingModalSidebar li.active {
+      color: #000000;
+      border-right: 3px solid #000000;
+      background-color: #f5f5f5;
+    }
+    .settingModalMain {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+    }
+      .delProject {
+      right: 20px;
+      bottom: 10px;
+    }
+    .addUserBtnContainer button {
+      width: 30%;
+    }
+  }
+
+
+  .settingModalMain h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
   }
 
   .inputGroup {
@@ -153,6 +230,7 @@
     font-size: 1rem;
     margin: 30px auto 0 auto;
     width: 150px;
+    user-select: none;
   }
   .saveClose:hover {
     background-color: #845f99;
@@ -175,8 +253,6 @@
     width: 100px;
     height: 30px;
     position: absolute;
-    right: 20px;
-    bottom: 10px;
   }
   
   .delProject:hover {
@@ -188,141 +264,7 @@
     background-color: #ff7777;
     color: #000000;
   }
-  
   /* 설정 modal 끝 */
-  
-  /* 글작성, 글수정 modal */
-  .writeNoteButton,
-  .updateNoteButton {
-    background-color: #5e308c;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  .writeNoteButton:hover,
-  .updateNoteButton:hover {
-    background-color: #845f99;
-    box-shadow: 0px 0px 3px #444444;
-  }
-  .writeNoteButton:active,
-  .updateNoteButton:active {
-    background-color: #a676a3;
-    color: #000000;
-  }
-  
-  /* 글작성 modal 끝 */
-  
-  /* 카테고리 */
-  
-  .categoryContainer {
-    display: block;
-    margin-bottom: 20px;
-    padding: 0 10px;
-  }
-  
-  .categoryContainer select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-
-    font-size: 0.9rem;
-
-    color: #000000;
-    background-color: #fff;
-
-    padding: 5px 3rem;
-    margin: 0;
-
-    border: 1px solid #aaa;
-    border-radius: 0.5em;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  }
-
-  .categoryContainer select:hover {
-    border-color: #888;
-  }
-  
-  .categoryContainer select:focus {
-    border-color: #aaa;
-    box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
-    box-shadow: 0 0 0 3px -moz-mac-focusring;
-    color: #222;
-    outline: none;
-  }
-  
-  
-  /* 카테고리 끝 */
-  
-  /* 자세히 보기 */
-  
-  .detailSection {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 30px;
-  }
-  
-  .detailTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .detailescription {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
-  .detailWriter {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .detailDate {
-    font-size: 14px;
-    color: #999;
-  }
-  
-  .buttonContainer {
-    margin-top: 30px;
-    display: flex;
-    gap: 30px;
-    float: right;
-  }
-  
-  .editButton,
-  .deleteButton {
-    background-color: #5e308c;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .editButton:hover,
-  .deleteButton:hover {
-    background-color: #845f99;
-    box-shadow: 0px 0px 3px #444444;
-  }
-  
-  .editButton:active,
-  .deleteButton:active {
-    background-color: #a676a3;
-    color: #000000;
-  }
-  
-  /* 자세히 보기 끝 */
   
   /* 설정 modal 멤버관리 tab */
   .memberManagement {
@@ -373,21 +315,32 @@
     text-overflow: ellipsis;
   }
 
-  .memberManagement li > div:last-of-type {
+  .manager {
+    display: block;
+    width: 47px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.8rem;
+    cursor: default;
+    user-select: none;
+  }
+
+  .kickUserBtn {
     display: block;
     width: 35px;
     border-radius: 3px;
     text-align: center;
     font-size: 0.8rem;
     cursor: pointer;
+    user-select: none;
   }
 
-  .memberManagement li > div:last-of-type:hover {
+  .kickUserBtn:hover {
     background-color: #5e308c;
     color: #ffffff;
   }
 
-  .memberManagement li > div:last-of-type:active {
+  .kickUserBtn:active {
     background-color: #a676a3;
     color: #ffffff;
   }
@@ -398,10 +351,9 @@
     align-items: center;
     width: 90%;
   }
-  .memberManagement button {
+  .addUserBtnContainer button {
     background-color: #5e308c;
-    width: 30%;
-    color: #fff;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -409,14 +361,15 @@
     font-weight: bold;
     cursor: pointer;
     margin: 30px auto 0 auto;
+    user-select: none;
   }
   
-  .memberManagement button:hover {
+  .addUserBtnContainer button:hover {
     background-color: #845f99;
     box-shadow: 0px 0px 3px #444444;
   }
   
-  .memberManagement button:active {
+  .addUserBtnContainer button:active {
     background-color: #a676a3;
     color: #000000;
   }
