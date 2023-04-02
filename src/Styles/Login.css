@@ -69,6 +69,10 @@
   cursor: pointer;
   border-radius: 6px;
 }
+.login-form-button button:hover {
+  background-color: #a676a3;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 1);
+}
 
 .signup {
   text-align: center;
