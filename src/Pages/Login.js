@@ -59,7 +59,7 @@ const Login = () => {
     return (
       <>
         <Header page={'Login'} />
-        <section>
+        <section className="loginSection">
           <div className="login-container">
             <div className="login-image">
               <img src="img/LoginImage.png" alt="login" />

@@ -120,35 +120,42 @@
 }
 
 /* 개요 */
-.projectSection .overview_container {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    justify-content: center
+.overview_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 95%;
+    min-height: calc(75vh - 40px);
 }
-
-.overview_table {
-    display: inline-block;
-    margin: auto;
-    border-collapse: collapse;
+.ovTitleBox,
+.ovDescriptionBox,
+.ovDeadlineBox,
+.ovDdayBox,
+.ovManagerBox {
+    width: 100%;
+    margin-bottom: 20px;
+    vertical-align: middle;
 }
-
-.overview_table td, th {
-    text-align: left;
-    padding: 8px;
-    color: #636363;
-    font-weight: bold;
-}
-
-.overview_table .overview_title {
+.ovTitleLabel,
+.ovDescriptionLabel,
+.ovDeadlineLabel,
+.ovDdayLabel,
+.ovManagerLabel {
+    font-size: 0.9rem;
     font-weight: bold;
     color: #5e308c;
 }
-
-.overview_table p {
-    text-align: left;
+.ovTitle,
+.ovDescription,
+.ovDeadline,
+.ovDday,
+.ovManager {
+    margin: 0 10px 0 10px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #636363;
 }
-
 
 /* 글 작성,수정 창 전체 label */
 .pjSectionInnerBox label {

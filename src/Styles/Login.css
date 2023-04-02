@@ -1,7 +1,9 @@
 .All_LoginContainer {
   display: flex;
 }
-
+.loginSection {
+  min-height: 900px;
+}
 .login-container {
   display: flex;
   position: static;

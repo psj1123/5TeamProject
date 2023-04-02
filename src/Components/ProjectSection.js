@@ -175,56 +175,41 @@ const ProjectSection = ({
               <div className="pjSectionMain">
                 <div className="pjSectionInnerBox">
                   <div className="overview_container">
-                    <table className="overview_table">
-                      <tr>
-                        <td className="overview_title">
-                          <p> 프로젝트 제목 &nbsp;</p>
-                        </td>
-                        <td>
-                          <p>{projectInfo.title}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="overview_title">
-                          <p> 프로젝트 설명 &nbsp;</p>
-                        </td>
-                        <td>
-                          <p>{projectInfo.description}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="overview_title">
-                          <p> 프로젝트 마감일 &nbsp;</p>
-                        </td>
-                        <td>
-                          <p>{projectInfo.deadline}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="overview_title">
-                          <p> 프로젝트 D-Day &nbsp;</p>
-                        </td>
-                        <td>
-                          <p>
-                            {result > 0
-                              ? 'D - ' + result
-                              : result === 0
-                              ? 'D - day'
-                              : '종료'}
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="overview_title">
-                          <p> 관리자 &nbsp;</p>
-                        </td>
-                        <td>
-                          <p>
-                            {projectInfo.nickname} ({projectInfo.email})
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
+                    <div>
+                      <div className="ovTitleBox">
+                        <div className="ovTitleLabel">프로젝트 제목</div>
+                        <div className="ovTitle">{projectInfo.title}</div>
+                      </div>
+                      <div className="ovDescriptionBox">
+                        <div className="ovDescriptionLabel">프로젝트 설명</div>
+                        <div className="ovDescription">
+                          {projectInfo.description}
+                        </div>
+                      </div>
+                      <div className="ovManagerBox">
+                        <div className="ovManagerLabel">프로젝트 매니저</div>
+                        <div className="ovManager">
+                          {projectInfo.nickname}({projectInfo.email})
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="ovDeadlineBox">
+                        <div className="ovDeadlineLabel">프로젝트 마감일</div>
+                        <div className="ovDeadline">{projectInfo.deadline}</div>
+                      </div>
+                      <div className="ovDdayBox">
+                        <div className="ovDdayLabel">프로젝트 D - Day</div>
+                        <div className="ovDday">
+                          {result > 0
+                            ? 'D - ' + result
+                            : result === 0
+                            ? 'D - day'
+                            : '종료'}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
