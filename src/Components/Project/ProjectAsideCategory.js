@@ -25,14 +25,14 @@ const AsideCategory = ({
       <div
         title={category}
         className={
-          projectInfo.email === loginEmail
+          projectInfo.creatoremail === loginEmail
             ? 'category category_manager'
             : 'category category_user'
         }
       >
         {category}
       </div>
-      {projectInfo.email === loginEmail ? (
+      {projectInfo.creatoremail === loginEmail ? (
         <button id={category} className="deleteCategory" onClick={deleteClick}>
           X
         </button>

@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
-import Managedlist from './Managedlist';
-import ProjectListModalAdd from '../ListPageModals/ProjectListModalAdd';
-import ProjectListModalJoin from '../ListPageModals/ProjectListModalJoin';
-import '../ListPageModals/ProjectListModal.css';
-import '../../Styles/Cards.css';
-import './list.css';
+import ProjectCards from './MyProjectsList/ProjectsListCards';
+import MyProjectsListModalAdd from './MyProjectsList/MyProjectsListModalAdd';
+import MyProjectsListModalJoin from './MyProjectsList/MyProjectsListModalJoin';
+import '../Styles/ProjectsList.css';
 
-function Listpage() {
+function MyProjectsList() {
   const loginEmail = window.sessionStorage.getItem('email');
   const loginNickname = window.sessionStorage.getItem('nickname');
 
@@ -141,7 +139,7 @@ function Listpage() {
                       onRequestClose={() => setModalIsOpen(false)}
                     >
                       <div className="projectAdd">
-                        <ProjectListModalAdd
+                        <MyProjectsListModalAdd
                           setModalIsOpen={setModalIsOpen}
                           createProject={createProject}
                         />
@@ -165,7 +163,7 @@ function Listpage() {
                       onRequestClose={() => setModalIsOpen1(false)}
                     >
                       <div>
-                        <ProjectListModalJoin
+                        <MyProjectsListModalJoin
                           setModalIsOpen={setModalIsOpen1}
                           joinProject={joinProject}
                         />
@@ -193,7 +191,7 @@ function Listpage() {
                     {joinedProjectlist[0] !== undefined &&
                       joinedProjectlist.map((project) => {
                         return (
-                          <Managedlist
+                          <ProjectCards
                             key={project.code}
                             project={project}
                             exitProject={exitProject}
@@ -213,4 +211,4 @@ function Listpage() {
   );
 }
 
-export default Listpage;
+export default MyProjectsList;

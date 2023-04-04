@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import ReactModal from 'react-modal';
-import '../../Styles/ProjectModal.css';
 import axios from 'axios';
+import '../../Styles/ProjectModal.css';
 
 const ProjectModal = ({
   isOpen,
@@ -213,7 +213,7 @@ const ProjectModal = ({
                       <div>
                         {user.nickname}({user.name})
                       </div>
-                      {user.email !== projectInfo.email && (
+                      {user.email !== projectInfo.creatoremail && (
                         <div
                           id={user.email}
                           className="kickUserBtn"
@@ -222,7 +222,7 @@ const ProjectModal = ({
                           추방
                         </div>
                       )}
-                      {user.email === projectInfo.email && (
+                      {user.email === projectInfo.creatoremail && (
                         <div id={user.email} className="manager">
                           관리자
                         </div>

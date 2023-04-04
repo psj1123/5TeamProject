@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../Styles/ListModal.css';
-import './ProjectListModal.css';
+import '../../Styles/ProjectsListModal.css';
 
-function ProjectListModalAdd({ setModalIsOpen, createProject }) {
+function MyProjectsListModalAdd({ setModalIsOpen, createProject }) {
   const input_name = useRef('');
   const input_contents = useRef('');
   const input_deadline = useRef('');
@@ -147,4 +146,4 @@ function ProjectListModalAdd({ setModalIsOpen, createProject }) {
   );
 }
 
-export default ProjectListModalAdd;
+export default MyProjectsListModalAdd;

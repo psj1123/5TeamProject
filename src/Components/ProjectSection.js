@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import '../Styles/ProjectSection.css';
-import '../Styles/ProjectSection_PostDetail.css';
 import axios from 'axios';
-import ProjectPostList from './Projects/ProjectPostList';
-import ProjectPostDetail from './Projects/ProjectPostDetail';
-import ProjectPostUpdate from './Projects/ProjectPostUpdate';
-import ProjectPostWrite from './Projects/ProjectPostWrite';
+import ProjectPostList from './Project/ProjectPostList';
+import ProjectPostDetail from './Project/ProjectPostDetail';
+import ProjectPostUpdate from './Project/ProjectPostUpdate';
+import ProjectPostWrite from './Project/ProjectPostWrite';
+import '../Styles/ProjectSection.css';
 
 const ProjectSection = ({
   posts,
@@ -217,7 +216,7 @@ const ProjectSection = ({
                       <div className="ovManagerBox">
                         <div className="ovManagerLabel">프로젝트 매니저</div>
                         <div className="ovManager">
-                          {projectInfo.nickname}({projectInfo.email})
+                          {projectInfo.nickname}({projectInfo.creatoremail})
                         </div>
                       </div>
                     </div>
@@ -288,17 +287,6 @@ const ProjectSection = ({
                 </div>
               </div>
             </div>
-
-            {/* <div>
-              <ul>
-                {postPageingList.map((Pages, i) => {
-                  return (
-                    <li key={i}></li>
-                  )
-                })}
-                <li></li>
-              </ul>
-            </div> */}
           </div>
         );
       }

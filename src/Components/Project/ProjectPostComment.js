@@ -129,6 +129,7 @@ const ProjectPostComment = ({
             <input
               type="text"
               maxLength="200"
+              placeholder="댓글 입력... (최대 200자)"
               defaultValue={comment.commentcontent}
               onKeyDown={async (e) => {
                 if (e.key === 'Enter') {
@@ -200,7 +201,7 @@ const ProjectPostComment = ({
                 삭제
               </div>
             </>
-          ) : loginEmail === projectInfo.email ? (
+          ) : loginEmail === projectInfo.creatoremail ? (
             <>
               <div className="deleteComment" onClick={deleteCommentBtn}>
                 삭제

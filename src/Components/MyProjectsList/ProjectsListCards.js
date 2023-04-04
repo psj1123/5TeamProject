@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Card, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './list.css';
-import '../../Styles/Cards.css';
+import '../../Styles/ProjectsListCards.css';
 
-function Managedlist({ exitProject, project }) {
+function ProjectsListCards({ exitProject, project }) {
   const loginEmail = window.sessionStorage.getItem('email');
 
   const navigate = useNavigate();
@@ -124,4 +123,4 @@ function Managedlist({ exitProject, project }) {
   );
 }
 
-export default Managedlist;
+export default ProjectsListCards;

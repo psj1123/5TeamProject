@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../Styles/ListModal.css';
-import './ProjectListModal.css';
+import '../../Styles/ProjectsListModal.css';
 
-function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
+function MyProjectsListModalJoin({ setModalIsOpen, joinProject }) {
   const input_code = useRef('');
 
   const onInsert = () => {
@@ -66,4 +65,4 @@ function ProjectListModalJoin({ setModalIsOpen, joinProject }) {
   );
 }
 
-export default ProjectListModalJoin;
+export default MyProjectsListModalJoin;

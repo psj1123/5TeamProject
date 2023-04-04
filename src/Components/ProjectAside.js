@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ProjectAsideCategory from './Projects/ProjectAsideCategory';
+import ProjectAsideCategory from './Project/ProjectAsideCategory';
 import '../Styles/ProjectAside.css';
 
 const ProjectAside = ({
@@ -59,7 +59,9 @@ const ProjectAside = ({
           <div className="projectTitleAndDescription">
             <div className="projectCreator">
               <p>관리자: {projectInfo.nickname}</p>
-              <p>({projectInfo.email})</p>
+              <p title={projectInfo.creatoremail}>
+                ({projectInfo.creatoremail})
+              </p>
             </div>
           </div>
 
@@ -104,7 +106,7 @@ const ProjectAside = ({
                   );
                 }
               })}
-              {projectInfo.email === loginEmail ? (
+              {projectInfo.creatoremail === loginEmail ? (
                 <li className="addCategoryBox" onClick={createCategoryBtn}>
                   <div className="category">카테고리 추가</div>
                 </li>
@@ -120,7 +122,7 @@ const ProjectAside = ({
             <div className="writeBtn" onClick={postWriteBtnClick}>
               글 작성
             </div>
-            {projectInfo.email === loginEmail ? (
+            {projectInfo.creatoremail === loginEmail ? (
               <div className="settingsBtn" onClick={modalOpen}>
                 설정
               </div>

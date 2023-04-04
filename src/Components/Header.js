@@ -1,7 +1,7 @@
 import React from 'react';
-import '../Styles/Header.css';
 import HeaderLeft from './Headers/HeaderLeft';
 import HeaderRight from './Headers/HeaderRight';
+import '../Styles/Header.css';
 
 const Header = ({ page }) => {
   return (

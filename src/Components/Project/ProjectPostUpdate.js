@@ -1,42 +1,43 @@
 import React, { useRef } from 'react';
-import '../../Styles/ProjectPostWrite.css';
+import '../../Styles/ProjectPostUpdate.css';
 
-const ProjectPostWrite = ({
-  projectInfo,
+const ProjectPostUpdate = ({
   loginEmail,
   categories,
-  postWrite,
-  setIsPostWriting,
+  projectInfo,
+  nowPost,
+  postUpdate,
+  setIsPostUpdating,
 }) => {
-  const createCategoryRef = useRef();
-  const createTitleRef = useRef();
-  const createContentRef = useRef();
+  const updateCategoryRef = useRef();
+  const updateTitleRef = useRef();
+  const updateContentRef = useRef();
 
-  const createPostBtn = () => {
-    const category = createCategoryRef.current.value;
-    const title = createTitleRef.current.value;
-    const content = createContentRef.current.value;
+  const updatePostBtn = () => {
+    const category = updateCategoryRef.current.value;
+    const title = updateTitleRef.current.value;
+    const content = updateContentRef.current.value;
 
     if (category === '') {
       alert('카테고리를 지정해주세요.');
-      createCategoryRef.current.focus();
+      updateCategoryRef.current.focus();
       return;
     } else if (title === '') {
       alert('제목을 입력해주세요.');
-      createTitleRef.current.focus();
+      updateTitleRef.current.focus();
       return;
     } else if (content === '') {
       alert('내용을 입력해주세요.');
-      createContentRef.current.focus();
+      updateContentRef.current.focus();
       return;
     } else {
-      if (window.confirm('등록하시겠습니까?')) {
+      if (window.confirm('수정하시겠습니까?')) {
         const postData = {
           category: category,
           title: title,
           content: content,
         };
-        postWrite(postData);
+        postUpdate(postData);
       } else {
         return;
       }
@@ -47,18 +48,19 @@ const ProjectPostWrite = ({
     <div className="pjSectionMainBox">
       <div className="pjSectionMain">
         <div className="pjSectionInnerBox">
-          <div className="createCategoryBox">
-            <label htmlFor="createCategory">카테고리</label>
+          <div className="updateCategoryBox">
+            <label htmlFor="updateCategory">카테고리</label>
             <select
-              className="createCategory"
-              id="createCategory"
-              ref={createCategoryRef}
+              className="updateCategory"
+              id="updateCategory"
+              defaultValue={nowPost.postCategory}
+              ref={updateCategoryRef}
             >
               <option value="">----- 선택 -----</option>
               {categories.map((category) => {
                 if (
                   category === '공지사항' &&
-                  loginEmail === projectInfo.email
+                  loginEmail === projectInfo.creatoremail
                 ) {
                   return (
                     <option key={category} value={category}>
@@ -67,9 +69,9 @@ const ProjectPostWrite = ({
                   );
                 } else if (
                   category === '공지사항' &&
-                  loginEmail !== projectInfo.email
+                  loginEmail !== projectInfo.creatoremail
                 ) {
-                  return <></>;
+                  return null;
                 } else {
                   return (
                     <option key={category} value={category}>
@@ -80,35 +82,35 @@ const ProjectPostWrite = ({
               })}
             </select>
           </div>
-          <div className="createPostTitleBox">
-            <label htmlFor="createTitle">제목</label>
+          <div className="updatePostTitleBox">
+            <label htmlFor="updateTitle">제목</label>
             <input
-              className="createPostTitle"
-              id="createTitle"
+              className="updatePostTitle"
+              id="updateTitle"
               maxLength="40"
               type="text"
-              ref={createTitleRef}
+              ref={updateTitleRef}
+              defaultValue={nowPost.postTitle}
               placeholder="제목 입력... (최대 40자)"
             />
           </div>
-          <div className="createPostContentBox">
-            <label htmlFor="createContent">내용</label>
+          <div className="updatePostContentBox">
+            <label htmlFor="updateContent">내용</label>
             <textarea
-              className="createPostContent"
-              id="createContent"
-              cols="30"
-              rows="10"
+              className="updatePostContent"
+              id="updateContent"
               maxLength="5000"
-              ref={createContentRef}
+              ref={updateContentRef}
+              defaultValue={nowPost.postContent}
               placeholder="내용 입력... (최대 5000자)"
-            />
+            ></textarea>
           </div>
-          <div className="createPostBtnBox">
+          <div className="updatePostBtnBox">
             <button
-              className="createPostCancelBtn"
+              className="updatePostCancelBtn"
               onClick={() => {
-                if (window.confirm('글 작성을 취소하겠습니까?')) {
-                  setIsPostWriting(false);
+                if (window.confirm('글 수정을 취소하겠습니까?')) {
+                  setIsPostUpdating(false);
                 } else {
                   return;
                 }
@@ -116,8 +118,8 @@ const ProjectPostWrite = ({
             >
               취소
             </button>
-            <button className="createPostBtn" onClick={createPostBtn}>
-              작성 완료
+            <button className="updatePostBtn" onClick={updatePostBtn}>
+              수정 완료
             </button>
           </div>
         </div>
@@ -126,4 +128,4 @@ const ProjectPostWrite = ({
   );
 };
 
-export default ProjectPostWrite;
+export default ProjectPostUpdate;

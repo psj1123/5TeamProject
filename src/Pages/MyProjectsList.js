@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import Header from '../Components/Header.js';
-import Footer from '../Components/Footer.js';
-import Listpage from '../Components/Listpage/Listpage';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import MyProjectsListSection from '../Components/MyProjectsListSection';
 
 const MyProjectsList = () => {
   const loginEmail = window.sessionStorage.getItem('email');
@@ -15,7 +15,7 @@ const MyProjectsList = () => {
     return (
       <div>
         <Header page={'MyProjectList'} />
-        {<Listpage />}
+        <MyProjectsListSection />
         <Footer />
       </div>
     );

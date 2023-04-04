@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Header from '../Components/Header.js';
 import ReturnTop from '../Components/ReturnTop.js';
 import ProjectSection from '../Components/ProjectSection';
 import ProjectAside from '../Components/ProjectAside';
-import Modal from '../Components/Modals/ProjectModal';
-import axios from 'axios';
+import Modal from '../Components/Project/ProjectModal';
 
 const Project = () => {
   const loginEmail = window.sessionStorage.getItem('email');
 
   const navigate = useNavigate();
-  const code = window.location.href.split('/')[4];
+  const code = window.location.href.split('/')[4].split('?')[0];
   const [isLoading, setIsLoading] = useState(false);
   const [projectInfo, setProjectInfo] = useState({
     code: '',
@@ -69,7 +69,7 @@ const Project = () => {
             title: data.title,
             description: data.description,
             nickname: data.nickname,
-            email: data.creatoremail,
+            creatoremail: data.creatoremail,
             deadline: data.deadline,
           });
         }
@@ -270,7 +270,7 @@ const Project = () => {
     axios
       .post('/deleteProjectProcess', {
         code: code,
-        creatoremail: loginEmail,
+        email: loginEmail,
       })
       .then((res) => {
         const { data } = res;

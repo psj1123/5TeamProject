@@ -32,6 +32,7 @@ const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
             <input
               type="text"
               maxLength="200"
+              placeholder="답글 입력... (최대 200자)"
               defaultValue={reple.replecontent}
               onKeyDown={async (e) => {
                 if (e.key === 'Enter') {
@@ -90,7 +91,7 @@ const ProjectPostReple = ({ projectInfo, reple, updateReple, deleteReple }) => {
             </div>
           </div>
         </>
-      ) : loginEmail === projectInfo.email ? (
+      ) : loginEmail === projectInfo.creatoremail ? (
         <>
           <div className="repleDeleteAndUpdateBox">
             <div className="deleteReple" onClick={deleteRepleBtn}>

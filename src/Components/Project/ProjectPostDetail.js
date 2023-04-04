@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ProjectPostComment from './ProjectPostComment';
+import '../../Styles/ProjectPostDetail.css';
 
 const ProjectPostDetail = ({
   projectInfo,
@@ -182,7 +183,7 @@ const ProjectPostDetail = ({
                       수정
                     </div>
                   </>
-                ) : projectInfo.email === loginEmail ? (
+                ) : projectInfo.creatoremail === loginEmail ? (
                   <>
                     <div
                       className="deletePost"

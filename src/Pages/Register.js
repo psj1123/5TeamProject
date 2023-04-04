@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import Header from '../Components/Header.js';
-import Footer from '../Components/Footer.js';
-import RegisterSection from '../Components/RegisterSecton';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import RegisterSection from '../Components/RegisterSection';
 
 const Register = () => {
   const loginEmail = window.sessionStorage.getItem('email');
